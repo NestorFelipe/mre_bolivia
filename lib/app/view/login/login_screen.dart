@@ -1,32 +1,20 @@
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/constant.dart';
-import '../../../base/pref_data.dart';
 import '../../../base/widget_utils.dart';
-import '../../routes/app_routes.dart';
+import '../../../controllers/login_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  void finishView() {
-    Constant.closeApp();
-  }
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool ispass = true;
-
-  @override
   Widget build(BuildContext context) {
-    FetchPixels(context);
-    return WillPopScope(
+    return GetBuilder<LoginController>(
+      init: LoginController(),
+      builder: (controller) => WillPopScope(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: backGroundColor,
@@ -34,13 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              padding: EdgeInsets.symmetric(
-                  horizontal: FetchPixels.getDefaultHorSpace(context)),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: ListView(
                 primary: true,
                 shrinkWrap: true,
                 children: [
-                  getVerSpace(FetchPixels.getPixelHeight(70)),
+                  getVerSpace(70.h),
                   Align(
                     alignment: Alignment.topCenter,
                     child: getCustomFont(
@@ -51,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(10)),
+                  getVerSpace(10.h),
                   Align(
                     alignment: Alignment.topCenter,
                     child: getCustomFont(
@@ -62,54 +49,46 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                  getVerSpace(30.h),
                   getDefaultTextFiledWithLabel(
                     context,
                     "Email",
-                    emailController,
+                    controller.emailController,
                     Colors.grey,
                     function: () {},
-                    height: FetchPixels.getPixelHeight(60),
+                    height: 60.h,
                     isEnable: false,
                     withprefix: true,
                     image: "message.svg",
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  getDefaultTextFiledWithLabel(
-                      context, "Password", passwordController, Colors.grey,
+                  getVerSpace(20.h),
+                  Obx(() => getDefaultTextFiledWithLabel(
+                      context, "Password", controller.passwordController, Colors.grey,
                       function: () {},
-                      height: FetchPixels.getPixelHeight(60),
+                      height: 60.h,
                       isEnable: false,
                       withprefix: true,
                       image: "lock.svg",
-                      isPass: ispass,
+                      isPass: controller.isPassVisible.value,
                       withSufix: true,
                       suffiximage: "eye.svg", imagefunction: () {
-                    setState(() {
-                      ispass = !ispass;
-                    });
-                  }),
-                  getVerSpace(FetchPixels.getPixelHeight(19)),
+                    controller.togglePasswordVisibility();
+                  })),
+                  getVerSpace(19.h),
                   Align(
                       alignment: Alignment.topRight,
                       child: GestureDetector(
-                        onTap: () {
-                          Constant.sendToNext(context, Routes.forgotRoute);
-                        },
+                        onTap: controller.goToForgotPassword,
                         child: getCustomFont(
                             "Forgot Password?", 16, blueColor, 1,
                             fontWeight: FontWeight.w800,),
                       )),
-                  getVerSpace(FetchPixels.getPixelHeight(49)),
-                  getButton(context, blueColor, "Login", Colors.white, () {
-                    PrefData.setLogIn(true);
-                    Constant.sendToNext(context, Routes.homeScreenRoute);
-                  }, 18,
+                  getVerSpace(49.h),
+                  getButton(context, blueColor, "Login", Colors.white, controller.login, 18,
                       weight: FontWeight.w600,
-                      buttonHeight: FetchPixels.getPixelHeight(60),
-                      borderRadius: BorderRadius.circular(
-                          FetchPixels.getPixelHeight(15))),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                      buttonHeight: 60.h,
+                      borderRadius: BorderRadius.circular(15.h)),
+                  getVerSpace(30.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -117,17 +96,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Don’t have an account?", 14, Colors.black, 1,
                           fontWeight: FontWeight.w400,),
                       GestureDetector(
-                        onTap: () {
-                          Constant.sendToNext(context, Routes.signupRoute);
-                        },
+                        onTap: controller.goToSignUp,
                         child: getCustomFont(" Sign Up", 16, blueColor, 1,
                             fontWeight: FontWeight.w800,),
                       )
                     ],
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(50)),
-                  getDivider(dividerColor, FetchPixels.getPixelHeight(1), 1),
-                  getVerSpace(FetchPixels.getPixelHeight(50)),
+                  getVerSpace(50.h),
+                  getDivider(dividerColor, 1.h, 1),
+                  getVerSpace(50.h),
                   getButton(
                     context,
                     Colors.white,
@@ -138,9 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     weight: FontWeight.w600,
                     isIcon: true,
                     image: "google.svg",
-                    buttonHeight: FetchPixels.getPixelHeight(60),
-                    borderRadius:
-                        BorderRadius.circular(FetchPixels.getPixelHeight(15)),
+                    buttonHeight: 60.h,
+                    borderRadius: BorderRadius.circular(15.h),
                     boxShadow: [
                       const BoxShadow(
                           color: Colors.black12,
@@ -148,15 +124,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           offset: Offset(0.0, 4.0)),
                     ],
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
+                  getVerSpace(20.h),
                   getButton(context, Colors.white, "Login with Facebook",
                       Colors.black, () {}, 18,
                       weight: FontWeight.w600,
                       isIcon: true,
                       image: "facebook.svg",
-                      buttonHeight: FetchPixels.getPixelHeight(60),
-                      borderRadius:
-                          BorderRadius.circular(FetchPixels.getPixelHeight(15)),
+                      buttonHeight: 60.h,
+                      borderRadius: BorderRadius.circular(15.h),
                       boxShadow: [
                         const BoxShadow(
                             color: Colors.black12,
@@ -169,8 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         onWillPop: () async {
-          finishView();
+          Constant.closeApp();
           return false;
-        });
+        }),
+    );
   }
 }

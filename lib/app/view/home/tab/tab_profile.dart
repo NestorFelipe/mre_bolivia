@@ -1,78 +1,71 @@
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/constant.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:fix_store/base/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../base/color_data.dart';
-import '../../../../base/widget_utils.dart';
+import '../../../../controllers/tab_profile_controller.dart';
 
-class TabProfile extends StatefulWidget {
+class TabProfile extends StatelessWidget {
   const TabProfile({super.key});
 
   @override
-  State<TabProfile> createState() => _TabProfileState();
-}
-
-class _TabProfileState extends State<TabProfile> {
-  @override
   Widget build(BuildContext context) {
-    FetchPixels(context);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: FetchPixels.getPixelWidth(20)),
-      child: Column(
-        children: [
-          getVerSpace(FetchPixels.getPixelHeight(20)),
-          withoutleftIconToolbar(context,
-              isrightimage: true,
-              title: "Profile",
-              weight: FontWeight.w800,
-              textColor: Colors.black,
-              fontsize: 24,
-              istext: true,
-              rightimage: "notification.svg"),
-          getVerSpace(FetchPixels.getPixelHeight(30)),
-          profilePictureView(context),
-          getVerSpace(FetchPixels.getPixelHeight(46)),
-          Expanded(
-              flex: 1,
-              child: ListView(
-                primary: true,
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  myProfileButton(context),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  myCardButton(context),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  myAddressButton(context),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  settingButton(context),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
-                  logoutButton(context)
-                ],
-              ))
-        ],
+    return GetBuilder<TabProfileController>(
+      init: TabProfileController(),
+      builder: (controller) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
+          children: [
+            getVerSpace(20.h),
+            withoutleftIconToolbar(context,
+                isrightimage: true,
+                title: "Profile",
+                weight: FontWeight.w800,
+                textColor: Colors.black,
+                fontsize: 24,
+                istext: true,
+                rightimage: "notification.svg"),
+            getVerSpace(30.h),
+            profilePictureView(context),
+            getVerSpace(46.h),
+            Expanded(
+                flex: 1,
+                child: ListView(
+                  primary: true,
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    myProfileButton(context, controller),
+                    getVerSpace(20.h),
+                    myCardButton(context, controller),
+                    getVerSpace(20.h),
+                    myAddressButton(context, controller),
+                    getVerSpace(20.h),
+                    settingButton(context, controller),
+                    getVerSpace(30.h),
+                    logoutButton(context, controller)
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }
 
-  Widget logoutButton(BuildContext context) {
-    return getButton(context, blueColor, "Logout", Colors.white, () {
-      Constant.closeApp();
-    }, 18,
+  Widget logoutButton(BuildContext context, TabProfileController controller) {
+    return getButton(context, blueColor, "Logout", Colors.white, controller.logout, 18,
         weight: FontWeight.w600,
-        borderRadius: BorderRadius.circular(FetchPixels.getPixelHeight(14)),
-        buttonHeight: FetchPixels.getPixelHeight(60));
+        borderRadius: BorderRadius.circular(14.r),
+        buttonHeight: 60.h);
   }
 
-  Widget settingButton(BuildContext context) {
+  Widget settingButton(BuildContext context, TabProfileController controller) {
     return getButtonWithIcon(context, Colors.white, "Settings", Colors.black,
-        () {
-      Constant.sendToNext(context, Routes.settingRoute);
-    }, 16,
+        controller.goToSettings, 16,
         weight: FontWeight.w400,
-        buttonHeight: FetchPixels.getPixelHeight(60),
-        borderRadius: BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+        buttonHeight: 60.h,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           const BoxShadow(
               color: Colors.black12, blurRadius: 10, offset: Offset(0.0, 4.0)),
@@ -83,14 +76,12 @@ class _TabProfileState extends State<TabProfile> {
         suffixImage: "arrow_right.svg");
   }
 
-  Widget myAddressButton(BuildContext context) {
+  Widget myAddressButton(BuildContext context, TabProfileController controller) {
     return getButtonWithIcon(context, Colors.white, "My Address", Colors.black,
-        () {
-      Constant.sendToNext(context, Routes.myAddressRoute);
-    }, 16,
+        controller.goToAddress, 16,
         weight: FontWeight.w400,
-        buttonHeight: FetchPixels.getPixelHeight(60),
-        borderRadius: BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+        buttonHeight: 60.h,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           const BoxShadow(
               color: Colors.black12, blurRadius: 10, offset: Offset(0.0, 4.0)),
@@ -101,14 +92,12 @@ class _TabProfileState extends State<TabProfile> {
         suffixImage: "arrow_right.svg");
   }
 
-  Widget myCardButton(BuildContext context) {
+  Widget myCardButton(BuildContext context, TabProfileController controller) {
     return getButtonWithIcon(context, Colors.white, "My Cards", Colors.black,
-        () {
-      Constant.sendToNext(context, Routes.cardRoute);
-    }, 16,
+        controller.goToCards, 16,
         weight: FontWeight.w400,
-        buttonHeight: FetchPixels.getPixelHeight(60),
-        borderRadius: BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+        buttonHeight: 60.h,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           const BoxShadow(
               color: Colors.black12, blurRadius: 10, offset: Offset(0.0, 4.0)),
@@ -119,14 +108,12 @@ class _TabProfileState extends State<TabProfile> {
         suffixImage: "arrow_right.svg");
   }
 
-  Widget myProfileButton(BuildContext context) {
+  Widget myProfileButton(BuildContext context, TabProfileController controller) {
     return getButtonWithIcon(context, Colors.white, "My Profile", Colors.black,
-        () {
-      Constant.sendToNext(context, Routes.profileRoute);
-    }, 16,
+        controller.goToProfile, 16,
         weight: FontWeight.w400,
-        buttonHeight: FetchPixels.getPixelHeight(60),
-        borderRadius: BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+        buttonHeight: 60.h,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           const BoxShadow(
               color: Colors.black12, blurRadius: 10, offset: Offset(0.0, 4.0)),
@@ -142,21 +129,19 @@ class _TabProfileState extends State<TabProfile> {
       clipBehavior: Clip.none,
       children: [
         Container(
-          height: FetchPixels.getPixelHeight(100),
-          width: FetchPixels.getPixelHeight(100),
+          height: 100.h,
+          width: 100.h,
           decoration: BoxDecoration(
             image: getDecorationAssetImage(context, "profile_image.png"),
           ),
         ),
         Positioned(
-            top: FetchPixels.getPixelHeight(68),
-            left: FetchPixels.getPixelHeight(70),
+            top: 68.h,
+            left: 70.h,
             child: Container(
-              height: FetchPixels.getPixelHeight(46),
-              width: FetchPixels.getPixelHeight(46),
-              padding: EdgeInsets.symmetric(
-                  vertical: FetchPixels.getPixelHeight(10),
-                  horizontal: FetchPixels.getPixelHeight(10)),
+              height: 46.h,
+              width: 46.h,
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
               decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: const [
@@ -165,11 +150,8 @@ class _TabProfileState extends State<TabProfile> {
                         blurRadius: 10,
                         offset: Offset(0.0, 4.0)),
                   ],
-                  borderRadius:
-                      BorderRadius.circular(FetchPixels.getPixelHeight(35))),
-              child: getSvgImage("camera.svg",
-                  height: FetchPixels.getPixelHeight(24),
-                  width: FetchPixels.getPixelHeight(24)),
+                  borderRadius: BorderRadius.circular(35.r)),
+              child: getSvgImage("camera.svg", height: 24.h, width: 24.h),
             ))
       ],
     );

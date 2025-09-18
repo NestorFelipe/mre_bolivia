@@ -1,71 +1,34 @@
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../base/color_data.dart';
-import '../../../base/constant.dart';
 import '../../../base/widget_utils.dart';
+import '../../../controllers/signup_controller.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  void finishView() {
-    Constant.backToPrev(context);
-  }
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  SharedPreferences? selection;
-  bool agree = false;
-
-  TextEditingController passwordController = TextEditingController();
-  bool ispass = true;
-
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      selection = sp;
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    setState(() {
-      SharedPreferences.getInstance().then((SharedPreferences sp) {
-        selection = sp;
-        setState(() {});
-      });
-    });
-
-    FetchPixels(context);
-    return WillPopScope(
+    return GetBuilder<SignUpController>(
+      init: SignUpController(),
+      builder: (controller) => WillPopScope(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: backGroundColor,
           body: SafeArea(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: FetchPixels.getPixelWidth(20)),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
                 children: [
-                  getVerSpace(FetchPixels.getPixelHeight(26)),
+                  getVerSpace(26.h),
                   gettoolbarMenu(
                     context,
                     "back.svg",
-                    () {
-                      finishView();
-                    },
+                    controller.back,
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(22)),
+                  getVerSpace(22.h),
                   getCustomFont(
                     "Sign Up",
                     24,
@@ -73,108 +36,94 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     1,
                     fontWeight: FontWeight.w800,
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(10)),
+                  getVerSpace(10.h),
                   getCustomFont(
                       "Enter your detail for sign up!", 16, Colors.black, 1,
                       fontWeight: FontWeight.w400),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                  getVerSpace(30.h),
                   getDefaultTextFiledWithLabel(
                     context,
                     "Name",
-                    nameController,
+                    controller.nameController,
                     Colors.grey,
                     function: () {},
-                    height: FetchPixels.getPixelHeight(60),
+                    height: 60.h,
                     isEnable: false,
                     withprefix: true,
                     image: "user.svg",
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
+                  getVerSpace(20.h),
                   getDefaultTextFiledWithLabel(
                     context,
                     "Email",
-                    emailController,
+                    controller.emailController,
                     Colors.grey,
                     function: () {},
-                    height: FetchPixels.getPixelHeight(60),
+                    height: 60.h,
                     isEnable: false,
                     withprefix: true,
                     image: "message.svg",
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
+                  getVerSpace(20.h),
                   GestureDetector(
-                      onTap: () {
-                        Constant.sendToNext(context, Routes.selectCountryRoute);
-                      },
+                      onTap: controller.goToSelectCountry,
                       child: getCountryTextField(
                           context,
                           "Phone Number",
-                          phoneNumberController,
+                          controller.phoneController,
                           textColor,
-                          selection?.getString("code") ?? "+1",
+                          "+1", // Placeholder, ajustar con prefs si necesario
                           function: () {},
-                          height: FetchPixels.getPixelHeight(60),
+                          height: 60.h,
                           isEnable: false,
                           minLines: true,
-                          image: selection!.getString("country") ??
-                              "image_albania.jpg")),
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  getDefaultTextFiledWithLabel(
-                      context, "Password", passwordController, Colors.grey,
+                          image: "image_albania.jpg", // Placeholder
+                          inputFormatters: [controller.phoneMaskFormatter])),
+                  getVerSpace(20.h),
+                  Obx(() => getDefaultTextFiledWithLabel(
+                      context, "Password", controller.passwordController, Colors.grey,
                       function: () {},
-                      height: FetchPixels.getPixelHeight(60),
+                      height: 60.h,
                       isEnable: false,
                       withprefix: true,
                       image: "lock.svg",
-                      isPass: ispass,
-                      imageWidth: FetchPixels.getPixelWidth(19),
-                      imageHeight: FetchPixels.getPixelHeight(17.66),
+                      isPass: controller.isPassVisible.value,
+                      imageWidth: 19.w,
+                      imageHeight: 17.66.h,
                       withSufix: true,
-                      suffiximage: "eye.svg", imagefunction: () {
-                    setState(() {
-                      ispass = !ispass;
-                    });
-                  }),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                      suffiximage: "eye.svg", imagefunction: controller.togglePasswordVisibility)),
+                  getVerSpace(30.h),
                   Row(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            agree = !agree;
-                          });
-                        },
+                      Obx(() => GestureDetector(
+                        onTap: controller.toggleAgree,
                         child: Container(
-                          height: FetchPixels.getPixelHeight(24),
-                          width: FetchPixels.getPixelHeight(24),
+                          height: 24.h,
+                          width: 24.h,
                           decoration: BoxDecoration(
-                              color: (agree) ? blueColor : backGroundColor,
-                              border: (agree)
+                              color: (controller.agree.value) ? blueColor : backGroundColor,
+                              border: (controller.agree.value)
                                   ? null
                                   : Border.all(color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(
-                                  FetchPixels.getPixelHeight(6))),
+                              borderRadius: BorderRadius.circular(6.h)),
                           padding: EdgeInsets.symmetric(
-                              vertical: FetchPixels.getPixelHeight(6),
-                              horizontal: FetchPixels.getPixelWidth(4)),
-                          child: (agree) ? getSvgImage("done.svg") : null,
+                              vertical: 6.h,
+                              horizontal: 4.w),
+                          child: (controller.agree.value) ? getSvgImage("done.svg") : null,
                         ),
-                      ),
-                      getHorSpace(FetchPixels.getPixelWidth(10)),
+                      )),
+                      getHorSpace(10.w),
                       getCustomFont(
                           "I agree with Terms & Privacy", 16, Colors.black, 1,
                           fontWeight: FontWeight.w400)
                     ],
                   ),
-                  getVerSpace(FetchPixels.getPixelHeight(50)),
-                  getButton(context, blueColor, "Sign Up", Colors.white, () {
-                    Constant.sendToNext(context, Routes.verifyRoute);
-                  }, 18,
+                  getVerSpace(50.h),
+                  getButton(context, blueColor, "Sign Up", Colors.white, controller.signUp, 18,
                       weight: FontWeight.w600,
-                      buttonHeight: FetchPixels.getPixelHeight(60),
-                      borderRadius: BorderRadius.circular(
-                          FetchPixels.getPixelHeight(15))),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                      buttonHeight: 60.h,
+                      borderRadius: BorderRadius.circular(15.h)),
+                  getVerSpace(30.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -186,9 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          finishView();
-                        },
+                        onTap: controller.goToLogin,
                         child: getCustomFont(" Login", 16, blueColor, 1,
                             fontWeight: FontWeight.w800),
                       )
@@ -200,8 +147,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         onWillPop: () async {
-          finishView();
+          controller.back();
           return false;
-        });
+        }),
+    );
   }
 }

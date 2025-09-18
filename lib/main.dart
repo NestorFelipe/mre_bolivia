@@ -1,6 +1,8 @@
 import 'package:fix_store/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   // Asegurar que Flutter esté completamente inicializado
@@ -35,14 +37,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    
-    // Estrategia seamless: delay más largo para permitir coordinación perfecta
-    // Future.delayed(const Duration(milliseconds: 500), () {
-    //   if (mounted) {
-    //     // Transición gradual del splash nativo
-    //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    //   }
-    // });
   }
 
   @override
@@ -53,27 +47,30 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-      routes: AppPages.routes,
-      theme: ThemeData(
-        // Configurar el color de fondo por defecto para toda la app
-        scaffoldBackgroundColor: const Color(0xFFE0E0E0),
-        // Forzar tema claro siempre
-        brightness: Brightness.light,
-        // Configurar colores de la barra de estado
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color(0xFFE0E0E0),
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: Color(0xFFE0E0E0),
-            systemNavigationBarIconBrightness: Brightness.dark,
+    return ScreenUtilInit(
+      designSize: const Size(414, 896), // Tamaños de diseño basados en FetchPixels
+      builder: (context, child) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppPages.initialRoute,
+        getPages: AppPages.pages,
+        theme: ThemeData(
+          // Configurar el color de fondo por defecto para toda la app
+          scaffoldBackgroundColor: const Color(0xFFE0E0E0),
+          // Forzar tema claro siempre
+          brightness: Brightness.light,
+          // Configurar colores de la barra de estado
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Color(0xFFE0E0E0),
+              statusBarIconBrightness: Brightness.dark,
+              systemNavigationBarColor: Color(0xFFE0E0E0),
+              systemNavigationBarIconBrightness: Brightness.dark,
+            ),
           ),
         ),
+        // IMPORTANTE: Eliminar darkTheme completamente para forzar solo tema light
+        themeMode: ThemeMode.light, // Forzar siempre tema claro
       ),
-      // IMPORTANTE: Eliminar darkTheme completamente para forzar solo tema light
-      themeMode: ThemeMode.light, // Forzar siempre tema claro
     );
   }
 }

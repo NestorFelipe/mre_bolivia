@@ -598,7 +598,8 @@ Widget getCountryTextField(BuildContext context, String s,
     double? height,
     String? image,
     required Function function,
-    Function? imagefunction}) {
+    Function? imagefunction,
+    List<TextInputFormatter>? inputFormatters}) {
   FocusNode myFocusNode = FocusNode();
   return StatefulBuilder(
     builder: (context, setState) {
@@ -644,6 +645,7 @@ Widget getCountryTextField(BuildContext context, String s,
                     focusNode: myFocusNode,
                     obscureText: isPass,
                     showCursor: false,
+                    inputFormatters: inputFormatters,
                     onTap: () {
                       function();
                     },

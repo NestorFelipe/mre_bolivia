@@ -35,20 +35,40 @@ class FetchPixels {
   }
 
   static double getTextScale() {
+    // Validar que width y height estén inicializados
+    if (width <= 0 || height <= 0) {
+      return 1.0; // Valor por defecto
+    }
+    
     double textScaleFactor = (width > height) ? width / mockupWidth : height / mockupHeight;
     if (DeviceUtil.isTablet) {
       textScaleFactor = height / mockupHeight;
+    }
+
+    // Validar que no sea infinity o NaN
+    if (!textScaleFactor.isFinite || textScaleFactor <= 0) {
+      return 1.0;
     }
 
     return textScaleFactor;
   }
 
   static double getScale() {
+    // Validar que width y height estén inicializados
+    if (width <= 0 || height <= 0) {
+      return 1.0; // Valor por defecto
+    }
+    
     double scale =
         (width > height) ? mockupWidth / width : mockupHeight / height;
 
     if (DeviceUtil.isTablet) {
       scale = height / mockupHeight;
+    }
+
+    // Validar que no sea infinity o NaN
+    if (!scale.isFinite || scale <= 0) {
+      return 1.0;
     }
 
     return scale;

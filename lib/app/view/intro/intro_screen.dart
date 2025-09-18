@@ -1,42 +1,32 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:fix_store/app/data/data_file.dart';
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/color_data.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fix_store/base/resizer/fetch_pixels.dart';
 
-import '../../../base/constant.dart';
+import '../../../base/color_data.dart';
+import '../../../base/widget_utils.dart';
+import '../../../controllers/intro_controller.dart';
 import '../../models/model_intro.dart';
 
-class IntroScreen extends StatefulWidget {
+class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
 
   @override
-  State<IntroScreen> createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
-  void backClick() {
-    Constant.backToPrev(context);
-  }
-
-  ValueNotifier selectedPage = ValueNotifier(0);
-  final _controller = PageController();
-
-  @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    FetchPixels(context); // Inicializar FetchPixels para getAssetImage
+    return GetBuilder<IntroController>(
+      init: IntroController(),
+      builder: (controller) => WillPopScope(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: PageView.builder(
-              controller: _controller,
-              onPageChanged: (value) {
-                selectedPage.value = value;
-              },
+              controller: controller.pageController,
+              onPageChanged: controller.onPageChanged,
               itemCount: DataFile.introList.length,
               itemBuilder: (context, index) {
                 ModelIntro introModel = DataFile.introList[index];
@@ -48,11 +38,11 @@ class _IntroScreenState extends State<IntroScreen> {
                       color: introModel.color,
                       child: Column(
                         children: [
-                          getVerSpace(FetchPixels.getPixelHeight(55)),
+                          getVerSpace(55.h),
                           getAssetImage(
                               introModel.image ?? "",
-                              FetchPixels.getPixelWidth(277),
-                              FetchPixels.getPixelHeight(435))
+                              277.w,
+                              435.h)
                         ],
                       ),
                     ),
@@ -63,83 +53,58 @@ class _IntroScreenState extends State<IntroScreen> {
                           Container(
                             child: getAssetImage(
                                 "shape.png",
-                                FetchPixels.getPixelWidth(double.infinity),
-                                FetchPixels.getPixelHeight(460),
+                                1.sw,
+                                460.h,
                                 boxFit: BoxFit.fill),
                           ),
                           Positioned(
-                            top: FetchPixels.getPixelHeight(50),
-                            width: FetchPixels.width,
+                            top: 50.h,
+                            width: 1.sw,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  width: FetchPixels.getPixelHeight(263),
+                                  width: 263.w,
                                   child: getMultilineCustomFont(
                                       introModel.title ?? "", 34, Colors.black,
                                       fontWeight: FontWeight.w800,
                                       textAlign: TextAlign.center,
-                                      txtHeight:
-                                          FetchPixels.getPixelHeight(1.3)),
+                                      txtHeight: 1.3),
                                 ),
-                                getVerSpace(FetchPixels.getPixelHeight(10)),
+                                getVerSpace(10.h),
                                 getPaddingWidget(
-                                  EdgeInsets.symmetric(
-                                      horizontal:
-                                          FetchPixels.getPixelWidth(20)),
+                                  EdgeInsets.symmetric(horizontal: 20.w),
                                   getMultilineCustomFont(
                                       introModel.description ?? "",
                                       16,
                                       Colors.black,
                                       fontWeight: FontWeight.w400,
                                       textAlign: TextAlign.center,
-                                      txtHeight:
-                                          FetchPixels.getPixelHeight(1.3)),
+                                      txtHeight: 1.3),
                                 ),
-                                getVerSpace(FetchPixels.getPixelHeight(51)),
+                                getVerSpace(51.h),
                                 DotsIndicator(
                                     dotsCount: 3,
                                     position: index.toDouble(),
                                     decorator: DotsDecorator(
-                                        size: Size.square(
-                                            FetchPixels.getPixelHeight(8)),
-                                        activeSize: Size.square(
-                                            FetchPixels.getPixelHeight(8)),
+                                        size: Size.square(8.h),
+                                        activeSize: Size.square(8.h),
                                         activeColor: blueColor,
                                         color: blueColor.withOpacity(0.2),
-                                        spacing: EdgeInsets.symmetric(
-                                            horizontal:
-                                                FetchPixels.getPixelWidth(5)))),
-                                getVerSpace(FetchPixels.getPixelHeight(29)),
+                                        spacing: EdgeInsets.symmetric(horizontal: 5.w))),
+                                getVerSpace(29.h),
                                 getButton(
                                     context, blueColor, "Next", Colors.white,
-                                    () {
-                                  if (index == DataFile.introList.length - 1) {
-                                    Constant.sendToNext(
-                                        context, Routes.loginRoute);
-                                  } else {
-                                    _controller.animateToPage(index + 1,
-                                        duration:
-                                            const Duration(milliseconds: 250),
-                                        curve: Curves.easeInSine);
-                                  }
-                                }, 18,
+                                    () => controller.nextPage(context, index), 18,
                                     weight: FontWeight.w600,
-                                    buttonHeight:
-                                        FetchPixels.getPixelHeight(60),
-                                    insetsGeometry: EdgeInsets.symmetric(
-                                        horizontal:
-                                            FetchPixels.getPixelWidth(20)),
-                                    borderRadius: BorderRadius.circular(
-                                        FetchPixels.getPixelHeight(15))),
-                                getVerSpace(FetchPixels.getPixelHeight(16)),
+                                    buttonHeight: 60.h,
+                                    insetsGeometry: EdgeInsets.symmetric(horizontal: 20.w),
+                                    borderRadius: BorderRadius.circular(15.h)),
+                                getVerSpace(16.h),
                                 index == 2
                                     ? Container()
                                     : GestureDetector(
-                                        onTap: () {
-                                          Constant.sendToNext(
-                                              context, Routes.loginRoute);
-                                        },
+                                        onTap: () => controller.skipToLogin(context),
                                         child: getCustomFont(
                                           "Skip",
                                           19,
@@ -161,8 +126,9 @@ class _IntroScreenState extends State<IntroScreen> {
           ),
         ),
         onWillPop: () async {
-          backClick();
+          controller.backClick(context);
           return false;
-        });
+        }),
+    );
   }
 }
