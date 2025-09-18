@@ -13,6 +13,7 @@ class MainActivity: FlutterActivity() {
     private var keepSplashOnScreen = true
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        
         // Instalar el splash screen de Android 12+ si está disponible
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val splashScreen = installSplashScreen()

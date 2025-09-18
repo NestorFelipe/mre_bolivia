@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
   bool _hasNavigated = false;
   Timer? _navigationTimer;
   bool _isAppReady = false;
+  bool _isDisposed = false;
   
   // Controladores de animación para transición coordinada
   late AnimationController _fadeController;
@@ -73,13 +74,25 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _initializeVideo() async {
-    if (!mounted || !_isAppReady) return;
+    if (!mounted || !_isAppReady || _isDisposed) return;
     
     try {
-      _videoController = VideoPlayerController.asset('assets/videos/video_splash.webm');
+      // NUEVO EN 2.9.1: Crear VideoPlayerController con opciones específicas
+      _videoController = VideoPlayerController.asset(
+        'assets/videos/video_splash.webm',
+        videoPlayerOptions: VideoPlayerOptions(
+          // CRÍTICO: Configurar para no interferir con audio de otras apps
+          mixWithOthers: true, // Permite mezclar con Spotify y otras apps
+          allowBackgroundPlayback: false, // No reproducir en segundo plano
+        ),
+      );
+      
+      // Configurar volumen 0 ANTES de initialize
+      _videoController!.setVolume(0.0);
+      
       await _videoController!.initialize();
       
-      if (mounted && _isAppReady) {
+      if (mounted && _isAppReady && !_isDisposed) {
         setState(() {
           _showVideo = true;
         });
@@ -87,9 +100,11 @@ class _SplashScreenState extends State<SplashScreen>
         // Fade in suave del video
         _fadeController.forward();
         
-        // Configurar y reproducir video
+        // Configurar video completamente silencioso
         _videoController!.setLooping(false);
-        _videoController!.setVolume(0.0);
+        _videoController!.setVolume(0.0); // Confirmar volumen 0
+        
+        // Reproducir sin solicitar audio focus exclusivo
         _videoController!.play();
         
         // Escuchar cuando termine
@@ -98,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen>
     } catch (e) {
       print('Video no disponible: $e');
       // Si no hay video, continuar con imagen estática
-      if (mounted) {
+      if (mounted && !_isDisposed) {
         setState(() {
           _showVideo = false;
         });
@@ -117,7 +132,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _onVideoStateChanged() {
-    if (_videoController == null || !mounted) return;
+    if (_videoController == null || !mounted || _isDisposed) return;
     
     final value = _videoController!.value;
     
@@ -129,17 +144,24 @@ class _SplashScreenState extends State<SplashScreen>
       
       // Pequeño delay antes de navegar para suavizar transición
       Future.delayed(const Duration(milliseconds: 500), () {
-        _navigateToNext();
+        if (!_isDisposed) {
+          _navigateToNext();
+        }
       });
     }
   }
 
   void _navigateToNext() {
-    if (_hasNavigated || !mounted) return;
+    if (_hasNavigated || !mounted || _isDisposed) return;
     
     _hasNavigated = true;
+    _isDisposed = true; // Marcar como disposed
+    
+    // Detener y limpiar COMPLETAMENTE el video
+    _stopAndDisposeVideo();
+    
+    // Cancelar timer
     _navigationTimer?.cancel();
-    _videoController?.pause();
     
     // Navegar basado en estado de login
     PrefData.isLogIn().then((isLoggedIn) {
@@ -153,13 +175,66 @@ class _SplashScreenState extends State<SplashScreen>
     });
   }
 
+  /// Detiene y libera completamente el video
+  void _stopAndDisposeVideo() {
+    try {
+      if (_videoController != null) {
+        _videoController!.removeListener(_onVideoStateChanged);
+        _videoController!.pause();
+        _videoController!.dispose();
+        _videoController = null;
+      }
+    } catch (e) {
+      print('Error al limpiar video: $e');
+    }
+  }
+
   @override
   void dispose() {
+    _isDisposed = true;
     WidgetsBinding.instance.removeObserver(this);
+    
+    // Limpieza completa del video
+    _stopAndDisposeVideo();
+    
+    // Cancelar timer si aún existe
     _navigationTimer?.cancel();
-    _videoController?.dispose();
+    _navigationTimer = null;
+    
+    // Dispose del controlador de animación
     _fadeController.dispose();
+    
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    
+    switch (state) {
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        // Pausar video si la app va a segundo plano
+        if (_videoController != null && !_isDisposed) {
+          _videoController!.pause();
+        }
+        break;
+      case AppLifecycleState.resumed:
+        // Reanudar video si regresa a primer plano (solo si no ha terminado)
+        if (_videoController != null && !_isDisposed && !_hasNavigated) {
+          _videoController!.play();
+        }
+        break;
+      case AppLifecycleState.inactive:
+        // No hacer nada en inactive
+        break;
+      case AppLifecycleState.hidden:
+        // Pausar video si está oculta
+        if (_videoController != null && !_isDisposed) {
+          _videoController!.pause();
+        }
+        break;
+    }
   }
 
   @override
@@ -236,8 +311,8 @@ class _SplashScreenState extends State<SplashScreen>
       padding: const EdgeInsets.only(top:  10, left: 10),
       child: SizedBox(
         
-        width: FetchPixels.getPixelHeight(300),
-        height: FetchPixels.getPixelHeight(300),
+        width: FetchPixels.getPixelHeight(240),
+        height: FetchPixels.getPixelHeight(240),
         child: AspectRatio(
           aspectRatio: _videoController!.value.aspectRatio,
           child: VideoPlayer(_videoController!),

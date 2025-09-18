@@ -47,5 +47,12 @@
 		<false/>
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleDarkContent</string>
+		<!-- Configuración de audio para compatibilidad con apps en segundo plano -->
+		<key>AVAudioSessionCategoryOptions</key>
+		<array>
+			<string>AVAudioSessionCategoryOptionMixWithOthers</string>
+		</array>
+		<key>AVAudioSessionCategory</key>
+		<string>AVAudioSessionCategoryPlayback</string>
 	</dict>
 </plist>
