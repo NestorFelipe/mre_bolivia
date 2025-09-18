@@ -1,0 +1,46 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Deep Clean and Rebuild",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"run",
+				"-c",
+				"Remove-Item -Recurse -Force .gradle, build, app/build 2>$null; flutter clean; flutter pub get"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Delete Gradle Caches",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"Remove-Item",
+				"-Recurse",
+				"-Force",
+				".gradle,",
+				"build,",
+				"app/build"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Clean Gradle",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-c",
+				"Remove-Item -Recurse -Force .gradle -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force app/build -ErrorAction SilentlyContinue"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Clear Cache",
+			"type": "shell",
+			"command": "pwsh -c \"Remove-Item -Recurse -Force .gradle -ErrorAction SilentlyContinue; echo 'Gradle cache cleared'\"",
+			"group": "build"
+		}
+	]
+}

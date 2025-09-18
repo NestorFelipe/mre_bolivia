@@ -1,0 +1,53 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Flutter Clean Quick",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"clean"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Run Quick",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"run"
+			],
+			"group": "run"
+		},
+		{
+			"label": "Regenerate Native Splash",
+			"type": "shell",
+			"command": "dart",
+			"args": [
+				"run",
+				"flutter_native_splash:create"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Regenerate Native Splash",
+			"type": "shell",
+			"command": "dart",
+			"args": [
+				"run",
+				"flutter_native_splash:create"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Pub Get",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"pub",
+				"get"
+			],
+			"group": "build"
+		}
+	]
+}
