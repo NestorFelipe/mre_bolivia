@@ -15,55 +15,105 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> 
+    with TickerProviderStateMixin, WidgetsBindingObserver {
+  
   VideoPlayerController? _videoController;
-  bool _isVideoInitialized = false;
-  bool _hasVideoError = false;
   bool _hasNavigated = false;
   Timer? _navigationTimer;
+  bool _isAppReady = false;
+  
+  // Controladores de animación para transición coordinada
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+  bool _showVideo = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     
-    // Configurar UI fullscreen
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // Mantener el tema consistente
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
+      statusBarColor: Color(0xFFE0E0E0),
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Color(0xFFE0E0E0),
+      systemNavigationBarIconBrightness: Brightness.dark,
     ));
     
-    _initializeVideo();
-    _setupNavigationTimer();
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
+    
+    // CLAVE: Inicialización inmediata de Flutter sin esperar splash nativo
+    _initializeFlutterImmediately();
+  }
+
+  void _initializeFlutterImmediately() async {
+    // Esperar que el motor de Flutter esté completamente inicializado
+    await WidgetsBinding.instance.endOfFrame;
+    
+    // Inicialización inmediata - NO esperar al splash nativo
+    // Flutter toma control inmediatamente después de que esté listo
+    await Future.delayed(const Duration(milliseconds: 100));
+    
+    if (mounted) {
+      setState(() {
+        _isAppReady = true; // Solo necesitamos esta variable ahora
+      });
+      
+      // Inicializar el video de inmediato
+      _initializeVideo();
+      _setupNavigationTimer();
+    }
   }
 
   void _initializeVideo() async {
+    if (!mounted || !_isAppReady) return;
+    
     try {
       _videoController = VideoPlayerController.asset('assets/videos/video_splash.webm');
       await _videoController!.initialize();
       
-      if (mounted) {
+      if (mounted && _isAppReady) {
         setState(() {
-          _isVideoInitialized = true;
-          _hasVideoError = false;
+          _showVideo = true;
         });
         
+        // Fade in suave del video
+        _fadeController.forward();
+        
+        // Configurar y reproducir video
         _videoController!.setLooping(false);
         _videoController!.setVolume(0.0);
         _videoController!.play();
         
-        // Escuchar cuando termine el video
+        // Escuchar cuando termine
         _videoController!.addListener(_onVideoStateChanged);
       }
     } catch (e) {
-      print('Error cargando video: $e');
+      print('Video no disponible: $e');
+      // Si no hay video, continuar con imagen estática
       if (mounted) {
         setState(() {
-          _hasVideoError = true;
-          _isVideoInitialized = false;
+          _showVideo = false;
         });
+        _fadeController.forward();
       }
     }
+  }
+
+  void _setupNavigationTimer() {
+    // Timer de seguridad: navegar después de máximo 5 segundos
+    _navigationTimer = Timer(const Duration(seconds: 5), () {
+      if (!_hasNavigated) {
+        _navigateToNext();
+      }
+    });
   }
 
   void _onVideoStateChanged() {
@@ -76,31 +126,20 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         !value.isPlaying && 
         value.position >= value.duration &&
         value.duration.inMilliseconds > 0) {
-      _navigateToNext();
+      
+      // Pequeño delay antes de navegar para suavizar transición
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _navigateToNext();
+      });
     }
   }
 
-  void _setupNavigationTimer() {
-    // Timer de seguridad: navegar después de 5 segundos máximo
-    _navigationTimer = Timer(const Duration(seconds: 5), () {
-      if (!_hasNavigated) {
-        _navigateToNext();
-      }
-    });
-  }
-
   void _navigateToNext() {
-    if (_hasNavigated) return;
+    if (_hasNavigated || !mounted) return;
     
     _hasNavigated = true;
     _navigationTimer?.cancel();
     _videoController?.pause();
-    
-    // Restaurar UI normal
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.edgeToEdge,
-      overlays: SystemUiOverlay.values,
-    );
     
     // Navegar basado en estado de login
     PrefData.isLogIn().then((isLoggedIn) {
@@ -116,58 +155,140 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _navigationTimer?.cancel();
     _videoController?.dispose();
+    _fadeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     FetchPixels(context);
-    final screenSize = MediaQuery.of(context).size;
     
-    return WillPopScope(
-      child: Scaffold(
-        backgroundColor: fondoGris,
-        body: Container(
-          width: screenSize.width,
-          height: screenSize.height,
-          color: fondoGris,
-          child: Stack(
-            children: [
-              // Imagen de fondo siempre visible
-              // Center(
-              //   child: getAssetImage(
-              //     "logo.png",
-              //     FetchPixels.getPixelHeight(350),
-              //     FetchPixels.getPixelHeight(350),
-              //   ),
-              // ),
-              
-              // Video superpuesto si está disponible
-              if (_isVideoInitialized && !_hasVideoError)
-                Center(
-                  child: SizedBox(
-                    width: FetchPixels.getPixelHeight(240),
-                    height: FetchPixels.getPixelHeight(240),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: SizedBox(
-                          width: _videoController!.value.size.width,
-                          height: _videoController!.value.size.height,
-                          child: VideoPlayer(_videoController!),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: fondoGris,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: fondoGris,
+        child: Center(
+          child: _buildContent(),
         ),
       ),
-      onWillPop: () async => false,
+    );
+  }
+
+  Widget _buildContent() {
+    // Si la app no está lista, mostrar placeholder inmediatamente
+    if (!_isAppReady) {
+      return _buildPlaceholder();
+    }
+    
+    if (_showVideo && _videoController != null && _videoController!.value.isInitialized) {
+      // Mostrar video con fade in
+      return FadeTransition(
+        opacity: _fadeAnimation,
+        child: _buildVideoPlayer(),
+      );
+    } else {
+      // Mostrar imagen estática con fade in
+      return FadeTransition(
+        opacity: _fadeAnimation,
+        child: _buildStaticLogo(),
+      );
+    }
+  }
+
+  Widget _buildPlaceholder() {
+    return Container(
+      width: FetchPixels.getPixelHeight(240),
+      height: FetchPixels.getPixelHeight(240),
+      color: fondoGris,
+      child: Center(
+        child: Image.asset(
+          'assets/images/logo.png',
+          width: FetchPixels.getPixelHeight(240),
+          height: FetchPixels.getPixelHeight(240),
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            // Si hay error cargando la imagen, mostrar un placeholder simple
+            return Container(
+              width: FetchPixels.getPixelHeight(240),
+              height: FetchPixels.getPixelHeight(240),
+              color: fondoGris,
+              child: const Center(
+                child: Icon(
+                  Icons.image,
+                  size: 80,
+                  color: Colors.black26,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVideoPlayer() {
+    return Padding(
+      padding: const EdgeInsets.only(top:  10, left: 10),
+      child: SizedBox(
+        
+        width: FetchPixels.getPixelHeight(300),
+        height: FetchPixels.getPixelHeight(300),
+        child: AspectRatio(
+          aspectRatio: _videoController!.value.aspectRatio,
+          child: VideoPlayer(_videoController!),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStaticLogo() {
+    return Container(
+      width: FetchPixels.getPixelHeight(240),
+      height: FetchPixels.getPixelHeight(240),
+      color: fondoGris,
+      child: Center(
+        child: Image.asset(
+          'assets/images/logo.png',
+          width: FetchPixels.getPixelHeight(240),
+          height: FetchPixels.getPixelHeight(240),
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            // Si hay error cargando la imagen, mostrar el fallback anterior
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.play_circle_outline,
+                  size: 80,
+                  color: Colors.black26,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'BOLIVIA',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                const Text(
+                  'MINISTERIO DE\nRELACIONES EXTERIORES',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.black45,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

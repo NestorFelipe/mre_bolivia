@@ -6,22 +6,19 @@ void main() async {
   // Asegurar que Flutter esté completamente inicializado
   WidgetsFlutterBinding.ensureInitialized();
   
-  // // Mantener el splash nativo hasta que Flutter esté listo
-  // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  // Forzar tema light a nivel del sistema
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Color(0xFFE0E0E0), // Mismo color que fondoGris
+    statusBarIconBrightness: Brightness.dark, // Iconos oscuros para fondo claro
+    systemNavigationBarColor: Color(0xFFE0E0E0), // Mismo color consistente
+    systemNavigationBarIconBrightness: Brightness.dark, // Iconos oscuros
+  ));
   
-  // // Configurar orientación de pantalla
-  // await SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]);
-  
-  // // Configurar colores de la barra de estado para coincidir con el splash
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Color(0xFFE0E0E0), // Mismo color del splash
-  //   statusBarIconBrightness: Brightness.dark,
-  //   systemNavigationBarColor: Color(0xFFE0E0E0),
-  //   systemNavigationBarIconBrightness: Brightness.dark,
-  // ));
+  // Configurar orientación de pantalla
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   
   runApp(const MyApp());
 }
@@ -75,19 +72,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           ),
         ),
       ),
-      // Deshabilitar tema oscuro completamente
-      darkTheme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFE0E0E0),
-        brightness: Brightness.light, // Forzar tema claro incluso en darkTheme
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color(0xFFE0E0E0),
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: Color(0xFFE0E0E0),
-            systemNavigationBarIconBrightness: Brightness.dark,
-          ),
-        ),
-      ),
+      // IMPORTANTE: Eliminar darkTheme completamente para forzar solo tema light
       themeMode: ThemeMode.light, // Forzar siempre tema claro
     );
   }
