@@ -308,7 +308,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildVideoPlayer() {
     return Padding(
-      padding: const EdgeInsets.only(top:  10, left: 10),
+      padding: const EdgeInsets.only(top:  20, left: 5),
       child: SizedBox(
         
         width: FetchPixels.getPixelHeight(240),
