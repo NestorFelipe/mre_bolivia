@@ -30,6 +30,8 @@ import 'package:fix_store/app/view/signup/verify_screen.dart';
 import 'package:get/get.dart';
 
 import '../view/splash_screen.dart';
+import '../ui/pages/consulado_page.dart';
+import '../view/consulado/definicion_detail_screen.dart';
 import 'app_routes.dart';
 import '../../bindings/splash_binding.dart';
 import '../../bindings/intro_binding.dart';
@@ -37,6 +39,7 @@ import '../../bindings/login_binding.dart';
 import '../../bindings/signup_binding.dart';
 import '../../bindings/home_binding.dart';
 import '../../bindings/category_binding.dart';
+import '../../bindings/consulado_binding.dart';
 
 class AppPages {
   static const initialRoute = Routes.homeRoute;
@@ -162,6 +165,15 @@ class AppPages {
     GetPage(
       name: Routes.termOfServiceRoute,
       page: () => const TermOfServiceScreen(),
+    ),
+    GetPage(
+      name: Routes.consultadoRoute,
+      page: () => const ConsultadoPage(),
+      binding: ConsultadoBinding(),
+    ),
+    GetPage(
+      name: Routes.definicionDetailRoute,
+      page: () => const DefinicionDetailScreen(),
     ),
   ];
 }

@@ -28,6 +28,8 @@ abstract class Routes{
   static const privacyRoute = Paths.privacyPath;
   static const securityRoute = Paths.securityPath;
   static const termOfServiceRoute = Paths.termOfServicePath;
+  static const consultadoRoute = Paths.consultadoPath;
+  static const definicionDetailRoute = Paths.definicionDetailPath;
 }
 
 
@@ -61,4 +63,6 @@ abstract class Paths {
   static const privacyPath = "/PrivacyScreen";
   static const securityPath = "/SecurityScreen";
   static const termOfServicePath = "/TermOfServiceScreen";
+  static const consultadoPath = "/ConsultadoScreen";
+  static const definicionDetailPath = "/DefinicionDetailScreen";
 }

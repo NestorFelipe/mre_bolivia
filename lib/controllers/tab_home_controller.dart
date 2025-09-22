@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../base/constant.dart';
 import '../../app/routes/app_routes.dart';
 import '../controllers/shared_controller.dart';
+import '../controllers/consulado_controller.dart';
+import '../app/models/model_consulado.dart';
 
 class TabHomeController extends GetxController {
   // Observable para la página seleccionada en PageView
@@ -24,6 +26,9 @@ class TabHomeController extends GetxController {
   // Inyectar SharedController
   late SharedController sharedController;
 
+  // Inyectar ConsultadoController
+  ConsultadoController? consultadoController;
+
   @override
   void onInit() {
     super.onInit();
@@ -32,6 +37,14 @@ class TabHomeController extends GetxController {
       Get.put(SharedController(), permanent: true);
     }
     sharedController = Get.find<SharedController>();
+    
+    // Intentar obtener ConsultadoController si está disponible
+    try {
+      consultadoController = Get.find<ConsultadoController>();
+    } catch (e) {
+      // ConsultadoController no está disponible, se mantendrá como null
+    }
+    
     initializeSharedPreferences();
     update(); // Reconstruir inicialmente
   }
@@ -74,5 +87,48 @@ class TabHomeController extends GetxController {
   void goToCategoryDetail() {
     sharedPreferences?.setInt("index", 1);
     Constant.sendToNext(Get.context!, Routes.detailRoute);
+  }
+
+  // Obtener definiciones del consulado para el slider
+  List<ModelDefinicion> getSliderDefiniciones() {
+    if (consultadoController?.consultadoData == null) {
+      // Retorna lista vacía si no hay datos del consulado
+      return [];
+    }
+
+    final definiciones = consultadoController!.consultadoData!.definiciones;
+    
+    // Tomar las primeras 3 definiciones disponibles
+    if (definiciones.length >= 3) {
+      return definiciones.take(3).toList();
+    } else {
+      // Retornar todas las definiciones disponibles
+      return definiciones;
+    }
+  }
+
+  // Verificar si hay datos del consulado disponibles
+  bool get hasConsultadoData => consultadoController?.consultadoData != null;
+
+  // Verificar si está cargando los datos del consulado
+  bool get isLoadingConsultado => consultadoController?.isLoading ?? false;
+
+  // Verificar si hay error en los datos del consulado
+  bool get hasConsultadoError => consultadoController?.hasError ?? false;
+
+  // Obtener mensaje de error del consulado
+  String get consultadoErrorMessage => consultadoController?.errorMessage ?? '';
+
+  // Navegar a la página de consulado
+  void goToConsulado() {
+    Constant.sendToNext(Get.context!, Routes.consultadoRoute);
+  }
+
+  // Navegar a la página de detalle de definición
+  void goToDefinicionDetail(ModelDefinicion definicion, int index) {
+    Get.toNamed(Routes.definicionDetailRoute, arguments: {
+      'definicion': definicion,
+      'index': index,
+    });
   }
 }

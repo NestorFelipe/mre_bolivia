@@ -54,5 +54,23 @@
 		</array>
 		<key>AVAudioSessionCategory</key>
 		<string>AVAudioSessionCategoryPlayback</string>
+		<!-- Configuración de seguridad de transporte para permitir HTTP -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+			<key>NSExceptionDomains</key>
+			<dict>
+				<key>miconsulado.rree.gob.bo</key>
+				<dict>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+					<key>NSExceptionMinimumTLSVersion</key>
+					<string>TLSv1.0</string>
+					<key>NSIncludesSubdomains</key>
+					<true/>
+				</dict>
+			</dict>
+		</dict>
 	</dict>
 </plist>
