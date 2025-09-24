@@ -1,9 +1,10 @@
 import 'package:fix_store/app/models/model_consulado.dart';
-import 'package:fix_store/base/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:html/parser.dart' as html_parser;
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/constant.dart';
@@ -31,46 +32,52 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     }
   }
 
-  /// Convierte HTML a texto plano eliminando todas las etiquetas
-  String _parseHtmlToPlainText(String? htmlText) {
-    if (htmlText == null || htmlText.isEmpty) {
-      return "No hay descripción disponible para este elemento.";
-    }
-    
-    try {
-      // Parsear el HTML y extraer solo el texto
-      var document = html_parser.parse(htmlText);
-      String plainText = document.body?.text ?? htmlText;
-      
-      // Limpiar espacios en blanco extra y saltos de línea
-      plainText = plainText.replaceAll(RegExp(r'\s+'), ' ').trim();
-      
-      return plainText.isNotEmpty ? plainText : "No hay descripción disponible para este elemento.";
-    } catch (e) {
-      // Si hay error al parsear, intentar una limpieza básica con RegExp
-      return _cleanHtmlWithRegex(htmlText);
-    }
-  }
 
-  /// Método alternativo para limpiar HTML usando expresiones regulares
-  String _cleanHtmlWithRegex(String htmlText) {
-    // Eliminar etiquetas HTML
-    String cleanText = htmlText.replaceAll(RegExp(r'<[^>]*>'), '');
-    
-    // Decodificar entidades HTML comunes
-    cleanText = cleanText
-        .replaceAll('&nbsp;', ' ')
-        .replaceAll('&amp;', '&')
-        .replaceAll('&lt;', '<')
-        .replaceAll('&gt;', '>')
-        .replaceAll('&quot;', '"')
-        .replaceAll('&#39;', "'")
-        .replaceAll('&apos;', "'");
-    
-    // Limpiar espacios en blanco extra
-    cleanText = cleanText.replaceAll(RegExp(r'\s+'), ' ').trim();
-    
-    return cleanText.isNotEmpty ? cleanText : "No hay descripción disponible para este elemento.";
+
+  /// Renderiza contenido HTML manteniendo el formato original
+  Widget _renderHtmlContent(String? htmlText) {
+    if (htmlText == null || htmlText.isEmpty) {
+      return _getCustomFont("No hay descripción disponible para este elemento.", 16, Colors.black, 1);
+    }
+
+    return Html(
+      data: htmlText,
+      style: {
+        "body": Style(
+          fontSize: FontSize(16.0),
+          lineHeight: LineHeight.em(1.4),
+          fontFamily: Constant.fontsFamily,
+          margin: Margins.zero,
+          padding: HtmlPaddings.zero,
+        ),
+        "p": Style(
+          margin: Margins.only(bottom: 12),
+          textAlign: TextAlign.justify,
+        ),
+        "ul": Style(
+          margin: Margins.symmetric(vertical: 8),
+          padding: HtmlPaddings.only(left: 16),
+        ),
+        "ol": Style(
+          margin: Margins.symmetric(vertical: 8),
+          padding: HtmlPaddings.only(left: 16),
+        ),
+        "li": Style(
+          margin: Margins.only(bottom: 4),
+          lineHeight: LineHeight.em(1.3),
+        ),
+        "h1, h2, h3, h4, h5, h6": Style(
+          fontWeight: FontWeight.bold,
+          margin: Margins.symmetric(vertical: 8),
+        ),
+        "strong, b": Style(
+          fontWeight: FontWeight.bold,
+        ),
+        "em, i": Style(
+          fontStyle: FontStyle.italic,
+        ),
+      },
+    );
   }
 
   Widget _getVerSpace(double height) => SizedBox(height: height.h);
@@ -139,21 +146,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     );
   }
 
-  Widget _getMultilineCustomFont(String text, double fontSize, Color color, {
-    FontWeight fontWeight = FontWeight.normal,
-    double? txtHeight,
-  }) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize.sp,
-        color: color,
-        fontWeight: fontWeight,
-        fontFamily: Constant.fontsFamily,
-        height: txtHeight,
-      ),
-    );
-  }
+
 
   Widget _getButton(BuildContext context, Color bgColor, String text, Color textColor, 
       VoidCallback onPressed, double fontSize, {
@@ -183,14 +176,52 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     );
   }
 
+  /// Toolbar personalizado sin dependencia de FetchPixels
+  Widget _getToolbar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Container(
+            padding: EdgeInsets.all(8.w),
+            child: SvgPicture.asset(
+              "${Constant.assetImagePath}back.svg",
+              width: 24.w,
+              height: 24.w,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            child: _getCustomFont(
+              "Información del Consulado",
+              20,
+              Colors.black,
+              1,
+              fontWeight: FontWeight.w800,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        SizedBox(width: 40.w), // Espaciador para balancear
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Forzar pantalla completa
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    
     if (definicion == null) {
       return Scaffold(
         backgroundColor: backGroundColor,
-        body: SafeArea(
-          child: Center(
-            child: Column(
+        body: Center(
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.error_outline, size: 64.w, color: Colors.red),
@@ -208,30 +239,24 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                     insetsGeometrypadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h)),
               ],
             ),
-          ),
         ),
       );
     }
 
     return WillPopScope(
+      onWillPop: () async {
+        Get.back();
+        return false;
+      },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: backGroundColor,
-        body: SafeArea(
-          child: Column(
+        body: Column(
             children: [
               _getVerSpace(20),
               _getPaddingWidget(
                 EdgeInsets.symmetric(horizontal: 20.w),
-                gettoolbarMenu(context, "back.svg", () {
-                  Get.back();
-                },
-                    title: "Información del Consulado",
-                    weight: FontWeight.w800,
-                    textColor: Colors.black,
-                    fontsize: 20,
-                    istext: true,
-                    isrightimage: false),
+                _getToolbar(),
               ),
               _getVerSpace(20),
               Expanded(
@@ -320,13 +345,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                             ),
                           ],
                         ),
-                        child: _getMultilineCustomFont(
-                          _parseHtmlToPlainText(definicion!.valor),
-                          16,
-                          Colors.black87,
-                          fontWeight: FontWeight.w400,
-                          txtHeight: 1.4,
-                        ),
+                        child: _renderHtmlContent(definicion!.valor),
                       ),
                     ),
                     _getVerSpace(32),
@@ -375,13 +394,8 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                 ),
               )
             ],
-          ),
         ),
       ),
-      onWillPop: () async {
-        Get.back();
-        return false;
-      },
     );
   }
 

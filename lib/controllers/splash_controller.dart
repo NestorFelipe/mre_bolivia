@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
-import '../../base/pref_data.dart';
 import '../../app/routes/app_routes.dart';
 
 class SplashController extends GetxController with WidgetsBindingObserver {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,24 +14,25 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    // Forzar pantalla completa
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    
     // Inicializar posición si no está inicializado
     if (controller.position.value != index) {
       controller.initialize(index);
     }
 
     return WillPopScope(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: backGroundColor,
-        body: SafeArea(
-          child: Obx(() => controller.tabList.isNotEmpty ? controller.tabList[controller.position.value] : const SizedBox()),
-        ),
-        bottomNavigationBar: bottomNavigationBar(controller),
-      ),
       onWillPop: () async {
         controller.closeApp();
         return false;
       },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: backGroundColor,
+        body: Obx(() => controller.tabList.isNotEmpty ? controller.tabList[controller.position.value] : const SizedBox()),
+        bottomNavigationBar: bottomNavigationBar(controller),
+      ),
     );
   }
 

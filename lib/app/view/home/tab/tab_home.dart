@@ -3,6 +3,7 @@ import 'package:fix_store/app/models/model_category.dart';
 import 'package:fix_store/app/models/model_popular_service.dart';
 import 'package:fix_store/base/color_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +16,6 @@ class TabHome extends StatelessWidget {
 
   // Helper functions usando flutter_screenutil
   Widget _getVerSpace(double height) => SizedBox(height: height.h);
-  Widget _getHorSpace(double width) => SizedBox(width: width.w);
   
   Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
     padding: padding,
@@ -114,42 +114,26 @@ class TabHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Forzar pantalla completa
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    
     return GetBuilder<TabHomeController>(
       init: TabHomeController(),
       builder: (controller) => Column(
         children: [
-          _getVerSpace(21),
+          _getVerSpace(35.h),
           _getPaddingWidget(
-            EdgeInsets.symmetric(horizontal: 20.w),
+            EdgeInsets.symmetric(horizontal: 10.w),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _getSvgImage("menu.svg", height: 24, width: 24),
-                Column(
-                  children: [
-                    Obx(() => controller.isPrefsReady.value
-                        ? _getCustomFont("Hola ${controller.sharedController.userName.value}", 14, Colors.black, 1,
-                            fontWeight: FontWeight.w400)
-                        : const Text("Cargando...")),
-                    Row(
-                      children: [
-                        _getSvgImage("location.svg"),
-                        _getHorSpace(4),
-                        _getCustomFont("Shiloh, Hawaii", 14, Colors.black, 1,
-                            fontWeight: FontWeight.w400)
-                      ],
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: controller.goToNotifications,
-                  child: _getSvgImage("notification.svg",
-                      height: 24, width: 24),
-                ),
+                _getAssetImage("logo_mre.png",  270.w,   60.h, fit: BoxFit.cover),
+                
               ],
             ),
+          
           ),
-          _getVerSpace(20),
+
           Expanded(
             flex: 1,
             child: ListView(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../controllers/consulado_controller.dart';
 
 class ConsultadoPage extends GetView<ConsultadoController> {
-  const ConsultadoPage({Key? key}) : super(key: key);
+  const ConsultadoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
