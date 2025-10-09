@@ -1,6 +1,6 @@
-import 'package:fix_store/app/view/dialog/verify_dialog.dart';
-import 'package:fix_store/base/color_data.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/view/dialog/verify_dialog.dart';
+import 'package:mi_cancilleria/base/color_data.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
@@ -111,3 +111,4 @@ class _VerifyScreenState extends State<VerifyScreen> {
         });
   }
 }
+

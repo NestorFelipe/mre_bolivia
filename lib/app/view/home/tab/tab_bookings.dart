@@ -1,9 +1,8 @@
-import 'package:fix_store/app/view/bookings/active_booking_screen.dart';
-import 'package:fix_store/app/view/bookings/all_booking_screen.dart';
-import 'package:fix_store/app/view/bookings/cancel_booking_screen.dart';
-import 'package:fix_store/app/view/bookings/complete_booking_screen.dart';
-import 'package:fix_store/base/color_data.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/app/view/bookings/active_booking_screen.dart';
+import 'package:mi_cancilleria/app/view/bookings/cancel_booking_screen.dart';
+import 'package:mi_cancilleria/app/view/bookings/complete_booking_screen.dart';
+import 'package:mi_cancilleria/base/color_data.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,13 +45,13 @@ class TabBookings extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         controller: controller.pageController,
         scrollDirection: Axis.horizontal,
+        onPageChanged: controller.changePage,
         children: const [
-          AllBookingScreen(),
+          // ConsuladosScreen(),
           ActiveBookingScreen(),
           CompleteBookingScreen(),
           CancelBookingScreen()
         ],
-        onPageChanged: controller.changePage,
       ),
     );
   }
@@ -71,73 +70,97 @@ class TabBookings extends StatelessWidget {
             child: Container(
                 alignment: Alignment.center,
                 child: Obx(() => Column(
-                  children: [
-                    getCustomFont(
-                        "All", 16, controller.position.value == 0 ? blueColor : Colors.black, 1,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.visible),
-                    getVerSpace(7.h),
-                    Container(
-                      height: 2.h,
-                      color:
-                          controller.position.value == 0 ? blueColor : const Color(0xFFE5E8F1),
-                    )
-                  ],
-                ))),
+                      children: [
+                        getCustomFont(
+                            "All",
+                            16,
+                            controller.position.value == 0
+                                ? blueColor
+                                : Colors.black,
+                            1,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.visible),
+                        getVerSpace(7.h),
+                        Container(
+                          height: 2.h,
+                          color: controller.position.value == 0
+                              ? blueColor
+                              : const Color(0xFFE5E8F1),
+                        )
+                      ],
+                    ))),
           ),
           Tab(
             child: Container(
                 alignment: Alignment.center,
                 child: Obx(() => Column(
-                  children: [
-                    getCustomFont("Active", 16,
-                        controller.position.value == 1 ? blueColor : Colors.black, 1,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.visible),
-                    getVerSpace(7.h),
-                    Container(
-                      height: 2.h,
-                      color:
-                          controller.position.value == 1 ? blueColor : const Color(0xFFE5E8F1),
-                    )
-                  ],
-                ))),
+                      children: [
+                        getCustomFont(
+                            "Active",
+                            16,
+                            controller.position.value == 1
+                                ? blueColor
+                                : Colors.black,
+                            1,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.visible),
+                        getVerSpace(7.h),
+                        Container(
+                          height: 2.h,
+                          color: controller.position.value == 1
+                              ? blueColor
+                              : const Color(0xFFE5E8F1),
+                        )
+                      ],
+                    ))),
           ),
           Tab(
             child: Container(
                 alignment: Alignment.center,
                 child: Obx(() => Column(
-                  children: [
-                    getCustomFont("Completed", 16,
-                        controller.position.value == 2 ? blueColor : Colors.black, 1,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.visible),
-                    getVerSpace(7.h),
-                    Container(
-                      height: 2.h,
-                      color:
-                          controller.position.value == 2 ? blueColor : const Color(0xFFE5E8F1),
-                    )
-                  ],
-                ))),
+                      children: [
+                        getCustomFont(
+                            "Completed",
+                            16,
+                            controller.position.value == 2
+                                ? blueColor
+                                : Colors.black,
+                            1,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.visible),
+                        getVerSpace(7.h),
+                        Container(
+                          height: 2.h,
+                          color: controller.position.value == 2
+                              ? blueColor
+                              : const Color(0xFFE5E8F1),
+                        )
+                      ],
+                    ))),
           ),
           Tab(
             child: Container(
                 alignment: Alignment.center,
                 child: Obx(() => Column(
-                  children: [
-                    getCustomFont("Cancelled", 16,
-                        controller.position.value == 3 ? blueColor : Colors.black, 1,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.visible),
-                    getVerSpace(7.h),
-                    Container(
-                      height: 2.h,
-                      color:
-                          controller.position.value == 3 ? blueColor : const Color(0xFFE5E8F1),
-                    )
-                  ],
-                ))),
+                      children: [
+                        getCustomFont(
+                            "Cancelled",
+                            16,
+                            controller.position.value == 3
+                                ? blueColor
+                                : Colors.black,
+                            1,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.visible),
+                        getVerSpace(7.h),
+                        Container(
+                          height: 2.h,
+                          color: controller.position.value == 3
+                              ? blueColor
+                              : const Color(0xFFE5E8F1),
+                        )
+                      ],
+                    ))),
           )
         ],
       ),

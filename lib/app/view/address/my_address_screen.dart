@@ -1,9 +1,9 @@
-import 'package:fix_store/app/data/data_file.dart';
-import 'package:fix_store/app/models/model_address.dart';
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/app/view/dialog/delete_dialog.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/app/data/data_file.dart';
+import 'package:mi_cancilleria/app/models/model_address.dart';
+import 'package:mi_cancilleria/app/routes/app_routes.dart';
+import 'package:mi_cancilleria/app/view/dialog/delete_dialog.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -265,3 +265,4 @@ class _MyAddressScreenState extends State<MyAddressScreen> {
     );
   }
 }
+

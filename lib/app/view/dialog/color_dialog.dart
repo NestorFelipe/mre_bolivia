@@ -1,8 +1,7 @@
-import 'package:fix_store/app/data/data_file.dart';
-import 'package:fix_store/app/models/model_color.dart';
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/constant.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/data/data_file.dart';
+import 'package:mi_cancilleria/app/models/model_color.dart';
+import 'package:mi_cancilleria/base/constant.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -19,7 +18,6 @@ class ColorDialog extends StatefulWidget {
 class _ColorDialogState extends State<ColorDialog> {
   var total = 0.00;
   static List<ModelColor> hairColorLists = DataFile.hairColorList;
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,9 @@ class _ColorDialogState extends State<ColorDialog> {
                               fontWeight: FontWeight.w800)
                         ],
                       ),
-                total == 0.00 ? Container() : getVerSpace(FetchPixels.getPixelHeight(30)),
+                total == 0.00
+                    ? Container()
+                    : getVerSpace(FetchPixels.getPixelHeight(30)),
                 doneButton(context),
                 getVerSpace(FetchPixels.getPixelHeight(30))
               ],
@@ -77,7 +77,7 @@ class _ColorDialogState extends State<ColorDialog> {
   Widget doneButton(BuildContext context) {
     return getButton(context, blueColor, "Done", Colors.white, () {
       Constant.backToPrev(context);
-      Constant.sendToNext(context, Routes.cartRoute);
+      // Constant.sendToNext(context, Routes.cartRoute);
     }, 18,
         weight: FontWeight.w600,
         buttonHeight: FetchPixels.getPixelHeight(60),
@@ -233,3 +233,4 @@ class _ColorDialogState extends State<ColorDialog> {
     );
   }
 }
+

@@ -1,5 +1,5 @@
-import 'package:fix_store/base/color_data.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/color_data.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +16,18 @@ Widget getAssetImage(String image, double width, double height,
     {Color? color, BoxFit boxFit = BoxFit.contain}) {
   return Image.asset(
     Constant.assetImagePath + image,
+    color: color,
+    width: width,
+    height: height,
+    fit: boxFit,
+    scale: FetchPixels.getScale(),
+  );
+}
+
+Widget getFlagAssets(String image, double width, double height,
+    {Color? color, BoxFit boxFit = BoxFit.contain}) {
+  return Image.asset(
+    Constant.assetFlagImagePath + image,
     color: color,
     width: width,
     height: height,
@@ -337,7 +349,7 @@ Widget getDefaultTextFiledWithLabel(BuildContext context, String s,
                                 left: FetchPixels.getPixelWidth(12)),
                             child: InkWell(
                               onTap: () {
-                                if(imagefunction!=null) {
+                                if (imagefunction != null) {
                                   imagefunction();
                                 }
                               },
@@ -577,7 +589,7 @@ Widget getCardEditText(BuildContext context, String s,
                       hintStyle: TextStyle(
                           color: textColor,
                           fontWeight: FontWeight.w400,
-                          fontSize:16,
+                          fontSize: 16,
                           fontFamily: Constant.fontsFamily)),
                 ),
               )),
@@ -725,7 +737,7 @@ Widget getSearchWidget(
                   onChanged: onChanged,
                   decoration: InputDecoration(
                       isDense: true,
-                      hintText: "Search...",
+                      hintText: "Buscar...",
                       border: InputBorder.none,
                       hintStyle: TextStyle(
                           color: textColor,
@@ -838,3 +850,4 @@ Widget getDivider(Color color, double height, double thickness) {
     thickness: thickness,
   );
 }
+

@@ -1,6 +1,6 @@
-import 'package:fix_store/base/constant.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/base/constant.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -88,3 +88,4 @@ class _DeleteDialogState extends State<DeleteDialog> {
     );
   }
 }
+

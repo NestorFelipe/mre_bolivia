@@ -1,7 +1,7 @@
-import 'package:fix_store/app/view/home/home_screen.dart';
-import 'package:fix_store/base/constant.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/app/view/home/home_screen.dart';
+import 'package:mi_cancilleria/base/constant.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -69,3 +69,4 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
     );
   }
 }
+

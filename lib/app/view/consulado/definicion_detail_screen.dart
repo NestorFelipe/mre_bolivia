@@ -1,10 +1,11 @@
-import 'package:fix_store/app/models/model_consulado.dart';
+import 'package:mi_cancilleria/app/models/consulado/model_intro.dart';
+import 'package:mi_cancilleria/base/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/constant.dart';
@@ -17,116 +18,32 @@ class DefinicionDetailScreen extends StatefulWidget {
 }
 
 class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
-  ModelDefinicion? definicion;
+  Intro? definicion;
   int? definicionIndex;
+  Set<int> expandedCards = {}; // Para controlar qué tarjetas están expandidas
 
   @override
   void initState() {
     super.initState();
-    
+
     // Obtener los argumentos pasados desde la navegación
     final arguments = Get.arguments;
     if (arguments != null && arguments is Map<String, dynamic>) {
-      definicion = arguments['definicion'] as ModelDefinicion?;
+      definicion = arguments['definicion'] as Intro?;
       definicionIndex = arguments['index'] as int?;
     }
   }
 
-
-
-  /// Renderiza contenido HTML manteniendo el formato original
-  Widget _renderHtmlContent(String? htmlText) {
-    if (htmlText == null || htmlText.isEmpty) {
-      return _getCustomFont("No hay descripción disponible para este elemento.", 16, Colors.black, 1);
-    }
-
-    return Html(
-      data: htmlText,
-      style: {
-        "body": Style(
-          fontSize: FontSize(16.0),
-          lineHeight: LineHeight.em(1.4),
-          fontFamily: Constant.fontsFamily,
-          margin: Margins.zero,
-          padding: HtmlPaddings.zero,
-        ),
-        "p": Style(
-          margin: Margins.only(bottom: 12),
-          textAlign: TextAlign.justify,
-        ),
-        "ul": Style(
-          margin: Margins.symmetric(vertical: 8),
-          padding: HtmlPaddings.only(left: 16),
-        ),
-        "ol": Style(
-          margin: Margins.symmetric(vertical: 8),
-          padding: HtmlPaddings.only(left: 16),
-        ),
-        "li": Style(
-          margin: Margins.only(bottom: 4),
-          lineHeight: LineHeight.em(1.3),
-        ),
-        "h1, h2, h3, h4, h5, h6": Style(
-          fontWeight: FontWeight.bold,
-          margin: Margins.symmetric(vertical: 8),
-        ),
-        "strong, b": Style(
-          fontWeight: FontWeight.bold,
-        ),
-        "em, i": Style(
-          fontStyle: FontStyle.italic,
-        ),
-      },
-    );
-  }
-
-  Widget _getVerSpace(double height) => SizedBox(height: height.h);
-  
   Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
-    padding: padding,
-    child: child,
-  );
+        padding: padding,
+        child: child,
+      );
 
-  Widget _getAssetImage(String imageName, double width, double height, {BoxFit fit = BoxFit.cover}) {
-    return Image.asset(
-      "${Constant.assetImagePath}$imageName",
-      width: width.w,
-      height: height.h,
-      fit: fit,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          width: width.w,
-          height: height.h,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.image_not_supported,
-                size: 48.w,
-                color: Colors.grey[600],
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                'Imagen no disponible',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: Colors.grey[600],
-                  fontFamily: Constant.fontsFamily,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _getCustomFont(String text, double fontSize, Color color, int maxLines, {
+  Widget _getCustomFont(
+    String text,
+    double fontSize,
+    Color color,
+    int maxLines, {
     FontWeight fontWeight = FontWeight.normal,
     TextAlign textAlign = TextAlign.start,
     double? height,
@@ -146,10 +63,13 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     );
   }
 
-
-
-  Widget _getButton(BuildContext context, Color bgColor, String text, Color textColor, 
-      VoidCallback onPressed, double fontSize, {
+  Widget _getButton(
+    BuildContext context,
+    Color bgColor,
+    String text,
+    Color textColor,
+    VoidCallback onPressed,
+    double fontSize, {
     FontWeight weight = FontWeight.bold,
     double? buttonWidth,
     double? buttonHeight,
@@ -169,15 +89,15 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
           boxShadow: boxShadow,
         ),
         child: Center(
-          child: _getCustomFont(text, fontSize, textColor, 1, 
-            fontWeight: weight, textAlign: TextAlign.center),
+          child: _getCustomFont(text, fontSize, textColor, 1,
+              fontWeight: weight, textAlign: TextAlign.center),
         ),
       ),
     );
   }
 
   /// Toolbar personalizado sin dependencia de FetchPixels
-  Widget _getToolbar() {
+  Widget _getToolbar(String titulo) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -189,8 +109,8 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
             padding: EdgeInsets.all(8.w),
             child: SvgPicture.asset(
               "${Constant.assetImagePath}back.svg",
-              width: 24.w,
-              height: 24.w,
+              width: 32.w,
+              height: 32.w,
             ),
           ),
         ),
@@ -198,9 +118,9 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
           child: Container(
             alignment: Alignment.center,
             child: _getCustomFont(
-              "Información del Consulado",
-              20,
-              Colors.black,
+              titulo,
+              24,
+              const Color.fromARGB(255, 51, 51, 51),
               1,
               fontWeight: FontWeight.w800,
               textAlign: TextAlign.center,
@@ -216,29 +136,30 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
   Widget build(BuildContext context) {
     // Forzar pantalla completa
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
+
     if (definicion == null) {
       return Scaffold(
         backgroundColor: backGroundColor,
         body: Center(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.error_outline, size: 64.w, color: Colors.red),
-                _getVerSpace(16),
-                _getCustomFont("Error: No se encontraron datos", 18, Colors.red, 1,
-                    fontWeight: FontWeight.w600),
-                _getVerSpace(24),
-                _getButton(context, blueColor, "Volver", Colors.white, () {
-                  Get.back();
-                }, 16,
-                    weight: FontWeight.w600,
-                    buttonWidth: 120,
-                    buttonHeight: 48,
-                    borderRadius: BorderRadius.circular(12.r),
-                    insetsGeometrypadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h)),
-              ],
-            ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.error_outline, size: 64.w, color: Colors.red),
+              getVerSpace(16),
+              getCustomFont("Error: No se encontraron datos", 18, Colors.red, 1,
+                  fontWeight: FontWeight.w600),
+              getVerSpace(24),
+              _getButton(context, blueColor, "Volver", Colors.white, () {
+                Get.back();
+              }, 16,
+                  weight: FontWeight.w600,
+                  buttonWidth: 120,
+                  buttonHeight: 48,
+                  borderRadius: BorderRadius.circular(12.r),
+                  insetsGeometrypadding:
+                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h)),
+            ],
+          ),
         ),
       );
     }
@@ -251,199 +172,350 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: backGroundColor,
-        body: Column(
-            children: [
-              _getVerSpace(20),
-              _getPaddingWidget(
-                EdgeInsets.symmetric(horizontal: 20.w),
-                _getToolbar(),
+        body: Stack(
+          children: [
+            // Imagen de fondo superior izquierda
+            Positioned(
+              top: 50,
+              left: 0,
+              child:
+                  getAssetImage("chakanagris.png", 150, 150, fit: BoxFit.cover),
+            ),
+            // Imagen de fondo inferior derecha
+            Positioned(
+              bottom: 50,
+              right: 0,
+              child: Transform.rotate(
+                angle: 3.14159,
+                child: getAssetImage("chakanagris.png", 150, 150,
+                    fit: BoxFit.cover),
               ),
-              _getVerSpace(20),
-              Expanded(
-                flex: 1,
-                child: ListView(
-                  primary: true,
-                  shrinkWrap: true,
-                  children: [
-                    // Imagen principal
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      Container(
-                        height: 225.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.r),
-                          color: const Color(0xFFF0F0F0),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16.r),
-                          child: _getAssetImage(
-                            "out-${definicion!.funcionId}.png", 
-                            double.infinity, 
-                            225,
-                            fit: BoxFit.cover
+            ),
+            // Contenido original
+            Column(
+              children: [
+                getVerSpace(25),
+                getPaddingWidget(
+                  EdgeInsets.symmetric(horizontal: 18.w),
+                  _getToolbar(definicion!.titulo),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ListView(
+                    primary: true,
+                    shrinkWrap: true,
+                    children: [
+                      _getPaddingWidget(
+                        EdgeInsets.symmetric(horizontal: 20.w),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.r),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(0.0, 4.0)),
+                            ],
+                          ),
+                          child: IntrinsicHeight(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Container(
+                                  width: 4.w,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Colors.red, // Rojo
+                                        Colors.yellow, // Amarillo
+                                        Colors.green, // Verde
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(12.0),
+                                      bottomLeft: Radius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.w),
+                                    child: renderHtmlContent(
+                                        definicion!.descripcion),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    _getVerSpace(24),
-                    
-                    // Título principal
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      _getCustomFont(
-                        definicion!.titulo ?? "Sin título", 
-                        24, 
-                        Colors.black, 
-                        3,
-                        fontWeight: FontWeight.w800
+                      getVerSpace(15),
+
+                      // Información adicional
+                      _getPaddingWidget(
+                        EdgeInsets.symmetric(horizontal: 20.w),
+                        _getCustomFont(
+                            "Información Adicional", 18, Colors.black, 1,
+                            fontWeight: FontWeight.w800),
                       ),
-                    ),
-                    _getVerSpace(16),
-                    
-                    // // ID de función (si está disponible)
-                    // if (definicion!.funcionId != null)
-                    //   _getPaddingWidget(
-                    //     EdgeInsets.symmetric(horizontal: 20.w),
-                    //     Container(
-                    //       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                    //       decoration: BoxDecoration(
-                    //         color: blueColor.withOpacity(0.1),
-                    //         borderRadius: BorderRadius.circular(8.r),
-                    //       ),
-                    //       child: _getCustomFont(
-                    //         "ID: ${definicion!.funcionId}", 
-                    //         14, 
-                    //         blueColor, 
-                    //         1,
-                    //         fontWeight: FontWeight.w600
-                    //       ),
-                    //     ),
-                    //   ),
-                    // _getVerSpace(24),
-                    
-                    // Descripción/Valor
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      _getCustomFont("Descripción", 18, Colors.black, 1,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    _getVerSpace(12),
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(16.w),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              offset: Offset(0.0, 4.0)
-                            ),
+                      getVerSpace(16),
+
+                      // Tarjetas de información
+                      _getPaddingWidget(
+                        EdgeInsets.symmetric(horizontal: 20.w),
+                        Column(
+                          children: [
+                            if (definicion!.detalle.isNotEmpty)
+                              ...definicion!.detalle
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                int index = entry.key;
+                                var detalle = entry.value;
+                                return Column(
+                                  children: [
+                                    // Verificar si es un enlace
+                                    detalle.tipo == "link"
+                                        ? _buildLinkCard(
+                                            detalle.titulo,
+                                            detalle.descripcion ?? "",
+                                            index % 3 == 0
+                                                ? blueColor
+                                                : (index % 3 == 1
+                                                    ? Colors.green
+                                                    : Colors.orange),
+                                          )
+                                        : _buildInfoCard(
+                                            detalle.titulo,
+                                            detalle.descripcion ?? "",
+                                            Icons.info_outline,
+                                            index % 3 == 0
+                                                ? blueColor
+                                                : (index % 3 == 1
+                                                    ? Colors.green
+                                                    : Colors.orange),
+                                            index),
+                                    if (index < definicion!.detalle.length - 1)
+                                      getVerSpace(12.w),
+                                  ],
+                                );
+                              })
+                            else
+                              _buildInfoCard(
+                                  "Sin detalles",
+                                  "No hay información adicional disponible",
+                                  Icons.info_outline,
+                                  Colors.grey,
+                                  0),
                           ],
                         ),
-                        child: _renderHtmlContent(definicion!.valor),
                       ),
-                    ),
-                    _getVerSpace(32),
-                    
-                    // Información adicional
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      _getCustomFont("Información Adicional", 18, Colors.black, 1,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    _getVerSpace(16),
-                    
-                    // Tarjetas de información
-                    _getPaddingWidget(
-                      EdgeInsets.symmetric(horizontal: 20.w),
-                      Column(
-                        children: [
-                          _buildInfoCard(
-                            "Fuente", 
-                            "Consulado de Bolivia", 
-                            Icons.account_balance,
-                            blueColor
-                          ),
-                          _getVerSpace(12),
-                          _buildInfoCard(
-                            "Categoría", 
-                            "Servicios Consulares", 
-                            Icons.category,
-                            Colors.green
-                          ),
-                          _getVerSpace(12),
-                          _buildInfoCard(
-                            "Estado", 
-                            "Información Oficial", 
-                            Icons.verified,
-                            Colors.orange
-                          ),
-                        ],
-                      ),
-                    ),
-                    _getVerSpace(40),
-                    
-                    // Botón de contacto/más información
-                  
-                  ],
-                ),
-              )
-            ],
+                      getVerSpace(40.w),
+
+                      // Botón de contacto/más información
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoCard(String title, String value, IconData icon, Color iconColor) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 8,
-            offset: Offset(0.0, 2.0)
-          ),
-        ],
+  Widget _buildInfoCard(
+      String title, String value, IconData icon, Color iconColor, int index) {
+    bool isExpanded = expandedCards.contains(index);
+
+    // Limpiar el texto de caracteres de salto de línea y convertirlos a HTML
+    String cleanValue = value
+        .replaceAll('\r\n', '<br>')
+        .replaceAll('\r', '<br>')
+        .replaceAll('\n', '<br>');
+
+    String displayValue = cleanValue;
+
+    // Si no está expandido y el texto es más largo que 20 caracteres, truncar
+    if (!isExpanded && cleanValue.length > 20) {
+      // Buscar el texto sin las etiquetas HTML para el conteo
+      String textWithoutHtml = cleanValue.replaceAll(RegExp(r'<[^>]*>'), '');
+      if (textWithoutHtml.length > 20) {
+        displayValue = '${textWithoutHtml.substring(0, 20)}...';
+      }
+    }
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (isExpanded) {
+            expandedCards.remove(index);
+          } else {
+            expandedCards.add(index);
+          }
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: double.infinity,
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12, blurRadius: 8, offset: Offset(0.0, 2.0)),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 48.w,
+              height: 48.w,
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 24.w,
+              ),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
+                      fontWeight: FontWeight.w500),
+                  SizedBox(height: 4.h),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: Container(
+                      key: ValueKey(isExpanded),
+                      child: isExpanded
+                          ? renderHtmlContent(cleanValue)
+                          : renderHtmlContent(displayValue),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Icono indicador de expansión
+            Padding(
+              padding: EdgeInsets.only(top: 4.h),
+              child: Icon(
+                isExpanded
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: iconColor,
+                size: 20.w,
+              ),
+            ),
+          ],
+        ),
       ),
-      child: Row(
-        children: [
-          Container(
-            width: 48.w,
-            height: 48.w,
-            decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12.r),
+    );
+  }
+
+  Widget _buildLinkCard(String title, String url, Color iconColor) {
+    return GestureDetector(
+      onTap: () async {
+        try {
+          // Verificar si la URL es válida y agregarle protocolo si es necesario
+          String finalUrl = url;
+          if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            finalUrl = 'https://$url';
+          }
+
+          final Uri uri = Uri.parse(finalUrl);
+
+          // Intentar abrir la URL
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          } else {
+            // Si no se puede abrir, mostrar mensaje de error
+            // ignore: use_build_context_synchronously
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('No se puede abrir el enlace: $url'),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
+        } catch (e) {
+          // Manejo de errores
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error al abrir el enlace: $url'),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 3),
             ),
-            child: Icon(
-              icon,
+          );
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12, blurRadius: 8, offset: Offset(0.0, 2.0)),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 48.w,
+              height: 48.w,
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(
+                Icons.link,
+                color: iconColor,
+                size: 24.w,
+              ),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
+                      fontWeight: FontWeight.w500),
+                  SizedBox(height: 4.h),
+                  _getCustomFont(
+                    "Toca para abrir enlace",
+                    12,
+                    iconColor,
+                    1,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ],
+              ),
+            ),
+            // Icono de enlace externo
+            Icon(
+              Icons.open_in_new,
               color: iconColor,
-              size: 24.w,
+              size: 20.w,
             ),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _getCustomFont(title, 14, Colors.grey[600]!, 1,
-                    fontWeight: FontWeight.w500),
-                SizedBox(height: 4.h),
-                _getCustomFont(value, 16, Colors.black, 2,
-                    fontWeight: FontWeight.w600),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+

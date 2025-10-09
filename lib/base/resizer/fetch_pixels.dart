@@ -74,3 +74,4 @@ class FetchPixels {
     return scale;
   }
 }
+

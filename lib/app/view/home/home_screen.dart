@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/widget_utils.dart';
-import '../../../controllers/home_controller.dart';
+import '../../../controllers/consulado/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   final int index;
@@ -16,7 +16,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     // Forzar pantalla completa
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
+
     // Inicializar posición si no está inicializado
     if (controller.position.value != index) {
       controller.initialize(index);
@@ -30,7 +30,9 @@ class HomeScreen extends GetView<HomeController> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: backGroundColor,
-        body: Obx(() => controller.tabList.isNotEmpty ? controller.tabList[controller.position.value] : const SizedBox()),
+        body: Obx(() => controller.tabList.isNotEmpty
+            ? controller.tabList[controller.position.value]
+            : const SizedBox()),
         bottomNavigationBar: bottomNavigationBar(controller),
       ),
     );
@@ -41,34 +43,37 @@ class HomeScreen extends GetView<HomeController> {
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       height: 100.h,
       decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-                offset: Offset(0.0, 4.0)),
-          ],
-          ),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black12, blurRadius: 10, offset: Offset(0.0, 2.0)),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List<Widget>.generate(controller.itemList.length, (index) {
           return GestureDetector(
             onTap: () => controller.changePosition(index),
             child: Obx(() => Container(
-              decoration: BoxDecoration(
-                  color: controller.position.value == index ? blueColor : Colors.transparent,
-                  shape: BoxShape.circle),
-              child: Padding(
-                padding: EdgeInsets.all(13.h),
-                child: getSvgImage(controller.itemList[index],
-                    width: 24.h,
-                    height: 24.h,
-                    color: controller.position.value == index ? Colors.white : null),
-              ),
-            )),
+                  decoration: BoxDecoration(
+                      color: controller.position.value == index
+                          ? blueColor
+                          : Colors.transparent,
+                      shape: BoxShape.circle),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.h),
+                    child: getSvgImage(controller.itemList[index],
+                        width: 24.h,
+                        height: 24.h,
+                        color: controller.position.value == index
+                            ? Colors.white
+                            : null),
+                  ),
+                )),
           );
         }),
       ),
     );
   }
 }
+

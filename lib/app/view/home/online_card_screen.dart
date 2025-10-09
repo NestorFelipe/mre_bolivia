@@ -1,6 +1,6 @@
-import 'package:fix_store/app/data/data_file.dart';
-import 'package:fix_store/app/models/model_card.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/data/data_file.dart';
+import 'package:mi_cancilleria/app/models/model_card.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -138,3 +138,4 @@ class _OnlineCardScreenState extends State<OnlineCardScreen> {
     );
   }
 }
+

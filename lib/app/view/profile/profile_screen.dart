@@ -1,5 +1,5 @@
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/routes/app_routes.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -110,3 +110,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+

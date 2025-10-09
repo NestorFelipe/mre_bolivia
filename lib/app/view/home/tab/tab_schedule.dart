@@ -1,4 +1,4 @@
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -366,3 +366,4 @@ class TabSchedule extends StatelessWidget {
         ));
   }
 }
+

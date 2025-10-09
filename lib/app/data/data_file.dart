@@ -1,15 +1,15 @@
-import 'package:fix_store/app/models/model_address.dart';
-import 'package:fix_store/app/models/model_booking.dart';
-import 'package:fix_store/app/models/model_card.dart';
-import 'package:fix_store/app/models/model_cart.dart';
-import 'package:fix_store/app/models/model_category.dart';
-import 'package:fix_store/app/models/model_color.dart';
-import 'package:fix_store/app/models/model_country.dart';
-import 'package:fix_store/app/models/model_intro.dart';
-import 'package:fix_store/app/models/model_notification.dart';
-import 'package:fix_store/app/models/model_other.dart';
-import 'package:fix_store/app/models/model_popular_service.dart';
-import 'package:fix_store/app/models/model_salon.dart';
+import 'package:mi_cancilleria/app/models/model_address.dart';
+import 'package:mi_cancilleria/app/models/model_booking.dart';
+import 'package:mi_cancilleria/app/models/model_card.dart';
+import 'package:mi_cancilleria/app/models/model_cart.dart';
+import 'package:mi_cancilleria/app/models/model_category.dart';
+import 'package:mi_cancilleria/app/models/model_color.dart';
+import 'package:mi_cancilleria/app/models/model_country.dart';
+import 'package:mi_cancilleria/app/models/model_intro.dart';
+import 'package:mi_cancilleria/app/models/model_notification.dart';
+import 'package:mi_cancilleria/app/models/model_other.dart';
+import 'package:mi_cancilleria/app/models/model_popular_service.dart';
+import 'package:mi_cancilleria/app/models/model_salon.dart';
 
 import '../../base/color_data.dart';
 
@@ -161,9 +161,11 @@ class DataFile {
   ];
 
   static List<ModelPopularService> popularServiceList = [
-    ModelPopularService("wallpaper.png", "Wall Painting", "Painter"),
-    ModelPopularService("barber.png", "Salon For Men", "Barber"),
-    ModelPopularService("wallpaper.png", "Wall Painting", "Painter"),
-    ModelPopularService("barber.png", "Salon For Men", "Barber"),
+    ModelPopularService("wallpaper.png", "Vivencias", "Painter"),
+    ModelPopularService("viajes.png", "Viajes", "Barber"),
+    ModelPopularService("asistencia.png", "Asistencia", "Painter"),
+    ModelPopularService("tramites.png", "Tramites", "Tramite"),
+    ModelPopularService("entidades.png", "Entidades", "Barber"),
   ];
 }
+

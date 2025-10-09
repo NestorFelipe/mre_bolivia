@@ -3,14 +3,16 @@ import 'package:flutter/services.dart';
 
 class Constant {
   static String assetImagePath = "assets/images/";
+  static String assetFlagImagePath = "assets/paises/";
+
   static bool isDriverApp = false;
   static const String fontsFamily = "Lato";
   static const String fromLogin = "getFromLoginClick";
   static const String homePos = "getTabPos";
-  static const int stepStatusNone=0;
-  static const int stepStatusActive=1;
-  static const int stepStatusDone=2;
-  static const int stepStatusWrong=3;
+  static const int stepStatusNone = 0;
+  static const int stepStatusActive = 1;
+  static const int stepStatusDone = 2;
+  static const int stepStatusWrong = 3;
 
   static double getPercentSize(double total, double percent) {
     return (percent * total) / 100;
@@ -20,7 +22,7 @@ class Constant {
     Navigator.of(context).pop();
   }
 
-  static  getCurrency(BuildContext context) {
+  static getCurrency(BuildContext context) {
     return "ETH";
   }
 
@@ -56,3 +58,4 @@ class Constant {
     });
   }
 }
+

@@ -1,124 +1,41 @@
-import 'package:get/get.dart';
-import 'dart:io';
-import 'dart:convert';
-import '../app/models/model_consulado.dart';
+import 'package:mi_cancilleria/app/models/consulado/model_definicion_detail.dart';
+import 'package:mi_cancilleria/app/models/consulado/model_regiones.dart';
 
-class ConsultadoService extends GetConnect {
-  static const String _baseUrlHttps = 'https://miconsulado.rree.gob.bo/components/com_cancilleria/json.php';
-  static const String _baseUrlHttp = 'http://miconsulado.rree.gob.bo/components/com_cancilleria/json.php';
+import 'api_service.dart';
 
-  @override
-  void onInit() {
-    super.onInit();
-    httpClient.baseUrl = '';
-    httpClient.timeout = const Duration(seconds: 30);
-    
-    // Configurar headers para aceptar JSON
-    httpClient.defaultContentType = 'application/json';
-    httpClient.addRequestModifier<void>((request) {
-      request.headers['Accept'] = 'application/json';
-      request.headers['Content-Type'] = 'application/json';
-      request.headers['User-Agent'] = 'Flutter App';
-      return request;
-    });
-  }
-
-  /// Obtiene los datos del consulado desde la API con fallback HTTP
-  Future<Response<ModelConsulado?>> getConsultadoData() async {
-    // Primero intentar con HTTPS
-    final httpsResult = await _makeRequest(_baseUrlHttps, 'HTTPS');
-    if (httpsResult.statusCode == 200 && httpsResult.body != null) {
-      return httpsResult;
-    }
-
-    print('🔄 HTTPS falló, intentando con HTTP...');
-    
-    // Si HTTPS falla, intentar con HTTP
-    return await _makeRequest(_baseUrlHttp, 'HTTP');
-  }
-
-  /// Realiza la petición HTTP/HTTPS usando HttpClient nativo
-  Future<Response<ModelConsulado?>> _makeRequest(String url, String protocol) async {
+class ConsuladoService {
+  /// Obtiene los datos completos del consulado
+  Future<RegionesResponse> obtenerDatosConsulado() async {
     try {
-      print('📡 Iniciando llamada $protocol a: $url');
-      
-      // Crear HttpClient con configuración SSL personalizada
-      final httpClient = HttpClient();
-      
-      if (protocol == 'HTTPS') {
-        httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) {
-          print('⚠️ Certificado SSL no válido para $host:$port - Permitiendo conexión');
-          return true; // Permitir conexiones con certificados no válidos
-        };
-      }
+      final response = await ApiService.get()
+          .end('/Apostilla/paises-y-consulados')
+          .runAsync<Map<String, dynamic>>();
 
-      final uri = Uri.parse(url);
-      final request = await httpClient.getUrl(uri);
-      
-      // Configurar headers
-      request.headers.set('Accept', 'application/json');
-      request.headers.set('Content-Type', 'application/json');
-      request.headers.set('User-Agent', 'Flutter App');
-
-      final response = await request.close();
-      final responseBody = await response.transform(utf8.decoder).join();
-      
-      httpClient.close();
-
-      print('📊 Status Code ($protocol): ${response.statusCode}');
-      print('📋 Status: ${response.reasonPhrase}');
-      
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        print('✅ Datos recibidos via $protocol, procesando JSON...');
-        
-        try {
-          final jsonData = json.decode(responseBody);
-          final consultadoData = ModelConsulado.fromJson(jsonData);
-          print('✅ JSON procesado exitosamente');
-          print('📈 Definiciones encontradas: ${consultadoData.definiciones.length}');
-          
-          return Response(
-            statusCode: response.statusCode,
-            statusText: 'OK',
-            body: consultadoData,
-          );
-        } catch (e) {
-          print('❌ Error al procesar JSON: $e');
-          return Response(
-            statusCode: 500,
-            statusText: 'Error al procesar datos: $e',
-            body: null,
-          );
-        }
+      if (response.success && response.data != null) {
+        return RegionesResponse.fromJson(response.data!['data']);
       } else {
-        print('❌ Error en la respuesta $protocol: ${response.statusCode} - ${response.reasonPhrase}');
-        return Response(
-          statusCode: response.statusCode,
-          statusText: 'Error del servidor ($protocol): ${response.reasonPhrase}',
-          body: null,
-        );
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
       }
-    } on HandshakeException catch (e) {
-      print('🔒 Error de certificado SSL ($protocol): $e');
-      return Response(
-        statusCode: 500,
-        statusText: 'Error de certificado SSL ($protocol): ${e.message}',
-        body: null,
-      );
-    } on SocketException catch (e) {
-      print('🌐 Error de conexión ($protocol): $e');
-      return Response(
-        statusCode: 500,
-        statusText: 'Error de conexión ($protocol): Sin conexión a internet',
-        body: null,
-      );
     } catch (e) {
-      print('💥 Error inesperado ($protocol): $e');
-      return Response(
-        statusCode: 500,
-        statusText: 'Error inesperado ($protocol): $e',
-        body: null,
-      );
+      throw Exception('Error al obtener datos del consulado: $e');
+    }
+  }
+
+  /// Obtiene solo las definiciones del consulado
+  Future<ModelDefinicionDetail> obtenerDefiniciones() async {
+    try {
+      final response = await ApiService.get()
+          .end('/Apostilla/definicion')
+          .runAsync<Map<String, dynamic>>();
+
+      if (response.success && response.data != null) {
+        return ModelDefinicionDetail.fromJson(response.data!['data']);
+      } else {
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
+      }
+    } catch (e) {
+      throw Exception('Error al obtener definiciones: $e');
     }
   }
 }
+

@@ -31,3 +31,4 @@ class Assets {
   static const String imageNotification = "assets/images/notification.svg";
   static const String imageWasher = "assets/images/washer.png";
 }
+

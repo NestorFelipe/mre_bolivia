@@ -1,5 +1,5 @@
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -412,3 +412,4 @@ class _BookingDetailState extends State<BookingDetail> {
         });
   }
 }
+

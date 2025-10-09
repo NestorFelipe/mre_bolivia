@@ -1,31 +1,33 @@
-import 'package:fix_store/app/view/address/edit_address_screen.dart';
-import 'package:fix_store/app/view/address/my_address_screen.dart';
-import 'package:fix_store/app/view/bookings/booking_detail.dart';
-import 'package:fix_store/app/view/card/card_screen.dart';
-import 'package:fix_store/app/view/home/address_screen.dart';
-import 'package:fix_store/app/view/home/cart_screen.dart';
-import 'package:fix_store/app/view/home/category_screen.dart';
-import 'package:fix_store/app/view/home/date_time_screen.dart';
-import 'package:fix_store/app/view/home/home_screen.dart';
-import 'package:fix_store/app/view/home/detail_screen.dart';
-import 'package:fix_store/app/view/home/payment_screen.dart';
-import 'package:fix_store/app/view/home/order_detail.dart';
-import 'package:fix_store/app/view/intro/intro_screen.dart';
-import 'package:fix_store/app/view/login/forgot_password.dart';
-import 'package:fix_store/app/view/login/login_screen.dart';
-import 'package:fix_store/app/view/login/reset_password.dart';
-import 'package:fix_store/app/view/notification_screen.dart';
-import 'package:fix_store/app/view/profile/edit_profile_screen.dart';
-import 'package:fix_store/app/view/profile/profile_screen.dart';
-import 'package:fix_store/app/view/search/search_screen.dart';
-import 'package:fix_store/app/view/setting/help_screen.dart';
-import 'package:fix_store/app/view/setting/privacy_screen.dart';
-import 'package:fix_store/app/view/setting/security_screen.dart';
-import 'package:fix_store/app/view/setting/setting_screen.dart';
-import 'package:fix_store/app/view/setting/term_of_service_screen.dart';
-import 'package:fix_store/app/view/signup/select_country.dart';
-import 'package:fix_store/app/view/signup/signup_screen.dart';
-import 'package:fix_store/app/view/signup/verify_screen.dart';
+import 'package:mi_cancilleria/app/view/address/edit_address_screen.dart';
+import 'package:mi_cancilleria/app/view/address/my_address_screen.dart';
+import 'package:mi_cancilleria/app/view/bookings/booking_detail.dart';
+import 'package:mi_cancilleria/app/view/card/card_screen.dart';
+import 'package:mi_cancilleria/app/view/consulado/consulados_screen.dart';
+import 'package:mi_cancilleria/app/view/home/address_screen.dart';
+import 'package:mi_cancilleria/app/view/home/region_screen.dart';
+import 'package:mi_cancilleria/app/view/home/category_screen.dart';
+import 'package:mi_cancilleria/app/view/home/date_time_screen.dart';
+import 'package:mi_cancilleria/app/view/home/home_screen.dart';
+import 'package:mi_cancilleria/app/view/home/detail_screen.dart';
+import 'package:mi_cancilleria/app/view/home/payment_screen.dart';
+import 'package:mi_cancilleria/app/view/home/order_detail.dart';
+import 'package:mi_cancilleria/app/view/intro/intro_screen.dart';
+import 'package:mi_cancilleria/app/view/login/forgot_password.dart';
+import 'package:mi_cancilleria/app/view/login/login_screen.dart';
+import 'package:mi_cancilleria/app/view/login/reset_password.dart';
+import 'package:mi_cancilleria/app/view/notification_screen.dart';
+import 'package:mi_cancilleria/app/view/profile/edit_profile_screen.dart';
+import 'package:mi_cancilleria/app/view/profile/profile_screen.dart';
+import 'package:mi_cancilleria/app/view/search/search_screen.dart';
+import 'package:mi_cancilleria/app/view/setting/help_screen.dart';
+import 'package:mi_cancilleria/app/view/setting/privacy_screen.dart';
+import 'package:mi_cancilleria/app/view/setting/security_screen.dart';
+import 'package:mi_cancilleria/app/view/setting/setting_screen.dart';
+import 'package:mi_cancilleria/app/view/setting/term_of_service_screen.dart';
+import 'package:mi_cancilleria/app/view/signup/select_country.dart';
+import 'package:mi_cancilleria/app/view/signup/signup_screen.dart';
+import 'package:mi_cancilleria/app/view/signup/verify_screen.dart';
+import 'package:mi_cancilleria/bindings/region_binding.dart';
 
 import 'package:get/get.dart';
 
@@ -44,6 +46,10 @@ import '../../bindings/consulado_binding.dart';
 class AppPages {
   static const initialRoute = Routes.homeRoute;
   static List<GetPage> pages = [
+    GetPage(
+        name: Routes.consuladosRoute,
+        page: () => ConsuladosScreen(),
+        binding: ConsultadoBinding()),
     GetPage(
       name: Routes.homeRoute,
       page: () => const SplashScreen(),
@@ -91,12 +97,13 @@ class AppPages {
       binding: CategoryBinding(),
     ),
     GetPage(
-      name: Routes.detailRoute,
-      page: () => const DetailScreen(),
+      name: Routes.regionRoute,
+      page: () => const RegionScreen(),
+      binding: RegionBinding(),
     ),
     GetPage(
-      name: Routes.cartRoute,
-      page: () => const CartScreen(),
+      name: Routes.detailRoute,
+      page: () => const DetailScreen(),
     ),
     GetPage(
       name: Routes.addressRoute,
@@ -177,3 +184,4 @@ class AppPages {
     ),
   ];
 }
+

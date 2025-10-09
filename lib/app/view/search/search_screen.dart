@@ -1,5 +1,5 @@
-import 'package:fix_store/app/data/data_file.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/data/data_file.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -32,16 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   horizontal: FetchPixels.getPixelWidth(20)),
               child: Column(
                 children: [
-                  getVerSpace(FetchPixels.getPixelHeight(20)),
-                  gettoolbarMenu(context, "back.svg", () {
-                    Constant.backToPrev(context);
-                  },
-                      istext: true,
-                      title: "Search",
-                      weight: FontWeight.w800,
-                      fontsize: 24,
-                      textColor: Colors.black),
-                  getVerSpace(FetchPixels.getPixelHeight(30)),
+                  getVerSpace(FetchPixels.getPixelHeight(15)),
                   getSearchWidget(context, searchController, () {}, (value) {},
                       onSubmit: (submit) {
                     if (!searchLists.contains(submit)) {
@@ -62,11 +53,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                         getVerSpace(FetchPixels.getPixelHeight(40)),
-                        getCustomFont("No Searches", 22, Colors.black, 1,
+                        getCustomFont("Sin Busquedas", 22, Colors.black, 1,
                             fontWeight: FontWeight.w800),
                         getVerSpace(FetchPixels.getPixelHeight(10)),
-                        getCustomFont(
-                            "You have no recent searches.", 16, Colors.black, 1,
+                        getCustomFont("No tienes búsquedas recientes.", 16,
+                            Colors.black, 1,
                             fontWeight: FontWeight.w400)
                       ],
                     ))
@@ -174,3 +165,4 @@ class _SearchScreenState extends State<SearchScreen> {
         });
   }
 }
+

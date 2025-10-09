@@ -1,4 +1,4 @@
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -53,3 +53,4 @@ class _HelpScreenState extends State<HelpScreen> {
         });
   }
 }
+

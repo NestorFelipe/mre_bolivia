@@ -1,0 +1,4753 @@
+{
+  "institucion": [
+    {
+      "id": "165",
+      "titulo": "Misión y visión",
+      "valor": "<p>Es una representación del Estado boliviano en un país extranjero cuya función es brindar atención y asistencia a los connacionales que residen en el país receptor.</p>",
+      "image": "",
+      "order": "1"
+    },
+    {
+      "id": "165",
+      "titulo": "Principios - valores",
+      "valor": "<p>Es una representación del Estado boliviano en un país extranjero cuya función es brindar atención y asistencia a los connacionales que residen en el país receptor.</p>",
+      "image": "",
+      "order": "1"
+    }
+  ],
+  "definiciones": [
+    {
+      "id": "01",
+      "titulo": "Mi Cancilleria",
+      "valor": "<p>Es una representación del Estado boliviano en un país extranjero cuya función es brindar atención y asistencia a los connacionales que residen en el país receptor.</p>",
+      "image": "",
+      "order": "1"
+    },
+    {
+      "id": "02",
+      "titulo": "¿Qué es un consulado?",
+      "valor": "<p>Es una representación del Estado boliviano en un país extranjero cuya función es brindar atención y asistencia a los connacionales que residen en el país receptor.</p>",
+      "image": "",
+      "order": "2"
+    },
+    {
+      "id": "03",
+      "titulo": "¿Qué puede hacer un consulado?",
+      "valor": "<ul>\r\n<li>Representar y proteger a los ciudadanos bolivianos y sus intereses en el exterior.</li>\r\n<li>Realizar visitas a centros penitenciarios donde se encuentren bolivianos privados de libertad para brindar asistencia y protección consular.</li>\r\n<li>Aplicar convenios suscritos en materia judicial, fomento de turismo y relaciones culturales.</li>\r\n<li>Actuar en calidad de notario de Fe Pública y oficial de Registro Civil.</li>\r\n<li>Orientar en normas nacionales del Estado receptor sobre materia migratoria, jurídica y administrativa.</li>\r\n<li>Asistir a los bolivianos en comparecencias ante tribunales extranjeros asegurando que tengan representación legal.</li>\r\n<li>Visitar a bolivianos internados en hospitales y centros de albergue.</li>\r\n<li>Informar sobre actualizaciones consulares, en materia de repatriación de menores, situaciones de trata, tráfico de personas, además de brindar la asistencia y protección consular correspondiente.</li>\r\n<li>Gestionar y prestar asistencia consular para traslado y repatriación de cuerpos de fallecidos en el exterior en situación de vulnerabilidad.</li>\r\n</ul>",
+      "image": "",
+      "order": "3"
+    },
+    {
+      "id": "04",
+      "titulo": "¿Qué no hace el consulado?",
+      "valor": "<ul>\r\n<li>Patrocinar o intervenir en procesos judiciales de connacionales.</li>\r\n<li>Intervenir en procesos electorales.</li>\r\n<li>Tramitar visas de residencia, trabajo u otras en el país receptor.</li>\r\n<li>Proporcionar o prestar dinero, garantías o avales financieros.</li>\r\n<li>Encargarse del pago de cuentas o gastos personales de bolivianos en el exterior.</li>\r\n<li>Gestionar permisos de trabajo.</li>\r\n</ul>",
+      "image": "",
+      "order": "4"
+    }
+  ],
+  "asistencia": [
+    {
+      "id": "2",
+      "titulo": "Asistencia en repatriación",
+      "valor": "<div class=\"ZC_textos\">\r\n<div class=\"ZC_textos\">\r\n<p>El Ministerio de Relaciones Exteriores en su función de velar por la observancia de los derechos de los ciudadanos bolivianos en el exterior, coadyuva en los procedimientos de retorno al país de los connacionales que se encuentran en situación de vulnerabilidad económica o de emergencia, para ello:</p>\r\n<ul>\r\n<li>El interesado o familiar (en caso de restos mortales) debe acercarse al Consulado o Sección Consular más cercano y mediante nota solicitar la asistencia para la repatriación del ciudadano o del cuerpo.</li>\r\n<li>Se deberá presentar la cédula de identidad del interesado o del fallecido y del familiar que realiza el trámite.</li>\r\n<li>Certificado de Documentación que demuestre la filiación (parentesco familiar) en caso de que la solicitud este siendo presentada por un familiar.</li>\r\n<li>Certificado de defunción del país receptor, en base al cual, el Consulado registrará la defunción en el registro civil boliviano, en caso de repatriación de restos mortales.</li>\r\n</ul>\r\n<p>Con esta documentación el Consulado elaborará un informe socio-económico y remitirá la solicitud de recursos adicionales al Servicio Central de Cancillería, donde la solicitud será evaluada técnica, legal y presupuestariamente y se determinará su pertinencia.</p>\r\n</div>\r\n</div>",
+      "image": "",
+      "order": "1"
+    }
+  ],
+  "viajes": [
+    {
+      "id": "8",
+      "titulo": "Derechos y obligaciones",
+      "valor": "<p>Los derechos humanos de las personas migrantes están incluidos, casi en su totalidad, en todos y cada uno de los instrumentos internacionales y regionales de derechos humanos que se han adoptado.</p>\r\n<p>Tanto en el ámbito de la Organización de las Naciones Unidas (ONU), como de la Organización de los Estados Americanos (OEA), las declaraciones y acuerdos aprobados desde entonces reconocen un amplio catálogo de derechos humanos a todas las personas que se encuentran bajo la jurisdicción de un Estado.</p>",
+      "image": "",
+      "order": "1"
+    }
+  ],
+  "tipo_tramites": [
+    {
+      "id": "168",
+      "nombre": "Actuaciones notariales",
+      "descripcion": "Poderes, certificados de vivencia y otros actos notariales",
+      "tramites": [
+        {
+          "id": "12",
+          "nombre": "Certificados de Vivencia",
+          "descripcion": "<p>Es un documento que el Consulado emite dando fe de que el solicitante continúa con vida, es requerido periódicamente para el cobro de la renta jubilación o derecho habiente en el sistema de pensiones boliviano o en las compañías de seguros.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "57",
+                  "valor": "Pasaporte ó la Cédula de Identidad vigente.",
+                  "orden": "1"
+                },
+                {
+                  "id": "58",
+                  "valor": "Datos del domicilio temporal o permanente del solicitante en el extranjero.",
+                  "orden": "2"
+                },
+                {
+                  "id": "59",
+                  "valor": "Información del SECTOR del cual cobra la renta o copia de la última boleta de pago de la renta de jubilación.",
+                  "orden": "3"
+                },
+                {
+                  "id": "60",
+                  "valor": "Presencia física del interesado en la Oficina Consular, para certificados emitidos en físico, o para el enrolamiento en el sistema de vivencias a distancia con la tecnología de reconocimiento facial. ",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "nombre": "Poder Especial para el cobro de rentas",
+          "descripcion": "<p>Es el documento por medio del cual una persona concede autorización a otra para que en su nombre y representación ejecute los actos administrativos exclusivos para el cobro o renta de jubilación en territorio Boliviano.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "54",
+                  "valor": "El trámite es estrictamente personal.",
+                  "orden": "1"
+                },
+                {
+                  "id": "55",
+                  "valor": "Pasaporte o cédula de identidad vigente.",
+                  "orden": "2"
+                },
+                {
+                  "id": "56",
+                  "valor": "Copia de la cédula de identidad o pasaporte del apoderado.  ",
+                  "orden": "3"
+                },
+                {
+                  "id": "135",
+                  "valor": "Copia de la última boleta de pago de la renta de jubilación.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "nombre": "Poderes Generales o Especiales",
+          "descripcion": "<p>Es el documento mediante el cual una persona natural o jurídica, delega a otra u otras la responsabilidad de actuar en su nombre en determinada materia que el interesado lo requiera. <strong>Los poderes emitidos por las Oficinas Consulares de Bolivia en el exterior sólo tendrán efectos legales en territorio boliviano.</strong></p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "50",
+                  "valor": "El trámite es estrictamente personal.",
+                  "orden": "1"
+                },
+                {
+                  "id": "51",
+                  "valor": "Cédula de identidad o pasaporte vigente.",
+                  "orden": "2"
+                },
+                {
+                  "id": "52",
+                  "valor": "Fotocopia de carnet de identidad o pasaporte del apoderado.",
+                  "orden": "3"
+                },
+                {
+                  "id": "53",
+                  "valor": "Instructiva de poder.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "30",
+          "nombre": "Solicitud de certificados de vivencia mediante reconocimiento facial",
+          "descripcion": "<p>El sistema de \"Emisión de Certificados de Vivencia a través de Reconocimiento Facial\" permite al connacional boliviano que reside en el exterior, realizar el trámite del certificado de vivencia sin la necesidad de acercarse a la oficina consular.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "21",
+              "nombre": "Procedimiento de registro",
+              "requisitos": [
+                {
+                  "id": "198",
+                  "valor": "Acercarse a la oficina consular más cercana para realizar el registro de sus datos en el módulo de emisión de certificados de vivencia a través del reconocimiento facial.",
+                  "orden": "1"
+                },
+                {
+                  "id": "199",
+                  "valor": "Presentar los siguientes documentos: -Cédula de identidad del interesado. -Copia de la Cédula de identidad del apoderado.",
+                  "orden": "2"
+                },
+                {
+                  "id": "200",
+                  "valor": "Entregar la siguiente información: -Teléfonos de referencia. -Correo electrónico.  -Sector del cual percibe el beneficio.  -Datos del apoderado.",
+                  "orden": "3"
+                },
+                {
+                  "id": "201",
+                  "valor": "Una vez que se realice el registro, el sistema enviará al correo electrónico que usted registró una contraseña para el acceso a través de la aplicación móvil \"El Consulado en tus Manos\". ",
+                  "orden": "4"
+                }
+              ]
+            },
+            {
+              "id": "22",
+              "nombre": "Procedimiento de solicitud de certificado",
+              "requisitos": [
+                {
+                  "id": "202",
+                  "valor": "Una vez realizado el registro, el beneficiario podrá realizar la solicitud del certificado de vivencia desde el lugar donde este se encuentre, siguiendo los siguientes pasos:",
+                  "orden": "1"
+                },
+                {
+                  "id": "203",
+                  "valor": "Ingresar a la aplicación móvil \"El Consulado en tus Manos\", posteriormente ir al menú principal y buscar el icono Acceso Usuario (vivencias) donde encontrará el Módulo de reconocimiento facial.",
+                  "orden": "2"
+                },
+                {
+                  "id": "204",
+                  "valor": "Leer la información referida a los TÉRMINOS Y CONDICIONES DE USO.",
+                  "orden": "3"
+                },
+                {
+                  "id": "205",
+                  "valor": "Ingresar la información solicitada  -Número de cédula de identidad complemento si corresponde.  -La contraseña que el sistema envió al correo electrónico que usted registró.",
+                  "orden": "4"
+                },
+                {
+                  "id": "206",
+                  "valor": "Seleccionar la opción Nuevo certificado de vivencia.",
+                  "orden": "5"
+                },
+                {
+                  "id": "207",
+                  "valor": "Completar la información solicitada.",
+                  "orden": "6"
+                },
+                {
+                  "id": "208",
+                  "valor": "Hacer un clic en la opción Enviar y tomar foto, la cual tomará la fotografía para realizar el reconocimiento facial.",
+                  "orden": "7"
+                },
+                {
+                  "id": "209",
+                  "valor": "El sistema tomará las fotografías y realizará la comparación con las fotografías que se tomaron al momento del registro.",
+                  "orden": "8"
+                },
+                {
+                  "id": "210",
+                  "valor": "Finalmente, el sistema de reconocimiento facial mostrará el mensaje Se ha registrado correctamente, y el sistema generará automáticamente el certificado de vivencia correspondiente.",
+                  "orden": "9"
+                },
+                {
+                  "id": "211",
+                  "valor": "La oficina consular imprimirá el certificado de vivencia solicitado, firmará y lo enviará mediante el sistema a la Unidad de Legalizaciones del Ministerio de Relaciones Exteriores en Bolivia, para posteriormente ser entregado al apoderado. ",
+                  "orden": "10"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "171",
+      "nombre": "Autorización de viajes de menores",
+      "descripcion": "Autorizaciones para viajes de menores de edad",
+      "tramites": [
+        {
+          "id": "24",
+          "nombre": "Para ingreso de menores del exterior a Bolivia",
+          "descripcion": "<p>Es un documento mediante el cual el padre, la madre o ambos autorizan al menor de edad a viajar en compañía del otro progenitor (autoriza uno de los progenitores) o de terceras personas (autorizan los dos padres), que  le permiten el ingreso a Bolivia</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "113",
+                  "valor": "Pasaporte vigente de los padres",
+                  "orden": "1"
+                },
+                {
+                  "id": "114",
+                  "valor": "Pasaporte o certificado de nacimiento del menor.",
+                  "orden": "2"
+                },
+                {
+                  "id": "115",
+                  "valor": "Fotocopia pasaporte de la persona que acompañara al menor durante el viaje",
+                  "orden": "3"
+                },
+                {
+                  "id": "116",
+                  "valor": "Pago del arancel consular.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "25",
+          "nombre": "Salida de menores de Bolivia al exterior",
+          "descripcion": "",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "6",
+              "nombre": "Salida de menores, trámite realizado por ambos padres",
+              "requisitos": [
+                {
+                  "id": "117",
+                  "valor": "Carnet de identidad, o pasaporte original y fotocopia de ambos padres presentes",
+                  "orden": "1"
+                },
+                {
+                  "id": "118",
+                  "valor": "Carnet de Identidad, o pasaporte original y fotocopia del niño, niña adolescente",
+                  "orden": "2"
+                },
+                {
+                  "id": "119",
+                  "valor": "Certificado de nacimiento original y fotocopia del niño, niña adolescente",
+                  "orden": "3"
+                },
+                {
+                  "id": "120",
+                  "valor": "Tres fotografías del niño, niña adolescente tamaño 3x3 cualquier fondo",
+                  "orden": "4"
+                },
+                {
+                  "id": "121",
+                  "valor": "Compra de papeleta valorada en palacio de justicia",
+                  "orden": "5"
+                }
+              ]
+            },
+            {
+              "id": "7",
+              "nombre": "Salida de menores, trámite realizado por uno de los padres",
+              "requisitos": [
+                {
+                  "id": "122",
+                  "valor": "Carnet de identidad, o pasaporte original y fotocopia de ambos padres presentes",
+                  "orden": "1"
+                },
+                {
+                  "id": "123",
+                  "valor": "Carnet de Identidad, o pasaporte original y fotocopia del niño, niña adolescente",
+                  "orden": "2"
+                },
+                {
+                  "id": "125",
+                  "valor": "Tres fotografías del niño, niña adolescente tamaño 3x3 cualquier fondo",
+                  "orden": "3"
+                },
+                {
+                  "id": "124",
+                  "valor": "Certificado de nacimiento original y fotocopia del niño, niña adolescente",
+                  "orden": "3"
+                },
+                {
+                  "id": "126",
+                  "valor": "Compra de papeleta valorada en palacio de justicia",
+                  "orden": "5"
+                },
+                {
+                  "id": "127",
+                  "valor": "Cédula de Identidad original y fotocopias de dos garantes.",
+                  "orden": "6"
+                },
+                {
+                  "id": "128",
+                  "valor": "Poder Notariado Original adjuntando una fotocopia legalizada del mismo notario y tres fotocopias simples.",
+                  "orden": "7"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "167",
+      "nombre": "Legalizaciones",
+      "descripcion": "Legalización de documentos para uso en Bolivia",
+      "tramites": [
+        {
+          "id": "1",
+          "nombre": "Legalizaciones",
+          "descripcion": "<p>Una legalización es la homologación de un documento emitido en el país de residencia, tales  como: documentos relativos al Registro Civíl, Documentos notariales, Documentos comerciales, documentos de estudio, traducciones, certificados médicos, etc., y todo tipo de certificados que se encuentran ",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "1",
+                  "valor": "Estos documentos por ser extranjeros, previamente deberán estar previamente legalizados por las autoridades competentes en el país de origen.",
+                  "orden": "1"
+                },
+                {
+                  "id": "2",
+                  "valor": "Presentar el documento   a la Oficina Consular de Bolivia.",
+                  "orden": "2"
+                },
+                {
+                  "id": "3",
+                  "valor": "Realizar el pago correspondiente de acuerdo al Arancel Consular.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "26",
+          "nombre": "Legalización y Apostilla",
+          "descripcion": "<p>El procedimiento de la Cadena Diplomática de Legalizaciones para el servicio de legalización de firmas en documentos públicos, puede ser realizada en aquellos países no miembros del \"Convenio Suprimiendo la Exigencia de Legalización de Documentos Públicos Extranjeros\\\" (Convenio de La Haya sobre la Apostilla) y para aquellos documentos administrativos que refieran directamente a una operación mercantil o aduanera.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "17",
+              "nombre": "Requisitos Legalización",
+              "requisitos": [
+                {
+                  "id": "175",
+                  "valor": "La legalización es un acto administrativo mediante el cual se da valor legal a un documento público extranjero o boliviano, comprobando la autenticidad de la firma puesta en un documento y la calidad en que la autoridad del documento ha actuado.",
+                  "orden": "1"
+                },
+                {
+                  "id": "176",
+                  "valor": "El documento debe ser expedido por la autoridad competente y suscrito por la misma, el cual debe contener las firmas intermedias de autoridades competentes, según corresponda acorde a la normativa vigente del país emisor de la documentación (traducido en castellano en caso de estar en otro idioma).",
+                  "orden": "2"
+                },
+                {
+                  "id": "177",
+                  "valor": "Debe estar legalizado por la instancia competente y responsable de la legalización de firmas en documentos públicos (Ministerio de Relaciones Exteriores), o por la autoridad delegada del país donde se emitió el documento (traducido en castellano en caso de estar en otro idioma).",
+                  "orden": "3"
+                },
+                {
+                  "id": "178",
+                  "valor": "Cumplidos los anteriores pasos, se lleva el documento para proceder con la legalización en la Oficina Consular correspondiente.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "180",
+      "nombre": "Menaje Doméstico",
+      "descripcion": "Trámites para ingreso de menaje doméstico a Bolivia",
+      "tramites": [
+        {
+          "id": "27",
+          "nombre": "Menaje Doméstico",
+          "descripcion": "<p>El Régimen aduanero excepcional de Menaje Doméstico es aquel que permite introducir a territorio boliviano bienes usados y propios del ciudadano boliviano que retorna al país o del extranjero que fijará su residencia en el país, libre del pago de tributos aduaneros de importación. Este trámite se podrá realizar por única vez.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "19",
+              "nombre": "Ciudadano Boliviano",
+              "requisitos": [
+                {
+                  "id": "180",
+                  "valor": "Declaración Jurada de ingreso de menaje doméstico, llenada en el sistema informático de la Aduana Nacional (https://www.aduana.gob.bo/aduana7/content/viajero ).",
+                  "orden": "1"
+                },
+                {
+                  "id": "181",
+                  "valor": "Pasaporte que acredite una permanencia mínima de dos (2) años en el extranjero, con visitas a Bolivia realizadas durante un periodo que no exceda los 90 días. ",
+                  "orden": "2"
+                },
+                {
+                  "id": "182",
+                  "valor": "Documento de validación de la declaración jurada realizada por la Oficina Consular.",
+                  "orden": "3"
+                },
+                {
+                  "id": "183",
+                  "valor": "Certificado de residencia y actividad u oficio emitido por la Oficina Consular.",
+                  "orden": "4"
+                },
+                {
+                  "id": "184",
+                  "valor": "El trámite consular es de carácter gratuito.",
+                  "orden": "5"
+                },
+                {
+                  "id": "185",
+                  "valor": "Ingreso de menaje con valor máximo: Hasta 35.000 USD (Treinta y cinco mil dólares americanos) de valor FOB, cuando no incluye equipos y/o herramientas y hasta 50.000 USD (Cincuenta mil dólares americanos) cuando incluya equipos y/o máquinas.",
+                  "orden": "6"
+                }
+              ]
+            },
+            {
+              "id": "20",
+              "nombre": "Ciudadano extranjero",
+              "requisitos": [
+                {
+                  "id": "186",
+                  "valor": "Declaración Jurada de ingreso de menaje doméstico, llenada en el sistema informático de la Aduana Nacional (https://www.aduana.gob.bo/aduana7/content/viajero).",
+                  "orden": "1"
+                },
+                {
+                  "id": "187",
+                  "valor": "Visa de Objeto Determinado.",
+                  "orden": "2"
+                },
+                {
+                  "id": "188",
+                  "valor": "Documento de validación de la declaración jurada realizada por la Oficina Consular boliviana en el país donde se encuentre.",
+                  "orden": "3"
+                },
+                {
+                  "id": "189",
+                  "valor": "El trámite consular es de carácter gratuito.",
+                  "orden": "4"
+                },
+                {
+                  "id": "190",
+                  "valor": "Ingreso de menaje con valor máximo: Hasta $us 35.000 (Treinta y cinco mil dólares americanos).",
+                  "orden": "5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "170",
+      "nombre": "Otros",
+      "descripcion": "Otros trámites consulares diversos",
+      "tramites": [
+        {
+          "id": "14",
+          "nombre": "Asignacón de número de cédula de identidad",
+          "descripcion": "<p> Es la asignación de número de identidad a los ciudadanos bolivianos/as, generalmente menores de edad, nacidos en el exterior y que no cuentan con un número de identidad boliviano.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "64",
+                  "valor": "Presencia física del interesado (para toma de huellas digitales).",
+                  "orden": "1"
+                },
+                {
+                  "id": "65",
+                  "valor": "Presencia física de ambos padres, en caso de menores de edad. ",
+                  "orden": "2"
+                },
+                {
+                  "id": "66",
+                  "valor": "Carta de solicitud de los padres o del interesado mayor de edad. ",
+                  "orden": "3"
+                },
+                {
+                  "id": "67",
+                  "valor": "Declaración jurada del interesado mayor de edad, con dos testigos, expresando que nunca tuvo cédula de identidad boliviana y explicando los motivos. ",
+                  "orden": "4"
+                },
+                {
+                  "id": "68",
+                  "valor": "Certificado de nacimiento original del interesado boliviano. ",
+                  "orden": "5"
+                },
+                {
+                  "id": "143",
+                  "valor": "Cédula de identidad o pasaporte original y fotocopia de los progenitores. ",
+                  "orden": "6"
+                },
+                {
+                  "id": "144",
+                  "valor": "6 fotografías tamaño 3x3 del interesado con fondo blanco. ",
+                  "orden": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "13",
+          "nombre": "Certificado de antecedentes penales",
+          "descripcion": "<p>Es un documento emitido al amparo del Código de Procedimiento Penal aprobado por la Ley 1970 de fecha 31 de mayo de 1999 que refleja el Registro Judicial de Antecedentes Penales a partir de un registro nacional.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "61",
+                  "valor": "Pasaporte o carnet de identidad vigente del ciudadano boliviano o cédula de extranjero del ciudadano extranjero que residió en Bolivia.",
+                  "orden": "1"
+                },
+                {
+                  "id": "62",
+                  "valor": "Presentarse personalmente en la Oficina Consular",
+                  "orden": "2"
+                },
+                {
+                  "id": "63",
+                  "valor": "Tiempo estimado del trámite 48 horas.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "29",
+          "nombre": "Ingreso de Vehículos de Turismo no conducidos por el propietario",
+          "descripcion": "<p>Si el vehículo con placa extranjera ingresara a Bolivia con fines de turismo y es conducido por el propietario, no se requiere ningún trámite consular en un Consulado de Bolivia en el exterior, solo el llenado en línea del formulario correspondiente en la página web de la Aduana Nacional</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "194",
+                  "valor": "Poder notarial emitido por el propietario del vehículo.",
+                  "orden": "1"
+                },
+                {
+                  "id": "195",
+                  "valor": "Copia de los documentos de propiedad del vehículo",
+                  "orden": "2"
+                },
+                {
+                  "id": "196",
+                  "valor": "Fotografía 3x3 de la persona autorizada",
+                  "orden": "3"
+                },
+                {
+                  "id": "197",
+                  "valor": "Presencia física de la persona autorizada.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "15",
+          "nombre": "Salvoconducto",
+          "descripcion": "<p>Es un documento especial que permite al portador de forma excepcional trasladarse del exterior del país hacia Bolivia.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "69",
+                  "valor": "Presencia física del interesado (para toma de huellas digitales y firma).",
+                  "orden": "1"
+                },
+                {
+                  "id": "70",
+                  "valor": "Certificado de nacimiento boliviano (original o copia).",
+                  "orden": "2"
+                },
+                {
+                  "id": "71",
+                  "valor": "Pasaporte o cédula de identidad caduca o denuncia de pérdida o robo. ",
+                  "orden": "3"
+                },
+                {
+                  "id": "72",
+                  "valor": "Boleto de viaje de retorno a Bolivia.",
+                  "orden": "4"
+                },
+                {
+                  "id": "145",
+                  "valor": "Dos fotografías tamaño 3 x 4.",
+                  "orden": "5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "28",
+          "nombre": "Saneamiento de datos de Identidad",
+          "descripcion": "<p>El saneamiento de datos se realiza cuando los funcionarios de la Oficina Consular al verificar en el sistema RUI – SEGIP descubren que el ciudadano tiene observaciones en su registro de identidad como ser duplicidad, multiplicidad, homonimia, sin registro, entre otros.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "191",
+                  "valor": "Fotografía 3x3 fondo blanco.",
+                  "orden": "1"
+                },
+                {
+                  "id": "192",
+                  "valor": "Certificado de nacimiento original.",
+                  "orden": "2"
+                },
+                {
+                  "id": "193",
+                  "valor": "Documentos de respaldo provistos por el interesado que demuestren sus datos correctos de identidad, a ser visados por el Consulado con la leyenda \"Copia fiel del Original\" con firma y sello de la oficina consular.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "16",
+          "nombre": "Traducciones",
+          "descripcion": "<p>Es la  traducción realizada de documentos simples como cartas, certificados, documentos de estudio o documentos comerciales de un idioma extranjero al español y /o viceversa.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "73",
+                  "valor": "Documento original a ser traducido",
+                  "orden": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "166",
+      "nombre": "Pasaportes",
+      "descripcion": "Solicitud y renovación de pasaportes bolivianos",
+      "tramites": [
+        {
+          "id": "2",
+          "nombre": "Solicitud o renovación de pasaportes",
+          "descripcion": "<p>El pasaporte electrónico es el documento oficial de viaje tramitado por los ciudadanos bolivianos en la Dirección General de Migración (DIGEMIG) en Bolivia y en las Oficinas Consulares por los connacionales residentes en el exterior.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "13",
+              "nombre": "Nuevo pasaporte (menores de 18 años)",
+              "requisitos": [
+                {
+                  "id": "4",
+                  "valor": "Certificado de Nacimiento original actualizado.",
+                  "orden": "1"
+                },
+                {
+                  "id": "5",
+                  "valor": "Cédula de identidad o asignación de número de identidad en original y fotocopia simple.",
+                  "orden": "2"
+                },
+                {
+                  "id": "6",
+                  "valor": "Documentos del padre y/o madre en original y fotocopia: Pasaporte o Cédula de Identidad (para bolivianos). Cédula de Identidad de extranjero CIE o pasaporte (para extranjeros). Los documentos deben ser contrastados con los originales.",
+                  "orden": "3"
+                },
+                {
+                  "id": "7",
+                  "valor": "Autorización de emisión de pasaporte mediante Declaración Jurada ante autoridad competente del país receptor o una Oficina Consular de Bolivia si es que uno de los progenitores se encuentra en otro país. (No es necesaria si se tramita con ambos padres).",
+                  "orden": "4"
+                }
+              ]
+            },
+            {
+              "id": "14",
+              "nombre": "Nuevo pasaporte (mayores de 18 años)",
+              "requisitos": [
+                {
+                  "id": "168",
+                  "valor": "Cédula de identidad o asignación de número de identidad en original y fotocopia simple",
+                  "orden": "1"
+                },
+                {
+                  "id": "169",
+                  "valor": "Certificado de nacimiento original actualizado y fotocopia simple (En caso de ser boliviano por padres).",
+                  "orden": "2"
+                }
+              ]
+            },
+            {
+              "id": "15",
+              "nombre": "Emisión de pasaporte por pérdida o robo",
+              "requisitos": [
+                {
+                  "id": "170",
+                  "valor": "Cédula de identidad, asignación de número de identidad o Certificado de nacimiento original actualizado y fotocopia simple.",
+                  "orden": "1"
+                },
+                {
+                  "id": "171",
+                  "valor": "Denuncia de pérdida o robo del pasaporte ante las autoridades competentes del país receptor. (Puede realizar una Declaración Jurada en la Oficina Consular).",
+                  "orden": "2"
+                }
+              ]
+            },
+            {
+              "id": "16",
+              "nombre": "Renovación de pasaporte",
+              "requisitos": [
+                {
+                  "id": "172",
+                  "valor": "Cédula de identidad, asignación de número de identidad o Certificado de nacimiento original actualizado y fotocopia simple.",
+                  "orden": "1"
+                },
+                {
+                  "id": "173",
+                  "valor": "Pasaporte expirado o por expirarse en los próximos 6 meses, dañado o con las hojas agotadas.",
+                  "orden": "2"
+                },
+                {
+                  "id": "174",
+                  "valor": "Carta de solicitud a la Autoridad Consular explicando la necesidad de la renovación del pasaporte.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "165",
+      "nombre": "Registro civil",
+      "descripcion": "Trámites relacionados con registro civil como nacimientos, defunciones, matrimonios",
+      "tramites": [
+        {
+          "id": "20",
+          "nombre": "Celebración de matrimonio",
+          "descripcion": "<p>La Celebración del matrimonio es la unión libre, voluntaria, legal y pública de un varón y una mujer ante la sociedad, cumpliendo con los requisitos exigidos por ley. Lo celebra únicamente el Oficial de Registro Civil. Para este efecto los novios deberán presentar su documentación vigente.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "11",
+              "nombre": "Requisitos para matrimonio entre bolivianos",
+              "requisitos": [
+                {
+                  "id": "101",
+                  "valor": "Certificado de nacimiento original y actualizado de los contrayentes.",
+                  "orden": "1"
+                },
+                {
+                  "id": "102",
+                  "valor": "Documento de identidad original y fotocopia vigente.",
+                  "orden": "2"
+                },
+                {
+                  "id": "103",
+                  "valor": "Certificado de libertad de Estado civil o de soltería.",
+                  "orden": "3"
+                },
+                {
+                  "id": "104",
+                  "valor": "En caso de que uno o los dos contrayentes hubieran contraído matrimonio anteriormente con otra persona deberán presentar el certificado de matrimonio con la partida cancelada.",
+                  "orden": "4"
+                },
+                {
+                  "id": "105",
+                  "valor": "En caso de viudez deberá presentarse el certificado de defunción del anterior cónyuge.",
+                  "orden": "5"
+                },
+                {
+                  "id": "106",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos uno por contrayente, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presentes a momento del registro.",
+                  "orden": "6"
+                }
+              ]
+            },
+            {
+              "id": "12",
+              "nombre": "Requisitos para matrimonio entre boliviano/a y extranjero/a",
+              "requisitos": [
+                {
+                  "id": "153",
+                  "valor": "Certificado de nacimiento original y actualizado de los contrayentes, el ciudadano extranjero deberá entregar legalizado su certificado (traducido en caso de estar en un idioma distinto al castellano).",
+                  "orden": "1"
+                },
+                {
+                  "id": "154",
+                  "valor": "Documento de identidad original y fotocopia (cédula de identidad o pasaporte vigente para bolivianos y pasaporte para extranjeros – si corresponde traducido).",
+                  "orden": "2"
+                },
+                {
+                  "id": "155",
+                  "valor": "En caso de que uno o los dos contrayentes hubieran contraído matrimonio anteriormente con otra persona deberán presentar certificado de matrimonio con la partida cancelada o documento análogo del país para extranjero (traducido en castellano en caso de estar en otro idioma).",
+                  "orden": "3"
+                },
+                {
+                  "id": "156",
+                  "valor": "En caso de viudez deberá presentarse el certificado de defunción del anterior cónyuge (traducido en castellano en caso de estar en otro idioma).",
+                  "orden": "4"
+                },
+                {
+                  "id": "157",
+                  "valor": "Certificado de soltería emitido por el país de origen (traducido en castellano en caso de estar en otro idioma).",
+                  "orden": "5"
+                },
+                {
+                  "id": "158",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos uno por contrayente, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presente a momento del registro.",
+                  "orden": "6"
+                },
+                {
+                  "id": "159",
+                  "valor": "Si el pretendiente es extranjero, debe presentar los documentos legalizadas o apostillados por el país que los emite de acuerdo a su normativa y por el Consulado de Bolivia en el país respectivo y traducidos al español si están en otro idioma. Las traducciones deberán estar también legalizadas o apostilladas. ",
+                  "orden": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "22",
+          "nombre": "Emisión de certificados duplicados",
+          "descripcion": "<p>La Oficina Consular puede otorgar una copia original del certificado de nacimiento, defunción o de matrimonio, siempre y cuando estén registrados en base de datos del Registro Civíl.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "112",
+                  "valor": "Cédula de identidad y/o certificado de nacimiento (original ó fotocopia).",
+                  "orden": "1"
+                },
+                {
+                  "id": "134",
+                  "valor": "Pueden solicitar los certificados solamente los familiares de primer grado: padres, hermanos, cónyuge o hijos/as, portando sus documentos vigentes que muestren su relación con el titular del certificado, caso contrario, requieren un poder notarial. ",
+                  "orden": "2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "18",
+          "nombre": "Inscripción de partidas de defunción",
+          "descripcion": "<p>Es la solicitud que se realiza ante el Oficial de Registro Civil para registrar el fallecimiento de una persona boliviana en el exterior.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "88",
+                  "valor": "Certificado de defunción original o copia legalizada en el país emisor (traducido si no se encuentra en el idioma castellano, la traducción también deberá estar legalizada o apostillada). ",
+                  "orden": "1"
+                },
+                {
+                  "id": "89",
+                  "valor": "Cédula de identidad o pasaporte vigente del solicitante.",
+                  "orden": "2"
+                },
+                {
+                  "id": "90",
+                  "valor": "Certificado de defunción extranjero o certificado médico de defunción con firma y sello del médico.",
+                  "orden": "3"
+                },
+                {
+                  "id": "91",
+                  "valor": "Certificado médico forense (si la muerte fue en un accidente o de forma violenta)",
+                  "orden": "4"
+                },
+                {
+                  "id": "92",
+                  "valor": "Certificado de nacimiento, cédula de identidad o pasaporte del fallecido.",
+                  "orden": "5"
+                },
+                {
+                  "id": "93",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presentes a momento del registro.",
+                  "orden": "6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "17",
+          "nombre": "Inscripción de partidas de nacimiento",
+          "descripcion": "<p>La Inscripción ó el registro de nacimiento, es el acto por el cual el Oficial de Registro Civíl asienta los datos del nacimiento de una persona, previo cumplimento de los requisitos determinados por la norma.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "4",
+              "nombre": "Requisitos para menores desde nacidos hasta los 12 años cumplidos",
+              "requisitos": [
+                {
+                  "id": "75",
+                  "valor": "La madre o padre del menor debe ser boliviano/a. ",
+                  "orden": "1"
+                },
+                {
+                  "id": "76",
+                  "valor": "Presencia del menor que será inscrito. ",
+                  "orden": "2"
+                },
+                {
+                  "id": "77",
+                  "valor": "Presencia de los padres del menor (ambos si es posible o uno de ellos).",
+                  "orden": "3"
+                },
+                {
+                  "id": "78",
+                  "valor": "Certificado de nacido vivo emitido por el centro médico u hospital.",
+                  "orden": "4"
+                },
+                {
+                  "id": "79",
+                  "valor": "Certificado de Nacimiento de Registro Civil del país de nacimiento del menor, original o la copia legalizada, traducido si está en otro idioma diferente al español. La traducción también debe estar legalizada o apostillada. ",
+                  "orden": "5"
+                },
+                {
+                  "id": "80",
+                  "valor": "Pasaporte o cédula de identidad vigente de los padres.",
+                  "orden": "6"
+                },
+                {
+                  "id": "130",
+                  "valor": "Certificado de matrimonio de los padres (si son casados).",
+                  "orden": "7"
+                },
+                {
+                  "id": "131",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presentes al momento del registro.",
+                  "orden": "8"
+                }
+              ]
+            },
+            {
+              "id": "10",
+              "nombre": "Requisitos para mayores de 18 años",
+              "requisitos": [
+                {
+                  "id": "146",
+                  "valor": "Certificado de nacimiento, partida de nacimiento o documento análogo de registro emitido por autoridad competente en el extranjero en original o fotocopia/copia legalizada, apostillado cuando corresponda (traducido si no se encuentra en el idioma castellano). Este documento deberá contener el nombre completo de la madre boliviana o padre boliviano o su número de documento de identidad o pasaporte o cualquier dato que acredite que se trata de hijo/a con madre o padre boliviano.",
+                  "orden": "1"
+                },
+                {
+                  "id": "147",
+                  "valor": "En caso de que el documento oficial de nacimiento deba ser emitido por un país que atraviesa conflictos armados, bélicos, guerras o personas que se encuentran en calidad de apátridas, refugiados o asilados se podrá aceptar documentación supletoria previa autorización escrita de las funcionarias y los funcionarios consulares y/o servidoras y servidores públicos acreditados.",
+                  "orden": "2"
+                },
+                {
+                  "id": "148",
+                  "valor": "Cuando la filiación de la madre boliviana o el padre boliviano no esté acreditada en el documento oficial de nacimiento, la filiación se demostrará por documento oficial idóneo de autoridad competente que contenga el nombre completo del progenitor boliviano/a (reconocimiento, orden judicial u otro análogo original o fotocopia/copia legalizada, apostillado y traducido sino se encuentra en el idioma castellano).",
+                  "orden": "3"
+                },
+                {
+                  "id": "149",
+                  "valor": "Documento de identidad emitido en el extranjero u otra documentación que acredite la identidad del titular.",
+                  "orden": "4"
+                },
+                {
+                  "id": "150",
+                  "valor": "Cédula de identidad, pasaporte o certificado de nacimiento (original) de la madre o padre boliviano/a.",
+                  "orden": "5"
+                },
+                {
+                  "id": "151",
+                  "valor": "Cédula de identidad, pasaporte, o documento de identidad (original) de la madre extranjera o del padre extranjero. (si corresponde)",
+                  "orden": "6"
+                },
+                {
+                  "id": "152",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presentes a momento del registro.",
+                  "orden": "7"
+                }
+              ]
+            },
+            {
+              "id": "168",
+              "nombre": "Requisitos para menores de 12 hasta los 18 años",
+              "requisitos": [
+                {
+                  "id": "81",
+                  "valor": "La madre o padre del menor debe ser boliviano/a. ",
+                  "orden": "1"
+                },
+                {
+                  "id": "82",
+                  "valor": "Presencia del menor que será inscrito. ",
+                  "orden": "2"
+                },
+                {
+                  "id": "83",
+                  "valor": "Presencia de los padres del menor (ambos si es posible o uno de ellos).",
+                  "orden": "3"
+                },
+                {
+                  "id": "84",
+                  "valor": "Certificado de nacido vivo emitido por el centro médico u hospital.",
+                  "orden": "4"
+                },
+                {
+                  "id": "85",
+                  "valor": "Certificado de Nacimiento de Registro Civil del país de nacimiento del menor, original o la copia legalizada, traducido si está en otro idioma diferente al español. La traducción también debe estar legalizada o apostillada. ",
+                  "orden": "5"
+                },
+                {
+                  "id": "86",
+                  "valor": "Pasaporte o cédula de identidad vigente de los padres.",
+                  "orden": "6"
+                },
+                {
+                  "id": "87",
+                  "valor": "Certificado de matrimonio de los padres (si son casados).",
+                  "orden": "7"
+                },
+                {
+                  "id": "132",
+                  "valor": "Dos testigos con documentos de identidad vigentes. ",
+                  "orden": "8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "21",
+          "nombre": "Inscripción de reconocimiento de hijos",
+          "descripcion": "<p>Declaración voluntaria de reconocimiento que hacen los padres o uno de ellos, en forma personal o mediante poder especial, sobre el hecho del reconocimiento de su hijo ante un Oficial de Registro Civil debidamente autorizado.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "109",
+                  "valor": "Cédula de identidad y/o pasaporte y presencia de los padres (si uno de ellos no puede asistir puede acudir el presentarse el apoderado con el poder respectivo).",
+                  "orden": "1"
+                },
+                {
+                  "id": "110",
+                  "valor": "Certificado de nacimiento del menor boliviano original actualizado.",
+                  "orden": "2"
+                },
+                {
+                  "id": "111",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presente a momento del registro.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "23",
+          "nombre": "Rectificación o corrección de partidas",
+          "descripcion": "<p>Si usted requiere realizar la rectificación ò corrección de una partida, deberá apersonarse a la Oficina Consular.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "8",
+              "nombre": "Otro",
+              "requisitos": [
+                {
+                  "id": "162",
+                  "valor": "Complementación : Incluir, añadir datos no registrados en una partida de Registro Civil.",
+                  "orden": "1"
+                },
+                {
+                  "id": "160",
+                  "valor": "Solicitud de rectificación : Cuando se pruebe la existencia del error que no afecte a la identidad de la persona (fallas de escritura, letras o números) por ejemplo: Perez – Peres, se puede hacer solicitud de rectificación convalidar datos en una partida de nacimiento, matrimonio o defunción que tenga tachaduras, sobrescritos, por falta de firma o sello del funcionario encargado de Registro Civil. ",
+                  "orden": "1"
+                },
+                {
+                  "id": "161",
+                  "valor": "Reponer / reposición : Registrar o recuperar en el sistema una partida extraviada o destruida.",
+                  "orden": "2"
+                },
+                {
+                  "id": "163",
+                  "valor": "Cambiar : Suplir un dato por otro",
+                  "orden": "4"
+                },
+                {
+                  "id": "164",
+                  "valor": "Cancelación :  Dejar sin efecto una partida por existir más de una inscripción.",
+                  "orden": "5"
+                },
+                {
+                  "id": "165",
+                  "valor": "Traspaso : Trasladar o transferir una partida de un libro a otro.",
+                  "orden": "6"
+                },
+                {
+                  "id": "166",
+                  "valor": "Aclaración No será procedente la solicitud que pretenda rectificar un dato que a través de un anterior trámite administrativo fue rectificado o complementado, salvo que presente pruebas de reciente obtención.",
+                  "orden": "7"
+                },
+                {
+                  "id": "167",
+                  "valor": "El interesado debe presentar toda la documentación que avale que llena unos datos y no otros en su partida, sea de nacimiento, matrimonio o defunción. Por ejemplo: cédula de identidad, pasaporte, certificado de nacimiento, matrimonio o defunción, copia digitalizada o legalizada, otros documentos que sirvan para demostrar cuáles son los datos correctos.",
+                  "orden": "8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "19",
+          "nombre": "Registro u homologación de matrimonio",
+          "descripcion": "<p>El registro o la homologación del matrimonio es el acto por el cual los cónyuges acuden ante el Oficial del Registro Civil para solicitar que se asiente su casamiento en las partidas de los libros matrimoniales bolivianos. Necesariamente uno de los solicitantes debe tener nacionalidad boliviana. No se trata del registro de un nuevo matrimonio, si no un registro/transcripción/homologación de un matrimonio ya celebrado previamente en el exterior.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "133",
+                  "valor": "Presencia física de los cónyuges en la Oficina consular.",
+                  "orden": "1"
+                },
+                {
+                  "id": "96",
+                  "valor": "Certificado de matrimonio original o copia legalizada por las instancias correspondientes (si el certificado se encuentra en otro idioma, se deberá presentar de igual modo una copia traducida al castellano y legalizada).",
+                  "orden": "2"
+                },
+                {
+                  "id": "97",
+                  "valor": "Documento de identidad vigentes de ambos cónyuges (pasaporte vigente para extranjeros).",
+                  "orden": "3"
+                },
+                {
+                  "id": "98",
+                  "valor": "Cédula de identidad, pasaporte o documento de identidad de dos (2) testigos, mayores de edad, que no sean familiares, pueden ser extranjeros. Debiendo encontrarse presente a momento del registro.",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "169",
+      "nombre": "Visas",
+      "descripcion": "Diferentes tipos de visas para ingresar a Bolivia",
+      "tramites": [
+        {
+          "id": "3",
+          "nombre": "Visa Turismo",
+          "descripcion": "<p>La Visa de Turismo es el permiso que autoriza el ingreso al país a personas extranjeras para permanecer en territorio boliviano con el propósito de descanso o esparcimiento.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "10",
+                  "valor": "Pasaporte con vigencia mínima de seis (6) meses.",
+                  "orden": "1"
+                },
+                {
+                  "id": "11",
+                  "valor": "Formulario de Declaración Jurada de solicitud de Visa.",
+                  "orden": "2"
+                },
+                {
+                  "id": "12",
+                  "valor": "Certificado de vacuna contra la fiebre amarilla si visitará zonas endémicas de alto riesgo.",
+                  "orden": "3"
+                },
+                {
+                  "id": "13",
+                  "valor": "Itinerario de viaje o pasajes de retorno.",
+                  "orden": "4"
+                },
+                {
+                  "id": "14",
+                  "valor": "Carta de invitación de persona con domicilio legal en Bolivia registrada y autorizada por la Dirección General de Migración (DIGEMIG), o reserva de hospedaje.",
+                  "orden": "5"
+                },
+                {
+                  "id": "15",
+                  "valor": "Solvencia económica acreditada mediante extracto bancario y/o tarjeta de crédito.",
+                  "orden": "6"
+                },
+                {
+                  "id": "136",
+                  "valor": "Fotografía actual 4 x 4 (fondo rojo).",
+                  "orden": "7"
+                },
+                {
+                  "id": "137",
+                  "valor": "Resolución de la Dirección General de Migración (DIGEMIG) de autorización de ingreso a territorio boliviano. (para extranjeros de países comprendidos en el GRUPO III).",
+                  "orden": "8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "nombre": "Visa de Estudiante",
+          "descripcion": "<p>Es la autorización de ingreso al país a personas extranjeras, con el propósito de cursar estudios a nivel primario secundario y en instituciones de educación superior de formación profesional.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "22",
+                  "valor": "Formulario de Declaración Jurada de Solicitud de Visa.",
+                  "orden": "1"
+                },
+                {
+                  "id": "23",
+                  "valor": "Pasaporte con vigencia mínima de 6 meses.",
+                  "orden": "2"
+                },
+                {
+                  "id": "24",
+                  "valor": "Cualquiera de los siguientes documentos que acreditan los estudios que deberán ser legalizadas previamente por la Oficina Consular correspondiente: certificado de estudios, título de bachiller, licenciatura o posgrado, libreta o registro de notas.",
+                  "orden": "3"
+                },
+                {
+                  "id": "25",
+                  "valor": "Certificado de antecedentes policiales, penales o judiciales del país de origen o de su última residencia (no aplica a menores de 16 años). ",
+                  "orden": "4"
+                },
+                {
+                  "id": "26",
+                  "valor": "Certificado de vacuna contra la fiebre amarilla si visitará zonas endémicas de alto riesgo.",
+                  "orden": "5"
+                },
+                {
+                  "id": "27",
+                  "valor": "Fotografía actual (4x4 fondo rojo).",
+                  "orden": "6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "nombre": "Visa de Objeto Determinado",
+          "descripcion": "<p>La Visa de Objeto Determinado es el permiso para el ingreso al país a personas extranjeras, con el fin de permanecer en territorio boliviano por diferentes motivos: trabajo, trabajo transitorio, voluntariado, trabajo por intercambio académico, religiosos, salud, familia, con fines distintos al turismo.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "16",
+                  "valor": "Formulario de declaración jurada de solicitud de visa (aplicable a todos los tipos de visas).",
+                  "orden": "1"
+                },
+                {
+                  "id": "17",
+                  "valor": "Pasaporte con vigencia mínima de 6 meses (aplicable a todos los tipos de visas).",
+                  "orden": "2"
+                },
+                {
+                  "id": "18",
+                  "valor": "Documento que acredita la actividad que desarrollará en territorio boliviano (aplicable a todos los tipos de visas).",
+                  "orden": "3"
+                },
+                {
+                  "id": "19",
+                  "valor": "Carta de invitación de la entidad o empresa con documentación de respaldo en los casos que corresponda, excepto trabajo transitorio, salud y familia.",
+                  "orden": "4"
+                },
+                {
+                  "id": "20",
+                  "valor": "Certificado de Antecedentes policiales, penales o judiciales del país de origen o de residencia, solo a mayores de 16 años (aplicable a todos los tipos de visas).",
+                  "orden": "5"
+                },
+                {
+                  "id": "21",
+                  "valor": "Solvencia económica acreditada mediante extracto bancario y/o tarjeta de crédito, excepto por motivos religiosos y por familia. ",
+                  "orden": "6"
+                },
+                {
+                  "id": "138",
+                  "valor": "Certificado de vacuna contra la fiebre amarilla si visitará zonas endémicas de alto riesgo (aplicable a todos los tipos de visas).",
+                  "orden": "7"
+                },
+                {
+                  "id": "139",
+                  "valor": "Fotografía actual 4x4 (fondo rojo).",
+                  "orden": "8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "nombre": "Visa de cortesía",
+          "descripcion": "<p>La Visa de Cortesía es el permiso de ingreso a territorio boliviano, otorgada a altos funcionarios de Estado y de Gobierno, de organismos internacionales, personalidades culturales y religiosas, con la finalidad de realizar actividades de interés nacional.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "141",
+                  "valor": "Invitación emitida por una institución pública del Bolivia, vía Ministerio de Relaciones Exteriores.",
+                  "orden": "1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9",
+          "nombre": "Visa de transito",
+          "descripcion": "<p>La Visa de Tránsito es otorgada a todos los ciudadanos extranjeros que se encuentran en tránsito en nuestro territorio y tiene vigencia hasta 15 días.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "48",
+                  "valor": "Formulario de declaración jurada de solicitud de visa.",
+                  "orden": "1"
+                },
+                {
+                  "id": "49",
+                  "valor": "Pasaporte con vigencia mínima de 6 meses. ",
+                  "orden": "2"
+                },
+                {
+                  "id": "142",
+                  "valor": "Pasajes que acrediten que su destino final es un tercer país.",
+                  "orden": "3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "nombre": "Visa humanitaria",
+          "descripcion": "<p>La Visa Humanitaria es la autorización de ingreso al país a personas extranjeras para permanecer en territorio boliviano hasta 30 días que demuestren las siguientes razones humanitarias.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "34",
+                  "valor": "Formulario de Declaración Jurada de solicitud de Visa.",
+                  "orden": "1"
+                },
+                {
+                  "id": "35",
+                  "valor": "Demostrar documentalmente la situación por la que requiere visa humanitaria.",
+                  "orden": "2"
+                },
+                {
+                  "id": "36",
+                  "valor": "Pasaporte con vigencia mínima de 6 meses. ",
+                  "orden": "3"
+                },
+                {
+                  "id": "37",
+                  "valor": "Certificado de vacuna contra la Fiebre amarilla si visitará zonas endémicas de alto riesgo.",
+                  "orden": "4"
+                },
+                {
+                  "id": "38",
+                  "valor": "Fotografía actual.",
+                  "orden": "5"
+                }
+              ]
+            },
+            {
+              "id": "3",
+              "nombre": "En caso de ser acompañante de persona enferma que requiera tratamiento médico",
+              "requisitos": [
+                {
+                  "id": "43",
+                  "valor": "Formulario de declaración jurada de solicitud de permanencia temporal obtenido en el sitio web de la Dirección General de Migración (DIGEMIG). ",
+                  "orden": "1"
+                },
+                {
+                  "id": "44",
+                  "valor": "Pasaporte con vigencia mínima de 6 meses",
+                  "orden": "2"
+                },
+                {
+                  "id": "45",
+                  "valor": "Certificado de vacuna contra la fiebre amarilla si visitará zonas endémicas de alto riesgo.",
+                  "orden": "3"
+                },
+                {
+                  "id": "46",
+                  "valor": "Certificado Médico que acredite que la persona enferma a la cual se va a acompañar así lo requiere.",
+                  "orden": "4"
+                },
+                {
+                  "id": "47",
+                  "valor": "Fotografía actual (4x4 fondo rojo)",
+                  "orden": "5"
+                }
+              ]
+            },
+            {
+              "id": "165",
+              "nombre": "Requisito víctima de trata de personas o tráfico de migrantes u otras formas de explotación",
+              "requisitos": [
+                {
+                  "id": "39",
+                  "valor": "Formulario de Declaración Jurada de solicitud de permanencia temporal, obtenido del sitio web de la Dirección General de Migración.",
+                  "orden": "1"
+                },
+                {
+                  "id": "40",
+                  "valor": "Pasaporte o documento nacional de identidad o cualquier otro documento que acredite su identidad.",
+                  "orden": "2"
+                },
+                {
+                  "id": "41",
+                  "valor": "Cualquier documento (fotográfico, noticia u otro) que demuestre que es víctima de trata de personas o tráfico de migrantes.",
+                  "orden": "3"
+                },
+                {
+                  "id": "42",
+                  "valor": "Fotografía actual",
+                  "orden": "4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "6",
+          "nombre": "Visa múltiple",
+          "descripcion": "<p>La Visa Múltiple autoriza el ingreso y salida del país de manera constante a personas extranjeras con la finalidad de realizar actividades de inversión y negocios. Tiene vigencia de 1 año con estadía en territorio boliviano por periodos no mayores a 90 días ininterrumpidos.</p>",
+          "country_code": "GENERAL",
+          "tipos_requisitos": [
+            {
+              "id": "1",
+              "nombre": "Requisito General",
+              "requisitos": [
+                {
+                  "id": "28",
+                  "valor": "Formulario de Declaración Jurada de solicitud de Visa.",
+                  "orden": "1"
+                },
+                {
+                  "id": "29",
+                  "valor": "Pasaporte con vigencia mínima de seis (6) meses.",
+                  "orden": "2"
+                },
+                {
+                  "id": "30",
+                  "valor": "Documentación legalizada de Constitución de la empresa a la que representa en su país de origen o residencia.",
+                  "orden": "3"
+                },
+                {
+                  "id": "31",
+                  "valor": "Fotocopia legalizada del Número de Identificación Tributaria NIT ó certificación electrónica original en caso de que la empresa haya sido constituida en territorio boliviano.",
+                  "orden": "4"
+                },
+                {
+                  "id": "32",
+                  "valor": "Certificado vigente de antecedentes policiales, penales o judiciales del país de origen o de residencia, o certificado de antecedentes expedido por INTERPOL. ",
+                  "orden": "5"
+                },
+                {
+                  "id": "33",
+                  "valor": "Certificado de vacuna contra la Fiebre amarilla si visitará zonas endémicas de alto riesgo.",
+                  "orden": "6"
+                },
+                {
+                  "id": "140",
+                  "valor": "Fotografía actual 4 x 4 (fondo rojo).",
+                  "orden": "7"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "regiones": [
+    {
+      "id": "5",
+      "nombre": "Africa",
+      "codigo": "002",
+      "paises": [
+        {
+          "id": "40",
+          "nombre": "Egipto",
+          "alpha_2": "EG",
+          "alpha_3": "EGY",
+          "codigo_pais": "818",
+          "sub_region": "Northern Africa",
+          "codigo_numerico": 818,
+          "consulados": [
+            {
+              "id": 86,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN EGIPTO, EL CAIRO",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE 21, B AMMAN ESQUINA AV. MOHY EL DIN ABOU EL EZZ DOKKI, GIZA",
+              "latitud": 30.0595016,
+              "longitud": 31.2584644,
+              "horarios_atencion": "DE 9:00  A  15:00",
+              "telefono": "00202-37624361",
+              "telefono_emergencia": "002-01060459739",
+              "correo_electronico": "",
+              "pagina_web": "www.emboliviaegypt.com",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "256",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/emboliviaegypt/"
+                },
+                {
+                  "id": "257",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "258",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "nombre": "Americas",
+      "codigo": "019",
+      "paises": [
+        {
+          "id": "14",
+          "nombre": "Argentina",
+          "alpha_2": "AR",
+          "alpha_3": "ARG",
+          "codigo_pais": "032",
+          "sub_region": "South America",
+          "codigo_numerico": 32,
+          "consulados": [
+            {
+              "id": 39,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, COMODORO RIVADAVIA",
+              "tipo": "Consulado",
+              "direccion": "CALLE ITALIA Nº 965 ENTRE SAN MARTÍN Y SARMIENTO COMODORO RIVADAVIA - CHUBUT",
+              "latitud": -45.8604102,
+              "longitud": -67.487704,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "0054-9 (297) 4460021",
+              "telefono_emergencia": "0054-92976239023",
+              "correo_electronico": "consuladocomodoro@gmail.com",
+              "pagina_web": "https://www.facebook.com/coliviancomodoro/",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "115",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnComodoro/"
+                },
+                {
+                  "id": "116",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "117",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 27,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, CORDOBA",
+              "tipo": "Consulado",
+              "direccion": "CALLE FIGUEROA CÁCERES NO.368 BARRIO PASO DE LOS ANDES",
+              "latitud": -31.415725,
+              "longitud": -64.203263,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0054-3514216122",
+              "telefono_emergencia": "0054-3517505713",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "79",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/ConBolCordoba"
+                },
+                {
+                  "id": "80",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/ConBolCordoba"
+                },
+                {
+                  "id": "81",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 28,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, JUJUY",
+              "tipo": "Consulado",
+              "direccion": "CALLE RAMIREZ DE VELAZCO N° 145 ENTRE INDEPENDENCIA Y SAN MARTÍN",
+              "latitud": -24.187913,
+              "longitud": -65.309303,
+              "horarios_atencion": "DE 7:00  A  15:00",
+              "telefono": "0054-3884240501",
+              "telefono_emergencia": "",
+              "correo_electronico": "colivianssjujuy@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "82",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pg/BolEnJujuy/about/?ref=page_internal"
+                },
+                {
+                  "id": "83",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@ConsulBol_Jujuy"
+                },
+                {
+                  "id": "84",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 29,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, LA QUIACA",
+              "tipo": "Consulado",
+              "direccion": "CALLE 9 DE JULIO Nº 109. ESQ. ÁRABE SIRIA 1ER. PISO – C.P. 4650",
+              "latitud": -22.101523,
+              "longitud": -65.598088,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0054- 3885 422283",
+              "telefono_emergencia": "71216722",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "85",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnQuiaca/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "86",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "87",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 30,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, MENDOZA",
+              "tipo": "Consulado",
+              "direccion": "CALLE CLARK Nº 404 Y MARTINES DE ROZAS - 5TA. SECCIÓN - CIUDAD DE MENDOZA",
+              "latitud": -32.895161,
+              "longitud": -68.857489,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0054- 2614292458",
+              "telefono_emergencia": "-",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "88",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnMendoza/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "89",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "90",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 31,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, ORAN",
+              "tipo": "Consulado",
+              "direccion": "AV. SAN MARTIN Nº 134",
+              "latitud": -23.13378,
+              "longitud": -64.330005,
+              "horarios_atencion": "DE 7:30  A  15:30",
+              "telefono": "0054-3878410109",
+              "telefono_emergencia": "0054-3878451362",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "91",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnOran/"
+                },
+                {
+                  "id": "92",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/CONSULADO DE BOLIVIA"
+                },
+                {
+                  "id": "93",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 32,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, POCITOS - SALVADOR MAZZA",
+              "tipo": "Consulado",
+              "direccion": "AV. SAN MARTÍN N° 446",
+              "latitud": -22.055118,
+              "longitud": -63.686571,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "0054-113873471336",
+              "telefono_emergencia": "00591-71878487",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "94",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnPocitos/"
+                },
+                {
+                  "id": "95",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "96",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, ROSARIO",
+              "tipo": "Consulado",
+              "direccion": "AV. OVIDIO LAGOS 711, C.P. S2000LNH ROSARIO, SANTA FE, ARGENTINA",
+              "latitud": -32.9410015,
+              "longitud": -60.6610391,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "+54 9 341 4352040",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodebolivia.com.ar",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "97",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnRosario/"
+                },
+                {
+                  "id": "98",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "99",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 34,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, SALTA",
+              "tipo": "Consulado",
+              "direccion": "CALLE  MARIANO BOEDO  Nº 34  SALTA CAPITAL - ARGENTINA",
+              "latitud": -24.79216,
+              "longitud": -65.400931,
+              "horarios_atencion": "De 8:00  A  13.00  y  de 15:00 a 18:00",
+              "telefono": "5493874211040",
+              "telefono_emergencia": "5493875100096",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodeboliviasalta.com.ar",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "100",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/consuladodeboliviaensalta/"
+                },
+                {
+                  "id": "101",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/Consul_Bol_Salt"
+                },
+                {
+                  "id": "102",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 35,
+              "nombre": "CONSULADO DE BOLIVIA EN ARGENTINA, VIEDMA",
+              "tipo": "Consulado",
+              "direccion": "RIO NEGRO, COLÓN 460 - CP 8500",
+              "latitud": -40.81191,
+              "longitud": -62.9962,
+              "horarios_atencion": "DE 7:30  A  15:30",
+              "telefono": "0054-02920420566",
+              "telefono_emergencia": "0054-92920621268",
+              "correo_electronico": "info@consuladoboliviasur.com.ar",
+              "pagina_web": "www.consuladoboliviasur.com.ar",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "103",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnViedma/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "104",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@consuladoinfo"
+                },
+                {
+                  "id": "105",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 26,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN ARGENTINA, BUENOS AIRES",
+              "tipo": "Consulado General",
+              "direccion": "BARTOLOMÉ MITRE 2815, PLAZA ONCE - C.A.B.A.",
+              "latitud": -34.608812,
+              "longitud": -58.406403,
+              "horarios_atencion": "DE 8:00  A  15:00",
+              "telefono": "00-(54-11) 5263-3790",
+              "telefono_emergencia": "00549 1149148505",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladogeneraldebolivia.gov.ar",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "76",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnBuenosAires/"
+                },
+                {
+                  "id": "77",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "78",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "nombre": "VICECONSULADO DE BOLIVIA EN ARGENTINA, LA MATANZA",
+              "tipo": "Viceconsulado",
+              "direccion": "CALLE PRESIDENTE HIPÓLITO YRIGOYEN Nº 3210 ESQUINA CALLE PASTEUR, SAN JUSTO, PARTIDO LA MATANZA",
+              "latitud": -34.682966,
+              "longitud": -58.565886,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "0054-11 20532987",
+              "telefono_emergencia": "0011-69254603",
+              "correo_electronico": "",
+              "pagina_web": "www.boliviaenlamantanza.com.ar",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "109",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Viceconsulado-de-Bolivia-en-la-Matanza-Argentina-107752110773405/"
+                },
+                {
+                  "id": "110",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "111",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "nombre": "VICECONSULADO DE BOLIVIA EN ARGENTINA, LA PLATA",
+              "tipo": "Viceconsulado",
+              "direccion": "AV. 44 Nº 741 ENTRE 9 Y 10 CP 1900 LA PLATA",
+              "latitud": -34.9128188,
+              "longitud": -57.9565531,
+              "horarios_atencion": "",
+              "telefono": "+54 221 422 5191",
+              "telefono_emergencia": "0054 9 11 3116 2638",
+              "correo_electronico": "viceconsuladobolivia.laplata@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "106",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnLaPlata/"
+                },
+                {
+                  "id": "107",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "108",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 38,
+              "nombre": "VICECONSULADO DE BOLIVIA EN ARGENTINA, PILAR",
+              "tipo": "Viceconsulado",
+              "direccion": "PEDRO LAGRAVE Nº 563",
+              "latitud": -34.456861,
+              "longitud": -58.912694,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "0054-02304664510",
+              "telefono_emergencia": "0054-1126140045",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "112",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "113",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "114",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "15",
+          "nombre": "Brazil",
+          "alpha_2": "BR",
+          "alpha_3": "BRA",
+          "codigo_pais": "076",
+          "sub_region": "South America",
+          "codigo_numerico": 76,
+          "consulados": [
+            {
+              "id": 41,
+              "nombre": "CONSULADO DE BOLIVIA EN BRASIL, CORUMBA - MS",
+              "tipo": "Consulado",
+              "direccion": "CALLE 7 DE SETEMBRO, 47 ENTRE CALLE DELAMARE Y AV. GENERAL RONDON, BARRIO CENTRO.",
+              "latitud": -19.008889,
+              "longitud": -57.652778,
+              "horarios_atencion": "DE 8:00  A  16.30",
+              "telefono": "0055-67 32315605",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "121",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnCorumba/"
+                },
+                {
+                  "id": "122",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "123",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 47,
+              "nombre": "CONSULADO DE BOLIVIA EN BRASIL, CÁCERES",
+              "tipo": "Consulado",
+              "direccion": "RUA DOS DIAMANTES Nº 284, BARRIO VILA MARIANA, CIUDAD DE CÁCERES",
+              "latitud": -16.076361,
+              "longitud": -57.679722,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "0055-6532241253",
+              "telefono_emergencia": "00591-78078051",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "139",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnCaceres/"
+                },
+                {
+                  "id": "140",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "141",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 40,
+              "nombre": "CONSULADO DE BOLIVIA EN BRASIL, EPITACIOLANDIA - ACRE",
+              "tipo": "Consulado",
+              "direccion": "JULIO MATIOLI N° 84 CENTRO EPITACIOLANDIA",
+              "latitud": -11.0233305,
+              "longitud": -68.745879,
+              "horarios_atencion": "DE 7:00  A  15:00",
+              "telefono": "0068-35465760",
+              "telefono_emergencia": "0068-999083825",
+              "correo_electronico": "consuladoenbrasileia@hotmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "118",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnEpitaciolandia/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "119",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "120",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 42,
+              "nombre": "CONSULADO DE BOLIVIA EN BRASIL, GUAJARA MIRIM",
+              "tipo": "Consulado",
+              "direccion": "AV. 15 DE NOVIEMBRE NO. 255 ZONA CENTRAL.",
+              "latitud": -10.7907367,
+              "longitud": -65.3452172,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "0055-693541 8622",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "124",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnGuajaraMirin/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "125",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "126",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 43,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN BRASIL, RIO DE JANEIRO",
+              "tipo": "Consulado General",
+              "direccion": "AV. RUI BARBOSA 664, SALA 101 - FLAMENGO, CEP: 22250-020, PRAIA DO FLAMENGO",
+              "latitud": -22.941775,
+              "longitud": -43.173682,
+              "horarios_atencion": "DE 8:30  A  17:30",
+              "telefono": "0055-2125511796",
+              "telefono_emergencia": "0055-21983956883",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodeboliviaenrio@prg.br",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "127",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnRioDeJaneiro/"
+                },
+                {
+                  "id": "128",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "129",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 44,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN BRASIL, SAO PAULO",
+              "tipo": "Consulado General",
+              "direccion": "CALLE CORONEL ARTUR DE GODÓI NO 7, BARRIO VILA MARAIANA , SÃO PAULO",
+              "latitud": -23.5843227,
+              "longitud": -46.6396022,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "0055-11-32890443",
+              "telefono_emergencia": "0055-11-996651631",
+              "correo_electronico": "conbolsp@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "130",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/ConsualdoGeneralSP/"
+                },
+                {
+                  "id": "131",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/CGEPBSP"
+                },
+                {
+                  "id": "132",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 46,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN SALVADOR DE BAHIA - BRASIL",
+              "tipo": "Consulado Honorario",
+              "direccion": "AV. OCEANICA 591- BARRA",
+              "latitud": -13.009313,
+              "longitud": -38.526648,
+              "horarios_atencion": "DE 8:30  A  16:30",
+              "telefono": "005571-21034009",
+              "telefono_emergencia": "",
+              "correo_electronico": "lemosbolivia@montepascoal.com.br",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "136",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "137",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "138",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 45,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN BRASIL, BRASILIA",
+              "tipo": "Sección Consular",
+              "direccion": "SECTOR EMBAJADAS SUL, QUADRA 809, LOTE 34, CEP: 70200090 BRASILIA DF.",
+              "latitud": -15.8250756,
+              "longitud": -47.8947579,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0055-6133664448",
+              "telefono_emergencia": "0055-61995305309",
+              "correo_electronico": "",
+              "pagina_web": "www.embolivia.org.br",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "133",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnBrasil/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "134",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "135",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "16",
+          "nombre": "Canadá",
+          "alpha_2": "CA",
+          "alpha_3": "CAN",
+          "codigo_pais": "124",
+          "sub_region": "Northern America",
+          "codigo_numerico": 124,
+          "consulados": [
+            {
+              "id": 48,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN CANADA, MONTREAL",
+              "tipo": "Consulado Honorario",
+              "direccion": "44 SUNCHINE DRIVE, DOLLARD-DES-ORMEAUX - QUEBEC H9B, MONTREAL",
+              "latitud": 45.494106,
+              "longitud": -73.802475,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "001-514- 4210033",
+              "telefono_emergencia": "",
+              "correo_electronico": "colivian-montreal@videotron.ca",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "142",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "143",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "144",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 49,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN CANADA, QUEBEC",
+              "tipo": "Consulado Honorario",
+              "direccion": "1700, BOULEVARD LAURIER - SILLERY PQ G1S 1M4",
+              "latitud": 46.78661,
+              "longitud": -71.251947,
+              "horarios_atencion": "DE 10:00  A  15:00  / LUNES A MIÉRCOLES",
+              "telefono": "001-418 6888417",
+              "telefono_emergencia": "",
+              "correo_electronico": "bolivia@videotron.ca",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "145",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "146",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "147",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 50,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN CANADA, OTTAWA",
+              "tipo": "Sección Consular",
+              "direccion": "OTTAWA130 ALBERT STREET, EDIFICIO VARETTE, CUARTO PISO, OFICINA 416",
+              "latitud": 45.421131,
+              "longitud": -75.69721,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "+1-613-2365730",
+              "telefono_emergencia": "+1-613-7000130",
+              "correo_electronico": "",
+              "pagina_web": "www.bolivianembassy.ca",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "148",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/rrss.can.1/"
+                },
+                {
+                  "id": "149",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "150",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "17",
+          "nombre": "Chile",
+          "alpha_2": "CL",
+          "alpha_3": "CHL",
+          "codigo_pais": "152",
+          "sub_region": "South America",
+          "codigo_numerico": 152,
+          "consulados": [
+            {
+              "id": 52,
+              "nombre": "CONSULADO DE BOLIVIA EN CHILE, ANTOFAGASTA",
+              "tipo": "Consulado",
+              "direccion": "CALLE REBECA MATTE Nº 678",
+              "latitud": -23.646458,
+              "longitud": -70.398738,
+              "horarios_atencion": "DE 8:30  A  15:30",
+              "telefono": "0056-552928758",
+              "telefono_emergencia": "0056-9-78303982",
+              "correo_electronico": "colivian.antofagasta@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "154",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/ConsuladoBoliviaAntofagasta/"
+                },
+                {
+                  "id": "155",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "156",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 54,
+              "nombre": "CONSULADO DE BOLIVIA EN CHILE, CALAMA",
+              "tipo": "Consulado",
+              "direccion": "AVENIDA ALMIRANTE JUAN JOSÉ LATORRE N° 2611 SECTOR CENTRO Nº 2611 -ZONA CENTRAL",
+              "latitud": -22.456189,
+              "longitud": -68.926275,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0055-552344413",
+              "telefono_emergencia": "0056-975869673",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "160",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnCalama/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "161",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "162",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 55,
+              "nombre": "CONSULADO DE BOLIVIA EN CHILE, IQUIQUE",
+              "tipo": "Consulado",
+              "direccion": "CALLE SAN MARTÍN, ENTRE ANIBAL PINTO Y PATRICIO LYNCH.",
+              "latitud": -20.212624,
+              "longitud": -70.152295,
+              "horarios_atencion": "",
+              "telefono": "56-57-2527472",
+              "telefono_emergencia": "00570 962321203",
+              "correo_electronico": "colivianiquique@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "163",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnIquique/"
+                },
+                {
+                  "id": "164",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "165",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 53,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN CHILE, ARICA",
+              "tipo": "Consulado General",
+              "direccion": "CALLE PATRICIO LYNCH # 298, ESQ. SOTOMAYOR ARICA-CHILE",
+              "latitud": -18.4805658,
+              "longitud": -70.3179494,
+              "horarios_atencion": "DE 8:30  A  18:30",
+              "telefono": "0056- 582583390",
+              "telefono_emergencia": "0056-981356905",
+              "correo_electronico": "consuladoboliviaarica@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "157",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnArica/"
+                },
+                {
+                  "id": "158",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "159",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 51,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN CHILE, SANTIAGO",
+              "tipo": "Consulado General",
+              "direccion": "",
+              "latitud": null,
+              "longitud": null,
+              "horarios_atencion": "DE 8:30  A  13:00",
+              "telefono": "0056-225201704",
+              "telefono_emergencia": "0056-964651912",
+              "correo_electronico": "colivian-santiago@consuladodebolivia.cl",
+              "pagina_web": "www.consuladodebolivia.cl",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "151",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnSantiagoDeChile/"
+                },
+                {
+                  "id": "152",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "153",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "18",
+          "nombre": "Colombia",
+          "alpha_2": "CO",
+          "alpha_3": "COL",
+          "codigo_pais": "170",
+          "sub_region": "South America",
+          "codigo_numerico": 170,
+          "consulados": [
+            {
+              "id": 56,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN COLOMBIA, BOGOTA",
+              "tipo": "Sección Consular",
+              "direccion": "CARRERA 9-Nº 113-37, SANTA BÁRBARA CENTRAL, USAQUÉN, BOGOTÁ.D.C.",
+              "latitud": 4.60971,
+              "longitud": -74.08175,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "00571-6126700",
+              "telefono_emergencia": "0057-31312592427",
+              "correo_electronico": "",
+              "pagina_web": "www.embaiadaboliviacolombia.org",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "166",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolenColombia/"
+                },
+                {
+                  "id": "167",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/https"
+                },
+                {
+                  "id": "168",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "19",
+          "nombre": "Costa Rica",
+          "alpha_2": "CR",
+          "alpha_3": "CRI",
+          "codigo_pais": "188",
+          "sub_region": "Central America",
+          "codigo_numerico": 188,
+          "consulados": [
+            {
+              "id": 57,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN COSTA RICA, SAN JOSE",
+              "tipo": "Sección Consular",
+              "direccion": "CURRIDABAT, DE PLAZA FRESES 200METROSNORTE, 200METROS ESTE Y 50NORTE",
+              "latitud": 9.927944,
+              "longitud": -84.036583,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "00506-25243491",
+              "telefono_emergencia": "00506-88793666",
+              "correo_electronico": "",
+              "pagina_web": "www.embocr.com",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "169",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/EmBolCostaRica/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "170",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "171",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "20",
+          "nombre": "Cuba",
+          "alpha_2": "CU",
+          "alpha_3": "CUB",
+          "codigo_pais": "192",
+          "sub_region": "Caribbean",
+          "codigo_numerico": 192,
+          "consulados": [
+            {
+              "id": 58,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN CUBA, LA HABANA",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE 44, Nº 305 ENTRE 3RA Y 3RA A, MIRAMAR, PLAYAS.",
+              "latitud": 23.11597,
+              "longitud": -82.431858,
+              "horarios_atencion": "DE 9:00  A  16:00",
+              "telefono": "0053-72140756",
+              "telefono_emergencia": "0053-55283967",
+              "correo_electronico": "",
+              "pagina_web": "www.embajadadeboliviaencuba.org/",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "172",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/embajadadeboliviaencuba/"
+                },
+                {
+                  "id": "173",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/EmBoliviaCuba"
+                },
+                {
+                  "id": "174",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "22",
+          "nombre": "Ecuador",
+          "alpha_2": "EC",
+          "alpha_3": "ECU",
+          "codigo_pais": "218",
+          "sub_region": "South America",
+          "codigo_numerico": 218,
+          "consulados": [
+            {
+              "id": 60,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN ECUADOR, QUITO",
+              "tipo": "Sección Consular",
+              "direccion": "AV. ELOY ALFARO N° 2432 Y FERNANDO AYARZA",
+              "latitud": -0.18575,
+              "longitud": -78.477872,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "00593-2 2244830-31",
+              "telefono_emergencia": "",
+              "correo_electronico": "consular@embajadabolivia.ec",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "178",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Embajada-de-Bolivia-en-Ecuador-235864753658907"
+                },
+                {
+                  "id": "179",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "180",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "23",
+          "nombre": "Estados Unidos de America",
+          "alpha_2": "US",
+          "alpha_3": "USA",
+          "codigo_pais": "840",
+          "sub_region": "Northern America",
+          "codigo_numerico": 840,
+          "consulados": [
+            {
+              "id": 62,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN EE UU, HOUSTON",
+              "tipo": "Consulado General",
+              "direccion": "2401 FOUNTAIN VIEW DR. SUITE 110 HOUSTON, TX 77057",
+              "latitud": 29.7416128,
+              "longitud": -95.4845649,
+              "horarios_atencion": "DE 09:00  A 15:00",
+              "telefono": "1(832)916-4200",
+              "telefono_emergencia": "1(832) 499 - 3212",
+              "correo_electronico": "eduran@boliviatx.org",
+              "pagina_web": "www.boliviatx.org",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "184",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/boliviatx/"
+                },
+                {
+                  "id": "185",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/boliviatx"
+                },
+                {
+                  "id": "186",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 64,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN EE UU, LOS ANGELES",
+              "tipo": "Consulado General",
+              "direccion": "3701 WILSHIRE BOULEVARD, SUITE Nº 1065",
+              "latitud": 34.0622704,
+              "longitud": -118.3068699,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "1-2133880475",
+              "telefono_emergencia": "1-2137163980",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "190",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnLosAngeles/"
+                },
+                {
+                  "id": "191",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@boliviala"
+                },
+                {
+                  "id": "192",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 61,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN EE UU, MIAMI",
+              "tipo": "Consulado General",
+              "direccion": "3750 NW 87TH AVENUE, SUITE 240, DORAL - FLORIDA 33178",
+              "latitud": 25.806944,
+              "longitud": -80.338056,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "001-3053586303",
+              "telefono_emergencia": "",
+              "correo_electronico": "notasoficiales@boliviamiami.com",
+              "pagina_web": "boliviamiami.com/",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "181",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/boliviamiami/"
+                },
+                {
+                  "id": "182",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@boliviamiami"
+                },
+                {
+                  "id": "183",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 63,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN EE UU, NUEVA YORK",
+              "tipo": "Consulado General",
+              "direccion": "800 SECOND AVENUE, SUITE 430 - NUEVA YORK, NY 10017",
+              "latitud": 40.750064,
+              "longitud": -73.971655,
+              "horarios_atencion": "DE 9:30  A  14:00",
+              "telefono": "+1 (212) 687-0530",
+              "telefono_emergencia": "+1 (212) 687-0532",
+              "correo_electronico": "cboliviany@gmail.com",
+              "pagina_web": "www.bolivianyc.org/es-co",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "187",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/bolivianyc/"
+                },
+                {
+                  "id": "188",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "189",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 65,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN EE UU, WASHINGTON DC",
+              "tipo": "Consulado General",
+              "direccion": "1825 CONNECTICUT AVE NW SUITE 200C WASHINGTON D.C. 20009",
+              "latitud": 38.915233,
+              "longitud": -77.045917,
+              "horarios_atencion": "DE 9:00  A  15:00",
+              "telefono": "001-202 232 4827",
+              "telefono_emergencia": "001-202 232 4827",
+              "correo_electronico": "colivianwdc@boliviawdc.com",
+              "pagina_web": "www.boliviawdc.org",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "193",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/boliviawdc/"
+                },
+                {
+                  "id": "194",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/boliviawdc"
+                },
+                {
+                  "id": "195",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "24",
+          "nombre": "Mexico",
+          "alpha_2": "MX",
+          "alpha_3": "MEX",
+          "codigo_pais": "484",
+          "sub_region": "Central America",
+          "codigo_numerico": 484,
+          "consulados": [
+            {
+              "id": 66,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN MEXICO, DF MEXICO",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE GOETHE 104, COLONIA ANZURES, C.P. 11590, DELEGACIÓN MIGUEL HIDALGO, D.F. / C.P.11590 CDMX",
+              "latitud": 19.432079,
+              "longitud": -99.175809,
+              "horarios_atencion": "DE 8:30  A  16:00",
+              "telefono": "0052-5552553630",
+              "telefono_emergencia": "0052-15574675546",
+              "correo_electronico": "embajada-consular@embol.org.mx",
+              "pagina_web": "www.embol.org.mx",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "196",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pg/BolenMexico/about/?ref=page_internal"
+                },
+                {
+                  "id": "197",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@EmBolMexico"
+                },
+                {
+                  "id": "198",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "25",
+          "nombre": "Nicaragua",
+          "alpha_2": "NI",
+          "alpha_3": "NIC",
+          "codigo_pais": "558",
+          "sub_region": "Central America",
+          "codigo_numerico": 558,
+          "consulados": [
+            {
+              "id": 67,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN NICARAGUA, MANAGUA",
+              "tipo": "Sección Consular",
+              "direccion": "URBANIZACION MADRID, KM 9.4 CARRETERA A MASAYA, SEGUNDA ETAPA, CASA N° 5",
+              "latitud": null,
+              "longitud": null,
+              "horarios_atencion": "",
+              "telefono": "",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "199",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "200",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "201",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "26",
+          "nombre": "Panama",
+          "alpha_2": "PA",
+          "alpha_3": "PAN",
+          "codigo_pais": "591",
+          "sub_region": "Central America",
+          "codigo_numerico": 591,
+          "consulados": [
+            {
+              "id": 68,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN PANAMA, PANAMA",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE ANDRÉS BELLO, CASA N° 3, ZONA EL CANGREJO",
+              "latitud": 8.991265,
+              "longitud": -79.52627,
+              "horarios_atencion": "DE 8:30  A  12.30",
+              "telefono": "00507- 2690274",
+              "telefono_emergencia": "00507 6264 7127",
+              "correo_electronico": "",
+              "pagina_web": "www.emboliviapanama.com.pa",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "202",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnPanama"
+                },
+                {
+                  "id": "203",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@EmbolPanama"
+                },
+                {
+                  "id": "204",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "27",
+          "nombre": "Paraguay",
+          "alpha_2": "PY",
+          "alpha_3": "PRY",
+          "codigo_pais": "600",
+          "sub_region": "South America",
+          "codigo_numerico": 600,
+          "consulados": [
+            {
+              "id": 69,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN PARAGUAY, ASUNCION",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE ISRAEL Nº 309 ESQUINA RIO DE JANEIRO",
+              "latitud": -25.292533,
+              "longitud": -57.612038,
+              "horarios_atencion": "DE 9:00  A  16:00",
+              "telefono": "00595- 21 211430",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "205",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/embajadadebolivia.enparaguay.39/"
+                },
+                {
+                  "id": "206",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "207",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "28",
+          "nombre": "Perú",
+          "alpha_2": "PE",
+          "alpha_3": "PER",
+          "codigo_pais": "604",
+          "sub_region": "South America",
+          "codigo_numerico": 604,
+          "consulados": [
+            {
+              "id": 74,
+              "nombre": "CONSULADO DE BOLIVIA EN PERU, CUSCO",
+              "tipo": "Consulado",
+              "direccion": "AV. OSWALDO BACA #101 – CLORINDA MATO, BARRIO MAGISTERIO 1RA. ETAPA, CUSCO - PERU",
+              "latitud": -13.5258534,
+              "longitud": -71.9479521,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "0051-84-231845",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "220",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pages/Consulado-De-Bolivia-En-Cuzco/1288047651233493"
+                },
+                {
+                  "id": "221",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "222",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 71,
+              "nombre": "CONSULADO DE BOLIVIA EN PERU, ILO",
+              "tipo": "Consulado",
+              "direccion": "MEZZANINE DEL EDIFICIO MINERO II, CALLE BOLIVIA DE LA URBANIZACIÓN GARIBALDI.",
+              "latitud": -17.63463,
+              "longitud": -71.33671,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "0051-53481071",
+              "telefono_emergencia": "0051-986917524",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "211",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Consulado de Bolivia en Ilo"
+                },
+                {
+                  "id": "212",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "213",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 72,
+              "nombre": "CONSULADO DE BOLIVIA EN PERU, PUNO",
+              "tipo": "Consulado",
+              "direccion": "JR. CAJAMARCA Nº 664",
+              "latitud": -15.841821,
+              "longitud": -70.028944,
+              "horarios_atencion": "DE 8:00  A  16:00",
+              "telefono": "0051205400",
+              "telefono_emergencia": "0051984684235",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladopuno.simplesite.com",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "214",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Consulado de Bolivia en Puno"
+                },
+                {
+                  "id": "215",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "216",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 73,
+              "nombre": "CONSULADO DE BOLIVIA EN PERU, TACNA",
+              "tipo": "Consulado",
+              "direccion": "AV. BOLOGNESI 175 URBANIZACIÓN PESCASEROLLI",
+              "latitud": -18.006524,
+              "longitud": -70.236897,
+              "horarios_atencion": "DE 08:30 A 16:30",
+              "telefono": "0051-52-245121",
+              "telefono_emergencia": "0051-952007978",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "217",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/ConsuladoDeBoliviaTacnaPeru/"
+                },
+                {
+                  "id": "218",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "219",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 70,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN PERU, LIMA",
+              "tipo": "Consulado General",
+              "direccion": "",
+              "latitud": -12.09378,
+              "longitud": -77.05078,
+              "horarios_atencion": "DE 8:30  A  14:30",
+              "telefono": "005114228231",
+              "telefono_emergencia": "005114228231",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodebolivia.com.pe",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "208",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnLima/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "209",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "210",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "29",
+          "nombre": "Puerto Rico",
+          "alpha_2": "PR",
+          "alpha_3": "PRI",
+          "codigo_pais": "630",
+          "sub_region": "Caribbean",
+          "codigo_numerico": 630,
+          "consulados": [
+            {
+              "id": 75,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN PUERTO RICO, SAN JUAN",
+              "tipo": "Consulado Honorario",
+              "direccion": "1409 LUCCHETTI STREET, SAN JUAN, PUERTO RICO",
+              "latitud": 18.453344,
+              "longitud": -66.066466,
+              "horarios_atencion": "",
+              "telefono": "001-787 7225449",
+              "telefono_emergencia": "",
+              "correo_electronico": "Bolivia@caribe.net",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "223",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "224",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "225",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "21",
+          "nombre": "República Dominicana",
+          "alpha_2": "DO",
+          "alpha_3": "DOM",
+          "codigo_pais": "214",
+          "sub_region": "Caribbean",
+          "codigo_numerico": 214,
+          "consulados": [
+            {
+              "id": 59,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN REPUBLICA DOMINICANA, SANTO DOMINGO",
+              "tipo": "Consulado Honorario",
+              "direccion": "CALLE DR. NUÑEZ DOMINGUEZ #33, ESQ. FERNANDO VALERIO",
+              "latitud": 18.459358,
+              "longitud": -69.929003,
+              "horarios_atencion": "DE 8:00  A  17:00",
+              "telefono": "001-809- 3791919",
+              "telefono_emergencia": "",
+              "correo_electronico": "consuladoboliviard@hotmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "175",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Consulado-Honorario-de-Bolivia-en-República-Dominicana-109530287288481"
+                },
+                {
+                  "id": "176",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "177",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "30",
+          "nombre": "Uruguay",
+          "alpha_2": "UY",
+          "alpha_3": "URY",
+          "codigo_pais": "858",
+          "sub_region": "South America",
+          "codigo_numerico": 858,
+          "consulados": [
+            {
+              "id": 76,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN URUGUAY, MONTEVIDEO",
+              "tipo": "Sección Consular",
+              "direccion": "CALLE PRUDENCIO DE PENA Nº 2567",
+              "latitud": -34.898,
+              "longitud": 56.1595,
+              "horarios_atencion": "DE 9:30  A  17:30",
+              "telefono": "00598-27083573",
+              "telefono_emergencia": "00598-98195100",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "226",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnUruguay/"
+                },
+                {
+                  "id": "227",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "228",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "31",
+          "nombre": "Venezuela (República Bolivariana de)",
+          "alpha_2": "VE",
+          "alpha_3": "VEN",
+          "codigo_pais": "862",
+          "sub_region": "South America",
+          "codigo_numerico": 862,
+          "consulados": [
+            {
+              "id": 77,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN VENEZUELA, CARACAS",
+              "tipo": "Sección Consular",
+              "direccion": "AV. LUIS ROCHE CON 6TA. TRANSVERSAL, URB. ALTAMIRA, QUINTA",
+              "latitud": 10.504601,
+              "longitud": -66.847825,
+              "horarios_atencion": "DE 8:00  A  16.00",
+              "telefono": "0058-212 2633015",
+              "telefono_emergencia": "0058-4123727682",
+              "correo_electronico": "",
+              "pagina_web": "embajadadebolivia.com.ve",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "229",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "230",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "231",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "nombre": "Asia",
+      "codigo": "142",
+      "paises": [
+        {
+          "id": "33",
+          "nombre": "China",
+          "alpha_2": "CN",
+          "alpha_3": "CHN",
+          "codigo_pais": "156",
+          "sub_region": "Eastern Asia",
+          "codigo_numerico": 156,
+          "consulados": [
+            {
+              "id": 79,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN CHINA, BEIJING",
+              "tipo": "Sección Consular",
+              "direccion": "LIANG MA HE(SOUTH) NO.14, 2-3-2 TAYUAN DIPLOMATIC BUILDING",
+              "latitud": 39.945546,
+              "longitud": 116.451375,
+              "horarios_atencion": "DE 8:30  A  12:30  /  de 14:30 A 18:30",
+              "telefono": "0086-10 65323074",
+              "telefono_emergencia": "0018310925926",
+              "correo_electronico": "",
+              "pagina_web": "www.embolchina.net",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "235",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pg/BolEnChina/about/?ref=page_internal"
+                },
+                {
+                  "id": "236",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "237",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "37",
+          "nombre": "Corea (República de )",
+          "alpha_2": "KR",
+          "alpha_3": "KOR",
+          "codigo_pais": "410",
+          "sub_region": "Eastern Asia",
+          "codigo_numerico": 410,
+          "consulados": [
+            {
+              "id": 83,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN COREA DEL SUR, SEUL",
+              "tipo": "Sección Consular",
+              "direccion": "8F JEI BUILDING, EULJIRO 6, JUNG GU, SEOUL, REPUBLIC OF KOREA, 100-191",
+              "latitud": 37.546408,
+              "longitud": 127.00824,
+              "horarios_atencion": "DE 9:30  A  12.00  /  DE 14:30  A  17:00",
+              "telefono": "0082-23181767",
+              "telefono_emergencia": "0082-1028420210",
+              "correo_electronico": "",
+              "pagina_web": "blog.naver.com/embolseul",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "247",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnCoreaDelSur/"
+                },
+                {
+                  "id": "248",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "249",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "34",
+          "nombre": "India",
+          "alpha_2": "IN",
+          "alpha_3": "IND",
+          "codigo_pais": "356",
+          "sub_region": "Southern Asia",
+          "codigo_numerico": 356,
+          "consulados": [
+            {
+              "id": 80,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN LA INDIA, NUEVA DELHI",
+              "tipo": "Sección Consular",
+              "direccion": "E14/15 GROUND FLOOR,VASANT VIHAR, NUEVA DELHI",
+              "latitud": 28.561543,
+              "longitud": 77.159101,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "91-11-46060934",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "238",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pg/BolEnLaIndia/about/?ref=page_internal"
+                },
+                {
+                  "id": "239",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "240",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "35",
+          "nombre": "Iran (República Islamica de)",
+          "alpha_2": "IR",
+          "alpha_3": "IRN",
+          "codigo_pais": "364",
+          "sub_region": "Southern Asia",
+          "codigo_numerico": 364,
+          "consulados": [
+            {
+              "id": 81,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN IRAN, TEHERAN",
+              "tipo": "Sección Consular",
+              "direccion": "NO. 79 QAREH TAPEHEI ST., KOSAR SQ., SAADAT ABAD, TEHERAN (SEGUNDO PISO)",
+              "latitud": 35.7727413,
+              "longitud": 51.3712011,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0098-2188686807",
+              "telefono_emergencia": "0098-9203613975",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "241",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "242",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "243",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "36",
+          "nombre": "Japón",
+          "alpha_2": "JP",
+          "alpha_3": "JPN",
+          "codigo_pais": "392",
+          "sub_region": "Eastern Asia",
+          "codigo_numerico": 392,
+          "consulados": [
+            {
+              "id": 82,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN JAPON, TOKIO",
+              "tipo": "Sección Consular",
+              "direccion": "N° 38 KOWA BUILDING. ROOM 804, NISHI-AZABU 4-12-24; MINATO-KU, TOKYO 106-0031, JAPÓN",
+              "latitud": 35.659306,
+              "longitud": 139.721417,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0081-0334995441",
+              "telefono_emergencia": "0081-08040773315",
+              "correo_electronico": "",
+              "pagina_web": "www.ebja.jp",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "244",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnJapon/"
+                },
+                {
+                  "id": "245",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/EmBolJapon"
+                },
+                {
+                  "id": "246",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "38",
+          "nombre": "Líbano",
+          "alpha_2": "LB",
+          "alpha_3": "LBN",
+          "codigo_pais": "422",
+          "sub_region": "Western Asia",
+          "codigo_numerico": 422,
+          "consulados": [
+            {
+              "id": 84,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN LIBANO, BEIRUT",
+              "tipo": "Consulado Honorario",
+              "direccion": "BAUCHRIEH - MAR YOUHANNA STREET, GEMAYEL AND MATTAR BLDG, 4TO PISO",
+              "latitud": 33.892309,
+              "longitud": 35.56112,
+              "horarios_atencion": "",
+              "telefono": "00961-1874553",
+              "telefono_emergencia": "",
+              "correo_electronico": "consuladoboliviano@hotmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "250",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "251",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "252",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "39",
+          "nombre": "Turquía",
+          "alpha_2": "TR",
+          "alpha_3": "TUR",
+          "codigo_pais": "792",
+          "sub_region": "Western Asia",
+          "codigo_numerico": 792,
+          "consulados": [
+            {
+              "id": 85,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN TURQUIA, ESTAMBUL",
+              "tipo": "Consulado Honorario",
+              "direccion": "ALTAN ERBULAK SOKAK EKEN APT NO. 8 ESTAMBUL-TURQUIA",
+              "latitud": 41.067451,
+              "longitud": 29.001668,
+              "horarios_atencion": "",
+              "telefono": "0090-212 2745124",
+              "telefono_emergencia": "",
+              "correo_electronico": "smil@turk.net",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "253",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "254",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "255",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "nombre": "Europe",
+      "codigo": "150",
+      "paises": [
+        {
+          "id": "1",
+          "nombre": "Alemania",
+          "alpha_2": "DE",
+          "alpha_3": "DEU",
+          "codigo_pais": "276",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 276,
+          "consulados": [
+            {
+              "id": 6,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN ALEMANIA, FRANKFURT",
+              "tipo": "Consulado Honorario",
+              "direccion": "LIMBURGER STRAßE 42, CODIGO POSTAL 61462 KÖNIGSTEIN",
+              "latitud": 50.189785,
+              "longitud": 8.465531,
+              "horarios_atencion": "DE 9:00  A  14:00  /  LUNES-MIERCOLES-VIERNES",
+              "telefono": "0049-6174 2016020",
+              "telefono_emergencia": "",
+              "correo_electronico": "ml@hcbolivia.de",
+              "pagina_web": "www.hcbolivia.de",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "16",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "17",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "18",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 7,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN ALEMANIA, HAMBURGO",
+              "tipo": "Consulado Honorario",
+              "direccion": "CS BUSINESS CENTER (3. OG)",
+              "latitud": 53.541416,
+              "longitud": 9.993001,
+              "horarios_atencion": "DE 10:00  A  12:00  /  MARTES-JUEVES",
+              "telefono": "0049-40-226163771",
+              "telefono_emergencia": "",
+              "correo_electronico": "info-consular@bolivia-hh.de",
+              "pagina_web": "www.bolivia-hh.de",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "19",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "20",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "21",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 8,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN ALEMANIA, MUNICH",
+              "tipo": "Consulado Honorario",
+              "direccion": "EFFNERSTR. 46 D-81925 MÜNCHEN",
+              "latitud": 48.155477,
+              "longitud": 11.61721,
+              "horarios_atencion": "DE 9:00  A  14:00  /  LUNES-MIERCOLES-VIERNES",
+              "telefono": "0049-8999739227",
+              "telefono_emergencia": "",
+              "correo_electronico": "Bolivia@vonRheinbaben.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "22",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "23",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "24",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN ALEMANIA, BERLIN",
+              "tipo": "Sección Consular",
+              "direccion": "WICHMANNSTRABE 6, 10787 BERLÍN",
+              "latitud": 52.505166,
+              "longitud": 13.348277,
+              "horarios_atencion": "DE 9:00 A 17:00",
+              "telefono": "0049-302639150",
+              "telefono_emergencia": "0049-01797436240",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "25",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnAlemania"
+                },
+                {
+                  "id": "26",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@EmbBoliviaDe"
+                },
+                {
+                  "id": "27",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "nombre": "Austria",
+          "alpha_2": "AT",
+          "alpha_3": "AUT",
+          "codigo_pais": "040",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 40,
+          "consulados": [
+            {
+              "id": 2,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN AUSTRIA, LINZ",
+              "tipo": "Consulado Honorario",
+              "direccion": "NIEDERBAIRINGERSTR. 36A - 4203 ALTENBERG BEI - LINZ",
+              "latitud": 48.368289,
+              "longitud": 14.321243,
+              "horarios_atencion": "DE LUNES A SÁBADO  (PREVIA CITA)",
+              "telefono": "0043-7230 8777",
+              "telefono_emergencia": "",
+              "correo_electronico": "colivian.linz@gmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "4",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "5",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "6",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN AUSTRIA, VIENA",
+              "tipo": "Sección Consular",
+              "direccion": "WAAGAASSE 10/8 A-1040",
+              "latitud": 48.195278,
+              "longitud": 16.365556,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "00431-58746750",
+              "telefono_emergencia": "00436-506266119",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "1",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "2",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "3",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "nombre": "Bélgica",
+          "alpha_2": "BE",
+          "alpha_3": "BEL",
+          "codigo_pais": "056",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 56,
+          "consulados": [
+            {
+              "id": 3,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN BELGICA, BRUSELAS",
+              "tipo": "Sección Consular",
+              "direccion": "AV. LOUISE 176, BOITE 6, 1050 BRUSELAS",
+              "latitud": 50.828139,
+              "longitud": 4.363778,
+              "horarios_atencion": "DE 10:00 A 12:30 / DE 14:30 A 16:30",
+              "telefono": "0032-26270010",
+              "telefono_emergencia": "0032-489033040",
+              "correo_electronico": "",
+              "pagina_web": "www.embajadadebolivia.eu",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "7",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/MisiondeBoliviaUE/"
+                },
+                {
+                  "id": "8",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/embajadabolbrus"
+                },
+                {
+                  "id": "9",
+                  "tipo": "youtube",
+                  "url": "https://www.youtube.com/EmbajadaDeBolivia"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9",
+          "nombre": "España",
+          "alpha_2": "ES",
+          "alpha_3": "ESP",
+          "codigo_pais": "724",
+          "sub_region": "Southern Europe",
+          "codigo_numerico": 724,
+          "consulados": [
+            {
+              "id": 16,
+              "nombre": "CONSULADO DE BOLIVIA EN ESPAÑA, BILBAO",
+              "tipo": "Consulado",
+              "direccion": "CALLE PINTOR LOSADA Nº 19 BAJO CP 48004, ZONA DE BASARRETE",
+              "latitud": 43.249194,
+              "longitud": 2.912694,
+              "horarios_atencion": "DE 8:30  A  14:00",
+              "telefono": "0034 - 944122623",
+              "telefono_emergencia": "0034-688894276",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "46",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnBilabo/"
+                },
+                {
+                  "id": "47",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/ConsuladoBolBil"
+                },
+                {
+                  "id": "48",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 18,
+              "nombre": "CONSULADO DE BOLIVIA EN ESPAÑA, MURCIA",
+              "tipo": "Consulado",
+              "direccion": "CALLE TORRE DE ROMO Nº52 B, CP 30011, MURCIA - ESPAÑA",
+              "latitud": 37.977255,
+              "longitud": -1.125524,
+              "horarios_atencion": "",
+              "telefono": "034 - 968352565 - 968259696",
+              "telefono_emergencia": "",
+              "correo_electronico": "consulado.bolivia.mur@gmail.com",
+              "pagina_web": "www.consuladodeboliviaenmurcia.com",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "52",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/Consulado-De-Bolivia-Murcia-1430136113867244/"
+                },
+                {
+                  "id": "53",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/MurBolivia"
+                },
+                {
+                  "id": "54",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 21,
+              "nombre": "CONSULADO DE BOLIVIA EN ESPAÑA, SEVILLA",
+              "tipo": "Consulado",
+              "direccion": "AV. EDUARDO DATO Nº 38 1RO. - C; CP 41005",
+              "latitud": 37.382165,
+              "longitud": -5.970451,
+              "horarios_atencion": "DE 8:30  A  16:30 (LUNES A VIERNES ) Y DE 9:00 A 14:00 (1er. SÁBADO DE CADA MES)",
+              "telefono": "0034-954360498",
+              "telefono_emergencia": "0034-603208097",
+              "correo_electronico": "",
+              "pagina_web": "http://consuladodeboliviaensevilla.com/",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "61",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/consuladodeboliviaensevilla.espana"
+                },
+                {
+                  "id": "62",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/Conbolsevilla"
+                },
+                {
+                  "id": "63",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 20,
+              "nombre": "CONSULADO DE BOLIVIA EN ESPAÑA, VALENCIA",
+              "tipo": "Consulado",
+              "direccion": "AV. MARQUES DE SOTELO Nº 11, PISO 1 PUERTA 1, VALENCIA - CAPITAL, CP 46002",
+              "latitud": 39.468007,
+              "longitud": -0.376719,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "(34) 963154225",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "58",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/ConsuladodeBoliviaenValencia//"
+                },
+                {
+                  "id": "59",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@conbolvalencia"
+                },
+                {
+                  "id": "60",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 15,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN ESPAÑA, BARCELONA",
+              "tipo": "Consulado General",
+              "direccion": "Via Layetana Nº 45, Piso 5to, Of. 2\\nCódigo Postal 08003 – Barcelona",
+              "latitud": 41.388771,
+              "longitud": 2.174581,
+              "horarios_atencion": "DE 8:30  A  14.00",
+              "telefono": "34-938585821",
+              "telefono_emergencia": "640070629",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodeboliviaenbarcelona.es",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "43",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/consuladodeboliviaenbarcelona/"
+                },
+                {
+                  "id": "44",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@conbolbar"
+                },
+                {
+                  "id": "45",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 17,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN ESPAÑA, MADRID",
+              "tipo": "Consulado General",
+              "direccion": "CALLE AVIADOR LINDBERGH, Nº 3 – ZONA EL VISO - DISTRITO DE CHAMARTÍN – C.P. 28002.",
+              "latitud": 40.44249,
+              "longitud": -3.679682,
+              "horarios_atencion": "DE 8:30  A  14.30 (Atención 1er. sábado de cada mes 9:00 a 13:00)",
+              "telefono": "0034- 913 265 028",
+              "telefono_emergencia": "0034-694466961",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodebolivia.es",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "49",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnMadrid/?modal=admin_todo_tour"
+                },
+                {
+                  "id": "50",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@conbolmad"
+                },
+                {
+                  "id": "51",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "nombre": "VICECONSULADO DE BOLIVIA EN ESPAÑA, PALMA DE MALLORCA",
+              "tipo": "Viceconsulado",
+              "direccion": "CALLE PARELLADES Nº12 1º PISO DESPACHO 23 ZONA PLAZA DE LOS PATINES",
+              "latitud": 39.5773,
+              "longitud": 2.649151,
+              "horarios_atencion": "DE 8:30  A  13.30  / DE 16:00 A 19:00",
+              "telefono": "+34 971724591",
+              "telefono_emergencia": "0034-603634936",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "55",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnPalmaDeMallorca"
+                },
+                {
+                  "id": "56",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "57",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "nombre": "Federación Rusa",
+          "alpha_2": "RU",
+          "alpha_3": "RUS",
+          "codigo_pais": "643",
+          "sub_region": "Eastern Europe",
+          "codigo_numerico": 643,
+          "consulados": [
+            {
+              "id": 14,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN RUSIA, MOSCU",
+              "tipo": "Sección Consular",
+              "direccion": "SERPUJOVSKY VAL 8 DEPTS 135-137",
+              "latitud": 55.712087,
+              "longitud": 37.616453,
+              "horarios_atencion": "DE 10:00 A 18:30",
+              "telefono": "007-495 958 08 55",
+              "telefono_emergencia": "007 -903 664 64 35",
+              "correo_electronico": "",
+              "pagina_web": "embassybolivia.ru/",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "40",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/pg/BolEnRusia/about/?ref=page_internal"
+                },
+                {
+                  "id": "41",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "42",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "nombre": "Francia",
+          "alpha_2": "FR",
+          "alpha_3": "FRA",
+          "codigo_pais": "250",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 250,
+          "consulados": [
+            {
+              "id": 5,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN FRANCIA, MARSELLA",
+              "tipo": "Consulado Honorario",
+              "direccion": "LE NEGRESKO 2 - 14 ME NEGRESKO 13008 MARSEILLE FRANCE",
+              "latitud": 43.270283,
+              "longitud": 5.391917,
+              "horarios_atencion": "DE 9:00  A  14:00",
+              "telefono": "0036-82563742",
+              "telefono_emergencia": "",
+              "correo_electronico": "roselyne.bellepaume@orange.fr",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "13",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "14",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "15",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN FRANCIA, PARIS",
+              "tipo": "Sección Consular",
+              "direccion": "12, AV. DU PRESIDENT KENNEDY - 75016 PARÍS",
+              "latitud": 48.857494,
+              "longitud": 2.287032,
+              "horarios_atencion": "DE 9:00  A  12:30   /  DE 13:30  A  17.00",
+              "telefono": "0033-142249344",
+              "telefono_emergencia": "0033-638183844",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "10",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnFrancia/"
+                },
+                {
+                  "id": "11",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "12",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "6",
+          "nombre": "Holanda",
+          "alpha_2": "NL",
+          "alpha_3": "NLD",
+          "codigo_pais": "528",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 528,
+          "consulados": [
+            {
+              "id": 12,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN PAISES BAJOS, LA HAYA",
+              "tipo": "Sección Consular",
+              "direccion": "NASSAUPLEIN 2, 2585 EA LA HAYA - PB, LA HAYA",
+              "latitud": 52.089535,
+              "longitud": 4.30564,
+              "horarios_atencion": "DE 9:00  A  17:30",
+              "telefono": "0031-0703616707",
+              "telefono_emergencia": "0031-0610604269",
+              "correo_electronico": "",
+              "pagina_web": "www.embassyofbolivia.nl",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "34",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnPaisesBajos/"
+                },
+                {
+                  "id": "35",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "36",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "nombre": "Italia",
+          "alpha_2": "IT",
+          "alpha_3": "ITA",
+          "codigo_pais": "380",
+          "sub_region": "Southern Europe",
+          "codigo_numerico": 380,
+          "consulados": [
+            {
+              "id": 11,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN ITALIA, MILAN",
+              "tipo": "Consulado General",
+              "direccion": "VIA SPONTINI Nº1 ANGULO CORSO DE BUENOS AIRES 64 PIANO 2, SCALA \"C\"",
+              "latitud": 45.481742,
+              "longitud": 9.213772,
+              "horarios_atencion": "",
+              "telefono": "0039-225060947",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "www.consuladodebolivia.it",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "31",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/consolatob/"
+                },
+                {
+                  "id": "32",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "33",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN ITALIA, ROMA",
+              "tipo": "Sección Consular",
+              "direccion": "VIA CIVITAVECCHIA Nº 1",
+              "latitud": 41.9144715,
+              "longitud": 12.502692,
+              "horarios_atencion": "DE 9:00  A  17:00",
+              "telefono": "0039-068841001",
+              "telefono_emergencia": "0039-3884774044",
+              "correo_electronico": "",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "28",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/embajada.boliviaenitalia.1/"
+                },
+                {
+                  "id": "29",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@EmbBolivia_It"
+                },
+                {
+                  "id": "30",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "nombre": "Portugal",
+          "alpha_2": "PT",
+          "alpha_3": "PRT",
+          "codigo_pais": "620",
+          "sub_region": "Southern Europe",
+          "codigo_numerico": 620,
+          "consulados": [
+            {
+              "id": 13,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN PORTUGAL, LISBOA",
+              "tipo": "Consulado Honorario",
+              "direccion": "AV. DEFENSORES DE CHAVES Nº 71-B, 1000-114 LISBOA PORTUGAL",
+              "latitud": 38.739005,
+              "longitud": -9.144525,
+              "horarios_atencion": "",
+              "telefono": "00351 919794127",
+              "telefono_emergencia": "",
+              "correo_electronico": "luis.rezende@oniduo.pt",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "37",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "38",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "39",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "13",
+          "nombre": "Reino Unido de Gran Bretaña e Irlanda del Norte",
+          "alpha_2": "GB",
+          "alpha_3": "GBR",
+          "codigo_pais": "826",
+          "sub_region": "Northern Europe",
+          "codigo_numerico": 826,
+          "consulados": [
+            {
+              "id": 25,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN GRAN BRETAÑA, LONDRES",
+              "tipo": "Sección Consular",
+              "direccion": "106 EATON SQUARE, LONDON SW1W 9AD, LONDRES",
+              "latitud": 51.497164,
+              "longitud": -0.151243,
+              "horarios_atencion": "DE 9:30  A  13:30 y DE 15:00 A 17:00",
+              "telefono": "0044-20 72354248",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "www.bolivianembassy.co.uk",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "73",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnLondres/"
+                },
+                {
+                  "id": "74",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/@boliviaenuk"
+                },
+                {
+                  "id": "75",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "nombre": "Suecia",
+          "alpha_2": "SE",
+          "alpha_3": "SWE",
+          "codigo_pais": "752",
+          "sub_region": "Northern Europe",
+          "codigo_numerico": 752,
+          "consulados": [
+            {
+              "id": 22,
+              "nombre": "SECCION CONSULAR DE BOLIVIA EN SUECIA, ESTOCOLMO",
+              "tipo": "Sección Consular",
+              "direccion": "STJÁRNVÁGEN 2A, 181 50 LIDINGÓ, ESTOCOLMO",
+              "latitud": 59.362401,
+              "longitud": 18.122798,
+              "horarios_atencion": "DE 9:30  A  12:30  ( Lunes-Miércoles-Viernes)",
+              "telefono": "0046-87315830",
+              "telefono_emergencia": "",
+              "correo_electronico": "",
+              "pagina_web": "www.embolivia.se",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "64",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/BolEnSuecia/"
+                },
+                {
+                  "id": "65",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "66",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "nombre": "Suiza",
+          "alpha_2": "CH",
+          "alpha_3": "CHE",
+          "codigo_pais": "756",
+          "sub_region": "Western Europe",
+          "codigo_numerico": 756,
+          "consulados": [
+            {
+              "id": 23,
+              "nombre": "CONSULADO GENERAL DE BOLIVIA EN SUIZA, GINEBRA",
+              "tipo": "Consulado General",
+              "direccion": "RUE DE LAUSANNE 72, INGRESO RUE ROSCHILD 50, SEGUNDO PISO, CODIGO POSTAL 1202",
+              "latitud": 46.215722,
+              "longitud": 6.147492,
+              "horarios_atencion": "DE 9:00 A 15:00",
+              "telefono": "0041-227317189",
+              "telefono_emergencia": "0041-786631129",
+              "correo_electronico": "conboliviasuiza@gmail.com",
+              "pagina_web": "www.consuladoboliviasuiza.com",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "67",
+                  "tipo": "facebook",
+                  "url": "https://www.facebook.com/consuladodebolivia.ginebrasuiza/"
+                },
+                {
+                  "id": "68",
+                  "tipo": "twitter",
+                  "url": "https://twitter.com/conbolginebra"
+                },
+                {
+                  "id": "69",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "12",
+          "nombre": "Ucrania",
+          "alpha_2": "UA",
+          "alpha_3": "UKR",
+          "codigo_pais": "804",
+          "sub_region": "Eastern Europe",
+          "codigo_numerico": 804,
+          "consulados": [
+            {
+              "id": 24,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN UCRANIA, KIEV",
+              "tipo": "Consulado Honorario",
+              "direccion": "CALLE XORIVA - POCHAINSKAYA 45/24, KIEV, UCRANIA",
+              "latitud": null,
+              "longitud": null,
+              "horarios_atencion": "",
+              "telefono": "00380-44-4174291",
+              "telefono_emergencia": "",
+              "correo_electronico": "conboliv@ukr.net",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "70",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "71",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "72",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "nombre": "Oceania",
+      "codigo": "009",
+      "paises": [
+        {
+          "id": "32",
+          "nombre": "Australia",
+          "alpha_2": "AU",
+          "alpha_3": "AUS",
+          "codigo_pais": "036",
+          "sub_region": "Australia and New Zealand",
+          "codigo_numerico": 36,
+          "consulados": [
+            {
+              "id": 78,
+              "nombre": "CONSULADO HONORARIO DE BOLIVIA EN AUSTRALIA, SIDNEY",
+              "tipo": "Consulado Honorario",
+              "direccion": "SUITE 602, 90 PITT STRETT SYDNEY",
+              "latitud": -33.867061,
+              "longitud": 151.208766,
+              "horarios_atencion": "",
+              "telefono": "0061-292474235",
+              "telefono_emergencia": "",
+              "correo_electronico": "chussbol@hotmail.com",
+              "pagina_web": "",
+              "circunscripcion": "",
+              "consulado_redes_sociales": [
+                {
+                  "id": "232",
+                  "tipo": "facebook",
+                  "url": ""
+                },
+                {
+                  "id": "233",
+                  "tipo": "twitter",
+                  "url": ""
+                },
+                {
+                  "id": "234",
+                  "tipo": "youtube",
+                  "url": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

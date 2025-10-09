@@ -1,8 +1,8 @@
-import 'package:fix_store/app/routes/app_routes.dart';
-import 'package:fix_store/base/color_data.dart';
-import 'package:fix_store/base/constant.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
-import 'package:fix_store/base/widget_utils.dart';
+import 'package:mi_cancilleria/app/routes/app_routes.dart';
+import 'package:mi_cancilleria/base/color_data.dart';
+import 'package:mi_cancilleria/base/constant.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDialog extends StatefulWidget {
@@ -184,3 +184,4 @@ class _CategoryDialogState extends State<CategoryDialog> {
     );
   }
 }
+

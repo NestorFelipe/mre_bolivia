@@ -1,5 +1,5 @@
-import 'package:fix_store/app/view/dialog/reset_dialog.dart';
-import 'package:fix_store/base/resizer/fetch_pixels.dart';
+import 'package:mi_cancilleria/app/view/dialog/reset_dialog.dart';
+import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/color_data.dart';
@@ -130,3 +130,4 @@ class _ResetPasswordState extends State<ResetPassword> {
         });
   }
 }
+

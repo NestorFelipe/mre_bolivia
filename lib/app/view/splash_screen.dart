@@ -1,10 +1,10 @@
-import 'package:fix_store/base/color_data.dart';
+import 'package:mi_cancilleria/base/color_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
-import '../../controllers/splash_controller.dart';
+import '../../controllers/consulado/splash_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,18 +13,17 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> 
+class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  
   late SplashController controller;
 
   @override
   void initState() {
     super.initState();
-    
+
     controller = Get.put(SplashController());
     controller.initialize(this);
-    
+
     // Mantener el tema consistente
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE0E0E0),
@@ -44,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     // Forzar pantalla completa
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
+
     return Scaffold(
       backgroundColor: fondoGris,
       body: Container(
@@ -63,15 +62,20 @@ class _SplashScreenState extends State<SplashScreen>
     if (!controller.isAppReady.value) {
       return _buildPlaceholder();
     }
-    
-    if (controller.showVideo.value && controller.videoController != null && controller.videoController!.value.isInitialized) {
+
+    // Eliminar la condición que bloquea el video cuando se cargan datos
+    // La carga de APIs ahora es en segundo plano y no debe interferir con el video
+
+    if (controller.showVideo.value &&
+        controller.videoController != null &&
+        controller.videoController!.value.isInitialized) {
       // Mostrar video con fade in
       return FadeTransition(
         opacity: controller.fadeAnimation!,
         child: _buildVideoPlayer(),
       );
     } else {
-      // Mostrar imagen estática con fade in
+      // Mostrar imagen estática con fade in si el video no está disponible
       return FadeTransition(
         opacity: controller.fadeAnimation!,
         child: _buildStaticLogo(),
@@ -112,9 +116,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildVideoPlayer() {
     return Padding(
-      padding: const EdgeInsets.only(top:  20, left: 5),
+      padding: const EdgeInsets.only(top: 20, left: 5),
       child: SizedBox(
-        
         width: 240.h,
         height: 240.h,
         child: AspectRatio(
@@ -170,4 +173,42 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
   }
+
+  // Widget mantenido para uso futuro si es necesario
+  // ignore: unused_element
+  Widget _buildLoadingIndicator() {
+    return Container(
+      width: 240.h,
+      height: 240.h,
+      color: fondoGris,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/logo.png',
+            width: 200.h,
+            height: 200.h,
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(
+                Icons.image,
+                size: 80,
+                color: Colors.black26,
+              );
+            },
+          ),
+          SizedBox(height: 20.h),
+          SizedBox(
+            width: 20.w,
+            height: 20.w,
+            child: const CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.black45),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
+

@@ -27,6 +27,9 @@
 -keep class io.flutter.view.**  { *; }
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
+-dontwarn io.flutter.embedding.**
+
+-keep class gob.bo.cancilleria.app.** { *; }
 
 # Dart specific rules
 -dontwarn dart.**

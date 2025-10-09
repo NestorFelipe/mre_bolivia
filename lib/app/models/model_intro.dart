@@ -9,3 +9,4 @@ class ModelIntro {
 
   ModelIntro(this.id, this.title, this.description, this.image,this.color);
 }
+

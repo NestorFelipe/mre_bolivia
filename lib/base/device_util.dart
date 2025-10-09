@@ -10,3 +10,4 @@ class DeviceUtil {
     return _getDeviceType == 'tablet';
   }
 }
+
