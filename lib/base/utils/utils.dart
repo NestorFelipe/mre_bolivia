@@ -45,21 +45,26 @@ Widget getAssetImage(String imageName, double width, double height,
   );
 }
 
-Widget getCustomFont(String text, double fontSize, Color color, int maxLines,
-    {FontWeight fontWeight = FontWeight.normal,
+Widget getCustomFont(String text, double fontSize, Color fontColor, int maxLine,
+    {String fontFamily = Constant.fontsFamily,
+    TextOverflow overflow = TextOverflow.ellipsis,
+    TextDecoration decoration = TextDecoration.none,
+    FontWeight fontWeight = FontWeight.normal,
     TextAlign textAlign = TextAlign.start,
-    double? height}) {
+    txtHeight}) {
   return Text(
     text,
+    overflow: overflow,
     style: TextStyle(
-      fontSize: fontSize.sp,
-      color: color,
-      fontWeight: fontWeight,
-      fontFamily: Constant.fontsFamily,
-      height: height,
-    ),
-    maxLines: maxLines,
-    overflow: TextOverflow.ellipsis,
+        decoration: decoration,
+        fontSize: fontSize,
+        fontStyle: FontStyle.normal,
+        color: fontColor,
+        fontFamily: fontFamily,
+        height: txtHeight,
+        fontWeight: fontWeight),
+    maxLines: maxLine,
+    softWrap: true,
     textAlign: textAlign,
   );
 }
@@ -83,32 +88,82 @@ Widget getMultilineCustomFont(
   );
 }
 
-Widget getButton(
-  BuildContext context,
-  Color bgColor,
-  String text,
-  Color textColor,
-  VoidCallback onPressed,
-  double fontSize, {
-  FontWeight weight = FontWeight.bold,
-  double? buttonWidth,
-  BorderRadius? borderRadius,
-  EdgeInsets? insetsGeometrypadding,
-}) {
+BoxDecoration getButtonDecoration(Color bgColor,
+    {BorderRadius? borderRadius,
+    Border? border,
+    List<BoxShadow> shadow = const [],
+    DecorationImage? image}) {
+  return BoxDecoration(
+      color: bgColor,
+      borderRadius: borderRadius,
+      border: border,
+      boxShadow: shadow,
+      image: image);
+}
+
+DecorationImage getDecorationAssetImage(BuildContext buildContext, String image,
+    {BoxFit fit = BoxFit.contain}) {
+  return DecorationImage(
+    image: AssetImage((Constant.assetImagePath) + image),
+    fit: fit,
+  );
+}
+
+Widget getButton(BuildContext context, Color bgColor, String text,
+    Color textColor, Function function, double fontsize,
+    {bool isBorder = false,
+    EdgeInsetsGeometry? insetsGeometry,
+    borderColor = Colors.transparent,
+    FontWeight weight = FontWeight.bold,
+    bool isIcon = false,
+    String? image,
+    Color? imageColor,
+    double? imageWidth,
+    double? imageHeight,
+    bool smallFont = false,
+    double? buttonHeight,
+    double? buttonWidth,
+    List<BoxShadow> boxShadow = const [],
+    EdgeInsetsGeometry? insetsGeometrypadding,
+    BorderRadius? borderRadius,
+    double? borderWidth}) {
   return InkWell(
-    onTap: onPressed,
+    onTap: () {
+      function();
+    },
     child: Container(
-      width: buttonWidth?.w,
+      margin: insetsGeometry,
       padding: insetsGeometrypadding,
-      decoration: BoxDecoration(
-        color: bgColor,
+      width: buttonWidth,
+      height: buttonHeight,
+      decoration: getButtonDecoration(
+        bgColor,
         borderRadius: borderRadius,
+        shadow: boxShadow,
+        border: (isBorder)
+            ? Border.all(color: borderColor, width: borderWidth!)
+            : null,
       ),
-      child: Center(
-        child: getCustomFont(text, fontSize, textColor, 1,
-            fontWeight: weight, textAlign: TextAlign.center),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          (isIcon) ? getSvgImage(image!) : getHorSpace(0),
+          (isIcon) ? getHorSpace(10.w) : getHorSpace(0),
+          getCustomFont(text, fontsize, textColor, 1,
+              textAlign: TextAlign.center,
+              fontWeight: weight,
+              fontFamily: Constant.fontsFamily)
+        ],
       ),
     ),
+  );
+}
+
+Widget getHorSpace(double verSpace) {
+  return SizedBox(
+    width: verSpace,
   );
 }
 
@@ -157,4 +212,3 @@ Widget renderHtmlContent(String? htmlText) {
     },
   );
 }
-

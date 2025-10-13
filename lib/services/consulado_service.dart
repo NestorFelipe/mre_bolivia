@@ -1,3 +1,5 @@
+import 'package:mi_cancilleria/app/models/consulado/model_arancel_consulado.dart';
+import 'package:mi_cancilleria/app/models/consulado/model_arancel_contacto_seccion.dart';
 import 'package:mi_cancilleria/app/models/consulado/model_definicion_detail.dart';
 import 'package:mi_cancilleria/app/models/consulado/model_regiones.dart';
 
@@ -37,5 +39,37 @@ class ConsuladoService {
       throw Exception('Error al obtener definiciones: $e');
     }
   }
-}
 
+  Future<ArancelConsulado> obtenerConsuladosForArancel() async {
+    try {
+      final response = await ApiService.get()
+          .end('/Apostilla/arancel/consulados')
+          .runAsync<Map<String, dynamic>>();
+
+      if (response.success && response.data != null) {
+        return ArancelConsulado.fromJson(response.data!);
+      } else {
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
+      }
+    } catch (e) {
+      throw Exception('Error al obtener definiciones: $e');
+    }
+  }
+
+  Future<ModelArancelContactoSeccion> obtenerArancelContactoSeccion(
+      String pContacto, String pSeccion) async {
+    try {
+      final response = await ApiService.get()
+          .end('/Apostilla/arancel/contacto/$pContacto/seccion/$pSeccion')
+          .runAsync<Map<String, dynamic>>();
+
+      if (response.success && response.data != null) {
+        return ModelArancelContactoSeccion.fromJson(response.data!);
+      } else {
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
+      }
+    } catch (e) {
+      throw Exception('Error al obtener definiciones: $e');
+    }
+  }
+}

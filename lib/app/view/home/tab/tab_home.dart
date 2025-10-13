@@ -22,19 +22,6 @@ class TabHome extends StatelessWidget {
       init: TabHomeController(),
       builder: (controller) => Column(
         children: [
-          getVerSpace(23),
-          getPaddingWidget(
-            EdgeInsets.only(left: 15.w, right: 15.w, top: 0.h, bottom: 0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                getAssetImage("logo-bicentenario.webp", 150.w, 50.h,
-                    fit: BoxFit.contain),
-                getAssetImage("logo_mre.webp", 210.w, 65.h,
-                    fit: BoxFit.contain),
-              ],
-            ),
-          ),
           Expanded(
             flex: 1,
             child: ListView(
@@ -42,176 +29,205 @@ class TabHome extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: [
+                getPaddingWidget(
+                  EdgeInsets.only(left: 15.w, right: 15.w, top: 0, bottom: 0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getAssetImage("logo-bicentenario.webp", 160.w, 50.h,
+                          fit: BoxFit.contain),
+                      getAssetImage("logo_mre.webp", 220.w, 65.h,
+                          fit: BoxFit.contain),
+                    ],
+                  ),
+                ),
                 SizedBox(
-                  height: 170.h,
-                  child: Obx(() {
-                    if (controller.isLoadingConsultado) {
-                      return Container(
-                        width: 374.w,
-                        height: 184.h,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 198, 198, 198),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(color: blueColor),
-                              getCustomFont("Cargando información...", 16,
-                                  Colors.black, 1,
-                                  fontWeight: FontWeight.w600),
-                            ],
+                  height: 230.h,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                    child: Obx(() {
+                      if (controller.isLoadingConsultado) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 198, 198, 198),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
-                        ),
-                      );
-                    }
-                    if (controller.hasConsultadoError) {
-                      return Container(
-                        width: 374.w,
-                        height: 184.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFE6E6),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.error_outline,
-                                  color: Colors.red[400], size: 48.w),
-                              getVerSpace(8),
-                              getCustomFont(
-                                  "Error al cargar datos", 16, Colors.red, 1,
-                                  fontWeight: FontWeight.w600),
-                              getVerSpace(8),
-                              getButton(context, blueColor, "Reintentar",
-                                  Colors.white, () {
-                                controller.consultadoController?.refreshData();
-                              }, 12,
-                                  weight: FontWeight.w600,
-                                  buttonWidth: 100,
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  insetsGeometrypadding:
-                                      EdgeInsets.symmetric(vertical: 8.h)),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    // Obtener definiciones desde la API
-                    final definiciones = controller.getSliderDefiniciones();
-
-                    if (definiciones.isEmpty) {
-                      // Sin datos disponibles
-                      return Container(
-                        width: 374.w,
-                        height: 184.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF0F0F0),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.info_outline,
-                                  color: Colors.grey[600], size: 48.w),
-                              getVerSpace(8),
-                              getCustomFont("No hay información disponible", 16,
-                                  Colors.grey, 1,
-                                  fontWeight: FontWeight.w600),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-
-                    // Mostrar datos de la API
-                    return PageView.builder(
-                      controller: controller.pageController,
-                      onPageChanged: controller.changePage,
-                      itemCount: definiciones.length,
-                      itemBuilder: (context, index) {
-                        final definicion = definiciones[index];
-
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 374.w,
-                              height: 184.h,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 243, 243, 243),
-                                  borderRadius: BorderRadius.circular(20.r)),
-                              alignment: Alignment.center,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(color: blueColor),
+                                getCustomFont("Cargando información...", 16,
+                                    Colors.black, 1,
+                                    fontWeight: FontWeight.w600),
+                              ],
                             ),
-                            Positioned(
-                                child: SizedBox(
-                              height: 180.h,
-                              width: 374.w,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  getPaddingWidget(
-                                    EdgeInsets.only(
-                                        left: 20.w, top: 30.h, bottom: 25.h),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                            width: 150.w,
-                                            child: getMultilineCustomFont(
+                          ),
+                        );
+                      }
+                      if (controller.hasConsultadoError) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFE6E6),
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.error_outline,
+                                    color: Colors.red[400], size: 48.w),
+                                getVerSpace(8),
+                                getCustomFont(
+                                    "Error al cargar datos", 16, Colors.red, 1,
+                                    fontWeight: FontWeight.w600),
+                                getVerSpace(8),
+                                getButton(context, blueColor, "Reintentar",
+                                    Colors.white, () {
+                                  controller.consultadoController
+                                      ?.refreshData();
+                                }, 12,
+                                    weight: FontWeight.w600,
+                                    buttonWidth: 100,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    insetsGeometrypadding:
+                                        EdgeInsets.symmetric(vertical: 8.h)),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      // Obtener definiciones desde la API
+                      final definiciones = controller.getSliderDefiniciones();
+
+                      if (definiciones.isEmpty) {
+                        // Sin datos disponibles
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF0F0F0),
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.info_outline,
+                                    color: Colors.grey[600], size: 48.w),
+                                getVerSpace(8),
+                                getCustomFont("No hay información disponible",
+                                    16, Colors.grey, 1,
+                                    fontWeight: FontWeight.w600),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+
+                      // Mostrar datos de la API
+                      return PageView.builder(
+                        controller: controller.pageController,
+                        onPageChanged: controller.changePage,
+                        itemCount: definiciones.length,
+                        itemBuilder: (context, index) {
+                          final definicion = definiciones[index];
+
+                          return Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 380.w,
+                                height: 180.h,
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 236, 236, 236),
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 0.2),
+                                      spreadRadius: 0,
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    // Columna izquierda - 190.w (mitad del contenedor)
+                                    SizedBox(
+                                      width: 190.w,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16.w, vertical: 16.h),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            getMultilineCustomFont(
                                                 definicion.titulo,
                                                 18,
                                                 const Color.fromARGB(
                                                     255, 47, 47, 47),
                                                 fontWeight: FontWeight.w800,
-                                                txtHeight: 1.2)),
-                                        getButton(context, blueColor, "Ver Más",
-                                            Colors.white, () {
-                                          controller.goToDefinicionDetail(
-                                              definicion, index);
-                                        }, 14,
-                                            weight: FontWeight.w600,
-                                            buttonWidth: 108,
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            insetsGeometrypadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 12.h)),
-                                      ],
+                                                txtHeight: 1.2),
+                                            getVerSpace(20.h),
+                                            getButton(
+                                                context,
+                                                blueColor,
+                                                "Ver Más ...",
+                                                Colors.white, () {
+                                              controller.goToDefinicionDetail(
+                                                  definicion, index);
+                                            }, 14,
+                                                weight: FontWeight.w800,
+                                                buttonWidth: 108,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                insetsGeometrypadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 12.h)),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 5.w),
-                                    height: 185.h,
-                                    width: 185.w,
-                                    color: Colors.transparent,
-                                    child: getAssetImage(
-                                        definicion.imagen?.isNotEmpty == true
-                                            ? definicion.imagen!
-                                            : "out-${definicion.orden}.png",
-                                        132,
-                                        165,
-                                        fit: BoxFit.contain),
-                                  )
-                                ],
+                                    // Columna derecha - 190.w (mitad del contenedor)
+                                    Container(
+                                      width: 190.w,
+                                      height: 180.h,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20.r),
+                                          bottomRight: Radius.circular(20.r),
+                                          topLeft: Radius.circular(20.r),
+                                          bottomLeft: Radius.circular(20.r),
+                                        ),
+                                      ),
+                                      clipBehavior: Clip.hardEdge,
+                                      child: CustomCacheImage(
+                                        imageUrl: definicion.imagen,
+                                        width: 190.w,
+                                        height: 180.h,
+                                        fit: BoxFit.contain,
+                                        fallbackAssetImage:
+                                            "assets/images/chakanagris.png",
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ))
-                          ],
-                        );
-                      },
-                    );
-                  }),
+                            ],
+                          );
+                        },
+                      );
+                    }),
+                  ),
                 ),
-                getVerSpace(16),
                 Obx(() {
                   final definiciones = controller.getSliderDefiniciones();
                   if (definiciones.isEmpty ||
@@ -251,7 +267,7 @@ class TabHome extends StatelessWidget {
                     ),
                   );
                 }),
-                getVerSpace(24),
+                getVerSpace(20),
                 getPaddingWidget(
                   EdgeInsets.symmetric(horizontal: 20.w),
                   Row(
@@ -450,4 +466,3 @@ class TabHome extends StatelessWidget {
     );
   }
 }
-

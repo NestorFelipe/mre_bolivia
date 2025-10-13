@@ -1,7 +1,9 @@
 abstract class Routes {
   static const consuladosRoute = Paths.consuladosScreen;
-
   static const homeRoute = Paths.homepath;
+  static const seguimientoTramiteRoute = Paths.seguimientoTramitePath;
+  static const arancelesRoute = Paths.arancelesPath;
+
   static const introRoute = Paths.introPath;
   static const loginRoute = Paths.loginPath;
   static const forgotRoute = Paths.forgotPath;
@@ -40,6 +42,8 @@ abstract class Paths {
   static const homepath = "/";
   static const homescreenPath = "/HomeScreen";
   static const regionPath = "/RegionScreen";
+  static const seguimientoTramitePath = "/SeguimientoTramite";
+  static const arancelesPath = "/Aranceles";
 
   static const categoryPath = "/CategoryScreen";
   static const loginPath = "/LoginScreen";
@@ -71,4 +75,3 @@ abstract class Paths {
   static const consultadoPath = "/ConsultadoScreen";
   static const definicionDetailPath = "/DefinicionDetailScreen";
 }
-

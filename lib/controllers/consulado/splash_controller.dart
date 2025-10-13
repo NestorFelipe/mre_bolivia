@@ -18,6 +18,7 @@ class SplashController extends GetxController with WidgetsBindingObserver {
   RxBool isLoadingRegiones = false.obs;
   RxBool regionesLoaded = false.obs;
   RxBool allApisLoaded = false.obs;
+  RxBool consuladoArancelLoaded = false.obs;
 
   // Controladores
   VideoPlayerController? videoController;
@@ -107,6 +108,7 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       final futures = [
         _loadRegionesData(),
         _loadConsultadoData(),
+        _loadConsuladoForArancel(),
       ];
 
       try {
@@ -189,7 +191,6 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       if (consultadoController == null) return;
 
       print('🌎 Cargando datos de regiones en segundo plano...');
-
       await consultadoController!.loadConsultadoData();
 
       if (!isDisposed.value) {
@@ -198,6 +199,24 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       }
     } catch (e) {
       print('❌ Error al cargar datos de regiones: $e');
+    }
+  }
+
+  /// Cargar datos de regiones (modificado para no interferir con UI)
+  Future<void> _loadConsuladoForArancel() async {
+    try {
+      if (consultadoController == null) return;
+
+      print(
+          '🌎 Cargando datos de consulados para aranceles en segundo plano...');
+      await consultadoController!.loadConsultadoForArancel();
+
+      if (!isDisposed.value) {
+        consuladoArancelLoaded.value = true;
+        print('✅ Datos de consulados para aranceles cargados');
+      }
+    } catch (e) {
+      print('❌ Error al cargar datos de consulados para aranceles: $e');
     }
   }
 
@@ -364,4 +383,3 @@ class SplashController extends GetxController with WidgetsBindingObserver {
     }
   }
 }
-

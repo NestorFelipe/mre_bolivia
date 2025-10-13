@@ -11,6 +11,8 @@ import 'package:mi_cancilleria/app/view/home/home_screen.dart';
 import 'package:mi_cancilleria/app/view/home/detail_screen.dart';
 import 'package:mi_cancilleria/app/view/home/payment_screen.dart';
 import 'package:mi_cancilleria/app/view/home/order_detail.dart';
+import 'package:mi_cancilleria/app/view/home/tab/tab_aranceles.dart';
+import 'package:mi_cancilleria/app/view/home/tab/tab_seguimiento_tramite.dart';
 import 'package:mi_cancilleria/app/view/intro/intro_screen.dart';
 import 'package:mi_cancilleria/app/view/login/forgot_password.dart';
 import 'package:mi_cancilleria/app/view/login/login_screen.dart';
@@ -27,9 +29,11 @@ import 'package:mi_cancilleria/app/view/setting/term_of_service_screen.dart';
 import 'package:mi_cancilleria/app/view/signup/select_country.dart';
 import 'package:mi_cancilleria/app/view/signup/signup_screen.dart';
 import 'package:mi_cancilleria/app/view/signup/verify_screen.dart';
+import 'package:mi_cancilleria/bindings/aranceles_binding.dart';
 import 'package:mi_cancilleria/bindings/region_binding.dart';
 
 import 'package:get/get.dart';
+import 'package:mi_cancilleria/bindings/seguimiento_tramite_binding.dart';
 
 import '../view/splash_screen.dart';
 import '../ui/pages/consulado_page.dart';
@@ -182,6 +186,13 @@ class AppPages {
       name: Routes.definicionDetailRoute,
       page: () => const DefinicionDetailScreen(),
     ),
+    GetPage(
+        name: Routes.seguimientoTramiteRoute,
+        page: () => const SeguimientoTramite(),
+        binding: SeguimientoTramiteBinding()),
+    GetPage(
+        name: Routes.arancelesRoute,
+        page: () => const Aranceles(),
+        binding: ArancelesBinding()),
   ];
 }
-

@@ -63,6 +63,7 @@ class TabHomeController extends GetxController {
     if (!Get.isRegistered<SharedController>()) {
       Get.put(SharedController(), permanent: true);
     }
+
     sharedController = Get.find<SharedController>();
 
     // Intentar obtener ConsultadoController si está disponible
@@ -171,4 +172,3 @@ class TabHomeController extends GetxController {
     });
   }
 }
-
