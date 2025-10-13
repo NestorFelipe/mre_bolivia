@@ -40,8 +40,8 @@ class HomeScreen extends GetView<HomeController> {
 
   Widget bottomNavigationBar(HomeController controller) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      height: 100.h,
+      padding: EdgeInsets.symmetric(horizontal: 40.w),
+      height: 90.h,
       decoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -54,21 +54,28 @@ class HomeScreen extends GetView<HomeController> {
         children: List<Widget>.generate(controller.itemList.length, (index) {
           return GestureDetector(
             onTap: () => controller.changePosition(index),
-            child: Obx(() => Container(
-                  decoration: BoxDecoration(
-                      color: controller.position.value == index
-                          ? blueColor
-                          : Colors.transparent,
-                      shape: BoxShape.circle),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.h),
-                    child: getSvgImage(controller.itemList[index],
-                        width: 24.h,
-                        height: 24.h,
-                        color: controller.position.value == index
-                            ? Colors.white
-                            : null),
-                  ),
+            child: Obx(() => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: controller.position.value == index
+                              ? blueColor
+                              : Colors.transparent,
+                          shape: BoxShape.circle),
+                      child: Padding(
+                        padding: EdgeInsets.all(10.h),
+                        child: getSvgImage(controller.itemList[index],
+                            width: 24.h,
+                            height: 24.h,
+                            color: controller.position.value == index
+                                ? Colors.white
+                                : null),
+                      ),
+                    ),
+                    getCustomFont(
+                        controller.itemLabel[index], 14.sp, blueColor, 1)
+                  ],
                 )),
           );
         }),
@@ -76,4 +83,3 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 }
-

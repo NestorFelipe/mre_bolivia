@@ -22,6 +22,8 @@ class HomeController extends GetxController {
     "profile.svg"
   ];
 
+  List<String> itemLabel = ["Inicio", "Aranceles", "Seguimiento", "Vivencia"];
+
   // Inyectar SharedController
   late SharedController sharedController;
   late SeguimientoTramite seguimientoTramiteController;
