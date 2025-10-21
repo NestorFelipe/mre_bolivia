@@ -11,16 +11,13 @@ import 'package:mi_cancilleria/base/pref_data.dart';
 import 'package:mi_cancilleria/services/vivencias_service.dart';
 
 class VivenciaController extends GetxController {
-  // Observable para verificar si el usuario está logueado
   RxBool isLoggedIn = false.obs;
   RxBool isDetalle = false.obs;
   Rx<Vivencia?> selectedVivencia = null.obs;
 
-  // Controladores de texto
   TextEditingController ciController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // Observable para mostrar/ocultar password
   RxBool isPassVisible = true.obs;
   RxBool isNewCertificado = false.obs;
 
@@ -37,7 +34,6 @@ class VivenciaController extends GetxController {
     checkLoginStatus();
   }
 
-  // Verificar si el usuario está logueado
   Future<void> checkLoginStatus() async {
     bool loggedIn = await PrefData.isLogIn();
     isLoggedIn.value = loggedIn;
@@ -59,12 +55,10 @@ class VivenciaController extends GetxController {
     }
   }
 
-  // Método para alternar visibilidad de password
   void togglePasswordVisibility() {
     isPassVisible.value = !isPassVisible.value;
   }
 
-  // Método de login
   Future<ModelResponseAuth> login() async {
     final ci = ciController.text.trim();
     final password = passwordController.text;
@@ -181,12 +175,13 @@ class VivenciaController extends GetxController {
     }
   }
 
-  // Método de logout
   void logout() {
     PrefData.setLogIn(false);
     isLoggedIn.value = false;
     ciController.clear();
     passwordController.clear();
+    vivencias.clear();
+    periodos.clear();
     PrefData.clearPref();
   }
 
@@ -198,12 +193,10 @@ class VivenciaController extends GetxController {
     return await PrefData.getUsuario();
   }
 
-  // Navegación a forgot password
   void goToForgotPassword() {
     Get.toNamed(Routes.forgotRoute);
   }
 
-  // Navegación a sign up
   void goToSignUp() {
     Get.toNamed(Routes.signupRoute);
   }

@@ -8,6 +8,7 @@ import 'package:mi_cancilleria/app/data/data_file.dart';
 import 'package:mi_cancilleria/app/models/consulado/model_ciudad.dart';
 import 'package:mi_cancilleria/app/models/consulado/model_departamento.dart';
 import 'package:mi_cancilleria/app/models/consulado/model_residencia.dart';
+import 'package:mi_cancilleria/app/models/consulado/model_resposevalidafoto.dart';
 import 'package:mi_cancilleria/controllers/consulado/vivencia_controller.dart';
 import 'package:mi_cancilleria/base/pref_data.dart';
 import 'package:mi_cancilleria/services/api_service.dart';
@@ -575,15 +576,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       return;
     }
 
-    final imagenCapturada = await _capturarSelfie();
+    // Capturar selfie y validar con el servicio
+    final imagenValidada = await _capturarYValidarSelfie();
 
-    if (imagenCapturada == null) {
-      Get.snackbar(
-        'Cancelado',
-        'La captura de selfie fue cancelada',
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
-      );
+    if (imagenValidada == null) {
       return;
     }
 
@@ -592,43 +588,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
     });
 
     try {
-      // Obtener idPersona
-      final idPersona = await PrefData.getIdPersona();
-
-      if (idPersona.isEmpty) {
-        throw Exception('No se encontró el ID de persona');
-      }
-
-      // Crear tokenAS (base64 de idpersona)
-      final tokenAS = base64Encode(utf8.encode(idPersona));
-
-      // PASO 1: Enviar foto al servicio
-      final photoPayload = {
-        'photos':
-            imagenCapturada, // Ya está en formato "data:image/jpeg;base64,..."
-        'token': '1',
-        'tokenAS': tokenAS,
-        'personId': idPersona,
-      };
-
-      print('========================================');
-      print('ENVIANDO FOTO AL SERVICIO:');
-      print('personId: $idPersona');
-      print('tokenAS: $tokenAS');
-      print(
-          'photo (primeros 100 chars): ${imagenCapturada.substring(0, 100)}...');
-      print('========================================');
-
-      final photoResponse =
-          await ApiService.post().body(photoPayload).runAsync();
-
-      if (!photoResponse.success) {
-        throw Exception('Error al enviar la foto: ${photoResponse.mensaje}');
-      }
-
-      print('✅ Foto enviada exitosamente');
-      print('Respuesta del servidor: ${photoResponse.mensaje}');
-
       // PASO 2: Enviar datos del certificado
       final datosParaGuardar = {
         'idperiodo': widget.controller.selectedPeriodo.value?.id,
@@ -640,11 +599,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         'iddepartamental': selectedCiudad?.idciudad,
       };
 
-      print('ENVIANDO DATOS DEL CERTIFICADO:');
-      print(datosParaGuardar);
-      print('========================================');
-
-      // TODO: Enviar datosParaGuardar al segundo servicio
       // final dataResponse = await ApiService.post()
       //     .body(datosParaGuardar)
       //     .runAsync();
@@ -855,11 +809,13 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                       ),
                     ),
                     SizedBox(height: 8.h),
-                    _buildInstructionItem('Busque buena iluminación'),
+                    _buildInstructionItem('Busque buena iluminación natural'),
+                    _buildInstructionItem('Centre su rostro en el marco'),
                     _buildInstructionItem('Mire directamente a la cámara'),
-                    _buildInstructionItem('Mantenga el rostro centrado'),
+                    _buildInstructionItem('Mantenga una expresión neutral'),
+                    _buildInstructionItem('Retire lentes, gorras o accesorios'),
                     _buildInstructionItem(
-                        'No use accesorios que cubran el rostro'),
+                        'Asegúrese de que su rostro sea claramente visible'),
                   ],
                 ),
               ),
@@ -957,9 +913,9 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       final XFile? photo = await _picker.pickImage(
         source: ImageSource.camera,
         preferredCameraDevice: CameraDevice.front,
-        imageQuality: 85,
-        maxWidth: 1024,
-        maxHeight: 1024,
+        imageQuality: 90, // Aumentar calidad para mejor detección de rostro
+        maxWidth: 1280, // Aumentar resolución para mejor reconocimiento
+        maxHeight: 1280,
       );
 
       Get.back(); // Cerrar diálogo de carga
@@ -979,16 +935,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
             capturedImageBase64 = imageDataUri;
           });
 
-          Get.snackbar(
-            'Selfie Capturada',
-            'La imagen ha sido capturada correctamente',
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            icon: Icon(Icons.check_circle, color: Colors.white),
-            duration: const Duration(seconds: 2),
-          );
-
-          return imageDataUri; // Retornar base64 en lugar del path
+          return imageDataUri; // Retornar base64 para validación
         } else {
           // Usuario quiere reintentar
           return await _capturarSelfie();
@@ -1045,25 +992,447 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
   Future<bool?> _mostrarPreviewImagen(String imagePath) async {
     return await Get.dialog<bool>(
       Dialog(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.file(File(imagePath)),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () => Get.back(result: false),
-                  child: Text('Reintentar'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              getCustomFont(
+                "Verificar Imagen",
+                18,
+                const Color(0xFF14357D),
+                1,
+                fontWeight: FontWeight.w700,
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                'Asegúrese de que su rostro sea claramente visible',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: Colors.grey.shade700,
                 ),
-                ElevatedButton(
-                  onPressed: () => Get.back(result: true),
-                  child: Text('Confirmar'),
+              ),
+              SizedBox(height: 16.h),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: Image.file(
+                  File(imagePath),
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(color: Colors.blue.shade200),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: const Color(0xFF14357D),
+                      size: 18.sp,
+                    ),
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: Text(
+                        'La imagen será validada para verificar la identidad',
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => Get.back(result: false),
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                      ),
+                      child: Text(
+                        'Tomar Otra',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: () => Get.back(result: true),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF14357D),
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.check_circle, size: 18.sp),
+                          SizedBox(width: 8.w),
+                          Text(
+                            'Validar Imagen',
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+  /// Captura la selfie y la valida con el servicio inmediatamente
+  Future<String?> _capturarYValidarSelfie() async {
+    // Capturar la imagen
+    final imagenBase64 = await _capturarSelfie();
+
+    if (imagenBase64 == null) {
+      Get.snackbar(
+        'Cancelado',
+        'La captura de selfie fue cancelada',
+        backgroundColor: Colors.orange,
+        colorText: Colors.white,
+      );
+      return null;
+    }
+
+    // Mostrar diálogo de validación
+    Get.dialog(
+      WillPopScope(
+        onWillPop: () async => false,
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.all(24.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(
+                  color: const Color(0xFF14357D),
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  'Validando imagen...',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  'Verificando que el rostro sea visible',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
+      barrierDismissible: false,
     );
+
+    try {
+      // Obtener datos necesarios
+      final idPersona = await PrefData.getIdPersona();
+
+      if (idPersona.isEmpty) {
+        throw Exception('No se encontró el ID de persona');
+      }
+
+      // Crear tokenAS (base64 de idpersona)
+      final tokenAS = base64Encode(utf8.encode(idPersona));
+
+      // Enviar foto al servicio de validación
+      final photoPayload = {
+        'photos': [imagenBase64],
+        'token': '1',
+        'tokenAS': tokenAS,
+        'personId': idPersona,
+      };
+
+      final photoResponse = await ApiService.post()
+          .body(photoPayload)
+          .end("/Apostilla/vivencia/valida/imagen")
+          .runAsync();
+
+      final modelResponse = PhotoUploadResponse.fromJson(photoResponse.data);
+
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+
+      if (modelResponse.status != "1") {
+        // Mostrar error y permitir reintentar
+        final bool? reintentar = await Get.dialog<bool>(
+          Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 60.sp,
+                    color: Colors.red,
+                  ),
+                  SizedBox(height: 16.h),
+                  getCustomFont(
+                    "Validación Fallida",
+                    18,
+                    Colors.red,
+                    1,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    photoResponse.mensaje.isNotEmpty
+                        ? photoResponse.mensaje
+                        : 'No se pudo validar el rostro en la imagen',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: Colors.grey.shade700,
+                      height: 1.5,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade50,
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(color: Colors.orange.shade200),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Por favor, asegúrese de:',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.orange.shade900,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        _buildInstructionItem(
+                            'Su rostro está completamente visible'),
+                        _buildInstructionItem('Hay suficiente iluminación'),
+                        _buildInstructionItem('No hay sombras sobre el rostro'),
+                        _buildInstructionItem(
+                            'Está mirando directamente a la cámara'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () => Get.back(result: false),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                          ),
+                          child: Text(
+                            'Cancelar',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          onPressed: () => Get.back(result: true),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF14357D),
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.camera_alt, size: 18.sp),
+                              SizedBox(width: 8.w),
+                              Text(
+                                'Reintentar',
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+
+        if (reintentar == true) {
+          // Reintentar captura y validación
+          return await _capturarYValidarSelfie();
+        }
+
+        return null;
+      }
+
+      Get.snackbar(
+        'Validación Exitosa',
+        'Su rostro ha sido verificado correctamente',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: Icon(Icons.check_circle, color: Colors.white),
+        duration: const Duration(seconds: 2),
+      );
+
+      return imagenBase64;
+    } catch (e) {
+      // Cerrar diálogo si está abierto
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+
+      // Mostrar error y opción de reintentar
+      final bool? reintentar = await Get.dialog<bool>(
+        Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.cloud_off,
+                  size: 60.sp,
+                  color: Colors.red,
+                ),
+                SizedBox(height: 16.h),
+                getCustomFont(
+                  "Error de Conexión",
+                  18,
+                  Colors.red,
+                  1,
+                  fontWeight: FontWeight.w700,
+                ),
+                SizedBox(height: 12.h),
+                Text(
+                  'No se pudo validar la imagen. Verifique su conexión a internet.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey.shade700,
+                    height: 1.5,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  e.toString(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    color: Colors.grey.shade500,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Get.back(result: false),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                        ),
+                        child: Text(
+                          'Cancelar',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () => Get.back(result: true),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF14357D),
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                        ),
+                        child: Text(
+                          'Reintentar',
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        barrierDismissible: false,
+      );
+
+      if (reintentar == true) {
+        return await _capturarYValidarSelfie();
+      }
+
+      return null;
+    }
   }
 }

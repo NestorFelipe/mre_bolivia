@@ -12,7 +12,6 @@ class VivenciaHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Verificar si el usuario está vacío y hacer logout si es necesario
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (controller.usuario.value.isEmpty || controller.cedula.value.isEmpty) {
         controller.logout();
@@ -64,7 +63,6 @@ class VivenciaHome extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       textAlign: TextAlign.center,
                     ),
-
                     getCustomFont(
                       "C.I. : ${controller.cedula.value}",
                       16,
@@ -226,14 +224,52 @@ class VivenciaHome extends StatelessWidget {
                       ),
                     ),
                     getVerSpace(20.h),
-                    // Botón de logout para pruebas
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                            onPressed: () => controller.getListaVivencia(),
+                            onPressed: () async {
+                              // Mostrar indicador de carga
+                              Get.dialog(
+                                Center(
+                                  child: Container(
+                                    padding: EdgeInsets.all(20.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12.r),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        CircularProgressIndicator(
+                                          color: blueColor,
+                                        ),
+                                        SizedBox(height: 16.h),
+                                        Text(
+                                          'Cargando certificados...',
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                barrierDismissible: false,
+                              );
+
+                              try {
+                                await controller.getListaVivencia();
+                              } finally {
+                                // Cerrar el diálogo si está abierto
+                                if (Get.isDialogOpen ?? false) {
+                                  Get.back();
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: blueColor,
                               foregroundColor: Colors.white,

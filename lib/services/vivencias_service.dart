@@ -83,4 +83,24 @@ class VivenciasService {
       throw Exception('Error al obtener tipos de trámite: $e');
     }
   }
+
+  Future<ModelResponseAuth> validaImagen(String ci, String password) async {
+    try {
+      final response =
+          await ApiService.post().end('/Apostilla/vivencia/auth').body({
+        'ci': ci,
+        'password': password,
+      }).runAsync<Map<String, dynamic>>();
+
+      if (response.data != null) {
+        final jsonData = response.data!;
+        return ModelResponseAuth.fromJson(jsonData);
+      } else {
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
+      }
+    } catch (e) {
+      print(e);
+      throw Exception('Error al obtener tipos de trámite: $e');
+    }
+  }
 }

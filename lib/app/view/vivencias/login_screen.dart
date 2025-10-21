@@ -51,11 +51,51 @@ class LoginWidgetState extends State<LoginWidget> {
   void _ensureVisible(GlobalKey key) {}
 
   Future<void> _handleLogin() async {
-    final result = await widget.controller.login();
+    // Mostrar indicador de carga
+    Get.dialog(
+      Center(
+        child: Container(
+          padding: EdgeInsets.all(20.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(
+                color: blueColor,
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Iniciando sesión...',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
 
-    if (result.token!.isEmpty == false) {
-      await widget.controller.getUserInfo();
-      await widget.controller.getPeriodoVigente();
+    try {
+      final result = await widget.controller.login();
+
+      if (result.token!.isEmpty == false) {
+        await widget.controller.getUserInfo();
+        await widget.controller.getPeriodoVigente();
+      }
+    } catch (e) {
+      // El error será manejado por el controller
+      // El diálogo se cerrará en el finally
+    } finally {
+      // Cerrar el diálogo si está abierto
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
     }
   }
 
