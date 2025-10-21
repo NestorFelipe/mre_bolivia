@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../app/routes/app_routes.dart';
-import '../../base/pref_data.dart';
+import '../app/routes/app_routes.dart';
+import '../base/pref_data.dart';
 
 class LoginController extends GetxController {
   // Controladores de texto
@@ -21,7 +21,7 @@ class LoginController extends GetxController {
     // Lógica de autenticación (aquí solo simular)
     PrefData.setLogIn(true);
     // Navegar a home usando GetX
-    Get.offAllNamed(Routes.homeScreenRoute);
+    Get.offAllNamed(Routes.signupRoute);
   }
 
   // Navegación a forgot password
@@ -32,12 +32,6 @@ class LoginController extends GetxController {
   // Navegación a sign up
   void goToSignUp() {
     Get.toNamed(Routes.signupRoute);
-  }
-
-  // Cerrar app
-  void closeApp() {
-    // Usar GetX para salir, o mantener Constant.closeApp si es necesario
-    // Pero para consistencia, usar Get.back() o algo, pero como es close app, mantener
   }
 
   @override

@@ -14,17 +14,17 @@ import 'package:mi_cancilleria/app/view/home/order_detail.dart';
 import 'package:mi_cancilleria/app/view/home/tab/tab_aranceles.dart';
 import 'package:mi_cancilleria/app/view/home/tab/tab_seguimiento_tramite.dart';
 import 'package:mi_cancilleria/app/view/intro/intro_screen.dart';
-import 'package:mi_cancilleria/app/view/login/forgot_password.dart';
-import 'package:mi_cancilleria/app/view/login/login_screen.dart';
-import 'package:mi_cancilleria/app/view/login/reset_password.dart';
+import 'package:mi_cancilleria/app/view/vivencias/vista_certificado.dart';
+import 'package:mi_cancilleria/app/view/vivencias/vivencia_screen.dart';
+import 'package:mi_cancilleria/bindings/vivencia_binding.dart';
 import 'package:mi_cancilleria/app/view/notification_screen.dart';
 import 'package:mi_cancilleria/app/view/profile/edit_profile_screen.dart';
-import 'package:mi_cancilleria/app/view/profile/profile_screen.dart';
+// import 'package:mi_cancilleria/app/view/vivencias/nuevo_certificado.dart';
 import 'package:mi_cancilleria/app/view/search/search_screen.dart';
 import 'package:mi_cancilleria/app/view/setting/help_screen.dart';
 import 'package:mi_cancilleria/app/view/setting/privacy_screen.dart';
 import 'package:mi_cancilleria/app/view/setting/security_screen.dart';
-import 'package:mi_cancilleria/app/view/setting/setting_screen.dart';
+// import 'package:mi_cancilleria/app/view/vivencias/lista_vivencia.dart';
 import 'package:mi_cancilleria/app/view/setting/term_of_service_screen.dart';
 import 'package:mi_cancilleria/app/view/signup/select_country.dart';
 import 'package:mi_cancilleria/app/view/signup/signup_screen.dart';
@@ -41,7 +41,6 @@ import '../view/consulado/definicion_detail_screen.dart';
 import 'app_routes.dart';
 import '../../bindings/splash_binding.dart';
 import '../../bindings/intro_binding.dart';
-import '../../bindings/login_binding.dart';
 import '../../bindings/signup_binding.dart';
 import '../../bindings/home_binding.dart';
 import '../../bindings/category_binding.dart';
@@ -64,18 +63,19 @@ class AppPages {
       page: () => const IntroScreen(),
       binding: IntroBinding(),
     ),
-    GetPage(
-      name: Routes.loginRoute,
-      page: () => const LoginScreen(),
-      binding: LoginBinding(),
-    ),
+    // GetPage(
+    //   name: Routes.loginRoute,
+    //   page: () => const LoginScreen(),
+    //   binding: LoginBinding(),
+    // ),
     GetPage(
       name: Routes.forgotRoute,
       page: () => const ForgotPassword(),
     ),
     GetPage(
       name: Routes.resetRoute,
-      page: () => const ResetPassword(),
+      page: () => const VivenciaScreen(),
+      binding: VivenciaBinding(),
     ),
     GetPage(
       name: Routes.signupRoute,
@@ -125,10 +125,10 @@ class AppPages {
       name: Routes.orderDetailRoute,
       page: () => const OrderDetail(),
     ),
-    GetPage(
-      name: Routes.profileRoute,
-      page: () => const ProfileScreen(),
-    ),
+    // GetPage(
+    //   name: Routes.profileRoute,
+    //   page: () => const NuevoCertificado(),
+    // ),
     GetPage(
       name: Routes.editProfileRoute,
       page: () => const EditProfileScreen(),
@@ -145,10 +145,10 @@ class AppPages {
       name: Routes.cardRoute,
       page: () => const CardScreen(),
     ),
-    GetPage(
-      name: Routes.settingRoute,
-      page: () => const SettingScreen(),
-    ),
+    // GetPage(
+    //   name: Routes.settingRoute,
+    //   page: () => const ListaVivencia(),
+    // ),
     GetPage(
       name: Routes.notificationRoutes,
       page: () => const NotificationScreen(),

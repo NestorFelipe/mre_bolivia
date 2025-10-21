@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../controllers/consulado/vivencia_controller.dart';
 
-class LoginBinding extends Bindings {
+class VivenciaBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<VivenciaController>(() => VivenciaController());

@@ -1,6 +1,7 @@
 import 'package:mi_cancilleria/app/view/home/tab/tab_aranceles.dart';
 import 'package:mi_cancilleria/app/view/home/tab/tab_seguimiento_tramite.dart';
-import 'package:mi_cancilleria/app/view/login/login_screen.dart';
+import 'package:mi_cancilleria/app/view/vivencias/vivencia_screen.dart';
+import 'package:mi_cancilleria/controllers/consulado/vivencia_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../../base/constant.dart';
@@ -43,12 +44,17 @@ class HomeController extends GetxController {
     }
     seguimientoTramiteController = Get.find<SeguimientoTramite>();
 
+    // Inicializar VivenciaController para el tab
+    if (!Get.isRegistered<VivenciaController>()) {
+      Get.put(VivenciaController(), permanent: true);
+    }
+
     // Inicializar tabList aquí para reactividad
     tabList.assignAll([
       const TabHome(),
       const Aranceles(),
       const SeguimientoTramite(),
-      const LoginScreen(),
+      const VivenciaScreen(),
     ]);
 
     update(); // Forzar actualización inicial

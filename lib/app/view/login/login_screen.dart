@@ -5,61 +5,139 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../base/color_data.dart';
 import '../../../base/constant.dart';
 import '../../../base/widget_utils.dart';
-import '../../../controllers/login_controller.dart';
+import '../../../controllers/consulado/vivencia_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FocusNode _ciFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+  final GlobalKey _ciKey = GlobalKey();
+  final GlobalKey _passwordKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+  double _lastViewInset = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _ciFocus.addListener(() {
+      if (_ciFocus.hasFocus) {
+        _ensureVisible(_ciKey);
+      }
+    });
+    _passwordFocus.addListener(() {
+      if (_passwordFocus.hasFocus) {
+        _ensureVisible(_passwordKey);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _ciFocus.dispose();
+    _passwordFocus.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _ensureVisible(GlobalKey key) {}
+
+  void _handleLogin(VivenciaController controller) {
+    print('Login triggered');
+    controller.login();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
-      init: LoginController(),
+    // Calculate keyboard inset once and use it to avoid adding a permanent
+    // extra bottom padding when the keyboard is closed.
+    final double keyboardInset = MediaQuery.of(context).viewInsets.bottom;
+    final double bottomPadding = keyboardInset > 0 ? keyboardInset : 0;
+
+    // Track keyboard inset changes and trigger scroll when keyboard opens
+    if (keyboardInset != _lastViewInset) {
+      final bool keyboardOpened = keyboardInset > 0 && _lastViewInset == 0;
+      _lastViewInset = keyboardInset;
+
+      if (keyboardOpened) {
+        // Keyboard just opened, schedule scroll after layout completes
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(const Duration(milliseconds: 400), () {
+            if (_scrollController.hasClients && mounted) {
+              final maxScroll = _scrollController.position.maxScrollExtent;
+              if (maxScroll > 0) {
+                _scrollController.animateTo(
+                  maxScroll,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              }
+            }
+          });
+        });
+      }
+    }
+    return GetBuilder<VivenciaController>(
+      init: VivenciaController(),
       builder: (controller) => WillPopScope(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: backGroundColor,
-            body: SafeArea(
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: ListView(
-                  primary: true,
-                  shrinkWrap: true,
-                  children: [
-                    getAssetImage("logo.png", 240.h, 240.w,
-                        boxFit: BoxFit.cover),
-                    getVerSpace(40.h),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: getCustomFont(
-                        "Iniciar Sesión",
-                        24,
-                        Colors.black,
-                        1,
-                        fontWeight: FontWeight.w800,
-                      ),
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: backGroundColor,
+          body: SafeArea(
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ListView(
+                controller: _scrollController,
+                padding: EdgeInsets.only(bottom: 20.h),
+                primary: false,
+                shrinkWrap: true,
+                children: [
+                  getAssetImage("logo.png", 240.h, 240.w, boxFit: BoxFit.cover),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: getCustomFont(
+                      "Iniciar Sesión",
+                      24,
+                      Colors.black,
+                      1,
+                      fontWeight: FontWeight.w800,
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: getCustomFont(
-                        "Indentificate para continuar",
-                        16,
-                        Colors.black,
-                        1,
-                        fontWeight: FontWeight.w400,
-                      ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: getCustomFont(
+                      "Indentificate para continuar",
+                      16,
+                      Colors.black,
+                      1,
+                      fontWeight: FontWeight.w400,
                     ),
-                    getVerSpace(20.h),
-                    TextField(
-                      controller: controller.emailController,
+                  ),
+                  getVerSpace(5.h),
+                  Container(
+                    key: _ciKey,
+                    child: TextField(
+                      focusNode: _ciFocus,
+                      controller: controller.ciController,
                       enabled: true,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) {
+                        // Move focus to password field when user presses next
+                        FocusScope.of(context).requestFocus(_passwordFocus);
+                      },
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        labelText: "Cedula de identidad",
                         labelStyle: TextStyle(color: Colors.grey),
                         prefixIcon: Padding(
                           padding: EdgeInsets.all(12.0),
-                          child: getSvgImage("email.svg"),
+                          child: getSvgImage("info.svg",
+                              height: 16.h, width: 16.w),
                         ),
                         filled: true,
                         fillColor: Colors.white,
@@ -80,13 +158,23 @@ class LoginScreen extends StatelessWidget {
                           vertical: 20.h,
                         ),
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.number,
                     ),
-                    getVerSpace(5.h),
-                    Obx(() => TextField(
+                  ),
+                  getVerSpace(15.h),
+                  Obx(() => Container(
+                        key: _passwordKey,
+                        child: TextField(
+                          focusNode: _passwordFocus,
                           controller: controller.passwordController,
                           enabled: true,
                           obscureText: controller.isPassVisible.value,
+                          textInputAction: TextInputAction.done,
+                          onSubmitted: (_) {
+                            // Trigger login when user presses done/enter
+                            _handleLogin(controller);
+                          },
+                          keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                             labelText: "Password",
                             labelStyle: TextStyle(color: Colors.grey),
@@ -124,97 +212,43 @@ class LoginScreen extends StatelessWidget {
                               vertical: 20.h,
                             ),
                           ),
-                        )),
-                    getVerSpace(20.h),
-                    SizedBox(
-                      height: 60.h,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: blueColor,
-                          foregroundColor: Colors.white,
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.h),
-                          ),
                         ),
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                    getVerSpace(10.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        getCustomFont(
-                          "¿No tienes una cuenta?",
-                          14,
-                          Colors.black,
-                          1,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        GestureDetector(
-                          onTap: controller.goToSignUp,
-                          child: getCustomFont(
-                            " Inscribirse",
-                            16,
-                            blueColor,
-                            1,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        )
-                      ],
-                    ),
-                    getVerSpace(20.h),
-                    getDivider(dividerColor, 1.h, 1),
-                    getVerSpace(20.h),
-                    SizedBox(
-                      height: 60.h,
-                      width: double.infinity,
-                      child: Material(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15.h),
-                        elevation: 4,
-                        shadowColor: Colors.black12,
-                        child: InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.circular(15.h),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                getSvgImage("google.svg"),
-                                SizedBox(width: 12.w),
-                                Text(
-                                  "Iniciar con Google",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                      )),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, bottomPadding),
+            child: SizedBox(
+              height: 60.h,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => _handleLogin(controller),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: blueColor,
+                  foregroundColor: Colors.white,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.h),
+                  ),
+                ),
+                child: Text(
+                  "Ingresar",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
           ),
-          onWillPop: () async {
-            Constant.closeApp();
-            return false;
-          }),
+        ), // Scaffold
+        onWillPop: () async {
+          Constant.closeApp();
+          return false;
+        },
+      ), // WillPopScope
     );
   }
 }

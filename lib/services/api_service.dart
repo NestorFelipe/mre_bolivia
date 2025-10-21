@@ -44,10 +44,10 @@ class ApiResponse<T> {
 
 /// Clase principal del API service con patrón builder
 class ApiService {
-  // static const String _baseUrl = 'http://localhost:7050/api';
+  static const String _baseUrl = 'http://localhost:7050/api';
 
-  static const String _baseUrl =
-      'https://servicios.cancilleria.gob.bo/app-movil/api';
+  // static const String _baseUrl =
+  //     'https://servicios.cancilleria.gob.bo/app-movil/api';
 
   static final Map<String, String> _globalHeaders = {
     'Content-Type': 'application/json',
@@ -98,9 +98,24 @@ class ApiService {
     _httpClient = null;
   }
 
-  /// Método estático para inicializar el builder
+  /// Método estático para inicializar el builder con GET
   static ApiRequestBuilder get() {
-    return ApiRequestBuilder._();
+    return ApiRequestBuilder._('GET');
+  }
+
+  /// Método estático para inicializar el builder con POST
+  static ApiRequestBuilder post() {
+    return ApiRequestBuilder._('POST');
+  }
+
+  /// Método estático para inicializar el builder con PUT
+  static ApiRequestBuilder put() {
+    return ApiRequestBuilder._('PUT');
+  }
+
+  /// Método estático para inicializar el builder con DELETE
+  static ApiRequestBuilder delete() {
+    return ApiRequestBuilder._('DELETE');
   }
 
   /// Método para configurar headers globales
@@ -125,8 +140,10 @@ class ApiRequestBuilder {
   String? _customBaseUrl;
   final Map<String, String> _headers = {};
   final Map<String, dynamic> _queryParams = {};
+  Map<String, dynamic>? _body;
+  final String _method;
 
-  ApiRequestBuilder._();
+  ApiRequestBuilder._(this._method);
 
   /// Define el endpoint para la request
   ApiRequestBuilder end(String endpoint) {
@@ -164,30 +181,44 @@ class ApiRequestBuilder {
     return this;
   }
 
-  /// Ejecuta la request GET de manera asíncrona
+  /// Define el body para requests POST, PUT, PATCH
+  ApiRequestBuilder body(Map<String, dynamic> bodyData) {
+    _body = bodyData;
+    return this;
+  }
+
+  /// Ejecuta la request de manera asíncrona usando el método HTTP configurado
   Future<ApiResponse<T>> runAsync<T>({
+    T Function(dynamic)? parser,
+  }) async {
+    return _executeRequest<T>(_method, body: _body, parser: parser);
+  }
+
+  /// Ejecuta la request GET de manera asíncrona (legacy support)
+  @Deprecated('Use ApiService.get().end().runAsync() instead')
+  Future<ApiResponse<T>> getAsync<T>({
     T Function(dynamic)? parser,
   }) async {
     return _executeRequest<T>('GET', parser: parser);
   }
 
-  /// Ejecuta la request POST de manera asíncrona
+  /// Ejecuta la request POST de manera asíncrona (legacy support - mantiene compatibilidad)
   Future<ApiResponse<T>> postAsync<T>(
-    Map<String, dynamic> body, {
+    Map<String, dynamic> bodyData, {
     T Function(dynamic)? parser,
   }) async {
-    return _executeRequest<T>('POST', body: body, parser: parser);
+    return _executeRequest<T>('POST', body: bodyData, parser: parser);
   }
 
-  /// Ejecuta la request PUT de manera asíncrona
+  /// Ejecuta la request PUT de manera asíncrona (legacy support - mantiene compatibilidad)
   Future<ApiResponse<T>> putAsync<T>(
-    Map<String, dynamic> body, {
+    Map<String, dynamic> bodyData, {
     T Function(dynamic)? parser,
   }) async {
-    return _executeRequest<T>('PUT', body: body, parser: parser);
+    return _executeRequest<T>('PUT', body: bodyData, parser: parser);
   }
 
-  /// Ejecuta la request DELETE de manera asíncrona
+  /// Ejecuta la request DELETE de manera asíncrona (legacy support - mantiene compatibilidad)
   Future<ApiResponse<T>> deleteAsync<T>({
     T Function(dynamic)? parser,
   }) async {
