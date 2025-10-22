@@ -1,5 +1,5 @@
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
-import 'package:mi_cancilleria/base/widget_utils.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

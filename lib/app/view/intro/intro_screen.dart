@@ -1,9 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:mi_cancilleria/app/data/data_file.dart';
+import 'package:mre_bolivia/app/data/data_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/widget_utils.dart';

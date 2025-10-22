@@ -1,5 +1,5 @@
-import 'package:mi_cancilleria/app/models/consulado/model_intro.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_servicio.dart';
+import 'package:mre_bolivia/app/models/consulado/model_intro.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 
 class ModelDefinicionDetail {
   final List<Intro> intros;

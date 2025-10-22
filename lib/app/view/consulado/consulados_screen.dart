@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:mi_cancilleria/app/models/consulado/model_consulados.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/widget_utils.dart';
-import 'package:mi_cancilleria/controllers/consulado/tab_home_controller.dart';
+import 'package:mre_bolivia/app/models/consulado/model_consulados.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
+import 'package:mre_bolivia/controllers/consulado/tab_home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';

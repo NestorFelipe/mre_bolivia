@@ -1,8 +1,8 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_lista_vivencia.dart';
-import 'package:mi_cancilleria/controllers/consulado/vivencia_controller.dart';
+import 'package:mre_bolivia/app/models/consulado/model_lista_vivencia.dart';
+import 'package:mre_bolivia/controllers/consulado/vivencia_controller.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/utils/utils.dart';

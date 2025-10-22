@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/procces_tracker.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/utils/utils.dart';
-import 'package:mi_cancilleria/controllers/consulado/seguimiento_tramite_controller.dart';
+import 'package:mre_bolivia/app/ui/pages/components/procces_tracker.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/utils/utils.dart';
+import 'package:mre_bolivia/controllers/consulado/seguimiento_tramite_controller.dart';
 
 class SeguimientoTramite extends GetView<SeguimientoTramiteController> {
   const SeguimientoTramite({super.key});

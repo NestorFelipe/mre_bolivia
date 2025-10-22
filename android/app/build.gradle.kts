@@ -27,7 +27,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace = "gob.bo.cancilleria.app"
+    namespace = "gob.bo.mre_bolivia.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "gob.bo.cancilleria.app"
+        applicationId = "gob.bo.mre_bolivia.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

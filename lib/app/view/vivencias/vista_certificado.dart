@@ -1,7 +1,7 @@
-import 'package:mi_cancilleria/app/routes/app_routes.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
-import 'package:mi_cancilleria/base/widget_utils.dart';
+import 'package:mre_bolivia/app/routes/app_routes.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/constant.dart';

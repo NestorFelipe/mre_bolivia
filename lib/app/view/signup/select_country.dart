@@ -1,6 +1,6 @@
-import 'package:mi_cancilleria/app/data/data_file.dart';
-import 'package:mi_cancilleria/app/models/model_country.dart';
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/app/data/data_file.dart';
+import 'package:mre_bolivia/app/models/model_country.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

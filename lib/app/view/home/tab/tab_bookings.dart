@@ -1,8 +1,8 @@
-import 'package:mi_cancilleria/app/view/bookings/active_booking_screen.dart';
-import 'package:mi_cancilleria/app/view/bookings/cancel_booking_screen.dart';
-import 'package:mi_cancilleria/app/view/bookings/complete_booking_screen.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/widget_utils.dart';
+import 'package:mre_bolivia/app/view/bookings/active_booking_screen.dart';
+import 'package:mre_bolivia/app/view/bookings/cancel_booking_screen.dart';
+import 'package:mre_bolivia/app/view/bookings/complete_booking_screen.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

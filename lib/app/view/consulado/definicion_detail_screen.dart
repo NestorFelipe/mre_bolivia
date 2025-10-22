@@ -1,5 +1,5 @@
-import 'package:mi_cancilleria/app/models/consulado/model_intro.dart';
-import 'package:mi_cancilleria/base/utils/utils.dart';
+import 'package:mre_bolivia/app/models/consulado/model_intro.dart';
+import 'package:mre_bolivia/base/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -29,7 +29,7 @@
 -keep class io.flutter.plugins.**  { *; }
 -dontwarn io.flutter.embedding.**
 
--keep class gob.bo.cancilleria.app.** { *; }
+-keep class gob.bo.mre_bolivia.app.** { *; }
 
 # Dart specific rules
 -dontwarn dart.**

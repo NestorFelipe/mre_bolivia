@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/controllers/consulado/tab_home_controller.dart';
+import 'package:mre_bolivia/controllers/consulado/tab_home_controller.dart';
 import 'package:get/get.dart';
 import '../controllers/consulado/consulado_controller.dart';
 import '../controllers/consulado/regiones_controller.dart';

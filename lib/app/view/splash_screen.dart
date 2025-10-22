@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/base/color_data.dart';
+import 'package:mre_bolivia/base/color_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

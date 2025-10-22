@@ -1,5 +1,5 @@
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_jwt.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_lista_vivencia.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_periodos_vigente.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_response_auth.dart';
-import 'package:mi_cancilleria/app/routes/app_routes.dart';
-import 'package:mi_cancilleria/base/pref_data.dart';
-import 'package:mi_cancilleria/services/vivencias_service.dart';
+import 'package:mre_bolivia/app/models/consulado/model_jwt.dart';
+import 'package:mre_bolivia/app/models/consulado/model_lista_vivencia.dart';
+import 'package:mre_bolivia/app/models/consulado/model_periodos_vigente.dart';
+import 'package:mre_bolivia/app/models/consulado/model_response_auth.dart';
+import 'package:mre_bolivia/app/routes/app_routes.dart';
+import 'package:mre_bolivia/base/pref_data.dart';
+import 'package:mre_bolivia/services/vivencias_service.dart';
 
 class VivenciaController extends GetxController {
   RxBool isLoggedIn = false.obs;

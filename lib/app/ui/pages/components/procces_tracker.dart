@@ -4,15 +4,15 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_tipo_tramite.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/tramite_asistenciaconsular.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/tramite_passaportes.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/tramite_poderes.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/tramite_visas.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/tramite_vivencias.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/utils/utils.dart';
-import 'package:mi_cancilleria/controllers/consulado/seguimiento_tramite_controller.dart';
+import 'package:mre_bolivia/app/models/consulado/model_tipo_tramite.dart';
+import 'package:mre_bolivia/app/ui/pages/components/tramite_asistenciaconsular.dart';
+import 'package:mre_bolivia/app/ui/pages/components/tramite_passaportes.dart';
+import 'package:mre_bolivia/app/ui/pages/components/tramite_poderes.dart';
+import 'package:mre_bolivia/app/ui/pages/components/tramite_visas.dart';
+import 'package:mre_bolivia/app/ui/pages/components/tramite_vivencias.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/utils/utils.dart';
+import 'package:mre_bolivia/controllers/consulado/seguimiento_tramite_controller.dart';
 
 Widget processTracker(
     BuildContext context, SeguimientoTramiteController controller) {

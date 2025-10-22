@@ -1,12 +1,12 @@
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_consulado.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_contacto_seccion.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_definicion_detail.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_intro.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_paises.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_regiones.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_seccion.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_servicio.dart';
-import 'package:mi_cancilleria/base/constant.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_consulado.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_contacto_seccion.dart';
+import 'package:mre_bolivia/app/models/consulado/model_definicion_detail.dart';
+import 'package:mre_bolivia/app/models/consulado/model_intro.dart';
+import 'package:mre_bolivia/app/models/consulado/model_paises.dart';
+import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
+import 'package:mre_bolivia/app/models/consulado/model_seccion.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
+import 'package:mre_bolivia/base/constant.dart';
 import 'package:get/get.dart';
 
 import '../../services/consulado_service.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mi_cancilleria/app/view/vivencias/lista_vivencia.dart';
-import 'package:mi_cancilleria/app/view/vivencias/login_screen.dart';
-import 'package:mi_cancilleria/app/view/vivencias/nuevo_certificado.dart';
-import 'package:mi_cancilleria/app/view/vivencias/vivencia_home.dart';
-import 'package:mi_cancilleria/controllers/consulado/vivencia_controller.dart';
+import 'package:mre_bolivia/app/view/vivencias/lista_vivencia.dart';
+import 'package:mre_bolivia/app/view/vivencias/login_screen.dart';
+import 'package:mre_bolivia/app/view/vivencias/nuevo_certificado.dart';
+import 'package:mre_bolivia/app/view/vivencias/vivencia_home.dart';
+import 'package:mre_bolivia/controllers/consulado/vivencia_controller.dart';
 
 class VivenciaScreen extends StatelessWidget {
   const VivenciaScreen({super.key});

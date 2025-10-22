@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/app/routes/app_pages.dart';
+import 'package:mre_bolivia/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

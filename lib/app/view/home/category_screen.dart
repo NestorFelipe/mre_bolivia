@@ -1,7 +1,7 @@
-import 'package:mi_cancilleria/app/models/consulado/model_servicio.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/image_cache.dart';
-import 'package:mi_cancilleria/base/utils/utils.dart';
-import 'package:mi_cancilleria/controllers/consulado/consulado_controller.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
+import 'package:mre_bolivia/app/ui/pages/components/image_cache.dart';
+import 'package:mre_bolivia/base/utils/utils.dart';
+import 'package:mre_bolivia/controllers/consulado/consulado_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

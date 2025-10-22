@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mi_cancilleria/app/ui/pages/components/procces_tracker.dart';
-import 'package:mi_cancilleria/controllers/consulado/seguimiento_tramite_controller.dart';
+import 'package:mre_bolivia/app/ui/pages/components/procces_tracker.dart';
+import 'package:mre_bolivia/controllers/consulado/seguimiento_tramite_controller.dart';
 
 Widget pasaportes(
     BuildContext context, SeguimientoTramiteController controller) {

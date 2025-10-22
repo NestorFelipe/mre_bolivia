@@ -1,4 +1,4 @@
-package gob.bo.cancilleria.app
+package gob.bo.mre_bolivia.app
 
 import io.flutter.embedding.android.FlutterActivity
 import android.os.Bundle

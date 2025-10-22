@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/app/models/consulado/model_detalle.dart';
+import 'package:mre_bolivia/app/models/consulado/model_detalle.dart';
 
 class Intro {
   final int id;

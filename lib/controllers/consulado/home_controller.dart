@@ -1,7 +1,7 @@
-import 'package:mi_cancilleria/app/view/home/tab/tab_aranceles.dart';
-import 'package:mi_cancilleria/app/view/home/tab/tab_seguimiento_tramite.dart';
-import 'package:mi_cancilleria/app/view/vivencias/vivencia_screen.dart';
-import 'package:mi_cancilleria/controllers/consulado/vivencia_controller.dart';
+import 'package:mre_bolivia/app/view/home/tab/tab_aranceles.dart';
+import 'package:mre_bolivia/app/view/home/tab/tab_seguimiento_tramite.dart';
+import 'package:mre_bolivia/app/view/vivencias/vivencia_screen.dart';
+import 'package:mre_bolivia/controllers/consulado/vivencia_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../../base/constant.dart';

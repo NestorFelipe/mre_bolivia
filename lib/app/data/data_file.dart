@@ -1,18 +1,18 @@
-import 'package:mi_cancilleria/app/models/consulado/model_ciudad.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_departamento.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_residencia.dart';
-import 'package:mi_cancilleria/app/models/model_address.dart';
-import 'package:mi_cancilleria/app/models/model_booking.dart';
-import 'package:mi_cancilleria/app/models/model_card.dart';
-import 'package:mi_cancilleria/app/models/model_cart.dart';
-import 'package:mi_cancilleria/app/models/model_category.dart';
-import 'package:mi_cancilleria/app/models/model_color.dart';
-import 'package:mi_cancilleria/app/models/model_country.dart';
-import 'package:mi_cancilleria/app/models/model_intro.dart';
-import 'package:mi_cancilleria/app/models/model_notification.dart';
-import 'package:mi_cancilleria/app/models/model_other.dart';
-import 'package:mi_cancilleria/app/models/model_popular_service.dart';
-import 'package:mi_cancilleria/app/models/model_salon.dart';
+import 'package:mre_bolivia/app/models/consulado/model_ciudad.dart';
+import 'package:mre_bolivia/app/models/consulado/model_departamento.dart';
+import 'package:mre_bolivia/app/models/consulado/model_residencia.dart';
+import 'package:mre_bolivia/app/models/model_address.dart';
+import 'package:mre_bolivia/app/models/model_booking.dart';
+import 'package:mre_bolivia/app/models/model_card.dart';
+import 'package:mre_bolivia/app/models/model_cart.dart';
+import 'package:mre_bolivia/app/models/model_category.dart';
+import 'package:mre_bolivia/app/models/model_color.dart';
+import 'package:mre_bolivia/app/models/model_country.dart';
+import 'package:mre_bolivia/app/models/model_intro.dart';
+import 'package:mre_bolivia/app/models/model_notification.dart';
+import 'package:mre_bolivia/app/models/model_other.dart';
+import 'package:mre_bolivia/app/models/model_popular_service.dart';
+import 'package:mre_bolivia/app/models/model_salon.dart';
 
 import '../../base/color_data.dart';
 

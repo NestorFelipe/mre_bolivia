@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/app/models/consulado/model_consulado_redes_sociales.dart';
+import 'package:mre_bolivia/app/models/consulado/model_consulado_redes_sociales.dart';
 
 class Consulado {
   final int id;

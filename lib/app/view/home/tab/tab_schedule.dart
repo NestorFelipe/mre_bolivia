@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/base/widget_utils.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

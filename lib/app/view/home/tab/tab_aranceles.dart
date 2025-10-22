@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_consulado.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_contacto_seccion.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_paises.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_seccion.dart';
-import 'package:mi_cancilleria/base/color_data.dart';
-import 'package:mi_cancilleria/base/utils/utils.dart';
-import 'package:mi_cancilleria/controllers/consulado/consulado_controller.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_consulado.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_contacto_seccion.dart';
+import 'package:mre_bolivia/app/models/consulado/model_paises.dart';
+import 'package:mre_bolivia/app/models/consulado/model_seccion.dart';
+import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/utils/utils.dart';
+import 'package:mre_bolivia/controllers/consulado/consulado_controller.dart';
 
 class Aranceles extends GetView<ConsuladoController> {
   const Aranceles({super.key});

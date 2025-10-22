@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/app/models/consulado/model_consulados.dart';
+import 'package:mre_bolivia/app/models/consulado/model_consulados.dart';
 
 class Pais {
   final String id;

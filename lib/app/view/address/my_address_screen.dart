@@ -1,9 +1,9 @@
-import 'package:mi_cancilleria/app/data/data_file.dart';
-import 'package:mi_cancilleria/app/models/model_address.dart';
-import 'package:mi_cancilleria/app/routes/app_routes.dart';
-import 'package:mi_cancilleria/app/view/dialog/delete_dialog.dart';
-import 'package:mi_cancilleria/base/resizer/fetch_pixels.dart';
-import 'package:mi_cancilleria/base/widget_utils.dart';
+import 'package:mre_bolivia/app/data/data_file.dart';
+import 'package:mre_bolivia/app/models/model_address.dart';
+import 'package:mre_bolivia/app/routes/app_routes.dart';
+import 'package:mre_bolivia/app/view/dialog/delete_dialog.dart';
+import 'package:mre_bolivia/base/resizer/fetch_pixels.dart';
+import 'package:mre_bolivia/base/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

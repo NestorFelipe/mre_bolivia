@@ -1,4 +1,4 @@
-import 'package:mi_cancilleria/app/models/consulado/model_paises.dart';
+import 'package:mre_bolivia/app/models/consulado/model_paises.dart';
 
 class RegionesResponse {
   final List<Region> regiones;

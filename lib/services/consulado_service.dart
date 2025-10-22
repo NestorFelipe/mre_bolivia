@@ -1,7 +1,7 @@
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_consulado.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_arancel_contacto_seccion.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_definicion_detail.dart';
-import 'package:mi_cancilleria/app/models/consulado/model_regiones.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_consulado.dart';
+import 'package:mre_bolivia/app/models/consulado/model_arancel_contacto_seccion.dart';
+import 'package:mre_bolivia/app/models/consulado/model_definicion_detail.dart';
+import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
 
 import 'api_service.dart';
 
