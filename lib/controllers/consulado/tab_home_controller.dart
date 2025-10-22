@@ -52,6 +52,11 @@ class TabHomeController extends GetxController {
   // Inyectar ConsultadoController
   ConsuladoController? consultadoController;
 
+  // Variables observables propias para evitar problemas cuando consultadoController es nulo
+  final RxBool _isLoadingConsultado = false.obs;
+  final RxBool _hasConsultadoError = false.obs;
+  final RxString _consultadoErrorMessage = ''.obs;
+
   void goBack() {
     Constant.backToPrev(Get.context!);
   }
@@ -69,8 +74,17 @@ class TabHomeController extends GetxController {
     // Intentar obtener ConsultadoController si está disponible
     try {
       consultadoController = Get.find<ConsuladoController>();
+
+      // Sincronizar estados iniciales
+      _syncConsultadoStates();
+
+      // Escuchar cambios en los estados del consultadoController
+      ever(consultadoController!.isLoading, (_) => _syncConsultadoStates());
+      ever(consultadoController!.hasError, (_) => _syncConsultadoStates());
+      ever(consultadoController!.errorMessage, (_) => _syncConsultadoStates());
     } catch (e) {
       // ConsultadoController no está disponible, se mantendrá como null
+      _syncConsultadoStates();
     }
 
     initializeSharedPreferences();
@@ -128,23 +142,27 @@ class TabHomeController extends GetxController {
 
   // Obtener definiciones del consulado para el slider
   List<Intro> getSliderDefiniciones() {
-    if (consultadoController?.consultadoData == null) {
+    if (consultadoController?.definicionesData?.intros == null) {
       // Retorna lista vacía si no hay datos del consulado
       return [];
     }
 
-    final definiciones = consultadoController!.definicionesData?.intros;
-
-    return definiciones!;
+    return consultadoController!.definicionesData!.intros;
   }
 
   List<Region> getPaisregion() {
+    if (consultadoController?.consultadoData == null) {
+      return [];
+    }
     regions.value = consultadoController!.consultadoData!;
     // ignore: invalid_use_of_protected_member
     return regions.value;
   }
 
   List<Servicio> getServicios() {
+    if (consultadoController?.definicionesData?.servicios == null) {
+      return [];
+    }
     servicios.value = consultadoController!.definicionesData!.servicios;
     // ignore: invalid_use_of_protected_member
     return servicios.value;
@@ -153,16 +171,27 @@ class TabHomeController extends GetxController {
   // Verificar si hay datos del consulado disponibles
   bool get hasConsultadoData => consultadoController?.consultadoData != null;
 
-  // Verificar si está cargando los datos del consulado
-  bool get isLoadingConsultado =>
-      consultadoController?.isLoading.value ?? false;
+  // Verificar si está cargando los datos del consulado (usa variable observable propia)
+  bool get isLoadingConsultado => _isLoadingConsultado.value;
 
-  // Verificar si hay error en los datos del consulado
-  bool get hasConsultadoError => consultadoController?.hasError.value ?? false;
+  // Verificar si hay error en los datos del consulado (usa variable observable propia)
+  bool get hasConsultadoError => _hasConsultadoError.value;
 
-  // Obtener mensaje de error del consulado
-  String get consultadoErrorMessage =>
-      consultadoController?.errorMessage.value ?? '';
+  // Obtener mensaje de error del consulado (usa variable observable propia)
+  String get consultadoErrorMessage => _consultadoErrorMessage.value;
+
+  // Sincronizar estados con consultadoController
+  void _syncConsultadoStates() {
+    if (consultadoController != null) {
+      _isLoadingConsultado.value = consultadoController!.isLoading.value;
+      _hasConsultadoError.value = consultadoController!.hasError.value;
+      _consultadoErrorMessage.value = consultadoController!.errorMessage.value;
+    } else {
+      _isLoadingConsultado.value = false;
+      _hasConsultadoError.value = true;
+      _consultadoErrorMessage.value = 'Controlador no disponible';
+    }
+  }
 
   // Navegar a la página de detalle de definición
   void goToDefinicionDetail(Intro definicion, int index) {

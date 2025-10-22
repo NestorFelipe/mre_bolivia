@@ -9,6 +9,7 @@ import 'package:mre_bolivia/app/models/consulado/model_ciudad.dart';
 import 'package:mre_bolivia/app/models/consulado/model_departamento.dart';
 import 'package:mre_bolivia/app/models/consulado/model_residencia.dart';
 import 'package:mre_bolivia/app/models/consulado/model_resposevalidafoto.dart';
+import 'package:mre_bolivia/app/models/consulado/model_vivencia_save.dart';
 import 'package:mre_bolivia/controllers/consulado/vivencia_controller.dart';
 import 'package:mre_bolivia/base/pref_data.dart';
 import 'package:mre_bolivia/services/api_service.dart';
@@ -270,7 +271,14 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                     // Ubicación
                     _buildSectionTitle("Ubicación"),
                     SizedBox(height: 10.h),
-
+                    getCustomFont(
+                      "Dpto. Apoderado",
+                      14,
+                      Colors.grey.shade700,
+                      1,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    SizedBox(height: 8.h),
                     _buildDropdownField<Departamento>(
                       value: selectedDepartamento,
                       items: departamentos,
@@ -284,7 +292,13 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                     ),
 
                     SizedBox(height: 15.h),
-
+                    getCustomFont(
+                      "Deseo recoger mi factura en oficina de:",
+                      14,
+                      Colors.grey.shade700,
+                      1,
+                      fontWeight: FontWeight.w600,
+                    ),
                     _buildDropdownField<Ciudad>(
                       value: selectedCiudad,
                       items: ciudades,
@@ -572,43 +586,34 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
   }
 
   void _guardarCertificado() async {
-    if (!_validarDatos()) {
-      return;
-    }
-
-    // Capturar selfie y validar con el servicio
-    final imagenValidada = await _capturarYValidarSelfie();
-
-    if (imagenValidada == null) {
-      return;
-    }
-
-    setState(() {
-      isProcessing = true;
-    });
-
     try {
-      // PASO 2: Enviar datos del certificado
-      final datosParaGuardar = {
-        'idperiodo': widget.controller.selectedPeriodo.value?.id,
-        'idresidencia': selectedResidencia?.idresidencia,
-        'apoderado': apoderadoController.text.trim(),
-        'niapoderado': niApoderadoController.text.trim(),
-        'dptoapoderado': selectedDepartamento?.descripcion ?? '',
-        'direccionapoderado': direccionApoderadoController.text.trim(),
-        'iddepartamental': selectedCiudad?.idciudad,
-      };
-
-      // final dataResponse = await ApiService.post()
-      //     .body(datosParaGuardar)
-      //     .runAsync();
-
-      // Simulación de proceso exitoso (quitar cuando se implemente el segundo servicio)
-      await Future.delayed(const Duration(seconds: 1));
+      if (!_validarDatos()) {
+        return;
+      }
 
       setState(() {
-        isProcessing = false;
+        isProcessing = true;
       });
+
+      final datosParaGuardar = ModelVivenciaSave(
+        idperiodo: widget.controller.selectedPeriodo.value?.id,
+        idresidencia: selectedResidencia?.idresidencia,
+        apoderado: apoderadoController.text.trim(),
+        niapoderado: niApoderadoController.text.trim(),
+        dptoapoderado: selectedDepartamento?.iddepartamento.toString(),
+        direccionapoderado: direccionApoderadoController.text.trim(),
+        iddepartamental: selectedCiudad?.idciudad,
+      );
+
+      // Capturar selfie y validar  y registro de certificado con el servicio
+      final imagenValidada = await _capturarYValidarSelfie(datosParaGuardar);
+
+      if (imagenValidada == null) {
+        setState(() {
+          isProcessing = false;
+        });
+        return;
+      }
 
       Get.snackbar(
         'Éxito',
@@ -618,7 +623,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         duration: const Duration(seconds: 2),
       );
 
-      // Volver a la pantalla principal después de 2 segundos
+      setState(() {
+        isProcessing = false;
+      });
+
       Future.delayed(const Duration(seconds: 2), () {
         widget.controller.setIsNewCertificado(false);
       });
@@ -634,8 +642,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         colorText: Colors.white,
         duration: const Duration(seconds: 3),
       );
-
-      print('❌ ERROR: ${e.toString()}');
     }
   }
 
@@ -755,6 +761,12 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
   /// Captura la selfie del usuario usando la cámara
   Future<String?> _capturarSelfie() async {
+    // Ocultar el teclado primero para evitar overflow
+    FocusScope.of(context).unfocus();
+
+    // Esperar a que el teclado se oculte completamente
+    await Future.delayed(const Duration(milliseconds: 300));
+
     // Mostrar diálogo de instrucciones antes de abrir la cámara
     final bool? continuar = await Get.dialog<bool>(
       Dialog(
@@ -909,16 +921,18 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       barrierDismissible: false,
     );
 
+    String? imageDataUri;
+    bool hasError = false;
+    String errorMessage = '';
+
     try {
       final XFile? photo = await _picker.pickImage(
         source: ImageSource.camera,
         preferredCameraDevice: CameraDevice.front,
-        imageQuality: 90, // Aumentar calidad para mejor detección de rostro
-        maxWidth: 1280, // Aumentar resolución para mejor reconocimiento
+        imageQuality: 90,
+        maxWidth: 1280,
         maxHeight: 1280,
       );
-
-      Get.back(); // Cerrar diálogo de carga
 
       if (photo != null) {
         // Mostrar preview de la imagen capturada con opción de confirmar o reintentar
@@ -928,34 +942,46 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
           // Leer la imagen y convertirla a base64
           final bytes = await File(photo.path).readAsBytes();
           final base64Image = base64Encode(bytes);
-          final imageDataUri = 'data:image/jpeg;base64,$base64Image';
+          imageDataUri = 'data:image/jpeg;base64,$base64Image';
 
           setState(() {
             capturedImagePath = photo.path;
             capturedImageBase64 = imageDataUri;
           });
-
-          return imageDataUri; // Retornar base64 para validación
         } else {
-          // Usuario quiere reintentar
+          // Usuario quiere reintentar - cerrar diálogo primero
+          if (Get.isDialogOpen == true) {
+            Get.back();
+          }
           return await _capturarSelfie();
         }
       }
-
-      return null;
     } catch (e) {
-      Get.back(); // Cerrar diálogo de carga
+      hasError = true;
+      errorMessage = 'Error al acceder a la cámara: ${e.toString()}';
+    } finally {
+      // SIEMPRE cerrar el diálogo primero
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
 
-      Get.snackbar(
-        'Error',
-        'Error al acceder a la cámara: ${e.toString()}',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error, color: Colors.white),
-      );
+      // Dar un pequeño delay para que el diálogo se cierre completamente
+      await Future.delayed(const Duration(milliseconds: 100));
 
-      return null;
+      // Mostrar error si ocurrió
+      if (hasError) {
+        Get.snackbar(
+          'Error',
+          errorMessage,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error, color: Colors.white),
+          duration: const Duration(seconds: 3),
+        );
+      }
     }
+
+    return imageDataUri;
   }
 
   /// Muestra un item de instrucción con viñeta
@@ -1108,7 +1134,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
   }
 
   /// Captura la selfie y la valida con el servicio inmediatamente
-  Future<String?> _capturarYValidarSelfie() async {
+  Future<String?> _capturarYValidarSelfie(ModelVivenciaSave pVivencia) async {
     // Capturar la imagen
     final imagenBase64 = await _capturarSelfie();
 
@@ -1122,7 +1148,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       return null;
     }
 
-    // Mostrar diálogo de validación
     Get.dialog(
       WillPopScope(
         onWillPop: () async => false,
@@ -1166,14 +1191,13 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
     );
 
     try {
-      // Obtener datos necesarios
       final idPersona = await PrefData.getIdPersona();
+      final token = await PrefData.getToken();
 
       if (idPersona.isEmpty) {
         throw Exception('No se encontró el ID de persona');
       }
 
-      // Crear tokenAS (base64 de idpersona)
       final tokenAS = base64Encode(utf8.encode(idPersona));
 
       // Enviar foto al servicio de validación
@@ -1182,11 +1206,13 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         'token': '1',
         'tokenAS': tokenAS,
         'personId': idPersona,
+        'vivencia': pVivencia.toJson(),
       };
 
       final photoResponse = await ApiService.post()
           .body(photoPayload)
-          .end("/Apostilla/vivencia/valida/imagen")
+          .header("Authorization", "Bearer $token")
+          .end("/Apostilla/vivencia/agrega/certificado")
           .runAsync();
 
       final modelResponse = PhotoUploadResponse.fromJson(photoResponse.data);
@@ -1315,8 +1341,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         );
 
         if (reintentar == true) {
-          // Reintentar captura y validación
-          return await _capturarYValidarSelfie();
+          return await _capturarYValidarSelfie(pVivencia);
         }
 
         return null;
@@ -1324,7 +1349,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       Get.snackbar(
         'Validación Exitosa',
-        'Su rostro ha sido verificado correctamente',
+        'Verificación facial completada correctamente. El nuevo certificado se registró en el sistema.',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: Icon(Icons.check_circle, color: Colors.white),
@@ -1429,7 +1454,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       );
 
       if (reintentar == true) {
-        return await _capturarYValidarSelfie();
+        return await _capturarYValidarSelfie(pVivencia);
       }
 
       return null;

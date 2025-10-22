@@ -44,10 +44,10 @@ class ApiResponse<T> {
 
 /// Clase principal del API service con patrón builder
 class ApiService {
-  // static const String _baseUrl = 'http://localhost:7050/api';
+  static const String _baseUrl = 'http://localhost:7050/api';
 
-  static const String _baseUrl =
-      'https://servicios.cancilleria.gob.bo/app-movil/api';
+  // static const String _baseUrl =
+  //     'https://servicios.cancilleria.gob.bo/app-movil/api';
 
   static final Map<String, String> _globalHeaders = {
     'Content-Type': 'application/json',
@@ -64,8 +64,8 @@ class ApiService {
       final client = HttpClient();
 
       // Configurar timeouts para mejor rendimiento en móviles
-      client.connectionTimeout = const Duration(seconds: 15);
-      client.idleTimeout = const Duration(seconds: 30);
+      client.connectionTimeout = const Duration(seconds: 60);
+      client.idleTimeout = const Duration(seconds: 60);
 
       // Configurar para ignorar errores de certificado (solo para desarrollo/testing)
       // En producción, considerar validar certificados específicos del dominio

@@ -154,7 +154,9 @@ class ConsuladoController extends GetxController {
       final data = await _consultadoService!.obtenerDefiniciones();
 
       definicionesData = data;
-      servicios.assignAll(definicionesData!.servicios);
+      if (definicionesData?.servicios != null) {
+        servicios.assignAll(definicionesData!.servicios);
+      }
       print('✅ Datos del consulado cargados correctamente');
     } catch (e) {
       hasError.value = true;
@@ -236,7 +238,9 @@ class ConsuladoController extends GetxController {
   }
 
   List<Servicio> getServicios() {
-    servicios.assignAll(definicionesData!.servicios);
+    if (definicionesData?.servicios != null) {
+      servicios.assignAll(definicionesData!.servicios);
+    }
     return servicios;
   }
 

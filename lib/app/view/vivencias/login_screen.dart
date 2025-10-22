@@ -86,15 +86,30 @@ class LoginWidgetState extends State<LoginWidget> {
 
       if (result.token!.isEmpty == false) {
         await widget.controller.getUserInfo();
+        // await widget.controller.fTest();
         await widget.controller.getPeriodoVigente();
       }
     } catch (e) {
-      // El error será manejado por el controller
-      // El diálogo se cerrará en el finally
+      print(e);
     } finally {
-      // Cerrar el diálogo si está abierto
-      if (Get.isDialogOpen ?? false) {
+      // SIEMPRE cerrar el diálogo primero, antes de cualquier otra acción
+      if (Get.isDialogOpen == true) {
         Get.back();
+      }
+
+      // Dar un pequeño delay para que el diálogo se cierre completamente
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      // Verificar si hubo error (el login falló si no está logueado)
+      if (!widget.controller.isLoggedIn.value) {
+        Get.snackbar(
+          'Error',
+          'Ocurrió un error en la conexión. Por favor, reintente más tarde.',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5),
+        );
       }
     }
   }
