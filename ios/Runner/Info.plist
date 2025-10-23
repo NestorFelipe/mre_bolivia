@@ -47,14 +47,26 @@
 		<false/>
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleDarkContent</string>
-		<!-- Configuración de audio para compatibilidad con apps en segundo plano -->
-		<key>AVAudioSessionCategoryOptions</key>
-		<array>
-			<string>AVAudioSessionCategoryOptionMixWithOthers</string>
-		</array>
-		<key>AVAudioSessionCategory</key>
-		<string>AVAudioSessionCategoryPlayback</string>
-		<!-- Configuración de seguridad de transporte para permitir HTTP -->
+	<!-- Permisos de privacidad para CÁMARA - Requerido por iOS -->
+	<key>NSCameraUsageDescription</key>
+	<string>Esta aplicación necesita acceso a la cámara para verificar tu identidad mediante reconocimiento facial en la solicitud de certificados de vivencia.</string>
+	
+	<!-- Permisos de privacidad para MICRÓFONO - Recomendado -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Se requiere acceso al micrófono para mejorar la experiencia de verificación.</string>
+	
+	<!-- Permisos de privacidad para FOTOS - Requerido para image_picker -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Esta aplicación necesita acceso a tus fotos para seleccionar imágenes de documentos.</string>
+	
+	<!-- Configuración de audio para compatibilidad con apps en segundo plano -->
+	<key>AVAudioSessionCategoryOptions</key>
+	<array>
+		<string>AVAudioSessionCategoryOptionMixWithOthers</string>
+	</array>
+	<key>AVAudioSessionCategory</key>
+	<string>AVAudioSessionCategoryPlayback</string>
+	<!-- Configuración de seguridad de transporte para permitir HTTP -->
 		<key>NSAppTransportSecurity</key>
 		<dict>
 			<key>NSAllowsArbitraryLoads</key>

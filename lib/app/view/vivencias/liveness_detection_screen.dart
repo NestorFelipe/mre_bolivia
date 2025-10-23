@@ -149,7 +149,9 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         frontCamera,
         ResolutionPreset.high,
         enableAudio: false,
-        imageFormatGroup: ImageFormatGroup.nv21,
+        imageFormatGroup: defaultTargetPlatform == TargetPlatform.android
+            ? ImageFormatGroup.nv21
+            : ImageFormatGroup.yuv420,
       );
 
       await _cameraController!.initialize();

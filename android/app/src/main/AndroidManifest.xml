@@ -5,6 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
+    <!-- Permisos para CÁMARA - Requerido para liveness detection -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    
+    <!-- Permiso para VIBRACIÓN - Feedback háptico -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    <!-- Permiso para mantener pantalla activa durante detección facial -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
    <application
         android:label="MRE Bolivia"
         android:name="${applicationName}"
