@@ -57,6 +57,13 @@ dependencies:
   cached_network_image: ^3.4.1
   shimmer: ^3.0.0
 
+  # face detection live camera
+  google_mlkit_face_detection: ^0.10.0
+  camera: ^0.10.5+9
+  image: ^4.1.7
+  audioplayers: ^6.1.0
+  wakelock_plus: ^1.2.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -84,6 +91,7 @@ flutter:
     - assets/images/
     - assets/videos/
     - assets/paises/
+    - assets/sounds/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

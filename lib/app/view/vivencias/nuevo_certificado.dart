@@ -1,15 +1,17 @@
 import 'dart:convert';
-import 'dart:io';
+// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:mre_bolivia/app/data/data_file.dart';
 import 'package:mre_bolivia/app/models/consulado/model_ciudad.dart';
 import 'package:mre_bolivia/app/models/consulado/model_departamento.dart';
 import 'package:mre_bolivia/app/models/consulado/model_residencia.dart';
 import 'package:mre_bolivia/app/models/consulado/model_resposevalidafoto.dart';
 import 'package:mre_bolivia/app/models/consulado/model_vivencia_save.dart';
+import 'package:mre_bolivia/app/view/vivencias/liveness_detection_screen.dart';
+import 'package:mre_bolivia/app/view/vivencias/liveness_service.dart';
 import 'package:mre_bolivia/controllers/consulado/vivencia_controller.dart';
 import 'package:mre_bolivia/base/pref_data.dart';
 import 'package:mre_bolivia/services/api_service.dart';
@@ -42,7 +44,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
   String? capturedImageBase64; // Imagen en formato base64
   bool isProcessing = false;
 
-  final ImagePicker _picker = ImagePicker();
+  // final ImagePicker _picker = ImagePicker();
 
   // Datos estáticos
   final List<Residencia> residencias = DataFile.residencia;
@@ -596,7 +598,8 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       });
 
       final datosParaGuardar = ModelVivenciaSave(
-        idperiodo: widget.controller.selectedPeriodo.value?.id,
+        // idperiodo: widget.controller.selectedPeriodo.value?.id,
+        idperiodo: 3, //TODO: Cambiar periodo seleccionado
         idresidencia: selectedResidencia?.idresidencia,
         apoderado: apoderadoController.text.trim(),
         niapoderado: niApoderadoController.text.trim(),
@@ -615,9 +618,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         return;
       }
 
+      // Certificado guardado exitosamente
       Get.snackbar(
         'Éxito',
-        'Certificado guardado correctamente',
+        'Certificado guardado correctamente. Cargando lista de certificados...',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         duration: const Duration(seconds: 2),
@@ -627,9 +631,74 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         isProcessing = false;
       });
 
-      Future.delayed(const Duration(seconds: 2), () {
+      // Esperar un momento para que el usuario vea el mensaje de éxito
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // Mostrar loading mientras se cargan los certificados
+      Get.dialog(
+        WillPopScope(
+          onWillPop: () async => false,
+          child: Center(
+            child: Container(
+              padding: EdgeInsets.all(24.w),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(
+                    color: const Color(0xFF14357D),
+                  ),
+                  SizedBox(height: 16.h),
+                  Text(
+                    'Cargando certificados...',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        barrierDismissible: false,
+      );
+
+      try {
+        // Recargar la lista de vivencias desde el servidor
+        await widget.controller.getListaVivencia();
+
+        // Cerrar el loading
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
+
+        // Cerrar el formulario de nuevo certificado
         widget.controller.setIsNewCertificado(false);
-      });
+
+        // Mostrar la vista de lista de vivencias
+        widget.controller.setIsDetalle(true);
+      } catch (e) {
+        // Cerrar el loading
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
+
+        Get.snackbar(
+          'Advertencia',
+          'El certificado se guardó correctamente, pero hubo un error al cargar la lista. Por favor, actualice manualmente.',
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 4),
+        );
+
+        // Cerrar el formulario de todas formas
+        widget.controller.setIsNewCertificado(false);
+      }
     } catch (e) {
       setState(() {
         isProcessing = false;
@@ -924,28 +993,52 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
     String? imageDataUri;
     bool hasError = false;
     String errorMessage = '';
+    var isContinue = false;
 
     try {
-      final XFile? photo = await _picker.pickImage(
-        source: ImageSource.camera,
-        preferredCameraDevice: CameraDevice.front,
-        imageQuality: 90,
-        maxWidth: 1280,
-        maxHeight: 1280,
+      final result = await Navigator.push<LivenessResult>(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (context) => LivenessDetectionScreen(
+            config: LivenessConfig(
+              requiredBlinks: 4, // Más parpadeos = más seguro
+              maxStepDurationSeconds: 20,
+              maxFailedAttempts: 3,
+            ),
+          ),
+        ),
       );
 
-      if (photo != null) {
+      if (LivenessService.validateResult(result!)) {
+        // Calcular score de confianza (0-100)
+        final score = LivenessService.calculateConfidenceScore(result);
+
+        if (score >= 70) {
+          isContinue = true;
+        } else {
+          isContinue = false;
+          print('⚠️ Baja confianza ($score%), pedir verificación adicional');
+        }
+      }
+
+      if (!isContinue) {
+        if (Get.isDialogOpen == true) {
+          Get.back();
+        }
+        return await _capturarSelfie();
+      }
+
+      if (result.frontImage != null) {
         // Mostrar preview de la imagen capturada con opción de confirmar o reintentar
-        final bool? confirmar = await _mostrarPreviewImagen(photo.path);
+        final base64Image = base64Encode(result.frontImage!);
+        imageDataUri = 'data:image/jpeg;base64,$base64Image';
+
+        final bool? confirmar = await _mostrarPreviewImagen(imageDataUri);
 
         if (confirmar == true) {
-          // Leer la imagen y convertirla a base64
-          final bytes = await File(photo.path).readAsBytes();
-          final base64Image = base64Encode(bytes);
-          imageDataUri = 'data:image/jpeg;base64,$base64Image';
-
           setState(() {
-            capturedImagePath = photo.path;
+            // capturedImagePath = result.frontImage!.path;
             capturedImageBase64 = imageDataUri;
           });
         } else {
@@ -1045,8 +1138,8 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
               SizedBox(height: 16.h),
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
-                child: Image.file(
-                  File(imagePath),
+                child: Image.memory(
+                  base64Decode(imagePath.split(',').last),
                   fit: BoxFit.contain,
                   width: double.infinity,
                 ),

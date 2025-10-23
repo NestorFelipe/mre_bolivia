@@ -27,6 +27,10 @@ class VivenciaController extends GetxController {
   RxString usuario = ''.obs;
   RxString cedula = ''.obs;
 
+  // Nuevos flags para controlar el estado de la UI
+  RxBool hasUserInfo = false.obs;
+  RxBool hasPeriodos = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -94,35 +98,36 @@ class VivenciaController extends GetxController {
     }
   }
 
-  Future<ListaVivenciaResponse> getUserInfo() async {
+  Future<ListaVivenciaResponse?> getUserInfo() async {
     final idPersona = await PrefData.getIdPersona();
     final token = await PrefData.getToken();
 
     try {
       final result = await VivenciasService().getInfoUser(token, idPersona);
 
-      if (!result.existosa!) {
-        Get.snackbar('Información',
-            'No se encontró información de vivencia para el usuario.',
-            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
-            colorText: Colors.white);
+      if (!result.existosa! || result.lista == null || result.lista!.isEmpty) {
+        // No hay información del usuario, pero el login fue exitoso
+        hasUserInfo.value = false;
+        usuario.value = '';
+        return null;
       }
 
+      // Hay información del usuario
       PrefData.setReg(result.paginado!.totalRegistros);
-
-      if (result.lista != null && result.lista!.isNotEmpty) {
-        PrefData.setUsuario(result.lista!.first.nombreCompleto);
-        usuario.value = result.lista!.first.nombreCompleto;
-      }
+      PrefData.setUsuario(result.lista!.first.nombreCompleto);
+      usuario.value = result.lista!.first.nombreCompleto;
+      hasUserInfo.value = true;
 
       return result;
     } catch (e) {
-      // Propagar el error para que la UI lo maneje
-      rethrow;
+      // Error en la llamada, no hay información del usuario
+      hasUserInfo.value = false;
+      usuario.value = '';
+      return null;
     }
   }
 
-  Future<ModelPeriodosVigente> getPeriodoVigente() async {
+  Future<ModelPeriodosVigente?> getPeriodoVigente() async {
     final idPersona = await PrefData.getIdPersona();
     final token = await PrefData.getToken();
 
@@ -131,23 +136,35 @@ class VivenciaController extends GetxController {
           await VivenciasService().getPeriodoVigente(token, idPersona);
 
       if (result.lista.isEmpty) {
-        Get.snackbar('Información',
-            'No se encontró información de periodo vigente para el usuario.',
-            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
-            colorText: Colors.white);
+        // No hay periodos vigentes
+        periodos.value = [];
+        hasPeriodos.value = false;
+
+        // Guardar el estado de login de todas formas
+        await PrefData.setLogIn(true);
+        isLoggedIn.value = true;
+
+        return null;
       }
 
-      if (result.lista.isNotEmpty) {
-        periodos.value = result.lista;
-      }
+      // Hay periodos vigentes
+      periodos.value = result.lista;
+      hasPeriodos.value = true;
 
       await PrefData.setLogIn(true);
       isLoggedIn.value = true;
 
       return result;
     } catch (e) {
-      // Propagar el error para que la UI lo maneje
-      rethrow;
+      // Error en la llamada
+      periodos.value = [];
+      hasPeriodos.value = false;
+
+      // Guardar el estado de login de todas formas
+      await PrefData.setLogIn(true);
+      isLoggedIn.value = true;
+
+      return null;
     }
   }
 
@@ -182,10 +199,14 @@ class VivenciaController extends GetxController {
   void logout() {
     PrefData.setLogIn(false);
     isLoggedIn.value = false;
+    hasUserInfo.value = false;
+    hasPeriodos.value = false;
     ciController.clear();
     passwordController.clear();
     vivencias.clear();
     periodos.clear();
+    usuario.value = '';
+    cedula.value = '';
     PrefData.clearPref();
   }
 

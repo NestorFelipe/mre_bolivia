@@ -51,65 +51,126 @@ class LoginWidgetState extends State<LoginWidget> {
   void _ensureVisible(GlobalKey key) {}
 
   Future<void> _handleLogin() async {
-    // Mostrar indicador de carga
-    Get.dialog(
-      Center(
-        child: Container(
-          padding: EdgeInsets.all(20.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(
-                color: blueColor,
-              ),
-              SizedBox(height: 16.h),
-              Text(
-                'Iniciando sesión...',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    bool showErrorSnackbar = false;
+    String errorMessage = '';
+
+    // Mostrar indicador de carga usando showDialog del contexto
+    showDialog(
+      context: context,
       barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return Center(
+          child: Container(
+            padding: EdgeInsets.all(20.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(
+                  color: blueColor,
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  'Iniciando sesión...',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
 
     try {
-      final result = await widget.controller.login();
+      // 1. Intentar login
+      final loginResult = await widget.controller.login();
 
-      if (result.token!.isEmpty == false) {
-        await widget.controller.getUserInfo();
-        // await widget.controller.fTest();
-        await widget.controller.getPeriodoVigente();
+      // Si el token no es válido, salir (el controlador ya mostró el mensaje)
+      if (loginResult.token == null || loginResult.token!.isEmpty) {
+        return;
+      }
+
+      // 2. Token válido, intentar obtener información del usuario
+      final userInfoResult = await widget.controller.getUserInfo();
+
+      // 3. Intentar obtener periodos vigentes
+      final periodosResult = await widget.controller.getPeriodoVigente();
+
+      // Cerrar el loading
+      if (mounted && Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+
+      // Dar un delay para que el diálogo se cierre
+      await Future.delayed(const Duration(milliseconds: 150));
+
+      // 4. Mostrar mensajes informativos según el resultado
+      if (mounted) {
+        if (userInfoResult == null && periodosResult == null) {
+          // No tiene ni userInfo ni periodos
+          Get.snackbar(
+            'Información',
+            'Bienvenido. No se encontró información de vivencias ni periodos vigentes asociados a su cuenta.',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
+            colorText: Colors.white,
+            duration: const Duration(seconds: 5),
+          );
+        } else if (userInfoResult == null && periodosResult != null) {
+          // Tiene periodos pero no userInfo
+          Get.snackbar(
+            'Información',
+            'Bienvenido. No se encontró información de vivencias previas.',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
+            colorText: Colors.white,
+            duration: const Duration(seconds: 4),
+          );
+        } else if (userInfoResult != null && periodosResult == null) {
+          // Tiene userInfo pero no periodos
+          Get.snackbar(
+            'Información',
+            'Bienvenido ${widget.controller.usuario.value}. No se encontraron periodos vigentes para solicitar certificados.',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
+            colorText: Colors.white,
+            duration: const Duration(seconds: 5),
+          );
+        }
+        // Si tiene ambos, no mostrar mensaje (login exitoso completo)
       }
     } catch (e) {
-      print(e);
+      print('Error en login: $e');
+      showErrorSnackbar = true;
+      errorMessage =
+          'Ocurrió un error en la conexión. Por favor, reintente más tarde.';
     } finally {
-      // SIEMPRE cerrar el diálogo primero, antes de cualquier otra acción
-      if (Get.isDialogOpen == true) {
-        Get.back();
+      // SIEMPRE cerrar el diálogo sin importar qué pase
+      if (mounted && Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
       }
 
-      // Dar un pequeño delay para que el diálogo se cierre completamente
-      await Future.delayed(const Duration(milliseconds: 100));
+      // Si hubo una excepción (error de red, servidor, etc), mostrar snackbar
+      if (showErrorSnackbar) {
+        // Dar un pequeño delay antes de mostrar el snackbar
+        await Future.delayed(const Duration(milliseconds: 150));
 
-      // Verificar si hubo error (el login falló si no está logueado)
-      if (!widget.controller.isLoggedIn.value) {
-        Get.snackbar(
-          'Error',
-          'Ocurrió un error en la conexión. Por favor, reintente más tarde.',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          duration: const Duration(seconds: 5),
-        );
+        if (mounted) {
+          Get.snackbar(
+            'Error',
+            errorMessage,
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 5),
+          );
+        }
       }
     }
   }
