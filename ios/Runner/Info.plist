@@ -66,6 +66,16 @@
 	</array>
 	<key>AVAudioSessionCategory</key>
 	<string>AVAudioSessionCategoryPlayback</string>
+	
+	<!-- Queries schemes para url_launcher - OBLIGATORIO para iOS -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>http</string>
+		<string>https</string>
+		<string>tel</string>
+		<string>mailto</string>
+	</array>
+	
 	<!-- Configuración de seguridad de transporte para permitir HTTP -->
 		<key>NSAppTransportSecurity</key>
 		<dict>

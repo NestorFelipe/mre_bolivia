@@ -205,7 +205,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                     primary: true,
                     shrinkWrap: true,
                     children: [
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
                         Container(
                           width: double.infinity,
@@ -392,8 +392,8 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
-                      fontWeight: FontWeight.w500),
+                  _getCustomFont(title, 18, Colors.grey[900]!, 1,
+                      fontWeight: FontWeight.w700),
                   SizedBox(height: 4.h),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
@@ -424,42 +424,233 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     );
   }
 
+  /// Mostrar diálogo de confirmación antes de abrir enlace externo
+  Future<bool> _showExternalLinkDialog(String url) async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.open_in_new,
+                    color: blueColor,
+                    size: 24.w,
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: _getCustomFont(
+                      'Salir a sistema externo',
+                      16,
+                      Colors.black87,
+                      2,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _getCustomFont(
+                    'Está a punto de ser redirigido a un sitio web externo:',
+                    14,
+                    Colors.black87,
+                    3,
+                  ),
+                  SizedBox(height: 12.h),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(color: Colors.grey[300]!),
+                    ),
+                    child: _getCustomFont(
+                      url,
+                      12,
+                      blueColor,
+                      3,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  _getCustomFont(
+                    '¿Desea continuar?',
+                    14,
+                    Colors.black54,
+                    1,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  style: TextButton.styleFrom(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                  ),
+                  child: _getCustomFont(
+                    'Cancelar',
+                    14,
+                    Colors.grey[600]!,
+                    1,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: blueColor,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                  ),
+                  child: _getCustomFont(
+                    'Abrir enlace',
+                    14,
+                    Colors.white,
+                    1,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+  }
+
   Widget _buildLinkCard(String title, String url, Color iconColor) {
     return GestureDetector(
       onTap: () async {
         try {
-          // Verificar si la URL es válida y agregarle protocolo si es necesario
-          String finalUrl = url;
-          if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            finalUrl = 'https://$url';
+          // Validar que la URL no esté vacía
+          if (url.trim().isEmpty) {
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('URL no válida o vacía'),
+                  backgroundColor: Colors.red,
+                  duration: Duration(seconds: 3),
+                ),
+              );
+            }
+            return;
           }
+
+          // Verificar si la URL es válida y agregarle protocolo si es necesario
+          String finalUrl = url.trim();
+          if (!finalUrl.startsWith('http://') &&
+              !finalUrl.startsWith('https://')) {
+            finalUrl = 'https://$finalUrl';
+          }
+
+          // Mostrar diálogo de confirmación
+          final bool confirmed = await _showExternalLinkDialog(finalUrl);
+
+          if (!confirmed) {
+            print('❌ Usuario canceló la apertura del enlace');
+            return;
+          }
+
+          // Debug: Imprimir la URL final
+          print('🔗 Intentando abrir URL: $finalUrl');
 
           final Uri uri = Uri.parse(finalUrl);
 
-          // Intentar abrir la URL
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          // Validar que el URI sea válido
+          if (!uri.hasScheme || uri.host.isEmpty) {
+            print(
+                '❌ URI inválido - Scheme: ${uri.hasScheme}, Host: ${uri.host}');
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('URL no válida: $url'),
+                  backgroundColor: Colors.red,
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            }
+            return;
+          }
+
+          print('✅ URI válido - Verificando si se puede lanzar...');
+
+          // Intentar lanzar directamente sin verificar canLaunchUrl
+          // ya que canLaunchUrl puede fallar incluso cuando launchUrl funciona
+          bool launched = await launchUrl(
+            uri,
+            mode: LaunchMode.externalApplication,
+          );
+
+          if (launched) {
+            print('✅ URL lanzada exitosamente');
           } else {
+            print('❌ No se pudo lanzar la URL');
             // Si no se puede abrir, mostrar mensaje de error
-            // ignore: use_build_context_synchronously
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No se puede abrir el enlace: $url'),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 3),
-              ),
-            );
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('No se puede abrir el enlace: $url'),
+                  backgroundColor: Colors.red,
+                  duration: const Duration(seconds: 3),
+                  action: SnackBarAction(
+                    label: 'Copiar',
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Clipboard.setData(ClipboardData(text: finalUrl));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('URL copiada al portapapeles'),
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
           }
         } catch (e) {
           // Manejo de errores
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Error al abrir el enlace: $url'),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-            ),
-          );
+          print('❌ Error al abrir el enlace: $e');
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Error al abrir el enlace: ${e.toString()}'),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 3),
+                action: SnackBarAction(
+                  label: 'Copiar',
+                  textColor: Colors.white,
+                  onPressed: () {
+                    String finalUrl = url.trim();
+                    if (!finalUrl.startsWith('http://') &&
+                        !finalUrl.startsWith('https://')) {
+                      finalUrl = 'https://$finalUrl';
+                    }
+                    Clipboard.setData(ClipboardData(text: finalUrl));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('URL copiada al portapapeles'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          }
         }
       },
       child: Container(
@@ -497,8 +688,8 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                       fontWeight: FontWeight.w500),
                   SizedBox(height: 4.h),
                   _getCustomFont(
-                    "Toca para abrir enlace",
-                    12,
+                    url, // Mostrar la URL real en lugar de texto genérico
+                    11,
                     iconColor,
                     1,
                     fontWeight: FontWeight.w400,
@@ -518,4 +709,3 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     );
   }
 }
-

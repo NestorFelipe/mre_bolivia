@@ -177,7 +177,7 @@ Widget renderHtmlContent(String? htmlText) {
     data: htmlText,
     style: {
       "body": Style(
-        fontSize: FontSize(14.0),
+        fontSize: FontSize(16.0),
         lineHeight: LineHeight.em(1.4),
         fontFamily: Constant.fontsFamily,
         margin: Margins.zero,

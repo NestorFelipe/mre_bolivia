@@ -42,34 +42,34 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
   // Acceso al controlador
   TabHomeController get controller => Get.find<TabHomeController>();
 
-  Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
-        padding: padding,
-        child: child,
-      );
+  // Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
+  //       padding: padding,
+  //       child: child,
+  //     );
 
-  Widget _getCustomFont(
-    String text,
-    double fontSize,
-    Color color,
-    int maxLines, {
-    FontWeight fontWeight = FontWeight.normal,
-    TextAlign textAlign = TextAlign.start,
-    double? height,
-  }) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize.sp,
-        color: color,
-        fontWeight: fontWeight,
-        fontFamily: Constant.fontsFamily,
-        height: height,
-      ),
-      maxLines: maxLines,
-      overflow: TextOverflow.ellipsis,
-      textAlign: textAlign,
-    );
-  }
+  // Widget _getCustomFont(
+  //   String text,
+  //   double fontSize,
+  //   Color color,
+  //   int maxLines, {
+  //   FontWeight fontWeight = FontWeight.normal,
+  //   TextAlign textAlign = TextAlign.justify,
+  //   double? height,
+  // }) {
+  //   return Text(
+  //     text,
+  //     style: TextStyle(
+  //       fontSize: fontSize.sp,
+  //       color: color,
+  //       fontWeight: fontWeight,
+  //       fontFamily: Constant.fontsFamily,
+  //       height: height,
+  //     ),
+  //     maxLines: maxLines,
+  //     overflow: TextOverflow.ellipsis,
+  //     textAlign: textAlign,
+  //   );
+  // }
 
   /// Toolbar personalizado sin dependencia de FetchPixels
   Widget _getToolbar(String titulo) {
@@ -92,7 +92,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
         Expanded(
           child: Container(
             alignment: Alignment.center,
-            child: _getCustomFont(
+            child: getCustomFont(
               titulo,
               24,
               const Color.fromARGB(255, 51, 51, 51),
@@ -142,7 +142,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
             Column(
               children: [
                 getVerSpace(35.w),
-                _getPaddingWidget(
+                getPaddingWidget(
                   EdgeInsets.symmetric(horizontal: 18.w),
                   _getToolbar(servicio!.titulo),
                 ),
@@ -152,7 +152,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
                     primary: true,
                     shrinkWrap: true,
                     children: [
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
                         Container(
                           width: double.infinity,
@@ -202,16 +202,16 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
                       ),
                       getVerSpace(16.w),
                       // Información adicional
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
-                        _getCustomFont("Información Adicional", 18,
+                        getCustomFont("Información Adicional", 18,
                             const Color.fromARGB(255, 53, 53, 53), 1,
                             fontWeight: FontWeight.w800),
                       ),
                       getVerSpace(16.w),
 
                       // Tarjetas de información
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
                         Column(
                           children: [
@@ -335,8 +335,9 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
-                      fontWeight: FontWeight.w500),
+                  // getCustomFont(title, 18, Colors.grey[900]!, 1,
+                  //     fontWeight: FontWeight.w500),
+                  renderHtmlContent(title),
                   SizedBox(height: 4.h),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
@@ -436,10 +437,10 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
+                  getCustomFont(title, 14, Colors.grey[600]!, 1,
                       fontWeight: FontWeight.w500),
                   SizedBox(height: 4.h),
-                  _getCustomFont(
+                  getCustomFont(
                     "Toca para abrir enlace",
                     12,
                     iconColor,
@@ -461,4 +462,3 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
     );
   }
 }
-
