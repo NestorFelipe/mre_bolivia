@@ -5,6 +5,8 @@ import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'package:visibility_detector/visibility_detector.dart';
 import '../../../../base/constant.dart';
 import '../../../app/routes/app_routes.dart';
 import '../shared_controller.dart';
@@ -36,6 +38,10 @@ class TabHomeController extends GetxController {
 
   // Para manejar la expansión de cards en ConsuladosScreen
   final RxSet<int> expandedCards = <int>{}.obs;
+
+  // Timer para auto-scroll del PageView
+  Timer? _autoScrollTimer;
+  bool _isVisible = false;
 
   // Método para toggle de expansión de cards
   void toggleCardExpansion(int index) {
@@ -191,6 +197,46 @@ class TabHomeController extends GetxController {
       _hasConsultadoError.value = true;
       _consultadoErrorMessage.value = 'Controlador no disponible';
     }
+  }
+
+  // Iniciar auto-scroll del PageView
+  void _startAutoScroll() {
+    _autoScrollTimer?.cancel();
+    _autoScrollTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
+      if (_isVisible && pageController.hasClients) {
+        final definiciones = getSliderDefiniciones();
+        if (definiciones.isNotEmpty) {
+          final nextPage = (selectedPage.value + 1) % definiciones.length;
+          pageController.animateToPage(nextPage,
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeInOut);
+          changePage(nextPage);
+        }
+      }
+    });
+  }
+
+  // Detener auto-scroll del PageView
+  void _stopAutoScroll() {
+    _autoScrollTimer?.cancel();
+    _autoScrollTimer = null;
+  }
+
+  // Manejar cambios de visibilidad
+  void onVisibilityChanged(VisibilityInfo info) {
+    _isVisible = info.visibleFraction > 0;
+    if (_isVisible) {
+      _startAutoScroll();
+    } else {
+      _stopAutoScroll();
+    }
+  }
+
+  @override
+  void onClose() {
+    _stopAutoScroll();
+    pageController.dispose();
+    super.onClose();
   }
 
   // Navegar a la página de detalle de definición

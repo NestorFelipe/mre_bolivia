@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import '../../../base/color_data.dart';
 import '../../../base/constant.dart';
@@ -34,35 +34,6 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
     }
   }
 
-  Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
-        padding: padding,
-        child: child,
-      );
-
-  Widget _getCustomFont(
-    String text,
-    double fontSize,
-    Color color,
-    int maxLines, {
-    FontWeight fontWeight = FontWeight.normal,
-    TextAlign textAlign = TextAlign.start,
-    double? height,
-  }) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize.sp,
-        color: color,
-        fontWeight: fontWeight,
-        fontFamily: Constant.fontsFamily,
-        height: height,
-      ),
-      maxLines: maxLines,
-      overflow: TextOverflow.ellipsis,
-      textAlign: textAlign,
-    );
-  }
-
   Widget _getButton(
     BuildContext context,
     Color bgColor,
@@ -89,7 +60,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
           boxShadow: boxShadow,
         ),
         child: Center(
-          child: _getCustomFont(text, fontSize, textColor, 1,
+          child: getCustomFont(text, fontSize, textColor, 1,
               fontWeight: weight, textAlign: TextAlign.center),
         ),
       ),
@@ -117,7 +88,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
         Expanded(
           child: Container(
             alignment: Alignment.center,
-            child: _getCustomFont(
+            child: getCustomFont(
               titulo,
               24,
               const Color.fromARGB(255, 51, 51, 51),
@@ -256,16 +227,16 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                       getVerSpace(15),
 
                       // Información adicional
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
-                        _getCustomFont(
+                        getCustomFont(
                             "Información Adicional", 18, Colors.black, 1,
                             fontWeight: FontWeight.w800),
                       ),
                       getVerSpace(16),
 
                       // Tarjetas de información
-                      _getPaddingWidget(
+                      getPaddingWidget(
                         EdgeInsets.symmetric(horizontal: 20.w),
                         Column(
                           children: [
@@ -280,7 +251,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                                   children: [
                                     // Verificar si es un enlace
                                     detalle.tipo == "link"
-                                        ? _buildLinkCard(
+                                        ? buildLinkCard(
                                             detalle.titulo,
                                             detalle.descripcion ?? "",
                                             index % 3 == 0
@@ -288,6 +259,8 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                                                 : (index % 3 == 1
                                                     ? Colors.green
                                                     : Colors.orange),
+                                            context,
+                                            mounted,
                                           )
                                         : _buildInfoCard(
                                             detalle.titulo,
@@ -392,8 +365,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _getCustomFont(title, 18, Colors.grey[900]!, 1,
-                      fontWeight: FontWeight.w700),
+                  renderHtmlContent(title),
                   SizedBox(height: 4.h),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
@@ -417,291 +389,6 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
                 color: iconColor,
                 size: 20.w,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Mostrar diálogo de confirmación antes de abrir enlace externo
-  Future<bool> _showExternalLinkDialog(String url) async {
-    return await showDialog<bool>(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.open_in_new,
-                    color: blueColor,
-                    size: 24.w,
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: _getCustomFont(
-                      'Salir a sistema externo',
-                      16,
-                      Colors.black87,
-                      2,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _getCustomFont(
-                    'Está a punto de ser redirigido a un sitio web externo:',
-                    14,
-                    Colors.black87,
-                    3,
-                  ),
-                  SizedBox(height: 12.h),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(color: Colors.grey[300]!),
-                    ),
-                    child: _getCustomFont(
-                      url,
-                      12,
-                      blueColor,
-                      3,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-                  _getCustomFont(
-                    '¿Desea continuar?',
-                    14,
-                    Colors.black54,
-                    1,
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  style: TextButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-                  ),
-                  child: _getCustomFont(
-                    'Cancelar',
-                    14,
-                    Colors.grey[600]!,
-                    1,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: blueColor,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                  ),
-                  child: _getCustomFont(
-                    'Abrir enlace',
-                    14,
-                    Colors.white,
-                    1,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-  }
-
-  Widget _buildLinkCard(String title, String url, Color iconColor) {
-    return GestureDetector(
-      onTap: () async {
-        try {
-          // Validar que la URL no esté vacía
-          if (url.trim().isEmpty) {
-            if (mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('URL no válida o vacía'),
-                  backgroundColor: Colors.red,
-                  duration: Duration(seconds: 3),
-                ),
-              );
-            }
-            return;
-          }
-
-          // Verificar si la URL es válida y agregarle protocolo si es necesario
-          String finalUrl = url.trim();
-          if (!finalUrl.startsWith('http://') &&
-              !finalUrl.startsWith('https://')) {
-            finalUrl = 'https://$finalUrl';
-          }
-
-          // Mostrar diálogo de confirmación
-          final bool confirmed = await _showExternalLinkDialog(finalUrl);
-
-          if (!confirmed) {
-            print('❌ Usuario canceló la apertura del enlace');
-            return;
-          }
-
-          // Debug: Imprimir la URL final
-          print('🔗 Intentando abrir URL: $finalUrl');
-
-          final Uri uri = Uri.parse(finalUrl);
-
-          // Validar que el URI sea válido
-          if (!uri.hasScheme || uri.host.isEmpty) {
-            print(
-                '❌ URI inválido - Scheme: ${uri.hasScheme}, Host: ${uri.host}');
-            if (mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('URL no válida: $url'),
-                  backgroundColor: Colors.red,
-                  duration: const Duration(seconds: 3),
-                ),
-              );
-            }
-            return;
-          }
-
-          print('✅ URI válido - Verificando si se puede lanzar...');
-
-          // Intentar lanzar directamente sin verificar canLaunchUrl
-          // ya que canLaunchUrl puede fallar incluso cuando launchUrl funciona
-          bool launched = await launchUrl(
-            uri,
-            mode: LaunchMode.externalApplication,
-          );
-
-          if (launched) {
-            print('✅ URL lanzada exitosamente');
-          } else {
-            print('❌ No se pudo lanzar la URL');
-            // Si no se puede abrir, mostrar mensaje de error
-            if (mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('No se puede abrir el enlace: $url'),
-                  backgroundColor: Colors.red,
-                  duration: const Duration(seconds: 3),
-                  action: SnackBarAction(
-                    label: 'Copiar',
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Clipboard.setData(ClipboardData(text: finalUrl));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('URL copiada al portapapeles'),
-                          backgroundColor: Colors.green,
-                          duration: Duration(seconds: 2),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
-            }
-          }
-        } catch (e) {
-          // Manejo de errores
-          print('❌ Error al abrir el enlace: $e');
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Error al abrir el enlace: ${e.toString()}'),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 3),
-                action: SnackBarAction(
-                  label: 'Copiar',
-                  textColor: Colors.white,
-                  onPressed: () {
-                    String finalUrl = url.trim();
-                    if (!finalUrl.startsWith('http://') &&
-                        !finalUrl.startsWith('https://')) {
-                      finalUrl = 'https://$finalUrl';
-                    }
-                    Clipboard.setData(ClipboardData(text: finalUrl));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('URL copiada al portapapeles'),
-                        backgroundColor: Colors.green,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            );
-          }
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(16.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black12, blurRadius: 8, offset: Offset(0.0, 2.0)),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 48.w,
-              height: 48.w,
-              decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Icon(
-                Icons.link,
-                color: iconColor,
-                size: 24.w,
-              ),
-            ),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _getCustomFont(title, 14, Colors.grey[600]!, 1,
-                      fontWeight: FontWeight.w500),
-                  SizedBox(height: 4.h),
-                  _getCustomFont(
-                    url, // Mostrar la URL real en lugar de texto genérico
-                    11,
-                    iconColor,
-                    1,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ],
-              ),
-            ),
-            // Icono de enlace externo
-            Icon(
-              Icons.open_in_new,
-              color: iconColor,
-              size: 20.w,
             ),
           ],
         ),

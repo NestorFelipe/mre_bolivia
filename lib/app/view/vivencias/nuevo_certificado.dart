@@ -598,8 +598,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       });
 
       final datosParaGuardar = ModelVivenciaSave(
-        // idperiodo: widget.controller.selectedPeriodo.value?.id,
-        idperiodo: 3, //TODO: Cambiar periodo seleccionado
+        idperiodo: widget.controller.selectedPeriodo.value?.id,
         idresidencia: selectedResidencia?.idresidencia,
         apoderado: apoderadoController.text.trim(),
         niapoderado: niApoderadoController.text.trim(),

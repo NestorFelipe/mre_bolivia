@@ -103,6 +103,7 @@ class CategoryScreen extends GetView<ConsuladoController> {
                                 imageUrl: modelServicio.imagen,
                                 height: 100,
                                 width: 150,
+                                fit: BoxFit.fill,
                               ),
                             ),
                             SizedBox(
@@ -146,4 +147,3 @@ class CategoryScreen extends GetView<ConsuladoController> {
         ));
   }
 }
-

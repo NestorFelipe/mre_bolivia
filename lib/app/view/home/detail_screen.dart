@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import 'package:url_launcher/url_launcher.dart';
 import '../../../controllers/consulado/tab_home_controller.dart';
 
 import '../../../base/color_data.dart';
@@ -42,35 +41,6 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
   // Acceso al controlador
   TabHomeController get controller => Get.find<TabHomeController>();
 
-  // Widget _getPaddingWidget(EdgeInsets padding, Widget child) => Padding(
-  //       padding: padding,
-  //       child: child,
-  //     );
-
-  // Widget _getCustomFont(
-  //   String text,
-  //   double fontSize,
-  //   Color color,
-  //   int maxLines, {
-  //   FontWeight fontWeight = FontWeight.normal,
-  //   TextAlign textAlign = TextAlign.justify,
-  //   double? height,
-  // }) {
-  //   return Text(
-  //     text,
-  //     style: TextStyle(
-  //       fontSize: fontSize.sp,
-  //       color: color,
-  //       fontWeight: fontWeight,
-  //       fontFamily: Constant.fontsFamily,
-  //       height: height,
-  //     ),
-  //     maxLines: maxLines,
-  //     overflow: TextOverflow.ellipsis,
-  //     textAlign: textAlign,
-  //   );
-  // }
-
   /// Toolbar personalizado sin dependencia de FetchPixels
   Widget _getToolbar(String titulo) {
     return Row(
@@ -94,7 +64,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
             alignment: Alignment.center,
             child: getCustomFont(
               titulo,
-              24,
+              16,
               const Color.fromARGB(255, 51, 51, 51),
               2,
               fontWeight: FontWeight.w800,
@@ -223,7 +193,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
                                   children: [
                                     // Verificar si es un enlace
                                     detalle.tipo == "link"
-                                        ? _buildLinkCard(
+                                        ? buildLinkCard(
                                             detalle.titulo,
                                             detalle.descripcion ?? "",
                                             index % 3 == 0
@@ -231,7 +201,8 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
                                                 : (index % 3 == 1
                                                     ? Colors.green
                                                     : Colors.orange),
-                                          )
+                                            context,
+                                            mounted)
                                         : _buildInfoCard(
                                             detalle.titulo,
                                             detalle.descripcion ?? "",
@@ -335,8 +306,6 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // getCustomFont(title, 18, Colors.grey[900]!, 1,
-                  //     fontWeight: FontWeight.w500),
                   renderHtmlContent(title),
                   SizedBox(height: 4.h),
                   AnimatedSwitcher(
@@ -361,100 +330,6 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
                 color: iconColor,
                 size: 20.w,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLinkCard(String title, String url, Color iconColor) {
-    return GestureDetector(
-      onTap: () async {
-        try {
-          // Verificar si la URL es válida y agregarle protocolo si es necesario
-          String finalUrl = url;
-          if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            finalUrl = 'https://$url';
-          }
-
-          final Uri uri = Uri.parse(finalUrl);
-
-          // Intentar abrir la URL
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri, mode: LaunchMode.externalApplication);
-          } else {
-            // Si no se puede abrir, mostrar mensaje de error
-            // ignore: use_build_context_synchronously
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('No se puede abrir el enlace: $url'),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 3),
-              ),
-            );
-          }
-        } catch (e) {
-          // Manejo de errores
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Error al abrir el enlace: $url'),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-            ),
-          );
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(16.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black12, blurRadius: 8, offset: Offset(0.0, 2.0)),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 48.w,
-              height: 48.w,
-              decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Icon(
-                Icons.link,
-                color: iconColor,
-                size: 24.w,
-              ),
-            ),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  getCustomFont(title, 14, Colors.grey[600]!, 1,
-                      fontWeight: FontWeight.w500),
-                  SizedBox(height: 4.h),
-                  getCustomFont(
-                    "Toca para abrir enlace",
-                    12,
-                    iconColor,
-                    1,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ],
-              ),
-            ),
-            // Icono de enlace externo
-            Icon(
-              Icons.open_in_new,
-              color: iconColor,
-              size: 20.w,
             ),
           ],
         ),
