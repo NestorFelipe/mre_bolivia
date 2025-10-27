@@ -1,4 +1,3 @@
-import 'package:mre_bolivia/app/data/data_file.dart';
 import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
 import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 import 'package:mre_bolivia/app/ui/pages/components/image_cache.dart';
@@ -454,12 +453,6 @@ class TabHome extends StatelessWidget {
 
                           Servicio service = servicios[index];
 
-                          // Verificación de seguridad para DataFile.popularServiceList
-                          final fallbackImage =
-                              index < DataFile.popularServiceList.length
-                                  ? DataFile.popularServiceList[index].image
-                                  : null;
-
                           return GestureDetector(
                             onTap: () => controller.goToServicio(service),
                             child: Container(
@@ -483,10 +476,7 @@ class TabHome extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Hero(
-                                      tag: index <
-                                              DataFile.popularServiceList.length
-                                          ? DataFile.popularServiceList[index]
-                                          : "service_$index",
+                                      tag: "service_$index",
                                       child: Container(
                                         width: 150.w,
                                         height: 122.h,
@@ -500,7 +490,6 @@ class TabHome extends StatelessWidget {
                                           width: 140.w,
                                           height: 120.h,
                                           fit: BoxFit.fill,
-                                          fallbackAssetImage: fallbackImage,
                                         ),
                                       )),
                                   SizedBox(

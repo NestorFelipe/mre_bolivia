@@ -35,7 +35,7 @@ dependencies:
   carousel_slider: ^5.1.1
   dots_indicator: ^4.0.1
   dotted_line: ^3.2.3
-  syncfusion_flutter_datepicker: ^31.1.19
+
   intl: ^0.20.2
   flutter_masked_text2: ^0.9.1
   flutter_staggered_animations: ^1.1.1
@@ -58,8 +58,8 @@ dependencies:
   shimmer: ^3.0.0
 
   # face detection live camera
-  google_mlkit_face_detection: ^0.10.0
-  camera: ^0.10.5+9
+  google_mlkit_face_detection: ^0.13.1
+  camera: ^0.11.2+1
   image: ^4.1.7
   audioplayers: ^6.1.0
   wakelock_plus: ^1.2.8

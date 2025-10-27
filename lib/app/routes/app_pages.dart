@@ -1,49 +1,27 @@
-import 'package:mre_bolivia/app/view/address/edit_address_screen.dart';
-import 'package:mre_bolivia/app/view/address/my_address_screen.dart';
-import 'package:mre_bolivia/app/view/bookings/booking_detail.dart';
-import 'package:mre_bolivia/app/view/card/card_screen.dart';
 import 'package:mre_bolivia/app/view/consulado/consulados_screen.dart';
-import 'package:mre_bolivia/app/view/home/address_screen.dart';
-import 'package:mre_bolivia/app/view/home/region_screen.dart';
 import 'package:mre_bolivia/app/view/home/category_screen.dart';
-import 'package:mre_bolivia/app/view/home/date_time_screen.dart';
+
+import 'package:mre_bolivia/app/view/home/region_screen.dart';
 import 'package:mre_bolivia/app/view/home/home_screen.dart';
 import 'package:mre_bolivia/app/view/home/detail_screen.dart';
-import 'package:mre_bolivia/app/view/home/payment_screen.dart';
-import 'package:mre_bolivia/app/view/home/order_detail.dart';
+
 import 'package:mre_bolivia/app/view/home/tab/tab_aranceles.dart';
 import 'package:mre_bolivia/app/view/home/tab/tab_seguimiento_tramite.dart';
-import 'package:mre_bolivia/app/view/intro/intro_screen.dart';
 import 'package:mre_bolivia/app/view/vivencias/vista_certificado.dart';
 import 'package:mre_bolivia/app/view/vivencias/vivencia_screen.dart';
+import 'package:mre_bolivia/bindings/category_binding.dart';
 import 'package:mre_bolivia/bindings/vivencia_binding.dart';
-import 'package:mre_bolivia/app/view/notification_screen.dart';
-import 'package:mre_bolivia/app/view/profile/edit_profile_screen.dart';
-// import 'package:mre_bolivia/app/view/vivencias/nuevo_certificado.dart';
-import 'package:mre_bolivia/app/view/search/search_screen.dart';
-import 'package:mre_bolivia/app/view/setting/help_screen.dart';
-import 'package:mre_bolivia/app/view/setting/privacy_screen.dart';
-import 'package:mre_bolivia/app/view/setting/security_screen.dart';
-// import 'package:mre_bolivia/app/view/vivencias/lista_vivencia.dart';
-import 'package:mre_bolivia/app/view/setting/term_of_service_screen.dart';
-import 'package:mre_bolivia/app/view/signup/select_country.dart';
-import 'package:mre_bolivia/app/view/signup/signup_screen.dart';
-import 'package:mre_bolivia/app/view/signup/verify_screen.dart';
+
 import 'package:mre_bolivia/bindings/aranceles_binding.dart';
 import 'package:mre_bolivia/bindings/region_binding.dart';
-
 import 'package:get/get.dart';
 import 'package:mre_bolivia/bindings/seguimiento_tramite_binding.dart';
-
 import '../view/splash_screen.dart';
 import '../ui/pages/consulado_page.dart';
 import '../view/consulado/definicion_detail_screen.dart';
 import 'app_routes.dart';
 import '../../bindings/splash_binding.dart';
-import '../../bindings/intro_binding.dart';
-import '../../bindings/signup_binding.dart';
 import '../../bindings/home_binding.dart';
-import '../../bindings/category_binding.dart';
 import '../../bindings/consulado_binding.dart';
 
 class AppPages {
@@ -59,16 +37,6 @@ class AppPages {
       binding: SplashBinding(),
     ),
     GetPage(
-      name: Routes.introRoute,
-      page: () => const IntroScreen(),
-      binding: IntroBinding(),
-    ),
-    // GetPage(
-    //   name: Routes.loginRoute,
-    //   page: () => const LoginScreen(),
-    //   binding: LoginBinding(),
-    // ),
-    GetPage(
       name: Routes.forgotRoute,
       page: () => const ForgotPassword(),
     ),
@@ -78,27 +46,9 @@ class AppPages {
       binding: VivenciaBinding(),
     ),
     GetPage(
-      name: Routes.signupRoute,
-      page: () => const SignUpScreen(),
-      binding: SignUpBinding(),
-    ),
-    GetPage(
-      name: Routes.selectCountryRoute,
-      page: () => const SelectCountry(),
-    ),
-    GetPage(
-      name: Routes.verifyRoute,
-      page: () => const VerifyScreen(),
-    ),
-    GetPage(
       name: Routes.homeScreenRoute,
       page: () => HomeScreen(0),
       binding: HomeBinding(),
-    ),
-    GetPage(
-      name: Routes.categoryRoute,
-      page: () => const CategoryScreen(),
-      binding: CategoryBinding(),
     ),
     GetPage(
       name: Routes.regionRoute,
@@ -108,74 +58,6 @@ class AppPages {
     GetPage(
       name: Routes.detailRoute,
       page: () => const DetailScreen(),
-    ),
-    GetPage(
-      name: Routes.addressRoute,
-      page: () => const AddressScreen(),
-    ),
-    GetPage(
-      name: Routes.dateTimeRoute,
-      page: () => const DateTimeScreen(),
-    ),
-    GetPage(
-      name: Routes.paymentRoute,
-      page: () => const PaymentScreen(),
-    ),
-    GetPage(
-      name: Routes.orderDetailRoute,
-      page: () => const OrderDetail(),
-    ),
-    // GetPage(
-    //   name: Routes.profileRoute,
-    //   page: () => const NuevoCertificado(),
-    // ),
-    GetPage(
-      name: Routes.editProfileRoute,
-      page: () => const EditProfileScreen(),
-    ),
-    GetPage(
-      name: Routes.myAddressRoute,
-      page: () => const MyAddressScreen(),
-    ),
-    GetPage(
-      name: Routes.editAddressRoute,
-      page: () => const EditAddressScreen(),
-    ),
-    GetPage(
-      name: Routes.cardRoute,
-      page: () => const CardScreen(),
-    ),
-    // GetPage(
-    //   name: Routes.settingRoute,
-    //   page: () => const ListaVivencia(),
-    // ),
-    GetPage(
-      name: Routes.notificationRoutes,
-      page: () => const NotificationScreen(),
-    ),
-    GetPage(
-      name: Routes.searchRoute,
-      page: () => const SearchScreen(),
-    ),
-    GetPage(
-      name: Routes.bookingRoute,
-      page: () => const BookingDetail(),
-    ),
-    GetPage(
-      name: Routes.helpRoute,
-      page: () => const HelpScreen(),
-    ),
-    GetPage(
-      name: Routes.privacyRoute,
-      page: () => const PrivacyScreen(),
-    ),
-    GetPage(
-      name: Routes.securityRoute,
-      page: () => const SecurityScreen(),
-    ),
-    GetPage(
-      name: Routes.termOfServiceRoute,
-      page: () => const TermOfServiceScreen(),
     ),
     GetPage(
       name: Routes.consultadoRoute,
@@ -194,5 +76,10 @@ class AppPages {
         name: Routes.arancelesRoute,
         page: () => const Aranceles(),
         binding: ArancelesBinding()),
+    GetPage(
+      name: Routes.categoryRoute,
+      page: () => const CategoryScreen(),
+      binding: CategoryBinding(),
+    ),
   ];
 }

@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../app/data/data_file.dart';
-import '../app/models/model_category.dart';
+
 import '../app/routes/app_routes.dart';
 import '../base/constant.dart';
 import '../base/device_util.dart';
 
 class CategoryController extends GetxController {
   // Observable para la lista de categorías
-  RxList<ModelCategory> categoryList = <ModelCategory>[].obs;
-  
+  // RxList<ModelCategory> categoryList = <ModelCategory>[].obs;
+
   // Observable para el número de columnas del grid
   RxInt numberOfColumns = 3.obs;
-  
+
   // SharedPreferences para guardar índice seleccionado
   SharedPreferences? sharedPreferences;
 
@@ -26,8 +25,8 @@ class CategoryController extends GetxController {
   // Inicializar datos
   void _initializeData() {
     // Cargar datos de categorías
-    categoryList.assignAll(DataFile.categoryList);
-    
+    // categoryList.assignAll(DataFile.categoryList);
+
     // Configurar número de columnas según dispositivo
     numberOfColumns.value = DeviceUtil.isTablet ? 6 : 3;
   }
@@ -41,7 +40,7 @@ class CategoryController extends GetxController {
   void goToCategoryDetail(int index) {
     // Guardar índice seleccionado en SharedPreferences
     sharedPreferences?.setInt("category_index", index);
-    
+
     // Navegar a la pantalla de detalle
     Constant.sendToNext(Get.context!, Routes.detailRoute);
   }
@@ -52,17 +51,17 @@ class CategoryController extends GetxController {
   }
 
   // Método para filtrar categorías (funcionalidad adicional)
-  void searchCategories(String query) {
-    if (query.isEmpty) {
-      categoryList.assignAll(DataFile.categoryList);
-    } else {
-      categoryList.assignAll(
-        DataFile.categoryList.where((category) =>
-          category.name?.toLowerCase().contains(query.toLowerCase()) == true
-        ).toList()
-      );
-    }
-  }
+  // void searchCategories(String query) {
+  //   if (query.isEmpty) {
+  //     categoryList.assignAll(DataFile.categoryList);
+  //   } else {
+  //     categoryList.assignAll(
+  //       DataFile.categoryList.where((category) =>
+  //         category.name?.toLowerCase().contains(query.toLowerCase()) == true
+  //       ).toList()
+  //     );
+  //   }
+  // }
 
   // Método para refrescar datos
   void refreshData() {
