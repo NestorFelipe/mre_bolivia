@@ -17,6 +17,9 @@ class SplashController extends GetxController with WidgetsBindingObserver {
   RxBool consultadoLoaded = false.obs;
   RxBool isLoadingRegiones = false.obs;
   RxBool regionesLoaded = false.obs;
+  RxBool isLoadingTramiteServicios = false.obs;
+  RxBool tramiteServiciosLoaded = false.obs;
+
   RxBool allApisLoaded = false.obs;
   RxBool consuladoArancelLoaded = false.obs;
 
@@ -109,6 +112,7 @@ class SplashController extends GetxController with WidgetsBindingObserver {
         _loadRegionesData(),
         _loadConsultadoData(),
         _loadConsuladoForArancel(),
+        _loadTramiteServicios()
       ];
 
       try {
@@ -185,6 +189,23 @@ class SplashController extends GetxController with WidgetsBindingObserver {
     }
   }
 
+  /// Cargar datos del consulado (modificado para no interferir con UI)
+  Future<void> _loadTramiteServicios() async {
+    try {
+      if (consultadoController == null) return;
+
+      print('📡 Cargando datos de tramite servicios en segundo plano...');
+
+      await consultadoController!.loadTramiteServiciosData();
+
+      if (!isDisposed.value) {
+        tramiteServiciosLoaded.value = true;
+      }
+    } catch (e) {
+      print('❌ Error al cargar datos de tramite servicios: $e');
+    }
+  }
+
   /// Cargar datos de regiones (modificado para no interferir con UI)
   Future<void> _loadRegionesData() async {
     try {
@@ -222,13 +243,18 @@ class SplashController extends GetxController with WidgetsBindingObserver {
 
   /// Verificar si todas las APIs han cargado
   void _checkAllApisLoaded() {
-    if (consultadoLoaded.value && regionesLoaded.value) {
+    if (consultadoLoaded.value &&
+        regionesLoaded.value &&
+        tramiteServiciosLoaded.value &&
+        consuladoArancelLoaded.value) {
       allApisLoaded.value = true;
       print('🎉 Todas las APIs han cargado correctamente');
     } else {
       print('⏳ Esperando que terminen de cargar las APIs...');
       print('  - Consulado: ${consultadoLoaded.value}');
       print('  - Regiones: ${regionesLoaded.value}');
+      print('  - Trámite Servicios: ${tramiteServiciosLoaded.value}');
+      print('  - Consulado Arancel: ${consuladoArancelLoaded.value}');
     }
   }
 
@@ -309,6 +335,12 @@ class SplashController extends GetxController with WidgetsBindingObserver {
 
   /// Verificar si los datos de regiones están cargados
   bool get isRegionesDataLoaded => regionesLoaded.value;
+
+  /// Verificar si los datos de consulados para aranceles están cargados
+  bool get isConsuladoForArancelLoaded => consuladoArancelLoaded.value;
+
+  /// Verificar si los datos de trámite servicios están cargados
+  bool get isTramiteServiciosDataLoaded => tramiteServiciosLoaded.value;
 
   /// Verificar si todas las APIs están cargadas
   bool get areAllApisLoaded => allApisLoaded.value;

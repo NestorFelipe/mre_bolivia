@@ -2,6 +2,7 @@ import 'package:mre_bolivia/app/models/consulado/model_arancel_consulado.dart';
 import 'package:mre_bolivia/app/models/consulado/model_arancel_contacto_seccion.dart';
 import 'package:mre_bolivia/app/models/consulado/model_definicion_detail.dart';
 import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicios_tramites.dart';
 
 import 'api_service.dart';
 
@@ -70,6 +71,22 @@ class ConsuladoService {
       }
     } catch (e) {
       throw Exception('Error al obtener definiciones: $e');
+    }
+  }
+
+  Future<ServiciosTramitesResponse> obtenerTramiteServicios() async {
+    try {
+      final response = await ApiService.get()
+          .end('/Apostilla/tramites/servicios')
+          .runAsync<Map<String, dynamic>>();
+
+      if (response.success && response.data != null) {
+        return ServiciosTramitesResponse.fromJson(response.data!);
+      } else {
+        throw Exception('${response.mensaje} (Estado: ${response.estado})');
+      }
+    } catch (e) {
+      throw Exception('Error al obtener datos del consulado: $e');
     }
   }
 }

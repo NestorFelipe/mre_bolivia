@@ -6,6 +6,7 @@ import 'package:mre_bolivia/app/models/consulado/model_paises.dart';
 import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
 import 'package:mre_bolivia/app/models/consulado/model_seccion.dart';
 import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicios_tramites.dart';
 import 'package:mre_bolivia/base/constant.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +21,7 @@ class ConsuladoController extends GetxController {
   RxList<Servicio> servicios = <Servicio>[].obs;
   RxList<Arancel> aranceles = <Arancel>[].obs;
 
+  RxList<ServicioTramite> tramiteServicios = <ServicioTramite>[].obs;
   List<SeccionArancel> seccionArancel = [];
   // Datos del consulado
   List<Region>? consultadoData;
@@ -186,6 +188,28 @@ class ConsuladoController extends GetxController {
       hasError.value = true;
       errorMessage.value = e.toString();
       print('❌ Error al cargar datos de aranceles: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  /// Cargar datos tramite servicios
+  Future<void> loadTramiteServiciosData() async {
+    try {
+      isLoading.value = true;
+      hasError.value = false;
+      errorMessage.value = '';
+
+      print('📡 Cargando datos tramite servicios.');
+
+      final data = await _consultadoService!.obtenerTramiteServicios();
+      tramiteServicios.value = data.data;
+
+      print('✅ Datos de tramite servicios cargados correctamente');
+    } catch (e) {
+      hasError.value = true;
+      errorMessage.value = e.toString();
+      print('❌ Error al cargar datos de tramite servicios: $e');
     } finally {
       isLoading.value = false;
     }

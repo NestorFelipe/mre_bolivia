@@ -4,6 +4,7 @@ import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
 import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mre_bolivia/app/models/consulado/model_servicios_tramites.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -172,6 +173,14 @@ class TabHomeController extends GetxController {
     servicios.value = consultadoController!.definicionesData!.servicios;
     // ignore: invalid_use_of_protected_member
     return servicios.value;
+  }
+
+  List<ServicioTramite> getTramiteServicios() {
+    if (consultadoController?.tramiteServicios == null) {
+      return [];
+    }
+    // ignore: invalid_use_of_protected_member
+    return consultadoController!.tramiteServicios;
   }
 
   // Verificar si hay datos del consulado disponibles

@@ -1,6 +1,7 @@
 import 'package:mre_bolivia/app/models/consulado/model_regiones.dart';
 import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 import 'package:mre_bolivia/app/ui/pages/components/image_cache.dart';
+import 'package:mre_bolivia/app/ui/pages/components/redes_sociales.dart';
 import 'package:mre_bolivia/base/color_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -318,7 +319,6 @@ class TabHome extends StatelessWidget {
                     return const SizedBox.shrink();
                   }
                 }),
-                getVerSpace(20),
                 getPaddingWidget(
                   EdgeInsets.symmetric(horizontal: 20.w),
                   Row(
@@ -330,9 +330,9 @@ class TabHome extends StatelessWidget {
                     ],
                   ),
                 ),
-                getVerSpace(18),
+                getVerSpace(5),
                 SizedBox(
-                  height: 132.h,
+                  height: 130.h,
                   child: Obx(() {
                     try {
                       // Verificar si hay error o está cargando
@@ -409,9 +409,8 @@ class TabHome extends StatelessWidget {
                     ],
                   ),
                 ),
-                getVerSpace(16),
                 SizedBox(
-                  height: 215.h,
+                  height: 198.h,
                   child: Obx(() {
                     try {
                       // Verificar si hay error o está cargando
@@ -466,7 +465,7 @@ class TabHome extends StatelessWidget {
                                         offset: Offset(0.0, 4.0)),
                                   ],
                                   borderRadius: BorderRadius.circular(12.r)),
-                              padding: EdgeInsets.all(12.w),
+                              padding: EdgeInsets.all(14.w),
                               margin: EdgeInsets.only(
                                   left: index == 0 ? 20.w : 0,
                                   bottom: 24.h,
@@ -479,7 +478,7 @@ class TabHome extends StatelessWidget {
                                       tag: "service_$index",
                                       child: Container(
                                         width: 150.w,
-                                        height: 122.h,
+                                        height: 110.h,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12.r),
@@ -488,30 +487,18 @@ class TabHome extends StatelessWidget {
                                         child: CustomCacheImage(
                                           imageUrl: service.imagen,
                                           width: 140.w,
-                                          height: 120.h,
+                                          height: 110.h,
                                           fit: BoxFit.fill,
                                         ),
                                       )),
                                   SizedBox(
                                     width: 153.w,
-                                    height: 30.h,
+                                    height: 28.h,
                                     child: getCustomFont(service.titulo, 11,
                                         Colors.grey[600]!, 2,
                                         textAlign: TextAlign.center,
                                         fontWeight: FontWeight.w800),
                                   ),
-                                  // SizedBox(
-                                  //   width: 153.w,
-                                  //   child: Align(
-                                  //       alignment: Alignment.topLeft,
-                                  //       child: getCustomFont(
-                                  //         service.descripcion,
-                                  //         12,
-                                  //         Colors.grey[600]!,
-                                  //         1,
-                                  //         fontWeight: FontWeight.w400,
-                                  //       )),
-                                  // )
                                 ],
                               ),
                             ),
@@ -522,7 +509,8 @@ class TabHome extends StatelessWidget {
                       return const SizedBox.shrink();
                     }
                   }),
-                )
+                ),
+                const RedesSocialesWidget(),
               ],
             ),
           )

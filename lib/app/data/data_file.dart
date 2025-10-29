@@ -1,5 +1,6 @@
 import 'package:mre_bolivia/app/models/consulado/model_ciudad.dart';
 import 'package:mre_bolivia/app/models/consulado/model_departamento.dart';
+import 'package:mre_bolivia/app/models/consulado/model_redes_sociales.dart';
 import 'package:mre_bolivia/app/models/consulado/model_residencia.dart';
 
 class DataFile {
@@ -66,5 +67,46 @@ class DataFile {
       idciudad: 5902,
       descripcion: "Santa Cruz",
     ),
+  ];
+
+  static List<RedesSociales> redesSociales = [
+    RedesSociales(
+        icono: "facebook.svg",
+        id: 1,
+        nombre: "FaceBook",
+        url: "https://www.facebook.com/CancilleriaBolivia",
+        isActive: true),
+    RedesSociales(
+        icono: "twitter.svg",
+        id: 2,
+        nombre: "X-Twitter",
+        url: "https://x.com/MRE_Bolivia",
+        isActive: true),
+    RedesSociales(
+        icono: "tiktoker.svg",
+        id: 3,
+        nombre: "TikTok",
+        url: "https://www.tiktok.com/@cancilleriabolivia",
+        isActive: true),
+    RedesSociales(
+        icono: "youtube.svg",
+        id: 4,
+        nombre: "YouTube",
+        url: "https://www.youtube.com/@prensarree",
+        isActive: true),
+    RedesSociales(
+        icono: "instagram_fixed.svg",
+        id: 5,
+        nombre: "Instagram",
+        url:
+            "https://www.instagram.com/cancilleriabolivia/?igshid=MmJiY2I4NDBkZg%3D%3D",
+        isActive: true),
+    RedesSociales(
+        icono: "whatsapp.svg",
+        id: 6,
+        nombre: "WhatsApp",
+        url:
+            "https://api.whatsapp.com/send?phone=https://whatsapp.com/channel/0029VacUT241CYoPyObiYU0S",
+        isActive: false),
   ];
 }

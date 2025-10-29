@@ -38,10 +38,6 @@ class VivenciaController extends GetxController {
     checkLoginStatus();
   }
 
-  Future<void> fTest() async {
-    await VivenciasService().testService();
-  }
-
   Future<void> checkLoginStatus() async {
     bool loggedIn = await PrefData.isLogIn();
     isLoggedIn.value = loggedIn;
