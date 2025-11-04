@@ -239,7 +239,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
   Widget _renderScreenMain() {
     return Column(
       children: [
-        getVerSpace(35.w),
+        getVerSpace(55.h),
         getPaddingWidget(
           EdgeInsets.symmetric(horizontal: 18.w),
           _getToolbar(servicio!.titulo),
@@ -368,7 +368,7 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
   Widget _renderServiceApi() {
     return Column(
       children: [
-        getVerSpace(35.w),
+        getVerSpace(50.w),
         getPaddingWidget(
           EdgeInsets.symmetric(horizontal: 18.w),
           _getToolbar(servicio!.titulo),

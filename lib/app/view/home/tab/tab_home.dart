@@ -327,6 +327,8 @@ class TabHome extends StatelessWidget {
                     children: [
                       getCustomFont("Consulados", 20, Colors.black, 1,
                           fontWeight: FontWeight.w800),
+
+                          
                     ],
                   ),
                 ),
@@ -360,9 +362,9 @@ class TabHome extends StatelessWidget {
                             onTap: () => controller.goToRegion(region),
                             child: Container(
                               margin: EdgeInsets.only(
-                                  left: index == 0 ? 20.w : 0,
-                                  right: 20.w,
-                                  bottom: 28.h),
+                                  left: index == 0 ? 10.w : 0,
+                                  right: 10.w,
+                                  bottom: 27.h),
                               padding: EdgeInsets.only(top: 16.h, bottom: 12.h),
                               width: 91.w,
                               decoration: BoxDecoration(

@@ -327,7 +327,7 @@ class VivenciaHome extends StatelessWidget {
                                     backgroundColor: blueColor,
                                     foregroundColor: Colors.white,
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 40.w, vertical: 15.h),
+                                        horizontal: 25.w, vertical: 15.h),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15.h),
                                     ),
@@ -346,7 +346,7 @@ class VivenciaHome extends StatelessWidget {
                                   backgroundColor: Colors.red,
                                   foregroundColor: Colors.white,
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 40.w, vertical: 15.h),
+                                      horizontal: 25.w, vertical: 15.h),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15.h),
                                   ),

@@ -165,7 +165,7 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
             // Contenido original
             Column(
               children: [
-                getVerSpace(25),
+                getVerSpace(50.h),
                 getPaddingWidget(
                   EdgeInsets.symmetric(horizontal: 18.w),
                   _getToolbar(definicion!.titulo),
