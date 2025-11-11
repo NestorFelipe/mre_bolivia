@@ -180,12 +180,10 @@ class LoginWidgetState extends State<LoginWidget> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 60.h),
-
                   // Logo del gobierno
                   Container(
-                    height: 220.h,
-                    width: 120.w,
+                    height: 300.h,
+                    width: 200.w,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/images/logo_escudo.png"),
@@ -193,8 +191,6 @@ class LoginWidgetState extends State<LoginWidget> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 40.h),
 
                   // Título
                   getCustomFont(
@@ -216,7 +212,7 @@ class LoginWidgetState extends State<LoginWidget> {
                     textAlign: TextAlign.center,
                   ),
 
-                  SizedBox(height: 40.h),
+                  SizedBox(height: 10.h),
 
                   // Campo CI
                   Container(
@@ -265,8 +261,6 @@ class LoginWidgetState extends State<LoginWidget> {
                       },
                     ),
                   ),
-
-                  SizedBox(height: 20.h),
 
                   // Campo Contraseña
                   Container(
