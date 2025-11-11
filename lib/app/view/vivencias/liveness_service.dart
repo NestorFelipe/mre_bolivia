@@ -259,26 +259,3 @@ class LivenessService {
   }
 }
 
-/// Ejemplo de uso:
-/// 
-/// ```dart
-/// // Después de obtener el resultado
-/// final result = await Navigator.push<LivenessResult>(...);
-/// 
-/// // Validar el resultado
-/// if (LivenessService.validateResult(result!)) {
-///   // Generar reporte
-///   final report = LivenessService.generateValidationReport(result);
-///   print('Confidence Score: ${report['confidenceScore']}');
-///   
-///   // Preparar para Kairos
-///   final payload = LivenessService.prepareKairosPayload(
-///     result: result,
-///     subjectId: LivenessService.generateSubjectId(prefix: 'user'),
-///     galleryName: 'my_gallery',
-///   );
-///   
-///   // Enviar a API
-///   await sendToAPI(payload);
-/// }
-/// ```

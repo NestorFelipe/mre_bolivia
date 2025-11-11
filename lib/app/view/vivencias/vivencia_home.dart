@@ -40,7 +40,9 @@ class VivenciaHome extends StatelessWidget {
                 ],
               ),
             ),
-            getAssetImage("logo.png", 280.h, 280.w, fit: BoxFit.cover),
+            getVerSpace(40.h),
+            getAssetImage("logo_escudo.png", 220.h, 130.w, fit: BoxFit.contain ),
+            getVerSpace(40.h),
             Expanded(
               child: Center(
                 child: Obx(() => Column(
@@ -289,7 +291,7 @@ class VivenciaHome extends StatelessWidget {
                               ],
                             ),
                           ),
-                        getVerSpace(20.h),
+                        getVerSpace(5.h),
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Row(
