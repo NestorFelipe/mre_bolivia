@@ -120,6 +120,20 @@ class LivenessService {
       // return false;
     }
 
+    // NUEVA VALIDACIÓN: Verificar que el rostro tenga tamaño adecuado
+    if (validationData.containsKey('faceRatio')) {
+      final faceRatio =
+          double.tryParse(validationData['faceRatio'] as String? ?? '0.0') ??
+              0.0;
+      if (faceRatio < 0.10) {
+        debugPrint(
+            '⚠️ Rostro muy pequeño en la imagen: ${faceRatio.toStringAsFixed(3)}');
+        return false;
+      }
+      debugPrint(
+          '✅ Tamaño de rostro adecuado: ${faceRatio.toStringAsFixed(3)}');
+    }
+
     debugPrint('✅ Resultado validado exitosamente');
     return true;
   }

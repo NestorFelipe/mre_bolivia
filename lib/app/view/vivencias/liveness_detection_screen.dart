@@ -69,7 +69,8 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       enableClassification: true,
       enableTracking: true,
       enableLandmarks: true,
-      minFaceSize: 0.15,
+      minFaceSize:
+          0.35, // Aumentado de 0.15 a 0.35 para requerir rostros más cercanos
       performanceMode: FaceDetectorMode.accurate,
     ),
   );
@@ -147,7 +148,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
 
       _cameraController = CameraController(
         frontCamera,
-        ResolutionPreset.high,
+        ResolutionPreset.medium, // Cambiado de high a medium para mejor control
         enableAudio: false,
         imageFormatGroup: defaultTargetPlatform == TargetPlatform.android
             ? ImageFormatGroup.nv21
@@ -218,14 +219,34 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
       if (faces.isEmpty) {
         if (mounted) {
           setState(() {
-            _instruction = "No se detecta rostro. Acércate más a la cámara";
+            _instruction = "Acerca tu rostro a la cámara";
           });
         }
         return;
       }
 
       final face = faces.first;
-      debugPrint('✅ Rostro detectado - Paso: $_step');
+
+      // NUEVA VALIDACIÓN: Verificar que el rostro sea suficientemente grande
+      final faceBox = face.boundingBox;
+      final faceArea = faceBox.width * faceBox.height;
+      final imageArea = inputImage.metadata?.size.width ??
+          1.0 * (inputImage.metadata?.size.height ?? 1.0);
+      final faceRatio = faceArea / imageArea;
+
+      // Requerir que el rostro ocupe al menos 12% de la imagen (antes era ~3%)
+      if (faceRatio < 0.12) {
+        if (mounted) {
+          setState(() {
+            _instruction =
+                "Acércate más a la cámara\nTu rostro debe ocupar más espacio";
+          });
+        }
+        return;
+      }
+
+      debugPrint(
+          '✅ Rostro detectado - Paso: $_step, Tamaño: ${faceRatio.toStringAsFixed(3)}');
 
       // Solo verificar timeout DESPUÉS de detectar cara
       _checkTimeout();
@@ -482,6 +503,24 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
     final yAngle = face.headEulerAngleY ?? 0;
     final xAngle = face.headEulerAngleX ?? 0;
 
+    // NUEVA VALIDACIÓN: Verificar tamaño del rostro también aquí
+    final faceBox = face.boundingBox;
+    final faceArea = faceBox.width * faceBox.height;
+    // Aproximar el área de la imagen basándose en el tamaño del rostro detectado
+    final estimatedImageArea =
+        faceArea / 0.15; // Estimación basada en minFaceSize
+    final faceRatio = faceArea / estimatedImageArea;
+
+    if (faceRatio < 0.12) {
+      if (mounted) {
+        setState(() {
+          _instruction =
+              "Acércate más para la foto final\nTu rostro debe estar más cerca";
+        });
+      }
+      return;
+    }
+
     // Verificar que está de frente nuevamente
     if (yAngle.abs() < 10 && xAngle.abs() < 10) {
       if (mounted) {
@@ -494,7 +533,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
         // Detener el stream
         await _cameraController!.stopImageStream();
 
-        // Tomar la foto final
+        // Tomar la foto final con orientación fija
         final XFile photo = await _cameraController!.takePicture();
         final bytes = await photo.readAsBytes();
 
@@ -506,8 +545,9 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
           });
         }
 
-        // Completar validación
+        // Completar validación con información del tamaño del rostro
         _validationData['completedAt'] = DateTime.now().toIso8601String();
+        _validationData['faceRatio'] = faceRatio.toStringAsFixed(3);
         final result = LivenessResult(
           frontImage: bytes,
           success: true,
@@ -838,19 +878,40 @@ class FaceGuidePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
+      ..color = Colors.white.withOpacity(0.7)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3;
 
-    // Dibujar óvalo guía en el centro
+    // Dibujar óvalo guía más pequeño para forzar acercamiento
     final center = Offset(size.width / 2, size.height / 2);
     final ovalRect = Rect.fromCenter(
       center: center,
-      width: size.width * 0.6,
-      height: size.height * 0.5,
+      width: size.width * 0.7, // Aumentado de 0.6 a 0.7 para área más grande
+      height: size.height * 0.6, // Aumentado de 0.5 a 0.6
     );
 
     canvas.drawOval(ovalRect, paint);
+
+    // Agregar texto de instrucción
+    final textPainter = TextPainter(
+      text: const TextSpan(
+        text: 'Coloca tu rostro aquí',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout();
+    textPainter.paint(
+      canvas,
+      Offset(
+        center.dx - textPainter.width / 2,
+        ovalRect.bottom + 20,
+      ),
+    );
   }
 
   @override

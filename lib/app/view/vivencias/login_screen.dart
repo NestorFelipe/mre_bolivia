@@ -201,7 +201,6 @@ class LoginWidgetState extends State<LoginWidget> {
                       ),
                     ),
                   ),
-
                   // Título
                   getCustomFont(
                     "Iniciar Sesión",
@@ -210,9 +209,7 @@ class LoginWidgetState extends State<LoginWidget> {
                     1,
                     fontWeight: FontWeight.w700,
                   ),
-
                   SizedBox(height: 8.h),
-
                   Text(
                     "Acceda a su cuenta de vivencias",
                     style: TextStyle(
@@ -221,9 +218,7 @@ class LoginWidgetState extends State<LoginWidget> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-
                   SizedBox(height: 10.h),
-
                   // Campo CI
                   Container(
                     key: _ciKey,
@@ -271,9 +266,7 @@ class LoginWidgetState extends State<LoginWidget> {
                       },
                     ),
                   ),
-
                   SizedBox(height: 16.h),
-
                   // Campo Contraseña
                   Container(
                     key: _passwordKey,
@@ -332,9 +325,7 @@ class LoginWidgetState extends State<LoginWidget> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: 32.h),
-
                   // Botón de login
                   SizedBox(
                     width: double.infinity,

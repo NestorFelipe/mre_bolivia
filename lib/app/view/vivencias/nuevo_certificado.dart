@@ -1005,7 +1005,8 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
           builder: (context) => LivenessDetectionScreen(
             config: LivenessConfig(
               requiredBlinks: 4, // Más parpadeos = más seguro
-              maxStepDurationSeconds: 20,
+              maxStepDurationSeconds:
+                  25, // Aumentado a 25 segundos por validación más estricta
               maxFailedAttempts: 3,
             ),
           ),
