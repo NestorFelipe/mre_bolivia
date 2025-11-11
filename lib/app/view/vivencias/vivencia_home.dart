@@ -102,47 +102,63 @@ class VivenciaHome extends StatelessWidget {
                                     child: InkWell(
                                       borderRadius: BorderRadius.circular(12.r),
                                       onTap: () async {
-                                        // Mostrar indicador de carga si es necesario
-                                        if (controller.vivencias.isEmpty) {
-                                          Get.dialog(
-                                            Center(
-                                              child: Container(
-                                                padding: EdgeInsets.all(20.w),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.r),
-                                                ),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    CircularProgressIndicator(
-                                                      color: blueColor,
+                                        try {
+                                          // Mostrar indicador de carga solo si no hay certificados ya cargados
+                                          if (controller.vivencias.isEmpty) {
+                                            Get.dialog(
+                                              WillPopScope(
+                                                onWillPop: () async => false,
+                                                child: Center(
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.all(20.w),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.r),
                                                     ),
-                                                    SizedBox(height: 16.h),
-                                                    Text(
-                                                      'Cargando certificados...',
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                        color: Colors.black87,
-                                                      ),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        CircularProgressIndicator(
+                                                          color: blueColor,
+                                                        ),
+                                                        SizedBox(height: 16.h),
+                                                        Text(
+                                                          'Cargando certificados...',
+                                                          style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            color:
+                                                                Colors.black87,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            barrierDismissible: false,
+                                              barrierDismissible: false,
+                                            );
+                                          }
+
+                                          await controller.setSelectPeriodo(
+                                              controller.periodos[index]);
+                                        } catch (e) {
+                                          Get.snackbar(
+                                            'Error',
+                                            'No se pudieron cargar los certificados. Intente nuevamente.',
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                            duration:
+                                                const Duration(seconds: 3),
                                           );
-                                        }
-
-                                        await controller.setSelectPeriodo(
-                                            controller.periodos[index]);
-
-                                        // Cerrar el diálogo si está abierto
-                                        if (Get.isDialogOpen ?? false) {
-                                          Get.back();
+                                        } finally {
+                                          // SIEMPRE cerrar el diálogo si está abierto
+                                          if (Get.isDialogOpen ?? false) {
+                                            Get.back();
+                                          }
                                         }
                                       },
                                       child: Padding(
@@ -285,29 +301,32 @@ class VivenciaHome extends StatelessWidget {
                                   onPressed: () async {
                                     // Mostrar indicador de carga
                                     Get.dialog(
-                                      Center(
-                                        child: Container(
-                                          padding: EdgeInsets.all(20.w),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12.r),
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CircularProgressIndicator(
-                                                color: blueColor,
-                                              ),
-                                              SizedBox(height: 16.h),
-                                              Text(
-                                                'Cargando certificados...',
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  color: Colors.black87,
+                                      WillPopScope(
+                                        onWillPop: () async => false,
+                                        child: Center(
+                                          child: Container(
+                                            padding: EdgeInsets.all(20.w),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.r),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                CircularProgressIndicator(
+                                                  color: blueColor,
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(height: 16.h),
+                                                Text(
+                                                  'Cargando certificados...',
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    color: Colors.black87,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -316,8 +335,16 @@ class VivenciaHome extends StatelessWidget {
 
                                     try {
                                       await controller.getListaVivencia();
+                                    } catch (e) {
+                                      Get.snackbar(
+                                        'Error',
+                                        'No se pudieron cargar los certificados. Verifique su conexión e intente nuevamente.',
+                                        backgroundColor: Colors.red,
+                                        colorText: Colors.white,
+                                        duration: const Duration(seconds: 3),
+                                      );
                                     } finally {
-                                      // Cerrar el diálogo si está abierto
+                                      // SIEMPRE cerrar el diálogo sin importar qué pasó
                                       if (Get.isDialogOpen ?? false) {
                                         Get.back();
                                       }

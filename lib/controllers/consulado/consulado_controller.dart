@@ -11,6 +11,7 @@ import 'package:mre_bolivia/base/constant.dart';
 import 'package:get/get.dart';
 
 import '../../services/consulado_service.dart';
+import '../../services/offline_data_service.dart';
 import 'tab_home_controller.dart';
 
 class ConsuladoController extends GetxController {
@@ -135,10 +136,30 @@ class ConsuladoController extends GetxController {
 
       consultadoData = data.regiones;
       print('✅ Datos del consulado cargados correctamente');
+
+      // Guardar en cache para uso offline
+      try {
+        await _saveConsultadoDataToCache();
+      } catch (cacheError) {
+        print('⚠️ Error guardando en cache: $cacheError');
+      }
     } catch (e) {
       hasError.value = true;
       errorMessage.value = e.toString();
       print('❌ Error al cargar datos del consulado: $e');
+
+      // Intentar cargar desde cache si falla la conexión
+      try {
+        print('🔄 Intentando cargar desde cache...');
+        await loadConsultadoDataFromCache();
+        if (consultadoData != null && consultadoData!.isNotEmpty) {
+          hasError.value = false;
+          errorMessage.value = '';
+          print('✅ Datos del consulado cargados desde cache');
+        }
+      } catch (cacheError) {
+        print('❌ Error cargando desde cache: $cacheError');
+      }
     } finally {
       isLoading.value = false;
     }
@@ -206,10 +227,30 @@ class ConsuladoController extends GetxController {
       tramiteServicios.value = data.data;
 
       print('✅ Datos de tramite servicios cargados correctamente');
+
+      // Guardar en cache para uso offline
+      try {
+        await _saveTramiteServiciosToCache();
+      } catch (cacheError) {
+        print('⚠️ Error guardando trámites en cache: $cacheError');
+      }
     } catch (e) {
       hasError.value = true;
       errorMessage.value = e.toString();
-      print('❌ Error al cargar datos de tramite servicios: $e');
+      print('❌ Error al cargar datos tramite servicios: $e');
+
+      // Intentar cargar desde cache si falla la conexión
+      try {
+        print('🔄 Intentando cargar trámites desde cache...');
+        await loadTramiteServiciosFromCache();
+        if (tramiteServicios.isNotEmpty) {
+          hasError.value = false;
+          errorMessage.value = '';
+          print('✅ Datos de trámites cargados desde cache');
+        }
+      } catch (cacheError) {
+        print('❌ Error cargando trámites desde cache: $cacheError');
+      }
     } finally {
       isLoading.value = false;
     }
@@ -266,6 +307,72 @@ class ConsuladoController extends GetxController {
       servicios.assignAll(definicionesData!.servicios);
     }
     return servicios;
+  }
+
+  // Métodos para cache offline
+  Future<void> _saveConsultadoDataToCache() async {
+    if (consultadoData != null) {
+      final consultadoMap = {
+        'regiones': consultadoData!.map((region) => region.toJson()).toList(),
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      };
+      await OfflineDataService.saveConsultadoData(consultadoMap);
+      await OfflineDataService.saveRegionesData(
+          consultadoData!.map((region) => region.toJson()).toList());
+    }
+  }
+
+  Future<void> loadConsultadoDataFromCache() async {
+    final consultadoCache = await OfflineDataService.getConsultadoData();
+    if (consultadoCache != null && consultadoCache['regiones'] != null) {
+      final regionesList = consultadoCache['regiones'] as List;
+      consultadoData = regionesList
+          .map((regionJson) =>
+              Region.fromJson(regionJson as Map<String, dynamic>))
+          .toList();
+      print(
+          '✅ Datos de consulado restaurados desde cache (${consultadoData!.length} regiones)');
+    }
+  }
+
+  Future<void> _saveTramiteServiciosToCache() async {
+    if (tramiteServicios.isNotEmpty) {
+      final tramitesData = tramiteServicios
+          .map((tramite) => {
+                'id': tramite.id,
+                'nombre': tramite.nombre,
+                'descripcion': tramite.descripcion,
+                'entidadNombre': tramite.entidadNombre,
+                'entidadSigla': tramite.entidadSigla,
+                'entidadCodigoPortal': tramite.entidadCodigoPortal,
+                'precio': tramite.precio,
+                'codigoPortal': tramite.codigoPortal,
+                'monto': tramite.monto
+                    .map((m) => {
+                          'monto': m.monto,
+                          'cuenta': m.cuenta,
+                        })
+                    .toList(),
+                'otros': tramite.otros,
+                'url': tramite.url,
+              })
+          .toList();
+      await OfflineDataService.saveTramiteServiciosData(tramitesData);
+    }
+  }
+
+  Future<void> loadTramiteServiciosFromCache() async {
+    final tramitesData = await OfflineDataService.getTramiteServiciosData();
+    if (tramitesData != null && tramitesData.isNotEmpty) {
+      // Restaurar los datos de tramites desde cache
+      final List<ServicioTramite> tramitesFromCache = tramitesData.map((data) {
+        return ServicioTramite.fromJson(data as Map<String, dynamic>);
+      }).toList();
+
+      tramiteServicios.assignAll(tramitesFromCache);
+      print(
+          '✅ Servicios de tramites restaurados desde cache (${tramiteServicios.length} items)');
+    }
   }
 
   /// Refrescar datos (alias para reloadData)

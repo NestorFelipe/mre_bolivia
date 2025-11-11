@@ -111,31 +111,19 @@ class _DetailScreenState extends State<_DetailScreenWidget> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: backGroundColor,
-        body: Stack(
-          children: [
-            // Imagen de fondo superior izquierda
-            Positioned(
-              top: -50,
-              left: -50,
-              child:
-                  getAssetImage("chakanagris.png", 150, 150, fit: BoxFit.cover),
+        backgroundColor:
+            Colors.transparent, // Fondo transparente para mostrar la imagen
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/fondos.png"),
+              fit: BoxFit.cover, // Cubre toda la pantalla
             ),
-            // Imagen de fondo inferior derecha
-            Positioned(
-              bottom: -50,
-              right: -50,
-              child: Transform.rotate(
-                angle: 3.14159,
-                child: getAssetImage("chakanagris.png", 150, 150,
-                    fit: BoxFit.cover),
-              ),
-            ),
-            // Contenido condicional
-            servicio!.detalle.isNotEmpty && servicio!.detalle[0].tipo == 'data'
-                ? _renderServiceApi()
-                : _renderScreenMain(),
-          ],
+          ),
+          child: servicio!.detalle.isNotEmpty &&
+                  servicio!.detalle[0].tipo == 'data'
+              ? _renderServiceApi()
+              : _renderScreenMain(),
         ),
       ),
     );

@@ -8,7 +8,7 @@ import '../controllers/consulado/regiones_controller.dart';
 class SplashBinding extends Bindings {
   @override
   void dependencies() {
-    // Registrar servicios
+    // Registrar servicios principales
     Get.lazyPut<ConsuladoService>(() => ConsuladoService());
     Get.lazyPut<RegionesService>(() => RegionesService());
 
@@ -17,8 +17,7 @@ class SplashBinding extends Bindings {
     Get.put<ConsuladoController>(ConsuladoController(), permanent: true);
     Get.put<RegionesController>(RegionesController(), permanent: true);
 
-    // Registrar controlador de splash
+    // Registrar controladores de splash
     Get.lazyPut<SplashController>(() => SplashController());
   }
 }
-

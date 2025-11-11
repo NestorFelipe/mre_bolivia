@@ -187,6 +187,15 @@ class VivenciaController extends GetxController {
 
       return result;
     } catch (e) {
+      // Mostrar error específico para debugging
+      print('❌ Error en getListaVivencia: $e');
+      Get.snackbar(
+        'Error de Conexión',
+        'No se pudieron cargar los certificados. Verifique su conexión a internet.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+      );
       // Propagar el error para que la UI lo maneje
       rethrow;
     }

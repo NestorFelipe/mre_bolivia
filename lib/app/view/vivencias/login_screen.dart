@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../base/color_data.dart';
-import '../../../base/constant.dart';
 import '../../../base/widget_utils.dart';
 import '../../../controllers/consulado/vivencia_controller.dart';
 
@@ -23,7 +22,6 @@ class LoginWidgetState extends State<LoginWidget> {
   final GlobalKey _ciKey = GlobalKey();
   final GlobalKey _passwordKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
-  double _lastViewInset = 0.0;
 
   @override
   void initState() {
@@ -54,12 +52,11 @@ class LoginWidgetState extends State<LoginWidget> {
     bool showErrorSnackbar = false;
     String errorMessage = '';
 
-    // Mostrar indicador de carga usando showDialog del contexto
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return Center(
+    // Mostrar indicador de carga usando Get.dialog en lugar de showDialog del contexto
+    Get.dialog(
+      WillPopScope(
+        onWillPop: () async => false,
+        child: Center(
           child: Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
@@ -83,16 +80,19 @@ class LoginWidgetState extends State<LoginWidget> {
               ],
             ),
           ),
-        );
-      },
+        ),
+      ),
+      barrierDismissible: false,
     );
 
     try {
       // 1. Intentar login
       final loginResult = await widget.controller.login();
 
-      // Si el token no es válido, salir (el controlador ya mostró el mensaje)
+      // Si el login falló, salir (el controlador ya mostró el mensaje)
       if (loginResult.token == null || loginResult.token!.isEmpty) {
+        showErrorSnackbar = true;
+        errorMessage = 'Login fallido. Verifique sus credenciales.';
         return;
       }
 
@@ -101,14 +101,6 @@ class LoginWidgetState extends State<LoginWidget> {
 
       // 3. Intentar obtener periodos vigentes
       final periodosResult = await widget.controller.getPeriodoVigente();
-
-      // Cerrar el loading
-      if (mounted && Navigator.of(context).canPop()) {
-        Navigator.of(context).pop();
-      }
-
-      // Dar un delay para que el diálogo se cierre
-      await Future.delayed(const Duration(milliseconds: 150));
 
       // 4. Mostrar mensajes informativos según el resultado
       if (mounted) {
@@ -149,26 +141,25 @@ class LoginWidgetState extends State<LoginWidget> {
       print('Error en login: $e');
       showErrorSnackbar = true;
       errorMessage =
-          'Ocurrió un error en la conexión. Por favor, reintente más tarde.';
+          'Error de conexión. Verifique su internet e intente nuevamente.';
     } finally {
-      // SIEMPRE cerrar el diálogo sin importar qué pase
-      if (mounted && Navigator.of(context).canPop()) {
-        Navigator.of(context).pop();
+      // SIEMPRE cerrar el loading sin importar qué pasó
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
       }
 
-      // Si hubo una excepción (error de red, servidor, etc), mostrar snackbar
+      // Mostrar error si es necesario
       if (showErrorSnackbar) {
         // Dar un pequeño delay antes de mostrar el snackbar
         await Future.delayed(const Duration(milliseconds: 150));
 
         if (mounted) {
           Get.snackbar(
-            'Error',
+            'Error de Autenticación',
             errorMessage,
-            snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.red,
             colorText: Colors.white,
-            duration: const Duration(seconds: 5),
+            duration: const Duration(seconds: 3),
           );
         }
       }
@@ -177,191 +168,196 @@ class LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final double keyboardInset = MediaQuery.of(context).viewInsets.bottom;
-    final double bottomPadding = keyboardInset > 0 ? keyboardInset : 0;
-
-    if (keyboardInset != _lastViewInset) {
-      final bool keyboardOpened = keyboardInset > 0 && _lastViewInset == 0;
-      _lastViewInset = keyboardInset;
-
-      if (keyboardOpened) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(const Duration(milliseconds: 400), () {
-            if (_scrollController.hasClients && mounted) {
-              final maxScroll = _scrollController.position.maxScrollExtent;
-              if (maxScroll > 0) {
-                _scrollController.animateTo(
-                  maxScroll,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeOut,
-                );
-              }
-            }
-          });
-        });
-      }
-    }
-
-    return WillPopScope(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        backgroundColor: backGroundColor,
-        body: SafeArea(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: ListView(
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: backGroundColor,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: SingleChildScrollView(
               controller: _scrollController,
-              padding: EdgeInsets.only(bottom: 20.h),
-              primary: false,
-              shrinkWrap: true,
-              children: [
-                getAssetImage("logo.png", 240.h, 240.w, boxFit: BoxFit.cover),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: getCustomFont(
-                    "Iniciar Sesión",
-                    24,
-                    Colors.black,
-                    1,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: getCustomFont(
-                    "Indentificate para continuar",
-                    16,
-                    Colors.black,
-                    1,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                getVerSpace(5.h),
-                Container(
-                  key: _ciKey,
-                  child: TextField(
-                    focusNode: _ciFocus,
-                    controller: widget.controller.ciController,
-                    enabled: true,
-                    textInputAction: TextInputAction.next,
-                    onSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_passwordFocus);
-                    },
-                    decoration: InputDecoration(
-                      labelText: "Cedula de identidad",
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child:
-                            getSvgImage("info.svg", height: 16.h, width: 16.w),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.h),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.h),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.h),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 20.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 60.h),
+
+                  // Logo del gobierno
+                  Container(
+                    height: 220.h,
+                    width: 120.w,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/logo_escudo.png"),
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    keyboardType: TextInputType.number,
                   ),
-                ),
-                getVerSpace(15.h),
-                Obx(() => Container(
-                      key: _passwordKey,
-                      child: TextField(
-                        focusNode: _passwordFocus,
+
+                  SizedBox(height: 40.h),
+
+                  // Título
+                  getCustomFont(
+                    "Iniciar Sesión",
+                    28,
+                    const Color(0xFF14357D),
+                    1,
+                    fontWeight: FontWeight.w700,
+                  ),
+
+                  SizedBox(height: 8.h),
+
+                  Text(
+                    "Acceda a su cuenta de vivencias",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Colors.grey[600],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  SizedBox(height: 40.h),
+
+                  // Campo CI
+                  Container(
+                    key: _ciKey,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      controller: widget.controller.ciController,
+                      focusNode: _ciFocus,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(fontSize: 16.sp),
+                      decoration: InputDecoration(
+                        labelText: "Carnet de Identidad",
+                        labelStyle: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14.sp,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.person_outline,
+                          color: const Color(0xFF14357D),
+                          size: 20.sp,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h,
+                        ),
+                      ),
+                      onFieldSubmitted: (_) {
+                        _passwordFocus.requestFocus();
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: 20.h),
+
+                  // Campo Contraseña
+                  Container(
+                    key: _passwordKey,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Obx(
+                      () => TextFormField(
                         controller: widget.controller.passwordController,
-                        enabled: true,
-                        obscureText: widget.controller.isPassVisible.value,
-                        textInputAction: TextInputAction.done,
-                        onSubmitted: (_) {
-                          _handleLogin();
-                        },
-                        keyboardType: TextInputType.visiblePassword,
+                        focusNode: _passwordFocus,
+                        obscureText: !widget.controller.isPassVisible.value,
+                        style: TextStyle(fontSize: 16.sp),
                         decoration: InputDecoration(
-                          labelText: "Password",
-                          labelStyle: TextStyle(color: Colors.grey),
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: getSvgImage("lock.svg"),
+                          labelText: "Contraseña",
+                          labelStyle: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 14.sp,
+                          ),
+                          prefixIcon: Icon(
+                            Icons.lock_outline,
+                            color: const Color(0xFF14357D),
+                            size: 20.sp,
                           ),
                           suffixIcon: IconButton(
-                            icon: getSvgImage(
-                                widget.controller.isPassVisible.value
-                                    ? "eye.svg"
-                                    : "eye.svg"),
-                            onPressed: () {
-                              widget.controller.togglePasswordVisibility();
-                            },
+                            icon: Icon(
+                              widget.controller.isPassVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.grey[600],
+                              size: 20.sp,
+                            ),
+                            onPressed:
+                                widget.controller.togglePasswordVisibility,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            borderSide: BorderSide.none,
                           ),
                           filled: true,
                           fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.h),
-                            borderSide: BorderSide(color: Colors.grey.shade300),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.h),
-                            borderSide: BorderSide(color: Colors.grey.shade300),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.h),
-                            borderSide: BorderSide(color: Colors.grey.shade300),
-                          ),
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.w,
-                            vertical: 20.h,
+                            vertical: 16.h,
                           ),
                         ),
+                        onFieldSubmitted: (_) => _handleLogin(),
                       ),
-                    )),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, bottomPadding),
-          child: SizedBox(
-            height: 60.h,
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _handleLogin,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: blueColor,
-                foregroundColor: Colors.white,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.h),
-                ),
-              ),
-              child: Text(
-                "Ingresar",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+                    ),
+                  ),
+
+                  SizedBox(height: 32.h),
+
+                  // Botón de login
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50.h,
+                    child: ElevatedButton(
+                      onPressed: _handleLogin,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF14357D),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        elevation: 2,
+                      ),
+                      child: Text(
+                        "Iniciar Sesión",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
       ),
-      onWillPop: () async {
-        Constant.closeApp();
-        return false;
-      },
     );
   }
 }

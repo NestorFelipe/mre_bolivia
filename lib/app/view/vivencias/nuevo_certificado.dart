@@ -671,25 +671,23 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         // Recargar la lista de vivencias desde el servidor
         await widget.controller.getListaVivencia();
 
-        // Cerrar el loading
-        if (Get.isDialogOpen ?? false) {
-          Get.back();
-        }
-
         // Cerrar el formulario de nuevo certificado
         widget.controller.setIsNewCertificado(false);
 
         // Mostrar la vista de lista de vivencias
         widget.controller.setIsDetalle(true);
-      } catch (e) {
-        // Cerrar el loading
-        if (Get.isDialogOpen ?? false) {
-          Get.back();
-        }
 
         Get.snackbar(
+          'Éxito',
+          'Los certificados se han actualizado correctamente.',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
+      } catch (e) {
+        Get.snackbar(
           'Advertencia',
-          'El certificado se guardó correctamente, pero hubo un error al cargar la lista. Por favor, actualice manualmente.',
+          'El certificado se guardó correctamente, pero hubo un error al cargar la lista. Puede consultar manualmente desde el menú principal.',
           backgroundColor: Colors.orange,
           colorText: Colors.white,
           duration: const Duration(seconds: 4),
@@ -697,6 +695,11 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
         // Cerrar el formulario de todas formas
         widget.controller.setIsNewCertificado(false);
+      } finally {
+        // SIEMPRE cerrar el loading sin importar qué pasó
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
       }
     } catch (e) {
       setState(() {
@@ -1309,10 +1312,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       final modelResponse = PhotoUploadResponse.fromJson(photoResponse.data);
 
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-
       if (modelResponse.status != "1") {
         // Mostrar error y permitir reintentar
         final bool? reintentar = await Get.dialog<bool>(
@@ -1450,11 +1449,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       return imagenBase64;
     } catch (e) {
-      // Cerrar diálogo si está abierto
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-
       // Mostrar error y opción de reintentar
       final bool? reintentar = await Get.dialog<bool>(
         Dialog(
@@ -1550,6 +1544,11 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       }
 
       return null;
+    } finally {
+      // SIEMPRE cerrar el diálogo de validación sin importar qué pasó
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
     }
   }
 }

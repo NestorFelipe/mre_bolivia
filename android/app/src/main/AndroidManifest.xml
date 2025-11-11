@@ -40,7 +40,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     
    <application
-        android:label="MRE Bolivia"
+        android:label="Presidencia del Estado Plurinacional de Bolivia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:networkSecurityConfig="@xml/network_security_config"

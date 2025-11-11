@@ -551,8 +551,8 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
                 children: [
                   // Logo PNG a todo color
                   Image.asset(
-                    'assets/images/chakanafullcolor.png',
-                    width: 100,
+                    'assets/images/logo_escudo.png',
+                    width: 120,
                     height: 100,
                     fit: BoxFit.contain,
                   ),

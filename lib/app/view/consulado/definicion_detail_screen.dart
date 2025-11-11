@@ -142,160 +142,144 @@ class _DefinicionDetailScreenState extends State<DefinicionDetailScreen> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: backGroundColor,
-        body: Stack(
-          children: [
-            // Imagen de fondo superior izquierda
-            Positioned(
-              top: 50,
-              left: 0,
-              child:
-                  getAssetImage("chakanagris.png", 150, 150, fit: BoxFit.cover),
+        backgroundColor:
+            Colors.transparent, // Fondo transparente para mostrar la imagen
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/fondos.png"),
+              fit: BoxFit.cover, // Cubre toda la pantalla
             ),
-            // Imagen de fondo inferior derecha
-            Positioned(
-              bottom: 50,
-              right: 0,
-              child: Transform.rotate(
-                angle: 3.14159,
-                child: getAssetImage("chakanagris.png", 150, 150,
-                    fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              getVerSpace(50.h),
+              getPaddingWidget(
+                EdgeInsets.symmetric(horizontal: 18.w),
+                _getToolbar(definicion!.titulo),
               ),
-            ),
-            // Contenido original
-            Column(
-              children: [
-                getVerSpace(50.h),
-                getPaddingWidget(
-                  EdgeInsets.symmetric(horizontal: 18.w),
-                  _getToolbar(definicion!.titulo),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ListView(
-                    primary: true,
-                    shrinkWrap: true,
-                    children: [
-                      getPaddingWidget(
-                        EdgeInsets.symmetric(horizontal: 20.w),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.r),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 10,
-                                  offset: Offset(0.0, 4.0)),
-                            ],
-                          ),
-                          child: IntrinsicHeight(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Container(
-                                  width: 4.w,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.red, // Rojo
-                                        Colors.yellow, // Amarillo
-                                        Colors.green, // Verde
-                                      ],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                    ),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(12.0),
-                                      bottomLeft: Radius.circular(12.0),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(16.w),
-                                    child: renderHtmlContent(
-                                        definicion!.descripcion),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      getVerSpace(15),
-
-                      // Información adicional
-                      getPaddingWidget(
-                        EdgeInsets.symmetric(horizontal: 20.w),
-                        getCustomFont(
-                            "Información Adicional", 18, Colors.black, 1,
-                            fontWeight: FontWeight.w800),
-                      ),
-                      getVerSpace(16),
-
-                      // Tarjetas de información
-                      getPaddingWidget(
-                        EdgeInsets.symmetric(horizontal: 20.w),
-                        Column(
-                          children: [
-                            if (definicion!.detalle.isNotEmpty)
-                              ...definicion!.detalle
-                                  .asMap()
-                                  .entries
-                                  .map((entry) {
-                                int index = entry.key;
-                                var detalle = entry.value;
-                                return Column(
-                                  children: [
-                                    // Verificar si es un enlace
-                                    detalle.tipo == "link"
-                                        ? buildLinkCard(
-                                            detalle.titulo,
-                                            detalle.descripcion ?? "",
-                                            index % 3 == 0
-                                                ? blueColor
-                                                : (index % 3 == 1
-                                                    ? Colors.green
-                                                    : Colors.orange),
-                                            context,
-                                            mounted,
-                                          )
-                                        : _buildInfoCard(
-                                            detalle.titulo,
-                                            detalle.descripcion ?? "",
-                                            Icons.info_outline,
-                                            index % 3 == 0
-                                                ? blueColor
-                                                : (index % 3 == 1
-                                                    ? Colors.green
-                                                    : Colors.orange),
-                                            index),
-                                    if (index < definicion!.detalle.length - 1)
-                                      getVerSpace(12.w),
-                                  ],
-                                );
-                              })
-                            else
-                              _buildInfoCard(
-                                  "Sin detalles",
-                                  "No hay información adicional disponible",
-                                  Icons.info_outline,
-                                  Colors.grey,
-                                  0),
+              Expanded(
+                flex: 1,
+                child: ListView(
+                  primary: true,
+                  shrinkWrap: true,
+                  children: [
+                    getPaddingWidget(
+                      EdgeInsets.symmetric(horizontal: 20.w),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.r),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 10,
+                                offset: Offset(0.0, 4.0)),
                           ],
                         ),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                width: 4.w,
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Colors.red, // Rojo
+                                      Colors.yellow, // Amarillo
+                                      Colors.green, // Verde
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    bottomLeft: Radius.circular(12.0),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.w),
+                                  child: renderHtmlContent(
+                                      definicion!.descripcion),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      getVerSpace(40.w),
+                    ),
+                    getVerSpace(15),
 
-                      // Botón de contacto/más información
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
+                    // Información adicional
+                    getPaddingWidget(
+                      EdgeInsets.symmetric(horizontal: 20.w),
+                      getCustomFont(
+                          "Información Adicional", 18, Colors.black, 1,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    getVerSpace(16),
+
+                    // Tarjetas de información
+                    getPaddingWidget(
+                      EdgeInsets.symmetric(horizontal: 20.w),
+                      Column(
+                        children: [
+                          if (definicion!.detalle.isNotEmpty)
+                            ...definicion!.detalle.asMap().entries.map((entry) {
+                              int index = entry.key;
+                              var detalle = entry.value;
+                              return Column(
+                                children: [
+                                  // Verificar si es un enlace
+                                  detalle.tipo == "link"
+                                      ? buildLinkCard(
+                                          detalle.titulo,
+                                          detalle.descripcion ?? "",
+                                          index % 3 == 0
+                                              ? blueColor
+                                              : (index % 3 == 1
+                                                  ? Colors.green
+                                                  : Colors.orange),
+                                          context,
+                                          mounted,
+                                        )
+                                      : _buildInfoCard(
+                                          detalle.titulo,
+                                          detalle.descripcion ?? "",
+                                          Icons.info_outline,
+                                          index % 3 == 0
+                                              ? blueColor
+                                              : (index % 3 == 1
+                                                  ? Colors.green
+                                                  : Colors.orange),
+                                          index),
+                                  if (index < definicion!.detalle.length - 1)
+                                    getVerSpace(12.w),
+                                ],
+                              );
+                            })
+                          else
+                            _buildInfoCard(
+                                "Sin detalles",
+                                "No hay información adicional disponible",
+                                Icons.info_outline,
+                                Colors.grey,
+                                0),
+                        ],
+                      ),
+                    ),
+                    getVerSpace(40.w),
+
+                    // Botón de contacto/más información
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

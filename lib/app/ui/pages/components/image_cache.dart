@@ -52,7 +52,7 @@ class CustomCacheImage extends StatelessWidget {
 
   Widget _buildErrorImage() {
     // Usar imagen de fallback personalizada si está disponible
-    final assetPath = fallbackAssetImage ?? 'assets/images/chakanagris.png';
+    final assetPath = fallbackAssetImage ?? 'assets/images/logo.png';
 
     return Image.asset(
       assetPath,

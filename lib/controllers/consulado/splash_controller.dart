@@ -152,7 +152,7 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       print('🎬 Inicializando video...');
 
       // Ruta del video de splash (ajustar según tu archivo de video)
-      const videoPath = 'assets/videos/video_splash.webm';
+      const videoPath = 'assets/videos/splash_video.mp4';
 
       videoController = VideoPlayerController.asset(videoPath);
 
@@ -161,8 +161,12 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       if (!isDisposed.value) {
         showVideo.value = true;
         videoController!.addListener(_onVideoStateChanged);
+        // Silenciar el video
+        videoController!.setVolume(0.0);
+        // Configurar para bucle suave
+        videoController!.setLooping(true);
         videoController!.play();
-        print('✅ Video inicializado y reproduciendo');
+        print('✅ Video inicializado y reproduciendo en bucle (sin sonido)');
       }
     } catch (e) {
       print('❌ Error al inicializar video: $e');
@@ -262,16 +266,14 @@ class SplashController extends GetxController with WidgetsBindingObserver {
     if (videoController == null || isDisposed.value) return;
 
     final value = videoController!.value;
-    if (value.isInitialized &&
-        !value.isPlaying &&
-        value.position >= value.duration &&
-        value.duration.inMilliseconds > 0) {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        if (!isDisposed.value) {
-          _navigateToNext();
-        }
-      });
+
+    // Solo manejar errores del video, no terminación automática
+    if (value.hasError) {
+      print('❌ Error en el video: ${value.errorDescription}');
+      showVideo.value = false;
     }
+
+    // El video se reproduce en bucle, la navegación se maneja solo por timer
   }
 
   void _navigateToNext() {
