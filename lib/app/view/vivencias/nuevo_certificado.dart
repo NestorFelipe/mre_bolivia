@@ -1290,6 +1290,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       final token = await PrefData.getToken();
 
       if (idPersona.isEmpty) {
+        // CERRAR DIALOG ANTES DE LANZAR EXCEPCIÓN
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
         throw Exception('No se encontró el ID de persona');
       }
 
@@ -1309,6 +1313,11 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
           .header("Authorization", "Bearer $token")
           .end("/Apostilla/vivencia/agrega/certificado")
           .runAsync();
+
+      // CERRAR DIALOG DESPUÉS DE RESPUESTA EXITOSA
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
 
       final modelResponse = PhotoUploadResponse.fromJson(photoResponse.data);
 
@@ -1349,35 +1358,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                       height: 1.5,
                     ),
                   ),
-                  SizedBox(height: 8.h),
-                  Container(
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: Colors.orange.shade50,
-                      borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(color: Colors.orange.shade200),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Por favor, asegúrese de:',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.orange.shade900,
-                          ),
-                        ),
-                        SizedBox(height: 6.h),
-                        _buildInstructionItem(
-                            'Su rostro está completamente visible'),
-                        _buildInstructionItem('Hay suficiente iluminación'),
-                        _buildInstructionItem('No hay sombras sobre el rostro'),
-                        _buildInstructionItem(
-                            'Está mirando directamente a la cámara'),
-                      ],
-                    ),
-                  ),
                   SizedBox(height: 20.h),
                   Row(
                     children: [
@@ -1402,7 +1382,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                         child: ElevatedButton(
                           onPressed: () => Get.back(result: true),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF14357D),
+                            backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             padding: EdgeInsets.symmetric(vertical: 12.h),
                             shape: RoundedRectangleBorder(
@@ -1412,7 +1392,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.camera_alt, size: 18.sp),
+                              Icon(Icons.refresh, size: 18.sp),
                               SizedBox(width: 8.w),
                               Text(
                                 'Reintentar',
@@ -1449,6 +1429,11 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       return imagenBase64;
     } catch (e) {
+      // CERRAR DIALOG INMEDIATAMENTE EN CATCH
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+
       // Mostrar error y opción de reintentar
       final bool? reintentar = await Get.dialog<bool>(
         Dialog(
@@ -1517,16 +1502,23 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                       child: ElevatedButton(
                         onPressed: () => Get.back(result: true),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF14357D),
+                          backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           padding: EdgeInsets.symmetric(vertical: 12.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         ),
-                        child: Text(
-                          'Reintentar',
-                          style: TextStyle(fontSize: 14.sp),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.refresh, size: 18.sp),
+                            SizedBox(width: 8.w),
+                            Text(
+                              'Reintentar',
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -1544,11 +1536,6 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       }
 
       return null;
-    } finally {
-      // SIEMPRE cerrar el diálogo de validación sin importar qué pasó
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
     }
   }
 }

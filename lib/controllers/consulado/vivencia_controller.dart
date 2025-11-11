@@ -71,9 +71,8 @@ class VivenciaController extends GetxController {
       final result = await VivenciasService().authVivencia(ci, password);
 
       if (result.token == "" || result.token == null) {
-        Get.snackbar('Error',
-            'Credenciales inválidas, por favor verifique el nro de CI y contraseña y vuelva a intentar.',
-            backgroundColor: Colors.red, colorText: Colors.white);
+        // NO mostrar Get.snackbar aquí porque la UI ya maneja el error
+        return result; // Devolver resultado para que la UI lo maneje
       } else {
         final jwt = parseJwt(result.token!);
 

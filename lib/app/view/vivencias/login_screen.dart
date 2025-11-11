@@ -49,9 +49,6 @@ class LoginWidgetState extends State<LoginWidget> {
   void _ensureVisible(GlobalKey key) {}
 
   Future<void> _handleLogin() async {
-    bool showErrorSnackbar = false;
-    String errorMessage = '';
-
     // Mostrar indicador de carga usando Get.dialog en lugar de showDialog del contexto
     Get.dialog(
       WillPopScope(
@@ -91,8 +88,24 @@ class LoginWidgetState extends State<LoginWidget> {
 
       // Si el login falló, salir (el controlador ya mostró el mensaje)
       if (loginResult.token == null || loginResult.token!.isEmpty) {
-        showErrorSnackbar = true;
-        errorMessage = 'Login fallido. Verifique sus credenciales.';
+        // CERRAR DIALOG INMEDIATAMENTE
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
+
+        // Dar un pequeño delay antes de mostrar el snackbar
+        await Future.delayed(const Duration(milliseconds: 150));
+
+        // Mostrar mensaje de credenciales incorrectas
+        if (mounted) {
+          Get.snackbar(
+            'Error de Autenticación',
+            'Credenciales inválidas, por favor verifique el nro de CI y contraseña y vuelva a intentar.',
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 3),
+          );
+        }
         return;
       }
 
@@ -101,6 +114,11 @@ class LoginWidgetState extends State<LoginWidget> {
 
       // 3. Intentar obtener periodos vigentes
       final periodosResult = await widget.controller.getPeriodoVigente();
+
+      // CERRAR DIALOG ANTES DE MOSTRAR SNACKBARS
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
 
       // 4. Mostrar mensajes informativos según el resultado
       if (mounted) {
@@ -139,29 +157,22 @@ class LoginWidgetState extends State<LoginWidget> {
       }
     } catch (e) {
       print('Error en login: $e');
-      showErrorSnackbar = true;
-      errorMessage =
-          'Error de conexión. Verifique su internet e intente nuevamente.';
-    } finally {
-      // SIEMPRE cerrar el loading sin importar qué pasó
+      // CERRAR DIALOG INMEDIATAMENTE EN CATCH
       if (Get.isDialogOpen ?? false) {
         Get.back();
       }
 
-      // Mostrar error si es necesario
-      if (showErrorSnackbar) {
-        // Dar un pequeño delay antes de mostrar el snackbar
-        await Future.delayed(const Duration(milliseconds: 150));
+      // Dar un pequeño delay antes de mostrar el snackbar
+      await Future.delayed(const Duration(milliseconds: 150));
 
-        if (mounted) {
-          Get.snackbar(
-            'Error de Autenticación',
-            errorMessage,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 3),
-          );
-        }
+      if (mounted) {
+        Get.snackbar(
+          'Error de Autenticación',
+          'Error de conexión. Verifique su internet e intente nuevamente.',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
+        );
       }
     }
   }
@@ -182,8 +193,7 @@ class LoginWidgetState extends State<LoginWidget> {
                 children: [
                   // Logo del gobierno
                   Container(
-                    height: 300.h,
-                    width: 200.w,
+                    height: 150.h,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/images/logo_escudo.png"),
@@ -261,6 +271,8 @@ class LoginWidgetState extends State<LoginWidget> {
                       },
                     ),
                   ),
+
+                  SizedBox(height: 16.h),
 
                   // Campo Contraseña
                   Container(
