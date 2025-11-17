@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mre_bolivia/base/color_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,8 +25,8 @@ class _SplashImageScreenState extends State<SplashImageScreen>
   late Animation<int> _secondLineAnimation;
   late Animation<double> _explosionAnimation;
 
-  final String _firstLine = 'PRESIDENCIA DEL ESTADO';
-  final String _secondLinePart1 = 'PLURINACIONAL DE ';
+  final String _firstLine = 'Ministerio de Relaciones';
+  final String _secondLinePart1 = 'Exteriores de ';
   final String _secondLinePart2 = 'BOLIVIA';
 
   @override

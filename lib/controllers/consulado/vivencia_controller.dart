@@ -80,6 +80,8 @@ class VivenciaController extends GetxController {
         await PrefData.setToken(result.token!);
         await PrefData.setIdPersona(jwt.idPersona);
         await PrefData.setExpire(result.expiration!);
+        await PrefData.setLogIn(true);
+        isLoggedIn.value = true;
         isDetalle.value = false;
         isNewCertificado.value = false;
 
@@ -228,6 +230,10 @@ class VivenciaController extends GetxController {
 
   void goToSignUp() {
     Get.toNamed(Routes.signupRoute);
+  }
+
+  Future<bool> getIsLogin() async {
+    return await PrefData.isLogIn();
   }
 
   Future<void> setSelectPeriodo(Periodo periodo) async {

@@ -193,15 +193,36 @@ class LoginWidgetState extends State<LoginWidget> {
                 children: [
                   // Logo del gobierno
                   Container(
-                    height: 150.h,
+                    height: 120.h,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/logo_escudo.png"),
+                        image: AssetImage("assets/images/log_sin_fondo.png"),
                         fit: BoxFit.contain,
                       ),
                     ),
                   ),
                   // Título
+                  Text("Ministerio de Relaciones",
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black87)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Exteriores de ",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black87)),
+                      Text("BOLIVIA",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87)),
+                    ],
+                  ),
+                  getVerSpace(60.h),
                   getCustomFont(
                     "Iniciar Sesión",
                     28,

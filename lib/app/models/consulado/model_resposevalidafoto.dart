@@ -1,23 +1,31 @@
 class PhotoUploadResponse {
-  final String status;
-  final String codProcess;
+  final String tiporespuesta;
+  final String mensaje;
+  final bool exitosa;
+  final String codigo;
 
   PhotoUploadResponse({
-    required this.status,
-    required this.codProcess,
+    required this.tiporespuesta,
+    required this.mensaje,
+    required this.exitosa,
+    required this.codigo,
   });
 
   factory PhotoUploadResponse.fromJson(Map<String, dynamic> json) {
     return PhotoUploadResponse(
-      status: json['status'] as String,
-      codProcess: json['codProcess'] as String,
+      tiporespuesta: json['tiporespuesta'] as String? ?? '',
+      mensaje: json['mensaje'] as String? ?? '',
+      exitosa: json['exitosa'] as bool? ?? false,
+      codigo: json['codigo'] as String? ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'status': status,
-      'codProcess': codProcess,
+      'tiporespuesta': tiporespuesta,
+      'mensaje': mensaje,
+      'exitosa': exitosa,
+      'codigo': codigo,
     };
   }
 }

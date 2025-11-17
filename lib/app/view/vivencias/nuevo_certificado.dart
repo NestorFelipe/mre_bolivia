@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 // import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
 import 'package:mre_bolivia/app/data/data_file.dart';
 import 'package:mre_bolivia/app/models/consulado/model_ciudad.dart';
 import 'package:mre_bolivia/app/models/consulado/model_departamento.dart';
@@ -370,7 +371,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                           Text(
                             "Cancelar",
                             style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -378,10 +379,9 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   // Botón Guardar
                   Expanded(
-                    flex: 2,
                     child: ElevatedButton(
                       onPressed: isProcessing ? null : _guardarCertificado,
                       style: ElevatedButton.styleFrom(
@@ -423,9 +423,9 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                                 const Icon(Icons.save, size: 20),
                                 SizedBox(width: 8.w),
                                 Text(
-                                  "Guardar Certificado",
+                                  "Registrar",
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -634,45 +634,45 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       await Future.delayed(const Duration(milliseconds: 500));
 
       // Mostrar loading mientras se cargan los certificados
-      Get.dialog(
-        WillPopScope(
-          onWillPop: () async => false,
-          child: Center(
-            child: Container(
-              padding: EdgeInsets.all(24.w),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircularProgressIndicator(
-                    color: const Color(0xFF14357D),
-                  ),
-                  SizedBox(height: 16.h),
-                  Text(
-                    'Cargando certificados...',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        barrierDismissible: false,
-      );
+      // Get.dialog(
+      //   WillPopScope(
+      //     onWillPop: () async => false,
+      //     child: Center(
+      //       child: Container(
+      //         padding: EdgeInsets.all(24.w),
+      //         decoration: BoxDecoration(
+      //           color: Colors.white,
+      //           borderRadius: BorderRadius.circular(12.r),
+      //         ),
+      //         child: Column(
+      //           mainAxisSize: MainAxisSize.min,
+      //           children: [
+      //             CircularProgressIndicator(
+      //               color: const Color(0xFF14357D),
+      //             ),
+      //             SizedBox(height: 16.h),
+      //             Text(
+      //               'Cargando certificados...',
+      //               style: TextStyle(
+      //                 fontSize: 14.sp,
+      //                 fontWeight: FontWeight.w600,
+      //                 color: Colors.black87,
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      //   barrierDismissible: false,
+      // );
 
       try {
-        // Recargar la lista de vivencias desde el servidor
-        await widget.controller.getListaVivencia();
-
         // Cerrar el formulario de nuevo certificado
         widget.controller.setIsNewCertificado(false);
+
+        // Recargar la lista de vivencias desde el servidor
+        await widget.controller.getListaVivencia();
 
         // Mostrar la vista de lista de vivencias
         widget.controller.setIsDetalle(true);
@@ -700,6 +700,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         if (Get.isDialogOpen ?? false) {
           Get.back();
         }
+
+        setState(() {
+          isProcessing = false;
+        });
       }
     } catch (e) {
       setState(() {
@@ -1033,8 +1037,17 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       }
 
       if (result.frontImage != null) {
-        // Mostrar preview de la imagen capturada con opción de confirmar o reintentar
-        final base64Image = base64Encode(result.frontImage!);
+        // Recortar la imagen para que sea cuadrada
+        final image = img.decodeImage(result.frontImage!)!;
+        final size = image.width < image.height ? image.width : image.height;
+        final offsetX = (image.width - size) ~/ 2;
+        final offsetY = (image.height - size) ~/ 2;
+        final squareImage = img.copyCrop(image,
+            x: offsetX, y: offsetY, width: size, height: size);
+
+        // Convertir a bytes y codificar en base64
+        final squareImageBytes = img.encodeJpg(squareImage);
+        final base64Image = base64Encode(squareImageBytes);
         imageDataUri = 'data:image/jpeg;base64,$base64Image';
 
         final bool? confirmar = await _mostrarPreviewImagen(imageDataUri);
@@ -1244,47 +1257,47 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       return null;
     }
 
-    Get.dialog(
-      WillPopScope(
-        onWillPop: () async => false,
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.all(24.w),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(
-                  color: const Color(0xFF14357D),
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  'Validando imagen...',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  'Verificando que el rostro sea visible',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.grey.shade600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      barrierDismissible: false,
-    );
+    // Get.dialog(
+    //   WillPopScope(
+    //     onWillPop: () async => false,
+    //     child: Center(
+    //       child: Container(
+    //         padding: EdgeInsets.all(24.w),
+    //         decoration: BoxDecoration(
+    //           color: Colors.white,
+    //           borderRadius: BorderRadius.circular(12.r),
+    //         ),
+    //         child: Column(
+    //           mainAxisSize: MainAxisSize.min,
+    //           children: [
+    //             CircularProgressIndicator(
+    //               color: const Color(0xFF14357D),
+    //             ),
+    //             SizedBox(height: 16.h),
+    //             Text(
+    //               'Validando imagen...',
+    //               style: TextStyle(
+    //                 fontSize: 14.sp,
+    //                 fontWeight: FontWeight.w600,
+    //                 color: Colors.black87,
+    //               ),
+    //             ),
+    //             SizedBox(height: 8.h),
+    //             Text(
+    //               'Verificando que el rostro sea visible',
+    //               textAlign: TextAlign.center,
+    //               style: TextStyle(
+    //                 fontSize: 12.sp,
+    //                 color: Colors.grey.shade600,
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    //   barrierDismissible: false,
+    // );
 
     try {
       final idPersona = await PrefData.getIdPersona();
@@ -1322,7 +1335,7 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       final modelResponse = PhotoUploadResponse.fromJson(photoResponse.data);
 
-      if (modelResponse.status != "1") {
+      if (modelResponse.exitosa == false) {
         // Mostrar error y permitir reintentar
         final bool? reintentar = await Get.dialog<bool>(
           Dialog(
@@ -1341,7 +1354,9 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
                   ),
                   SizedBox(height: 16.h),
                   getCustomFont(
-                    "Validación Fallida",
+                    modelResponse.mensaje.isNotEmpty
+                        ? modelResponse.mensaje
+                        : "Validación Fallida",
                     18,
                     Colors.red,
                     1,

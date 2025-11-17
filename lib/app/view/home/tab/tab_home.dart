@@ -44,13 +44,40 @@ class TabHome extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              getAssetImage("logo_escudo_hor.png", 360.w, 100.h,
+                              getAssetImage("log_sin_fondo.png", 100.h, 100.w,
                                   fit: BoxFit.contain),
+                              SizedBox(width: 10.w),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text("Ministerio de Relaciones",
+                                      style: TextStyle(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black87)),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text("Exteriores de ",
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black87)),
+                                      Text("BOLIVIA",
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87)),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: 210.h,
+                          height: 180.h,
                           child: VisibilityDetector(
                             key: const Key('pageview-slider'),
                             onVisibilityChanged: controller.onVisibilityChanged,
@@ -174,7 +201,7 @@ class TabHome extends StatelessWidget {
                                         children: [
                                           Container(
                                             width: 380.w,
-                                            height: 180.h,
+                                            height: 160.h,
                                             decoration: BoxDecoration(
                                               color: const Color.fromARGB(
                                                   255, 236, 236, 236),
@@ -270,8 +297,8 @@ class TabHome extends StatelessWidget {
                                                   child: CustomCacheImage(
                                                     imageUrl: definicion.imagen,
                                                     width: 190.w,
-                                                    height: 180.h,
-                                                    fit: BoxFit.contain,
+                                                    height: 160.h,
+                                                    fit: BoxFit.fill,
                                                     fallbackAssetImage:
                                                         "assets/images/logo_escudo.png",
                                                   ),

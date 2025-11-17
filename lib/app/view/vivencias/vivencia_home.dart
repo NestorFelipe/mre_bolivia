@@ -13,7 +13,7 @@ class VivenciaHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (controller.usuario.value.isEmpty || controller.cedula.value.isEmpty) {
+      if (controller.cedula.value.isEmpty) {
         controller.logout();
       }
     });
@@ -41,7 +41,28 @@ class VivenciaHome extends StatelessWidget {
               ),
             ),
             getVerSpace(40.h),
-            getAssetImage("logo_escudo.png", 220.h, 130.w, fit: BoxFit.contain ),
+            getAssetImage("log_sin_fondo.png", 220.h, 130.w,
+                fit: BoxFit.contain),
+            Text("Ministerio de Relaciones",
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Exteriores de ",
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black87)),
+                Text("BOLIVIA",
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87)),
+              ],
+            ),
             getVerSpace(40.h),
             Expanded(
               child: Center(
@@ -295,7 +316,7 @@ class VivenciaHome extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               // Mostrar botón "Ver Certificados" solo si tiene userInfo
                               if (controller.hasUserInfo.value)
@@ -364,11 +385,12 @@ class VivenciaHome extends StatelessWidget {
                                   child: Text(
                                     "Ver Certificados",
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
+                              getHorSpace(10.w),
                               ElevatedButton(
                                 onPressed: () => controller.logout(),
                                 style: ElevatedButton.styleFrom(
@@ -377,13 +399,13 @@ class VivenciaHome extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 25.w, vertical: 15.h),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.h),
+                                    borderRadius: BorderRadius.circular(15.r),
                                   ),
                                 ),
                                 child: Text(
                                   "Cerrar Sesión",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
