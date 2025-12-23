@@ -272,7 +272,7 @@ Widget getDefaultTextFiledWithLabel(BuildContext context, String s,
           mqData.copyWith(textScaleFactor: FetchPixels.getTextScale());
 
       return AbsorbPointer(
-        absorbing: isEnable,
+        absorbing: !isEnable,
         child: Container(
           height: height,
           margin: margin,
@@ -850,4 +850,3 @@ Widget getDivider(Color color, double height, double thickness) {
     thickness: thickness,
   );
 }
-

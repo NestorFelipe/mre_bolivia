@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../base/color_data.dart';
 import '../../../base/widget_utils.dart';
 import '../../../controllers/consulado/vivencia_controller.dart';
+import '../../../app/models/consulado/model_response_auth.dart';
 
 // Widget interno de login
 class LoginWidget extends StatefulWidget {
@@ -22,6 +23,8 @@ class LoginWidgetState extends State<LoginWidget> {
   final GlobalKey _ciKey = GlobalKey();
   final GlobalKey _passwordKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
+  bool _isLoginInProgress = false;
+  bool _showSnackbar = false;
 
   @override
   void initState() {
@@ -48,131 +51,125 @@ class LoginWidgetState extends State<LoginWidget> {
 
   void _ensureVisible(GlobalKey key) {}
 
-  Future<void> _handleLogin() async {
-    // Mostrar indicador de carga usando Get.dialog en lugar de showDialog del contexto
-    Get.dialog(
-      WillPopScope(
-        onWillPop: () async => false,
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.all(20.w),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(
-                  color: blueColor,
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  'Iniciando sesión...',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.black87,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      barrierDismissible: false,
+  void _showSnackbarWithDelay(
+      String title, String message, Color backgroundColor, Duration duration) {
+    setState(() {
+      _showSnackbar = true;
+    });
+
+    Get.snackbar(
+      title,
+      message,
+      backgroundColor: backgroundColor,
+      colorText: Colors.white,
+      duration: duration,
+      snackPosition: title == 'Error' || title == 'Error de Autenticación'
+          ? SnackPosition.BOTTOM
+          : SnackPosition.TOP,
+      margin: EdgeInsets.all(16.w),
     );
 
+    // Esperar a que se cierre el snackbar y resetear el flag
+    Future.delayed(duration, () {
+      if (mounted) {
+        setState(() {
+          _showSnackbar = false;
+        });
+      }
+    });
+  }
+
+  Future<void> _handleLogin() async {
+    // Prevenir múltiples clics simultáneos
+    if (_isLoginInProgress || _showSnackbar) {
+      return;
+    }
+
+    _isLoginInProgress = true;
+    setState(() {});
+
     try {
+      // Cerrar cualquier snackbar anterior
+      try {
+        ScaffoldMessenger.of(context).clearSnackBars();
+      } catch (e) {
+        print('Error cerrando snackbars: $e');
+      }
+
+      if (!mounted) {
+        _isLoginInProgress = false;
+        return;
+      }
+
       // 1. Intentar login
-      final loginResult = await widget.controller.login();
-
-      // Si el login falló, salir (el controlador ya mostró el mensaje)
-      if (loginResult.token == null || loginResult.token!.isEmpty) {
-        // CERRAR DIALOG INMEDIATAMENTE
-        if (Get.isDialogOpen ?? false) {
-          Get.back();
-        }
-
-        // Dar un pequeño delay antes de mostrar el snackbar
-        await Future.delayed(const Duration(milliseconds: 150));
-
-        // Mostrar mensaje de credenciales incorrectas
+      ModelResponseAuth loginResult;
+      try {
+        loginResult = await widget.controller.login();
+      } catch (e) {
+        print('Error en login: $e');
         if (mounted) {
-          Get.snackbar(
-            'Error de Autenticación',
-            'Credenciales inválidas, por favor verifique el nro de CI y contraseña y vuelva a intentar.',
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 3),
+          _showSnackbarWithDelay(
+            'Error',
+            'Error de conexión. Verifique su internet e intente nuevamente.',
+            Colors.red,
+            const Duration(seconds: 3),
           );
         }
         return;
       }
 
-      // 2. Token válido, intentar obtener información del usuario
-      final userInfoResult = await widget.controller.getUserInfo();
-
-      // 3. Intentar obtener periodos vigentes
-      final periodosResult = await widget.controller.getPeriodoVigente();
-
-      // CERRAR DIALOG ANTES DE MOSTRAR SNACKBARS
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
+      // Si la cuenta está bloqueada, no mostrar snackbar (mostrar el widget bloqueado)
+      if (loginResult.isBlocked == true) {
+        // El widget de cuenta bloqueada se mostrará automáticamente via Obx
+        return;
       }
 
-      // 4. Mostrar mensajes informativos según el resultado
-      if (mounted) {
-        if (userInfoResult == null && periodosResult == null) {
-          // No tiene ni userInfo ni periodos
-          Get.snackbar(
-            'Información',
-            'Bienvenido. No se encontró información de vivencias ni periodos vigentes asociados a su cuenta.',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
-            colorText: Colors.white,
-            duration: const Duration(seconds: 5),
-          );
-        } else if (userInfoResult == null && periodosResult != null) {
-          // Tiene periodos pero no userInfo
-          Get.snackbar(
-            'Información',
-            'Bienvenido. No se encontró información de vivencias previas.',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
-            colorText: Colors.white,
-            duration: const Duration(seconds: 4),
-          );
-        } else if (userInfoResult != null && periodosResult == null) {
-          // Tiene userInfo pero no periodos
-          Get.snackbar(
-            'Información',
-            'Bienvenido ${widget.controller.usuario.value}. No se encontraron periodos vigentes para solicitar certificados.',
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: const Color.fromARGB(255, 1, 49, 88),
-            colorText: Colors.white,
-            duration: const Duration(seconds: 5),
+      // Si el login falló (sin token), mostrar error y salir
+      if (loginResult.token == null || loginResult.token!.isEmpty) {
+        if (mounted) {
+          _showSnackbarWithDelay(
+            'Error de Autenticación',
+            'Credenciales inválidas, por favor verifique el nro de CI y contraseña y vuelva a intentar.',
+            Colors.red,
+            const Duration(seconds: 3),
           );
         }
-        // Si tiene ambos, no mostrar mensaje (login exitoso completo)
-      }
-    } catch (e) {
-      print('Error en login: $e');
-      // CERRAR DIALOG INMEDIATAMENTE EN CATCH
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
+        return;
       }
 
-      // Dar un pequeño delay antes de mostrar el snackbar
-      await Future.delayed(const Duration(milliseconds: 150));
+      // Login exitoso, obtener información adicional
+      final userInfoResult = await widget.controller.getUserInfo();
+      final periodosResult = await widget.controller.getPeriodoVigente();
 
+      // Mostrar mensaje apropiado
       if (mounted) {
-        Get.snackbar(
-          'Error de Autenticación',
-          'Error de conexión. Verifique su internet e intente nuevamente.',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          duration: const Duration(seconds: 3),
-        );
+        if (userInfoResult == null && periodosResult == null) {
+          _showSnackbarWithDelay(
+            'Información',
+            'Bienvenido. No se encontró información de vivencias ni periodos vigentes asociados a su cuenta.',
+            const Color.fromARGB(255, 1, 49, 88),
+            const Duration(seconds: 5),
+          );
+        } else if (userInfoResult == null && periodosResult != null) {
+          _showSnackbarWithDelay(
+            'Información',
+            'Bienvenido. No se encontró información de vivencias previas.',
+            const Color.fromARGB(255, 1, 49, 88),
+            const Duration(seconds: 4),
+          );
+        } else if (userInfoResult != null && periodosResult == null) {
+          _showSnackbarWithDelay(
+            'Información',
+            'Bienvenido ${widget.controller.usuario.value}. No se encontraron periodos vigentes para solicitar certificados.',
+            const Color.fromARGB(255, 1, 49, 88),
+            const Duration(seconds: 5),
+          );
+        }
+      }
+    } finally {
+      _isLoginInProgress = false;
+      if (mounted) {
+        setState(() {});
       }
     }
   }
@@ -352,23 +349,133 @@ class LoginWidgetState extends State<LoginWidget> {
                     width: double.infinity,
                     height: 50.h,
                     child: ElevatedButton(
-                      onPressed: _handleLogin,
+                      onPressed: (_isLoginInProgress || _showSnackbar)
+                          ? null
+                          : _handleLogin,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF14357D),
+                        backgroundColor: (_isLoginInProgress || _showSnackbar)
+                            ? Colors.grey[400]
+                            : const Color(0xFF14357D),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         elevation: 2,
                       ),
-                      child: Text(
-                        "Iniciar Sesión",
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      child: (_isLoginInProgress || _showSnackbar)
+                          ? SizedBox(
+                              height: 20.h,
+                              width: 20.h,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white.withOpacity(0.8),
+                                ),
+                                strokeWidth: 2.5,
+                              ),
+                            )
+                          : Text(
+                              "Iniciar Sesión",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                     ),
+                  ),
+
+                  SizedBox(height: 24.h),
+                  Obx(
+                    () => widget.controller.isAccountLocked.value
+                        ? Container(
+                            padding: EdgeInsets.all(16.w),
+                            decoration: BoxDecoration(
+                              color: Colors.orange[50],
+                              border:
+                                  Border.all(color: Colors.orange, width: 1),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.lock_outline,
+                                        color: Colors.orange, size: 24.sp),
+                                    SizedBox(width: 12.w),
+                                    Expanded(
+                                      child: Text(
+                                        "Tu cuenta está bloqueada",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.orange[800],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                if (widget
+                                    .controller.ciController.text.isNotEmpty)
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 12.h),
+                                    child: Container(
+                                      padding: EdgeInsets.all(12.w),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                      child: Text(
+                                        "Por motivos de seguridad, tu cuenta ha sido temporalmente bloqueada. Puedes recuperar tu contraseña o solicitar el desbloqueo de tu cuenta.",
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Colors.grey[700],
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                SizedBox(height: 12.h),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      widget.controller.goToRecoverPassword();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.orange,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                    ),
+                                    child: Text("Recuperar Contraseña",
+                                        style: TextStyle(fontSize: 14.sp)),
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      widget.controller.goToUnblockAccount();
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      side: BorderSide(color: Colors.orange),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                    ),
+                                    child: Text("Solicitar Desbloqueo",
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: Colors.orange[800])),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ),
                 ],
               ),

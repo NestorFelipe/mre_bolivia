@@ -7,7 +7,7 @@ import 'package:mre_bolivia/app/view/home/detail_screen.dart';
 
 import 'package:mre_bolivia/app/view/home/tab/tab_aranceles.dart';
 import 'package:mre_bolivia/app/view/home/tab/tab_seguimiento_tramite.dart';
-import 'package:mre_bolivia/app/view/vivencias/vista_certificado.dart';
+import 'package:mre_bolivia/app/view/vivencias/forgot_password.dart';
 import 'package:mre_bolivia/app/view/vivencias/vivencia_screen.dart';
 import 'package:mre_bolivia/bindings/category_binding.dart';
 import 'package:mre_bolivia/bindings/vivencia_binding.dart';

@@ -1,18 +1,24 @@
 class ModelResponseAuth {
   final String? token;
   final DateTime? expiration;
+  final String? mensaje;
+  final bool? isBlocked;
 
   ModelResponseAuth({
     required this.token,
     required this.expiration,
+    this.mensaje,
+    this.isBlocked = false,
   });
 
   factory ModelResponseAuth.fromJson(Map<String, dynamic> json) {
     return ModelResponseAuth(
-      token: json['token'] as String,
+      token: json['token'] as String?,
       expiration: json['expiration'] != ""
-          ? DateTime.parse(json['expiration'] as String)
+          ? DateTime.tryParse(json['expiration'] as String)
           : null,
+      mensaje: json['mensaje'] as String?,
+      isBlocked: json['isBlocked'] as bool? ?? false,
     );
   }
 
@@ -20,6 +26,8 @@ class ModelResponseAuth {
     return {
       'token': token,
       'expiration': expiration == null ? "" : expiration?.toIso8601String(),
+      'mensaje': mensaje,
+      'isBlocked': isBlocked
     };
   }
 }

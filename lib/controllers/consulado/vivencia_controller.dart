@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mre_bolivia/app/models/consulado/model_genericresponse.dart';
 import 'package:mre_bolivia/app/models/consulado/model_jwt.dart';
 import 'package:mre_bolivia/app/models/consulado/model_lista_vivencia.dart';
 import 'package:mre_bolivia/app/models/consulado/model_periodos_vigente.dart';
@@ -18,8 +19,9 @@ class VivenciaController extends GetxController {
   TextEditingController ciController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  RxBool isPassVisible = true.obs;
+  RxBool isPassVisible = false.obs;
   RxBool isNewCertificado = false.obs;
+  RxBool isAccountLocked = false.obs;
 
   RxList<Vivencia> vivencias = <Vivencia>[].obs;
   RxList<Periodo> periodos = <Periodo>[].obs;
@@ -67,13 +69,35 @@ class VivenciaController extends GetxController {
     final ci = ciController.text.trim();
     final password = passwordController.text;
 
+    // Limpiar estado anterior
+    isLoggedIn.value = false;
+    hasUserInfo.value = false;
+    hasPeriodos.value = false;
+    usuario.value = '';
+    vivencias.clear();
+    periodos.clear();
+    isAccountLocked.value = false;
+
     try {
       final result = await VivenciasService().authVivencia(ci, password);
 
+      // Verificar si la cuenta está bloqueada según el mensaje
+      final mensajeMinuscula = (result.mensaje ?? '').toLowerCase();
+      if (mensajeMinuscula.contains('bloqueada') ||
+          mensajeMinuscula.contains('bloqueado') ||
+          mensajeMinuscula.contains('account locked') ||
+          result.isBlocked == true) {
+        isAccountLocked.value = true;
+        return result;
+      }
+
+      // Si el login falló, devolver resultado sin cambios de estado
       if (result.token == "" || result.token == null) {
-        // NO mostrar Get.snackbar aquí porque la UI ya maneja el error
-        return result; // Devolver resultado para que la UI lo maneje
-      } else {
+        return result;
+      }
+
+      // Login exitoso - guardar credenciales y token
+      try {
         final jwt = parseJwt(result.token!);
 
         await PrefData.setCi(ci);
@@ -81,16 +105,27 @@ class VivenciaController extends GetxController {
         await PrefData.setIdPersona(jwt.idPersona);
         await PrefData.setExpire(result.expiration!);
         await PrefData.setLogIn(true);
+
         isLoggedIn.value = true;
         isDetalle.value = false;
         isNewCertificado.value = false;
-
         cedula.value = ci;
+      } catch (e) {
+        // Error al procesar JWT, devolver el resultado sin estado
+        print('Error procesando JWT: $e');
+        return result;
       }
 
       return result;
     } catch (e) {
-      // Propagar el error para que la UI lo maneje
+      // En caso de error de conexión, limpiar estado
+      print('Error en login: $e');
+      isLoggedIn.value = false;
+      hasUserInfo.value = false;
+      hasPeriodos.value = false;
+      usuario.value = '';
+      vivencias.clear();
+      periodos.clear();
       rethrow;
     }
   }
@@ -99,11 +134,17 @@ class VivenciaController extends GetxController {
     final idPersona = await PrefData.getIdPersona();
     final token = await PrefData.getToken();
 
+    // Si no tenemos token, no intentar llamada
+    if (token.isEmpty) {
+      hasUserInfo.value = false;
+      usuario.value = '';
+      return null;
+    }
+
     try {
       final result = await VivenciasService().getInfoUser(token, idPersona);
 
       if (!result.existosa! || result.lista == null || result.lista!.isEmpty) {
-        // No hay información del usuario, pero el login fue exitoso
         hasUserInfo.value = false;
         usuario.value = '';
         return null;
@@ -117,7 +158,7 @@ class VivenciaController extends GetxController {
 
       return result;
     } catch (e) {
-      // Error en la llamada, no hay información del usuario
+      print('Error obteniendo info de usuario: $e');
       hasUserInfo.value = false;
       usuario.value = '';
       return null;
@@ -128,39 +169,37 @@ class VivenciaController extends GetxController {
     final idPersona = await PrefData.getIdPersona();
     final token = await PrefData.getToken();
 
+    // Si no tenemos token, no intentar llamada
+    if (token.isEmpty) {
+      periodos.value = [];
+      hasPeriodos.value = false;
+      return null;
+    }
+
     try {
       final result =
           await VivenciasService().getPeriodoVigente(token, idPersona);
 
       if (result.lista.isEmpty) {
-        // No hay periodos vigentes
         periodos.value = [];
         hasPeriodos.value = false;
-
-        // Guardar el estado de login de todas formas
         await PrefData.setLogIn(true);
         isLoggedIn.value = true;
-
         return null;
       }
 
-      // Hay periodos vigentes
       periodos.value = result.lista;
       hasPeriodos.value = true;
-
       await PrefData.setLogIn(true);
       isLoggedIn.value = true;
 
       return result;
     } catch (e) {
-      // Error en la llamada
+      print('Error obteniendo periodos vigentes: $e');
       periodos.value = [];
       hasPeriodos.value = false;
-
-      // Guardar el estado de login de todas formas
       await PrefData.setLogIn(true);
       isLoggedIn.value = true;
-
       return null;
     }
   }
@@ -234,6 +273,61 @@ class VivenciaController extends GetxController {
 
   Future<bool> getIsLogin() async {
     return await PrefData.isLogIn();
+  }
+
+  void goToRecoverPassword() {
+    final ci = ciController.text.trim();
+    Get.toNamed(Routes.forgotRoute, arguments: {
+      'actionType': 'recover',
+      'userName': ci,
+      'ci': ci,
+    });
+  }
+
+  void goToUnblockAccount() {
+    final ci = ciController.text.trim();
+    Get.toNamed(Routes.forgotRoute, arguments: {
+      'actionType': 'unlock',
+      'userName': ci,
+      'ci': ci,
+    });
+  }
+
+  void requestAccountUnblock() {
+    // Navegar al formulario de desbloqueo
+    goToUnblockAccount();
+  }
+
+  Future<ModelGenericResponse> sendRecoverPasswordRequest(
+      String email, String ci) async {
+    // Implementar la llamada al servicio para recuperación de contraseña
+    // Esta función debe enviar email y ci al backend
+    try {
+      var data = await VivenciasService().authRecovery(email, ci);
+      print('Solicitud de recuperación enviada: $email, $ci, $data');
+      // Por ahora solo simulamos la solicitud
+      await Future.delayed(const Duration(seconds: 1));
+      return data;
+    } catch (e) {
+      print('Error enviando solicitud de recuperación: $e');
+      rethrow;
+    }
+  }
+
+  Future<ModelGenericResponse> sendUnblockRequest(
+      String email, String ci) async {
+    // Implementar la llamada al servicio para desbloqueo de cuenta
+    // Esta función debe enviar email y ci al backend
+    try {
+      var data = await VivenciasService().authUnlock(email, ci);
+      print('Solicitud de desbloqueo enviada: $email, $ci, $data');
+      // Por ahora solo simulamos la solicitud
+      await Future.delayed(const Duration(seconds: 1));
+      return data;
+    } catch (e) {
+      print('Error enviando solicitud de desbloqueo: $e');
+      rethrow;
+    }
   }
 
   Future<void> setSelectPeriodo(Periodo periodo) async {

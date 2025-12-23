@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mre_bolivia/base/color_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

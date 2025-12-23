@@ -296,8 +296,31 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
     }
   }
 
+  /// Normaliza el ángulo headEulerAngleY según la plataforma
+  ///
+  /// **Problema identificado:**
+  /// - iOS y Android tienen convenciones de rotación OPUESTAS para la cámara frontal
+  /// - En Android: ángulo positivo = giro a la DERECHA
+  /// - En iOS: ángulo positivo = giro a la IZQUIERDA (invertido)
+  ///
+  /// **Causa técnica:**
+  /// Google ML Kit interpreta los ejes de rotación según cómo cada plataforma
+  /// define la orientación del sensor de la cámara frontal. iOS aplica una
+  /// transformación diferente que resulta en signos opuestos.
+  ///
+  /// **Solución:**
+  /// Invertir el signo del ángulo Y en iOS para que la detección sea consistente
+  double _normalizeHeadAngle(double rawAngle) {
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      // En iOS, invertir el ángulo porque la convención es opuesta a Android
+      return -rawAngle;
+    }
+    // En Android y otras plataformas, usar el ángulo tal como viene
+    return rawAngle;
+  }
+
   void _analyzeMovementPattern(Face face) {
-    final yAngle = face.headEulerAngleY ?? 0;
+    final yAngle = _normalizeHeadAngle(face.headEulerAngleY ?? 0);
     final xAngle = face.headEulerAngleX ?? 0;
 
     _headYAngles.add(yAngle);
@@ -430,7 +453,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   }
 
   Future<void> _detectFrontFace(Face face) async {
-    final yAngle = face.headEulerAngleY ?? 0;
+    final yAngle = _normalizeHeadAngle(face.headEulerAngleY ?? 0);
     final xAngle = face.headEulerAngleX ?? 0;
 
     // Rostro de frente: ángulos cerca de 0
@@ -454,7 +477,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   }
 
   Future<void> _detectRightProfile(Face face) async {
-    final yAngle = face.headEulerAngleY ?? 0;
+    final yAngle = _normalizeHeadAngle(face.headEulerAngleY ?? 0);
 
     // Perfil derecho: ángulo Y positivo (>20°)
     if (yAngle > 20 && yAngle < 45) {
@@ -477,7 +500,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   }
 
   Future<void> _detectLeftProfile(Face face) async {
-    final yAngle = face.headEulerAngleY ?? 0;
+    final yAngle = _normalizeHeadAngle(face.headEulerAngleY ?? 0);
 
     // Perfil izquierdo: ángulo Y negativo (<-20°)
     if (yAngle < -20 && yAngle > -45) {
@@ -500,7 +523,7 @@ class _LivenessDetectionScreenState extends State<LivenessDetectionScreen> {
   }
 
   Future<void> _captureFinalPhoto(Face face) async {
-    final yAngle = face.headEulerAngleY ?? 0;
+    final yAngle = _normalizeHeadAngle(face.headEulerAngleY ?? 0);
     final xAngle = face.headEulerAngleX ?? 0;
 
     // NUEVA VALIDACIÓN: Verificar tamaño del rostro también aquí
