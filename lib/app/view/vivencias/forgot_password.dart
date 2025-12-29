@@ -216,18 +216,73 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         ],
                       ),
                     ),
-                  getDefaultTextFiledWithLabel(
-                    context,
-                    "Correo Electrónico",
-                    emailController,
-                    Colors.grey,
-                    function: () {},
-                    height: FetchPixels.getPixelHeight(60),
-                    isEnable: true,
-                    withprefix: true,
-                    image: "message.svg",
-                    imageWidth: FetchPixels.getPixelWidth(19),
-                    imageHeight: FetchPixels.getPixelHeight(17.66),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                        fontSize: FetchPixels.getPixelHeight(16),
+                        color: Colors.black,
+                      ),
+                      cursorColor: blueColor,
+                      cursorWidth: 2.0,
+                      decoration: InputDecoration(
+                        labelText: "Correo Electrónico",
+                        labelStyle: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: FetchPixels.getPixelHeight(14),
+                        ),
+                        prefixIcon: Padding(
+                          padding:
+                              EdgeInsets.all(FetchPixels.getPixelHeight(12)),
+                          child: Icon(
+                            Icons.email_outlined,
+                            color: blueColor,
+                            size: FetchPixels.getPixelHeight(20),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide(
+                            color: blueColor,
+                            width: 2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide(
+                            color: Colors.grey[300] ?? Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: FetchPixels.getPixelWidth(16),
+                          vertical: FetchPixels.getPixelHeight(16),
+                        ),
+                      ),
+                    ),
                   ),
                   getVerSpace(FetchPixels.getPixelHeight(50)),
                   SizedBox(
