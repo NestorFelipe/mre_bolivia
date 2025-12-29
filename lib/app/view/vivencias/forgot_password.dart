@@ -17,12 +17,12 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   late VivenciaController controller;
   TextEditingController emailController = TextEditingController();
+  TextEditingController ciController = TextEditingController();
   bool isLoading = false;
 
   // Parámetros dinámicos
   late String actionType; // 'recover' o 'unlock'
-  late String userName;
-  late String ci;
+  late String ciInitial;
 
   @override
   void initState() {
@@ -31,12 +31,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
     // Obtener parámetros de la navegación
     actionType = Get.arguments?['actionType'] ?? 'recover';
-    ci = Get.arguments?['ci'] ?? '';
-    userName = Get.arguments?['userName'] ?? '';
+    ciInitial = Get.arguments?['ci'] ?? '';
+
+    // Pre-llenar el CI con el valor inicial si existe
+    if (ciInitial.isNotEmpty) {
+      ciController.text = ciInitial;
+    }
 
     // Debug: imprimir los valores recibidos
-    print(
-        'ForgotPassword - actionType: $actionType, ci: $ci, userName: $userName');
+    print('ForgotPassword - actionType: $actionType, ciInitial: $ciInitial');
   }
 
   void finish() {
@@ -51,8 +54,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   String getSubtitle() {
     return actionType == 'unlock'
-        ? 'Necesitamos tu correo electrónico para enviar instrucciones de desbloqueo'
-        : 'Necesitamos tu correo electrónico de registro para restablecer la contraseña';
+        ? 'Ingresa tu Carnet de Identidad y correo electrónico para recibir instrucciones de desbloqueo'
+        : 'Ingresa tu Carnet de Identidad y correo electrónico para restablecer tu contraseña';
   }
 
   String getButtonText() {
@@ -61,6 +64,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Future<void> handleSubmit() async {
     final email = emailController.text.trim();
+    final ciValue = ciController.text.trim();
+
+    if (ciValue.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Por favor ingrese su Carnet de Identidad',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
 
     if (email.isEmpty) {
       Get.snackbar(
@@ -93,10 +108,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       var data;
       if (actionType == 'unlock') {
         // Solicitar desbloqueo
-        data = await controller.sendUnblockRequest(email, ci);
+        data = await controller.sendUnblockRequest(email, ciValue);
       } else {
         // Recuperar contraseña
-        data = await controller.sendRecoverPasswordRequest(email, ci);
+        data = await controller.sendRecoverPasswordRequest(email, ciValue);
       }
 
       // Verificar si la solicitud fue exitosa
@@ -185,37 +200,77 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           textAlign: TextAlign.center,
                           txtHeight: FetchPixels.getPixelHeight(1.3))),
                   getVerSpace(FetchPixels.getPixelHeight(30)),
-                  // Mostrar información del usuario
-                  if (userName.isNotEmpty)
-                    Container(
-                      padding: EdgeInsets.all(FetchPixels.getPixelWidth(12)),
-                      decoration: BoxDecoration(
-                        color: blueColor.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(
-                            FetchPixels.getPixelHeight(10)),
+                  // Campo Carnet de Identidad
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.circular(FetchPixels.getPixelHeight(12)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    margin:
+                        EdgeInsets.only(bottom: FetchPixels.getPixelHeight(16)),
+                    child: TextFormField(
+                      controller: ciController,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                        fontSize: FetchPixels.getPixelHeight(16),
+                        color: Colors.black,
                       ),
-                      margin: EdgeInsets.only(
-                          bottom: FetchPixels.getPixelHeight(20)),
-                      child: Row(
-                        children: [
-                          Icon(Icons.person_outline,
-                              color: blueColor,
-                              size: FetchPixels.getPixelHeight(20)),
-                          SizedBox(width: FetchPixels.getPixelWidth(10)),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                getCustomFont("Usuario", 12, Colors.grey, 1,
-                                    fontWeight: FontWeight.w500),
-                                getCustomFont(userName, 14, Colors.black, 1,
-                                    fontWeight: FontWeight.w600),
-                              ],
-                            ),
+                      cursorColor: blueColor,
+                      cursorWidth: 2.0,
+                      decoration: InputDecoration(
+                        labelText: "Carnet de Identidad",
+                        labelStyle: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: FetchPixels.getPixelHeight(14),
+                        ),
+                        prefixIcon: Padding(
+                          padding:
+                              EdgeInsets.all(FetchPixels.getPixelHeight(12)),
+                          child: Icon(
+                            Icons.credit_card,
+                            color: blueColor,
+                            size: FetchPixels.getPixelHeight(20),
                           ),
-                        ],
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide(
+                            color: blueColor,
+                            width: 2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              FetchPixels.getPixelHeight(12)),
+                          borderSide: BorderSide(
+                            color: Colors.grey[300] ?? Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: FetchPixels.getPixelWidth(16),
+                          vertical: FetchPixels.getPixelHeight(16),
+                        ),
                       ),
                     ),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -332,6 +387,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   void dispose() {
     emailController.dispose();
+    ciController.dispose();
     super.dispose();
   }
 }
