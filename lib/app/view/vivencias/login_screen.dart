@@ -211,6 +211,13 @@ class LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 ),
                               ),
+                              GestureDetector(
+                                  onTap: () {
+                                    widget.controller.isAccountLocked.value =
+                                        false;
+                                  },
+                                  child: Icon(Icons.close,
+                                      color: Colors.red, size: 24.sp)),
                             ],
                           ),
                           Padding(
@@ -246,7 +253,10 @@ class LoginWidgetState extends State<LoginWidget> {
                               ),
                               child: Text(
                                 "Solicitar Desbloqueo",
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
