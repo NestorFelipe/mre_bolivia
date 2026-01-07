@@ -64,7 +64,7 @@ class LoginWidgetState extends State<LoginWidget> {
       colorText: Colors.white,
       duration: duration,
       snackPosition: title == 'Error' || title == 'Error de Autenticación'
-          ? SnackPosition.BOTTOM
+          ? SnackPosition.TOP
           : SnackPosition.TOP,
       margin: EdgeInsets.all(16.w),
     );

@@ -72,7 +72,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         'Por favor ingrese su Carnet de Identidad',
         backgroundColor: Colors.red,
         colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
       return;
     }
@@ -83,7 +83,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         'Por favor ingrese su correo electrónico',
         backgroundColor: Colors.red,
         colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
       return;
     }
@@ -94,7 +94,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         'Por favor ingrese un correo electrónico válido',
         backgroundColor: Colors.red,
         colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
       return;
     }
@@ -122,7 +122,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             data.mensaje,
             backgroundColor: Colors.green,
             colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM,
+            snackPosition: SnackPosition.TOP,
             duration: const Duration(seconds: 4),
           );
 
@@ -143,7 +143,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             data.mensaje,
             backgroundColor: Colors.red,
             colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM,
+            snackPosition: SnackPosition.TOP,
           );
         }
       }
@@ -155,7 +155,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           'No se pudo procesar la solicitud. Intente nuevamente.',
           backgroundColor: Colors.red,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
         );
       }
     } finally {

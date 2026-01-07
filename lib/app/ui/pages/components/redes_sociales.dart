@@ -57,10 +57,9 @@ class RedesSocialesWidget extends StatelessWidget {
   void _mostrarError(BuildContext context, String mensaje) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(mensaje),
-        backgroundColor: Colors.red,
-        duration: const Duration(seconds: 2),
-      ),
+          content: Text(mensaje),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 2)),
     );
   }
 

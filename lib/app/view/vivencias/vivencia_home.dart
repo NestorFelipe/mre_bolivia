@@ -169,14 +169,13 @@ class VivenciaHome extends StatelessWidget {
                                           await controller.setSelectPeriodo(
                                               controller.periodos[index]);
                                         } catch (e) {
-                                          Get.snackbar(
-                                            'Error',
-                                            'No se pudieron cargar los certificados. Intente nuevamente.',
-                                            backgroundColor: Colors.red,
-                                            colorText: Colors.white,
-                                            duration:
-                                                const Duration(seconds: 3),
-                                          );
+                                          Get.snackbar('Error',
+                                              'No se pudieron cargar los certificados. Intente nuevamente.',
+                                              backgroundColor: Colors.red,
+                                              colorText: Colors.white,
+                                              duration:
+                                                  const Duration(seconds: 3),
+                                              snackPosition: SnackPosition.TOP);
                                         } finally {
                                           // SIEMPRE cerrar el diálogo si está abierto
                                           if (Get.isDialogOpen ?? false) {
@@ -359,13 +358,12 @@ class VivenciaHome extends StatelessWidget {
                                     try {
                                       await controller.getListaVivencia();
                                     } catch (e) {
-                                      Get.snackbar(
-                                        'Error',
-                                        'No se pudieron cargar los certificados. Verifique su conexión e intente nuevamente.',
-                                        backgroundColor: Colors.red,
-                                        colorText: Colors.white,
-                                        duration: const Duration(seconds: 3),
-                                      );
+                                      Get.snackbar('Error',
+                                          'No se pudieron cargar los certificados. Verifique su conexión e intente nuevamente.',
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white,
+                                          duration: const Duration(seconds: 3),
+                                          snackPosition: SnackPosition.TOP);
                                     } finally {
                                       // SIEMPRE cerrar el diálogo sin importar qué pasó
                                       if (Get.isDialogOpen ?? false) {

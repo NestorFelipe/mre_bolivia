@@ -618,13 +618,12 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
       }
 
       // Certificado guardado exitosamente
-      Get.snackbar(
-        'Éxito',
-        'Certificado guardado correctamente. Cargando lista de certificados...',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
-      );
+      Get.snackbar('Éxito',
+          'Certificado guardado correctamente. Cargando lista de certificados...',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP);
 
       setState(() {
         isProcessing = false;
@@ -678,20 +677,18 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         widget.controller.setIsDetalle(true);
 
         Get.snackbar(
-          'Éxito',
-          'Los certificados se han actualizado correctamente.',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          duration: const Duration(seconds: 2),
-        );
+            'Éxito', 'Los certificados se han actualizado correctamente.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.TOP);
       } catch (e) {
-        Get.snackbar(
-          'Advertencia',
-          'El certificado se guardó correctamente, pero hubo un error al cargar la lista. Puede consultar manualmente desde el menú principal.',
-          backgroundColor: Colors.orange,
-          colorText: Colors.white,
-          duration: const Duration(seconds: 4),
-        );
+        Get.snackbar('Advertencia',
+            'El certificado se guardó correctamente, pero hubo un error al cargar la lista. Puede consultar manualmente desde el menú principal.',
+            backgroundColor: Colors.orange,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 4),
+            snackPosition: SnackPosition.TOP);
 
         // Cerrar el formulario de todas formas
         widget.controller.setIsNewCertificado(false);
@@ -710,13 +707,11 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         isProcessing = false;
       });
 
-      Get.snackbar(
-        'Error',
-        'Error al guardar el certificado: ${e.toString()}',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-      );
+      Get.snackbar('Error', 'Error al guardar el certificado: ${e.toString()}',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
+          snackPosition: SnackPosition.TOP);
     }
   }
 
@@ -725,108 +720,96 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
     // Validar tipo de residencia
     if (selectedResidencia == null) {
       Get.snackbar(
-        'Error de Validación',
-        'Debe seleccionar un tipo de residencia',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+          'Error de Validación', 'Debe seleccionar un tipo de residencia',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar nombre del apoderado
     if (apoderadoController.text.trim().isEmpty) {
       Get.snackbar(
-        'Error de Validación',
-        'Debe ingresar el nombre del apoderado',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+          'Error de Validación', 'Debe ingresar el nombre del apoderado',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar que el nombre tenga al menos 3 caracteres
     if (apoderadoController.text.trim().length < 3) {
-      Get.snackbar(
-        'Error de Validación',
-        'El nombre del apoderado debe tener al menos 3 caracteres',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación',
+          'El nombre del apoderado debe tener al menos 3 caracteres',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar NI del apoderado
     if (niApoderadoController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error de Validación',
-        'Debe ingresar el NI del apoderado',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación', 'Debe ingresar el NI del apoderado',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar que el NI tenga formato correcto (solo números y longitud mínima)
     if (niApoderadoController.text.trim().length < 5) {
-      Get.snackbar(
-        'Error de Validación',
-        'El NI del apoderado debe tener al menos 5 caracteres',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación',
+          'El NI del apoderado debe tener al menos 5 caracteres',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar departamento
     if (selectedDepartamento == null) {
-      Get.snackbar(
-        'Error de Validación',
-        'Debe seleccionar un departamento',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación', 'Debe seleccionar un departamento',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar ciudad
     if (selectedCiudad == null) {
-      Get.snackbar(
-        'Error de Validación',
-        'Debe seleccionar una ciudad',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación', 'Debe seleccionar una ciudad',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar dirección
     if (direccionApoderadoController.text.trim().isEmpty) {
       Get.snackbar(
-        'Error de Validación',
-        'Debe ingresar la dirección del apoderado',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+          'Error de Validación', 'Debe ingresar la dirección del apoderado',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
     // Validar que la dirección tenga longitud mínima
     if (direccionApoderadoController.text.trim().length < 10) {
-      Get.snackbar(
-        'Error de Validación',
-        'La dirección debe tener al menos 10 caracteres',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: Icon(Icons.error_outline, color: Colors.white),
-      );
+      Get.snackbar('Error de Validación',
+          'La dirección debe tener al menos 10 caracteres',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(Icons.error_outline, color: Colors.white),
+          snackPosition: SnackPosition.TOP);
       return false;
     }
 
@@ -1079,14 +1062,12 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
 
       // Mostrar error si ocurrió
       if (hasError) {
-        Get.snackbar(
-          'Error',
-          errorMessage,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          icon: Icon(Icons.error, color: Colors.white),
-          duration: const Duration(seconds: 3),
-        );
+        Get.snackbar('Error', errorMessage,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            icon: Icon(Icons.error, color: Colors.white),
+            duration: const Duration(seconds: 3),
+            snackPosition: SnackPosition.TOP);
       }
     }
 
@@ -1248,12 +1229,10 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
     final imagenBase64 = await _capturarSelfie();
 
     if (imagenBase64 == null) {
-      Get.snackbar(
-        'Cancelado',
-        'La captura de selfie fue cancelada',
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
-      );
+      Get.snackbar('Cancelado', 'La captura de selfie fue cancelada',
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP);
       return null;
     }
 
@@ -1434,14 +1413,13 @@ class _NuevoCertificadoState extends State<NuevoCertificado> {
         return null;
       }
 
-      Get.snackbar(
-        'Validación Exitosa',
-        'Verificación facial completada correctamente. El nuevo certificado se registró en el sistema.',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: Icon(Icons.check_circle, color: Colors.white),
-        duration: const Duration(seconds: 2),
-      );
+      Get.snackbar('Validación Exitosa',
+          'Verificación facial completada correctamente. El nuevo certificado se registró en el sistema.',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: Icon(Icons.check_circle, color: Colors.white),
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP);
 
       return imagenBase64;
     } catch (e) {

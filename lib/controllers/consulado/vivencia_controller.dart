@@ -217,6 +217,7 @@ class VivenciaController extends GetxController {
         Get.snackbar('Información',
             'No se encontró información de vivencia para el usuario.',
             backgroundColor: const Color.fromARGB(255, 1, 49, 88),
+            snackPosition: SnackPosition.TOP,
             colorText: Colors.white);
       }
 
@@ -229,13 +230,12 @@ class VivenciaController extends GetxController {
     } catch (e) {
       // Mostrar error específico para debugging
       print('❌ Error en getListaVivencia: $e');
-      Get.snackbar(
-        'Error de Conexión',
-        'No se pudieron cargar los certificados. Verifique su conexión a internet.',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-      );
+      Get.snackbar('Error de Conexión',
+          'No se pudieron cargar los certificados. Verifique su conexión a internet.',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
+          snackPosition: SnackPosition.TOP);
       // Propagar el error para que la UI lo maneje
       rethrow;
     }
@@ -338,12 +338,11 @@ class VivenciaController extends GetxController {
       try {
         await getListaVivencia();
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          'No se pudieron cargar los certificados previos. Intente nuevamente.',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        Get.snackbar('Error',
+            'No se pudieron cargar los certificados previos. Intente nuevamente.',
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.TOP);
         return; // No mostrar el formulario si falla la carga
       }
     }

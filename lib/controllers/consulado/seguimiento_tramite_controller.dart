@@ -63,7 +63,8 @@ class SeguimientoTramiteController extends GetxController {
     } catch (e) {
       // Manejar error, por ejemplo, mostrar snackbar
       Get.snackbar('Alerta', 'listado de tramites inaccesible: $e',
-          backgroundColor: const Color.fromARGB(255, 204, 173, 125));
+          backgroundColor: const Color.fromARGB(255, 204, 173, 125),
+          snackPosition: SnackPosition.TOP);
     }
   }
 
@@ -102,6 +103,7 @@ class SeguimientoTramiteController extends GetxController {
           backgroundColor: const Color.fromARGB(255, 255, 177, 61),
           duration: const Duration(seconds: 5),
           icon: const Icon(Icons.warning, color: Color.fromARGB(255, 0, 0, 0)),
+          snackPosition: SnackPosition.TOP,
           colorText: Colors.black);
     }
   }
