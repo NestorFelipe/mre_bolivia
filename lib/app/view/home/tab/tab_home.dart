@@ -3,6 +3,7 @@ import 'package:mre_bolivia/app/models/consulado/model_servicio.dart';
 import 'package:mre_bolivia/app/ui/pages/components/image_cache.dart';
 import 'package:mre_bolivia/app/ui/pages/components/redes_sociales.dart';
 import 'package:mre_bolivia/base/color_data.dart';
+import 'package:mre_bolivia/base/config/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -591,6 +592,10 @@ class TabHome extends StatelessWidget {
                           }),
                         ),
                         const RedesSocialesWidget(),
+                        Text("v. ${AppConfig.appVersion}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 12.sp, color: Colors.grey[600]))
                       ],
                     ),
                   )
